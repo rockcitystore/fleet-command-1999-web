@@ -185,6 +185,23 @@ function makeInputHandlers(world) {
       }
       updateHUD(world);
     },
+    onDeleteWaypoint: (aircraftId, index) => {
+      const ac = world.aircraft.find((a) => a.id === aircraftId && a.alive);
+      if (!ac || !ac.order || ac.order.waypoints.length <= 2) return;
+      ac.order.waypoints.splice(index, 1);
+      if (ac.order.wpIndex > index) ac.order.wpIndex--;
+      updateHUD(world);
+    },
+    onInsertWaypoint: (aircraftId, index) => {
+      const ac = world.aircraft.find((a) => a.id === aircraftId && a.alive);
+      if (!ac || !ac.order || ac.order.kind !== 'flyTo') return;
+      const wps = ac.order.waypoints;
+      const a = wps[index];
+      const b = wps[index + 1] || a;
+      const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, alt: ac.targetAlt, speed: ac.maxSpeed };
+      wps.splice(index + 1, 0, mid);
+      updateHUD(world);
+    },
   };
 }
 

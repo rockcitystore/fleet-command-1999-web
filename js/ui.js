@@ -335,7 +335,8 @@ function updateInfoPanel(world) {
         : 'AIRBORNE';
       const wpN = ac.order && ac.order.waypoints ? ac.order.waypoints.length : 0;
       const wpI = ac.order && ac.order.wpIndex != null ? ac.order.wpIndex + 1 : 0;
-      el('info-weapons').textContent = `FUEL ${fuelPct}%  ALT ${Math.round(ac.alt)}  WP ${wpI}/${wpN}`;
+      const ord = ac.weapon ? `  ORD ${ac.ordnance}/${ac.ordnanceMax}` : '';
+      el('info-weapons').textContent = `FUEL ${fuelPct}%  ALT ${Math.round(ac.alt)}  WP ${wpI}/${wpN}${ord}`;
       const act = el('info-ac-actions');
       if (act) act.classList.remove('hidden');
       const rBtn = el('btn-ac-route');

@@ -283,9 +283,20 @@ function drawAircraftRoute(ctx, ac, size, cam, selected) {
   ctx.setLineDash([]);
   for (let i = startIdx; i < wps.length; i++) {
     const wp = worldToScreen({ x: wps[i].x, y: wps[i].y }, size, cam);
-    ctx.beginPath();
-    ctx.arc(wp.x, wp.y, 2.6, 0, Math.PI * 2);
-    ctx.stroke();
+    if (selected) {
+      // Draggable handle: filled, bright, slightly larger.
+      ctx.fillStyle = ac.side === 'player' ? '#39d0ff' : '#ff5b5b';
+      ctx.beginPath();
+      ctx.arc(wp.x, wp.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+    } else {
+      ctx.beginPath();
+      ctx.arc(wp.x, wp.y, 2.6, 0, Math.PI * 2);
+      ctx.stroke();
+    }
   }
   ctx.restore();
 }

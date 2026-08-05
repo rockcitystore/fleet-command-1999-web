@@ -4,10 +4,12 @@ import {
   shipAtScreen,
   projectileAtScreen,
   aircraftAtScreen,
+  waypointAtScreen,
   screenToWorld,
   panCamera,
   zoomCamera,
   playerShipsInRect,
+  WORLD_SIZE,
   AIRCRAFT_STATS,
 } from './engine.js';
 import { isPointOnLand, snapToSea } from './terrain.js';
@@ -23,6 +25,7 @@ export function attachInput(canvas, world, handlers) {
   let pointerStart = null;        // {x,y} where the active press began.
   let lastPan = null;             // {x,y} last move point, for incremental panning.
   let startPlayerShip = null;     // player ship under the press start, if any.
+  let dragWaypoint = null;        // { acId, index } when dragging a flight-plan waypoint.
   let pinching = false;           // true while >= 2 pointers are down.
   let pinchPrevDist = 0;          // previous distance between the two pinch points.
   const activePointers = new Map(); // pointerId -> {x,y} (live positions).
@@ -196,6 +199,24 @@ export function attachInput(canvas, world, handlers) {
       }
     }
 
+    // Waypoint handle (right-click): insert a new leg or delete the grabbed one.
+    const wpHit = waypointAtScreen(up, s, world.camera, world);
+    if (wpHit) {
+      const ac = world.aircraft.find((a) => a.id === wpHit.acId && a.alive);
+      if (ac && ac.side === 'player' && ac.order && ac.order.waypoints.length > 0) {
+        const wpItems = [];
+        wpItems.push({
+          label: `SELECT TRACK ${String(ac.id).padStart(4, '0')}`,
+          action: () => { world.__selectedAircraft = [ac.id]; world.__selectedProjectile = null; selected = []; handlers.onSelectionChange([]); },
+        });
+        if (ac.order.waypoints.length > 2) {
+          wpItems.push({ label: 'DELETE WAYPOINT', action: () => handlers.onDeleteWaypoint(ac.id, wpHit.index) });
+        }
+        wpItems.push({ label: 'INSERT WAYPOINT', action: () => handlers.onInsertWaypoint(ac.id, wpHit.index) });
+        return wpItems;
+      }
+    }
+
     if (!ship && !aircraft && mobileSel.length > 0) {
       const wp = screenToWorld(up, s, world.camera);
       const onLand = isPointOnLand(wp.x, wp.y);
@@ -243,7 +264,16 @@ export function attachInput(canvas, world, handlers) {
       lastPan = { x: e.offsetX, y: e.offsetY };
       const ship = shipAtScreen(pointerStart, s, world.camera, world);
       startPlayerShip = ship && ship.side === 'player' ? ship : null;
-      mode = 'pending';
+      // Grab a flight-plan waypoint of the selected aircraft, if the press
+      // starts on one. This takes priority over pan/box for that gesture.
+      const wpHit = waypointAtScreen(pointerStart, s, world.camera, world);
+      if (wpHit) {
+        dragWaypoint = wpHit;
+        mode = 'dragWaypoint';
+      } else {
+        dragWaypoint = null;
+        mode = 'pending';
+      }
     } else if (activePointers.size === 2) {
       // A second finger landed: switch to pinch, abandon any box.
       if (mode === 'box') world.__selectRect = undefined;
@@ -272,6 +302,18 @@ export function attachInput(canvas, world, handlers) {
     }
 
     // Single pointer gesture.
+    if (mode === 'dragWaypoint' && dragWaypoint) {
+      // Live-reposition the grabbed waypoint in world space.
+      const w = screenToWorld({ x: e.offsetX, y: e.offsetY }, s, world.camera);
+      const ac = world.aircraft.find((a) => a.id === dragWaypoint.acId && a.alive);
+      if (ac && ac.order && ac.order.waypoints[dragWaypoint.index]) {
+        ac.order.waypoints[dragWaypoint.index].x = Math.max(0, Math.min(WORLD_SIZE, w.x));
+        ac.order.waypoints[dragWaypoint.index].y = Math.max(0, Math.min(WORLD_SIZE, w.y));
+      }
+      lastPan = { x: e.offsetX, y: e.offsetY };
+      return;
+    }
+
     if (mode === 'pending') {
       if (Math.hypot(e.offsetX - pointerStart.x, e.offsetY - pointerStart.y) > DRAG_THRESHOLD) {
         // Drag confirmed. Hold Shift/Ctrl to box-select; otherwise pan the map.
@@ -328,6 +370,14 @@ export function attachInput(canvas, world, handlers) {
     const moved = pointerStart
       ? Math.hypot(up.x - pointerStart.x, up.y - pointerStart.y)
       : 0;
+
+    if (mode === 'dragWaypoint') {
+      // Waypoint drag finished (coords already live-updated in pointermove).
+      dragWaypoint = null;
+      world.__selectRect = undefined;
+      mode = 'pending';
+      return;
+    }
 
     if (moved < DRAG_THRESHOLD) {
       // TAP.

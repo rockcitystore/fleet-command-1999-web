@@ -247,18 +247,51 @@ function check(cond, msg) {
   }
   check(reParked, 'recovered aircraft re-parks on its home platform');
 
-  // Fuel bingo: a freshly launched aircraft with low fuel auto-RTB and lands.
+  // No automatic fuel bingo (faithful to FC99: RTB is an explicit command).
+  // A low-fuel aircraft must stay airborne until the player orders RTB (or it
+  // runs dry and is lost) — it must NOT silently abandon its flight plan.
   const ac2 = w.launchAircraft(airport.id, airport.aircraft[0].id, 'patrol', null);
-  ac2.fuel = 1; // well below 15% bingo
-  let bingoParked = false;
-  for (let k = 0; k < 400; k++) {
+  ac2.fuel = ac2.maxFuel * 0.1; // 10% — below the old 15% auto-bingo threshold
+  for (let k = 0; k < 120; k++) E.updateAircraft(w, 1 / 60); // ~2s
+  check(ac2.state !== 'rtb' && ac2.alive, 'low-fuel aircraft does NOT auto-RTB (explicit RTB only)');
+
+  // Ammo bingo: an aircraft with empty ordnance auto-returns to base.
+  const ac3 = w.launchAircraft(airport.id, airport.aircraft[0].id, 'ASW', null);
+  check(ac3.ordnance > 0 && ac3.weapon, 'ASW aircraft carries ordnance + a weapon');
+  ac3.ordnance = 0; // spent
+  let ammoParked = false;
+  for (let k = 0; k < 600; k++) {
     E.updateAircraft(w, 1 / 60);
-    if (!w.aircraft.find((a) => a.id === ac2.id) && airport.aircraft.find((a) => a.id === ac2.id && a.state === 'parked')) {
-      bingoParked = true; break;
+    if (!w.aircraft.find((a) => a.id === ac3.id) && airport.aircraft.find((a) => a.id === ac3.id && a.state === 'parked')) {
+      ammoParked = true; break;
     }
   }
-  check(bingoParked, 'low-fuel aircraft auto-RTB and recovers to base');
-  console.log('PASS: aircraft launch/transit/recover/fuel');
+  check(ammoParked, 'empty-ordnance aircraft auto-RTB (ammo bingo) and recovers');
+  console.log('PASS: aircraft launch/transit/recover/fuel/ammo');
+}
+
+// ---------------------------------------------------------------------------
+// 8. WAYPOINT DRAG: hit-test + coordinate update (engine primitives)
+// ---------------------------------------------------------------------------
+{
+  const w = E.makeWorld(0);
+  const airport = w.ships.find((s) => s.name === 'Airport' && s.side === 'player');
+  const ac = w.launchAircraft(airport.id, airport.aircraft[0].id, 'patrol', null);
+  w.__selectedAircraft = [ac.id];
+  const cam = { zoom: 1, center: { x: 2000, y: 2000 } };
+  const size = { width: 1000, height: 800 };
+  const wp0 = ac.order.waypoints[0];
+  const sp = E.worldToScreen(wp0, size, cam);
+  const hit = E.waypointAtScreen(sp, size, cam, w);
+  check(hit && hit.index === 0, 'waypointAtScreen finds the grabbed waypoint');
+
+  // Simulate a drag: move it 200px to the right and write the world coord back.
+  const moved = { x: sp.x + 200, y: sp.y };
+  const wNew = E.screenToWorld(moved, size, cam);
+  ac.order.waypoints[hit.index].x = wNew.x;
+  ac.order.waypoints[hit.index].y = wNew.y;
+  check(Math.abs(ac.order.waypoints[0].x - wNew.x) < 1e-6, 'dragging updates the waypoint world coord');
+  console.log('PASS: waypoint drag hit-test + update');
 }
 
 // ---------------------------------------------------------------------------

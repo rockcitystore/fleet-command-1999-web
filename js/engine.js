@@ -48,16 +48,16 @@ export const SHIP_STATS = REAL_SHIP_STATS;
 // before the bingo RTB). Missions are the original FC99 vocabulary
 // (CAP / ASW / Strike / Intercept / Recon / patrol).
 export const AIRCRAFT_STATS = {
-  'P-3 Orion':       { display: 'P-3 Orion',       category: 'fixed', maxSpeed: 235, maxAlt: 1400, maxFuel: 260, sensorRange: 900, missions: ['ASW', 'Recon', 'patrol'] },
-  'F/A-18 Hornet':   { display: 'F/A-18 Hornet',   category: 'fixed', maxSpeed: 330, maxAlt: 1800, maxFuel: 210, sensorRange: 850, missions: ['CAP', 'Strike', 'Intercept'] },
-  'F-14 Tomcat':     { display: 'F-14 Tomcat',     category: 'fixed', maxSpeed: 345, maxAlt: 1900, maxFuel: 220, sensorRange: 900, missions: ['CAP', 'Intercept', 'Strike'] },
-  'SH-60F Sea Hawk': { display: 'SH-60F Sea Hawk', category: 'helo',  maxSpeed: 110, maxAlt: 420,  maxFuel: 180, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'] },
-  'SH-60R Sea Hawk': { display: 'SH-60R Sea Hawk', category: 'helo',  maxSpeed: 110, maxAlt: 420,  maxFuel: 180, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'] },
-  'EA-6B Prowler':   { display: 'EA-6B Prowler',   category: 'fixed', maxSpeed: 250, maxAlt: 1500, maxFuel: 230, sensorRange: 800, missions: ['Recon', 'CAP', 'patrol'] },
-  'S-3 Viking':      { display: 'S-3 Viking',      category: 'fixed', maxSpeed: 240, maxAlt: 1300, maxFuel: 240, sensorRange: 800, missions: ['ASW', 'Recon', 'patrol'] },
-  'ES-3 Viking':     { display: 'ES-3 Viking',     category: 'fixed', maxSpeed: 240, maxAlt: 1300, maxFuel: 240, sensorRange: 800, missions: ['Recon', 'ASW', 'patrol'] },
-  'Super Lynx':      { display: 'Super Lynx',      category: 'helo',  maxSpeed: 120, maxAlt: 450,  maxFuel: 170, sensorRange: 600, missions: ['ASW', 'Recon', 'patrol'] },
-  '__default':       { display: 'Aircraft',        category: 'fixed', maxSpeed: 240, maxAlt: 1400, maxFuel: 210, sensorRange: 800, missions: ['CAP', 'patrol'] },
+  'P-3 Orion':       { display: 'P-3 Orion',       category: 'fixed', maxSpeed: 235, maxAlt: 1400, maxFuel: 260, sensorRange: 900, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 600, damage: 30, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 4 },
+  'F/A-18 Hornet':   { display: 'F/A-18 Hornet',   category: 'fixed', maxSpeed: 330, maxAlt: 1800, maxFuel: 210, sensorRange: 850, missions: ['CAP', 'Strike', 'Intercept'], weapon: { type: 'missile', range: 900, damage: 35, realName: 'AGM-84 Harpoon', cooldown: 6 }, ordnance: 4 },
+  'F-14 Tomcat':     { display: 'F-14 Tomcat',     category: 'fixed', maxSpeed: 345, maxAlt: 1900, maxFuel: 220, sensorRange: 900, missions: ['CAP', 'Intercept', 'Strike'], weapon: { type: 'missile', range: 1000, damage: 40, realName: 'AIM-54 Phoenix', cooldown: 6 }, ordnance: 4 },
+  'SH-60F Sea Hawk': { display: 'SH-60F Sea Hawk', category: 'helo',  maxSpeed: 110, maxAlt: 420,  maxFuel: 180, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 500, damage: 28, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
+  'SH-60R Sea Hawk': { display: 'SH-60R Sea Hawk', category: 'helo',  maxSpeed: 110, maxAlt: 420,  maxFuel: 180, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 500, damage: 28, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
+  'EA-6B Prowler':   { display: 'EA-6B Prowler',   category: 'fixed', maxSpeed: 250, maxAlt: 1500, maxFuel: 230, sensorRange: 800, missions: ['Recon', 'CAP', 'patrol'], weapon: null, ordnance: 0 },
+  'S-3 Viking':      { display: 'S-3 Viking',      category: 'fixed', maxSpeed: 240, maxAlt: 1300, maxFuel: 240, sensorRange: 800, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 600, damage: 30, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 3 },
+  'ES-3 Viking':     { display: 'ES-3 Viking',     category: 'fixed', maxSpeed: 240, maxAlt: 1300, maxFuel: 240, sensorRange: 800, missions: ['Recon', 'ASW', 'patrol'], weapon: null, ordnance: 0 },
+  'Super Lynx':      { display: 'Super Lynx',      category: 'helo',  maxSpeed: 120, maxAlt: 450,  maxFuel: 170, sensorRange: 600, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 450, damage: 26, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
+  '__default':       { display: 'Aircraft',        category: 'fixed', maxSpeed: 240, maxAlt: 1400, maxFuel: 210, sensorRange: 800, missions: ['CAP', 'patrol'], weapon: { type: 'missile', range: 800, damage: 30, realName: 'AGM-84 Harpoon', cooldown: 6 }, ordnance: 3 },
 };
 
 // ---------------------------------------------------------------------------
@@ -171,6 +171,11 @@ export class World {
       fuel: st.maxFuel,
       maxFuel: st.maxFuel,
       sensorRange: st.sensorRange,
+      weapon: st.weapon ? { ...st.weapon } : null,
+      ordnance: st.ordnance || 0,
+      ordnanceMax: st.ordnance || 0,
+      _acCd: 0,
+      _rtbReason: null,
       mission: mission || null,
       order: null,
       heading: 0,
@@ -342,7 +347,7 @@ export class World {
 // ---------------------------------------------------------------------------
 // Coordinate helpers
 // ---------------------------------------------------------------------------
-function scaleFor(size, cam) {
+export function scaleFor(size, cam) {
   const base = Math.min(size.width, size.height) / WORLD_SIZE;
   return base * cam.zoom;
 }
@@ -459,6 +464,22 @@ export function playerShipsInRect(rect, size, cam, world) {
   return out;
 }
 
+// Hit-test a waypoint handle of the currently selected aircraft. Returns
+// { acId, index } for the nearest waypoint within the grab tolerance, or null.
+export function waypointAtScreen(point, size, cam, world) {
+  const acId = world.__selectedAircraft && world.__selectedAircraft[0];
+  if (!acId) return null;
+  const ac = world.aircraft.find((a) => a.id === acId && a.alive);
+  if (!ac || !ac.order || ac.order.kind !== 'flyTo') return null;
+  const scale = scaleFor(size, cam);
+  const tol = Math.max(10 * scale, 12);
+  for (let i = 0; i < ac.order.waypoints.length; i++) {
+    const sp = worldToScreen(ac.order.waypoints[i], size, cam);
+    if (Math.hypot(sp.x - point.x, sp.y - point.y) <= tol) return { acId: ac.id, index: i };
+  }
+  return null;
+}
+
 // ---------------------------------------------------------------------------
 // Simulation
 // ---------------------------------------------------------------------------
@@ -471,6 +492,22 @@ export function nearestEnemy(ship, world) {
     if (d < bd) {
       bd = d;
       best = o;
+    }
+  }
+  return best;
+}
+
+// Nearest enemy SHIP within `range` of a source unit (used by airborne
+// aircraft to find targets for their ordnance). Returns the ship or null.
+export function nearestEnemyShipInRange(src, world, range) {
+  let best = null;
+  let bd = Infinity;
+  for (const s of world.ships) {
+    if (!s.alive || s.side === src.side) continue;
+    const d = distance(src.pos, s.pos);
+    if (d <= range && d < bd) {
+      best = s;
+      bd = d;
     }
   }
   return best;
@@ -720,7 +757,9 @@ export function updateProjectiles(world, dt) {
 export function updateAircraft(world, dt) {
   const acs = world.aircraft.filter((a) => a.alive);
   for (const a of acs) {
-    // Fuel burn (1 unit/sec). Bingo RTB at 15% remaining; ditch at 0.
+    // Fuel burn (1 unit/sec). No automatic fuel bingo — Return to Base is an
+    // explicit player command (faithful to FC99; the original ditches planes
+    // that run dry rather than auto-returning). Zero fuel = lost.
     a.fuel -= dt;
     if (a.fuel <= 0) {
       a.fuel = 0;
@@ -728,11 +767,27 @@ export function updateAircraft(world, dt) {
       a.state = 'lost';
       continue;
     }
-    if (a.fuel < a.maxFuel * 0.15 && a.state !== 'rtb' && a.state !== 'recovering') {
+
+    // Ammo-aware engagement: airborne aircraft fire at enemy ships in range and
+    // spend ordnance. When ordnance is exhausted they auto-return to base (the
+    // ammo bingo the user asked for) — this is independent of fuel.
+    if (world.combatStarted && a.weapon && a.ordnance > 0 && a.state !== 'rtb' && a.state !== 'recovering') {
+      a._acCd -= dt;
+      if (a._acCd <= 0) {
+        const tgt = nearestEnemyShipInRange(a, world, a.weapon.range);
+        if (tgt) {
+          spawnProjectile(world, a, tgt, a.weapon);
+          a.ordnance -= 1;
+          a._acCd = a.weapon.cooldown;
+        }
+      }
+    }
+    if (a.weapon && a.ordnance <= 0 && a.state !== 'rtb' && a.state !== 'recovering') {
       const home = world.ship(a.homeId);
       if (home) {
         a.state = 'rtb';
         a.mission = null;
+        a._rtbReason = 'ammo';
         a.order = {
           kind: 'flyTo',
           waypoints: [{ x: home.pos.x, y: home.pos.y, alt: 0, speed: a.maxSpeed }],
