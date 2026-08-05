@@ -109,14 +109,14 @@ function check(cond, msg) {
       E.checkEnd(w);
     }
     for (const s of w.ships) {
-      if (s.pos.x < 0 || s.pos.x > 4000 || s.pos.y < 0 || s.pos.y > 4000) inBounds = false;
+      if (!Number.isFinite(s.pos.x) || !Number.isFinite(s.pos.y)) inBounds = false;
     }
     if (!['playing', 'playerWon', 'enemyWon'].includes(w.phase)) phaseValid = false;
   } catch (e) {
     threw = e;
   }
   check(threw === null, '600 manual ticks ran without throwing' + (threw ? ': ' + threw : ''));
-  check(inBounds, 'all ship positions stay within [0,4000]');
+  check(inBounds, 'all ship positions remain finite (open battle space, no clamp)');
   check(phaseValid, `phase valid after sim (got ${w.phase})`);
 
   let randOk = true;
@@ -292,6 +292,49 @@ function check(cond, msg) {
   ac.order.waypoints[hit.index].y = wNew.y;
   check(Math.abs(ac.order.waypoints[0].x - wNew.x) < 1e-6, 'dragging updates the waypoint world coord');
   console.log('PASS: waypoint drag hit-test + update');
+}
+
+// ---------------------------------------------------------------------------
+// 9. PER-TYPE DEFAULT ROUTES + OPEN BATTLE SPACE (no world clamp)
+// ---------------------------------------------------------------------------
+{
+  // Default route radius scales with the airframe: fixed-wing CAP is wider
+  // than a helicopter ASW racetrack.
+  const fw = { type: 'F/A-18 Hornet', pos: { x: 2000, y: 2000 }, targetAlt: 600, maxSpeed: 330 };
+  const cap = E.makeAircraftOrder(fw, 'CAP');
+  const rFW = Math.hypot(cap.waypoints[0].x - fw.pos.x, cap.waypoints[0].y - fw.pos.y);
+  check(Math.round(rFW) === 400, `fixed-wing CAP default radius 400 (got ${Math.round(rFW)})`);
+  check(cap.loop === true, 'CAP default is a looping racetrack');
+
+  const helo = { type: 'SH-60F Sea Hawk', pos: { x: 2000, y: 2000 }, targetAlt: 200, maxSpeed: 110 };
+  const asw = E.makeAircraftOrder(helo, 'ASW');
+  const rHe = Math.hypot(asw.waypoints[0].x - helo.pos.x, asw.waypoints[0].y - helo.pos.y);
+  check(Math.round(rHe) === 140, `helo ASW default radius 140 (got ${Math.round(rHe)})`);
+
+  const strike = E.makeAircraftOrder(fw, 'Strike');
+  check(strike.loop === false && strike.waypoints[0].x > fw.pos.x + 600,
+    'Strike flies a far transit leg (non-loop)');
+
+  // Open battle space: an aircraft ordered beyond WORLD_SIZE is NOT clamped.
+  const w = E.makeWorld(0);
+  const airport = w.ships.find((s) => s.name === 'Airport' && s.side === 'player');
+  const ac = w.launchAircraft(airport.id, airport.aircraft[0].id, 'patrol', null);
+  ac.pos.x = 3900; ac.pos.y = 3900;
+  ac.order = { kind: 'flyTo', waypoints: [{ x: 9000, y: 9000, alt: ac.targetAlt, speed: ac.maxSpeed }], wpIndex: 0, loop: false };
+  for (let k = 0; k < 200; k++) E.updateAircraft(w, 1 / 60);
+  check(ac.pos.x > 4000, `aircraft flies past WORLD_SIZE with no world clamp (x=${ac.pos.x.toFixed(0)})`);
+
+  // Ships too: a position outside the old box is NOT clamped back.
+  const enemy = w.ships.find((s) => s.side === 'enemy' && !s.immobile);
+  if (enemy) {
+    enemy.order = null;            // no movement order this tick
+    enemy.pos.x = 4100; enemy.pos.y = 2000; // place it just outside the old box
+    E.updateMovement(w, 1 / 60);
+    check(enemy.pos.x > 4000, `ship position not clamped to world box (x=${enemy.pos.x.toFixed(0)})`);
+  } else {
+    check(true, 'ship position not clamped (no enemy mobile ship to test)');
+  }
+  console.log('PASS: per-type default routes + open battle space');
 }
 
 // ---------------------------------------------------------------------------

@@ -60,6 +60,55 @@ export const AIRCRAFT_STATS = {
   '__default':       { display: 'Aircraft',        category: 'fixed', maxSpeed: 240, maxAlt: 1400, maxFuel: 210, sensorRange: 800, missions: ['CAP', 'patrol'], weapon: { type: 'missile', range: 800, damage: 30, realName: 'AGM-84 Harpoon', cooldown: 6 }, ordnance: 3 },
 };
 
+// Default flight-plan geometry per MISSION, scaled by airframe category. The
+// original FC99 lets the player hand-draw routes per mission; this mirrors that
+// by giving each mission a sensible default whose SIZE differs for long-range
+// fixed-wing aircraft vs short-range helicopters (the original's "range" is an
+// endurance limit, so shorter-endurance airframes fly tighter patterns).
+// `transit` missions fly a leg OUT from the platform and hold (non-looping);
+// the rest orbit a racetrack around the launch point (looping).
+const ROUTE_DEFAULTS = {
+  CAP:      { fixed: 400, helo: 180 },
+  patrol:   { fixed: 350, helo: 160 },
+  ASW:      { fixed: 280, helo: 140 },
+  Recon:    { fixed: 500, helo: 250, transit: true },
+  Strike:   { fixed: 700, helo: 350, transit: true },
+  Intercept:{ fixed: 700, helo: 350, transit: true },
+};
+
+// Build the default flight plan for a freshly launched (or re-tasked) aircraft.
+// `ac` must carry { pos, targetAlt, maxSpeed, type }.
+export function makeAircraftOrder(ac, mission) {
+  const st = AIRCRAFT_STATS[ac.type] || AIRCRAFT_STATS.__default;
+  const def = ROUTE_DEFAULTS[mission] || ROUTE_DEFAULTS.patrol;
+  const r = def[st.category] || def.fixed;
+  if (def.transit) {
+    // Fly a leg outward from the platform and hold there (non-looping).
+    const leg = r;
+    return {
+      kind: 'flyTo',
+      waypoints: [
+        { x: ac.pos.x + leg, y: ac.pos.y, alt: ac.targetAlt, speed: ac.maxSpeed },
+        { x: ac.pos.x + leg * 0.6, y: ac.pos.y + leg * 0.6, alt: ac.targetAlt, speed: ac.maxSpeed },
+      ],
+      wpIndex: 0,
+      loop: false,
+    };
+  }
+  // Racetrack orbit around the launch point.
+  return {
+    kind: 'flyTo',
+    waypoints: [
+      { x: ac.pos.x + r, y: ac.pos.y, alt: ac.targetAlt, speed: ac.maxSpeed },
+      { x: ac.pos.x, y: ac.pos.y + r, alt: ac.targetAlt, speed: ac.maxSpeed },
+      { x: ac.pos.x - r, y: ac.pos.y, alt: ac.targetAlt, speed: ac.maxSpeed },
+      { x: ac.pos.x, y: ac.pos.y - r, alt: ac.targetAlt, speed: ac.maxSpeed },
+    ],
+    wpIndex: 0,
+    loop: true,
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Camera
 // ---------------------------------------------------------------------------
@@ -184,27 +233,20 @@ export class World {
       trail: [],
     };
     platform.aircraft.splice(idx, 1);
-    let wps = waypoints && waypoints.length
-      ? waypoints
-      : (() => {
-          const r = 350;
-          return [
-            { x: platform.pos.x + r, y: platform.pos.y, alt: airborne.targetAlt },
-            { x: platform.pos.x, y: platform.pos.y + r, alt: airborne.targetAlt },
-            { x: platform.pos.x - r, y: platform.pos.y, alt: airborne.targetAlt },
-            { x: platform.pos.x, y: platform.pos.y - r, alt: airborne.targetAlt },
-          ];
-        })();
-    airborne.order = {
-      kind: 'flyTo',
-      waypoints: wps.map((w) => ({
-        x: w.x, y: w.y,
-        alt: w.alt != null ? w.alt : airborne.targetAlt,
-        speed: w.speed != null ? w.speed : airborne.maxSpeed,
-      })),
-      wpIndex: 0,
-      loop: mission === 'patrol' || mission === 'CAP',
-    };
+    if (waypoints && waypoints.length) {
+      airborne.order = {
+        kind: 'flyTo',
+        waypoints: waypoints.map((w) => ({
+          x: w.x, y: w.y,
+          alt: w.alt != null ? w.alt : airborne.targetAlt,
+          speed: w.speed != null ? w.speed : airborne.maxSpeed,
+        })),
+        wpIndex: 0,
+        loop: mission === 'patrol' || mission === 'CAP',
+      };
+    } else {
+      airborne.order = makeAircraftOrder(airborne, mission);
+    }
     this.aircraft.push(airborne);
     return airborne;
   }
@@ -610,11 +652,9 @@ export function updateMovement(world, dt) {
     }
   }
 
-  // clamp to world
-  for (const s of ships) {
-    s.pos.x = Math.max(s.radius, Math.min(WORLD_SIZE - s.radius, s.pos.x));
-    s.pos.y = Math.max(s.radius, Math.min(WORLD_SIZE - s.radius, s.pos.y));
-  }
+  // No world-box clamp: the battle space is open (faithful to FC99, whose 2D
+  // map is a scrollable viewport with no hard edge). Units roam freely; only
+  // land collision below keeps them off terrain.
 
   // land collision: ships cannot drive onto land; snap back toward last safe position.
   for (const s of ships) {
@@ -861,9 +901,8 @@ export function updateAircraft(world, dt) {
       }
     }
 
-    // clamp to world
-    a.pos.x = Math.max(0, Math.min(WORLD_SIZE, a.pos.x));
-    a.pos.y = Math.max(0, Math.min(WORLD_SIZE, a.pos.y));
+    // No world-box clamp: the battle space is open (faithful to FC99). The
+    // aircraft flies wherever its route takes it; the camera scrolls to follow.
   }
 }
 

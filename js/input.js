@@ -9,7 +9,6 @@ import {
   panCamera,
   zoomCamera,
   playerShipsInRect,
-  WORLD_SIZE,
   AIRCRAFT_STATS,
 } from './engine.js';
 import { isPointOnLand, snapToSea } from './terrain.js';
@@ -307,8 +306,10 @@ export function attachInput(canvas, world, handlers) {
       const w = screenToWorld({ x: e.offsetX, y: e.offsetY }, s, world.camera);
       const ac = world.aircraft.find((a) => a.id === dragWaypoint.acId && a.alive);
       if (ac && ac.order && ac.order.waypoints[dragWaypoint.index]) {
-        ac.order.waypoints[dragWaypoint.index].x = Math.max(0, Math.min(WORLD_SIZE, w.x));
-        ac.order.waypoints[dragWaypoint.index].y = Math.max(0, Math.min(WORLD_SIZE, w.y));
+        // No world-box clamp: waypoints may be placed anywhere in the open
+        // battle space (faithful to FC99), so just write the world coord.
+        ac.order.waypoints[dragWaypoint.index].x = w.x;
+        ac.order.waypoints[dragWaypoint.index].y = w.y;
       }
       lastPan = { x: e.offsetX, y: e.offsetY };
       return;

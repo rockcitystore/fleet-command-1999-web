@@ -1,7 +1,7 @@
 // main.js — integration glue + real-time render loop.
 // Wires engine <-> render <-> input <-> ui. Runs in the browser as an ES module.
 
-import { makeWorld, makeCustomWorld, fitCameraToWorld } from './engine.js';
+import { makeWorld, makeCustomWorld, fitCameraToWorld, makeAircraftOrder } from './engine.js';
 import { drawBattle, drawMinimap } from './render.js';
 import { attachInput } from './input.js';
 import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach } from './ui.js';
@@ -170,18 +170,7 @@ function makeInputHandlers(world) {
       if (ac.order && ac.order.kind === 'flyTo') {
         ac.order.loop = (mission === 'patrol' || mission === 'CAP');
       } else {
-        const r = 350;
-        ac.order = {
-          kind: 'flyTo',
-          waypoints: [
-            { x: ac.pos.x + r, y: ac.pos.y, alt: ac.targetAlt, speed: ac.maxSpeed },
-            { x: ac.pos.x, y: ac.pos.y + r, alt: ac.targetAlt, speed: ac.maxSpeed },
-            { x: ac.pos.x - r, y: ac.pos.y, alt: ac.targetAlt, speed: ac.maxSpeed },
-            { x: ac.pos.x, y: ac.pos.y - r, alt: ac.targetAlt, speed: ac.maxSpeed },
-          ],
-          wpIndex: 0,
-          loop: true,
-        };
+        ac.order = makeAircraftOrder(ac, mission);
       }
       updateHUD(world);
     },
@@ -285,3 +274,4 @@ buildMenu(null, {
 window.addEventListener('resize', resizeCanvases);
 // Debug hook for automated verification (harmless in production).
 window.__fc = game;
+window.__fc.makeAircraftOrder = makeAircraftOrder;

@@ -76,8 +76,11 @@ for (let i = 0; i < 300; i++) {
   E.updateMovement(world, 1 / 60); E.updateDetection(world); E.updateWeapons(world, 1 / 60);
   E.updateProjectiles(world, 1 / 60); E.updateAI(world, 1 / 60); E.checkEnd(world);
 }
-const inBounds = world.ships.every((s) => s.pos.x >= 0 && s.pos.x <= 4000 && s.pos.y >= 0 && s.pos.y <= 4000);
-check('300-tick sim in-bounds & valid phase', inBounds && ['playing', 'playerWon', 'enemyWon'].includes(world.phase));
+// The battle space is now open (no world-box clamp), so we no longer assert a
+// hard [0,4000] bound — instead confirm positions stay finite (no NaN blow-up)
+// and the sim phase is valid.
+const finite = world.ships.every((s) => Number.isFinite(s.pos.x) && Number.isFinite(s.pos.y));
+check('300-tick sim finite positions & valid phase', finite && ['playing', 'playerWon', 'enemyWon'].includes(world.phase));
 
 // 3. CLICK-SELECT: tap exactly on a player ship's screen position → onSelectionChange([id])
 const map = document.getElementById('map');
