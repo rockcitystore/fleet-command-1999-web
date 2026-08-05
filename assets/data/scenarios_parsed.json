@@ -1,0 +1,408 @@
+{
+ "CVBG Norwegian Sea": {
+  "title": "CVBG Norwegian Sea",
+  "file": "Single01.scs",
+  "count": 5,
+  "world": {
+   "minx": 218714.250547,
+   "maxx": 1051368.931832,
+   "miny": 35897.529706,
+   "maxy": 826775.191213,
+   "minz": 0.0,
+   "maxz": 0.0
+  },
+  "units": [
+   {
+    "cls": "NIMITZ CVN",
+    "name": "CVN 76",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 226515.235147,
+    "y": 327375.226392,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 20.0,
+    "aircraft": [
+     {
+      "type": "F/A-18 Hornet",
+      "count": 35
+     },
+     {
+      "type": "SH-60F Sea Hawk",
+      "count": 4
+     },
+     {
+      "type": "EA-6B Prowler",
+      "count": 4
+     },
+     {
+      "type": "S-3 Viking",
+      "count": 10
+     },
+     {
+      "type": "ES-3 Viking",
+      "count": 2
+     }
+    ]
+   },
+   {
+    "cls": "",
+    "name": "Airport",
+    "type": "BUILDINGENTITY",
+    "alliance": 1,
+    "x": 1007132.193402,
+    "y": 826775.191213,
+    "z": 0.0,
+    "course": 270.0,
+    "speed": 0.0,
+    "aircraft": []
+   },
+   {
+    "cls": "TICONDEROGA CG",
+    "name": "CG 50",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 218714.250547,
+    "y": 335817.287914,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 15.0,
+    "aircraft": [
+     {
+      "type": "SH-60R Sea Hawk",
+      "count": 2
+     }
+    ]
+   },
+   {
+    "cls": "",
+    "name": "Tu-22M Backfire 5",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 238373.942855,
+    "y": 328338.057145,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 15.0,
+    "aircraft": [
+     {
+      "type": "SH-60R Sea Hawk",
+      "count": 2
+     }
+    ]
+   },
+   {
+    "cls": "",
+    "name": "Airport 1",
+    "type": "BUILDINGENTITY",
+    "alliance": 8,
+    "x": 1051368.931832,
+    "y": 35897.529706,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 0.0,
+    "aircraft": []
+   }
+  ]
+ },
+ "Wyoming Deploys": {
+  "title": "Wyoming Deploys",
+  "file": "Single07.scs",
+  "count": 5,
+  "world": {
+   "minx": 341694.347248,
+   "maxx": 526003.789009,
+   "miny": 772818.057145,
+   "maxy": 791302.268136,
+   "minz": -216.0,
+   "maxz": 0.0
+  },
+  "units": [
+   {
+    "cls": "OHIO SSBN",
+    "name": "Airport",
+    "type": "BUILDINGENTITY",
+    "alliance": 0,
+    "x": 341694.347248,
+    "y": 791302.268136,
+    "z": 0.0,
+    "course": 90.0,
+    "speed": 0.0,
+    "aircraft": [
+     {
+      "type": "P-3 Orion",
+      "count": 4
+     }
+    ]
+   },
+   {
+    "cls": "OHIO SSBN",
+    "name": "SSBN 742",
+    "type": "SUBENTITY",
+    "alliance": 0,
+    "x": 478457.424171,
+    "y": 785746.268136,
+    "z": -60.0,
+    "course": 0.0,
+    "speed": 15.0,
+    "aircraft": []
+   },
+   {
+    "cls": "SEA WOLF SSN",
+    "name": "SSN 22",
+    "type": "SUBENTITY",
+    "alliance": 0,
+    "x": 517883.481316,
+    "y": 774527.595607,
+    "z": -60.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   },
+   {
+    "cls": "VICTOR III SSN",
+    "name": "SSN 324",
+    "type": "SUBENTITY",
+    "alliance": 1,
+    "x": 512327.481316,
+    "y": 774954.980222,
+    "z": -216.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   },
+   {
+    "cls": "",
+    "name": "SSN 328 2",
+    "type": "SUBENTITY",
+    "alliance": 1,
+    "x": 526003.789009,
+    "y": 772818.057145,
+    "z": -216.0,
+    "course": 0.0,
+    "speed": 5.0,
+    "aircraft": []
+   }
+  ]
+ },
+ "Hair Trigger": {
+  "title": "Hair Trigger",
+  "file": "Single08.scs",
+  "count": 16,
+  "world": {
+   "minx": 258674.712086,
+   "maxx": 482570.740658,
+   "miny": 250554.057145,
+   "maxy": 613991.336265,
+   "minz": -100.0,
+   "maxz": 22000.0
+  },
+  "units": [
+   {
+    "cls": "NIMITZ CVN",
+    "name": "CVN 74",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 272244.694497,
+    "y": 282500.536273,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 20.0,
+    "aircraft": [
+     {
+      "type": "F-14 Tomcat",
+      "count": 5
+     },
+     {
+      "type": "F/A-18 Hornet",
+      "count": 5
+     },
+     {
+      "type": "SH-60F Sea Hawk",
+      "count": 1
+     }
+    ]
+   },
+   {
+    "cls": "ARLEIGH BURKE DDG",
+    "name": "DDG 58",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 258674.712086,
+    "y": 289018.67253,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 16.0,
+    "aircraft": []
+   },
+   {
+    "cls": "TICONDEROGA VLS CG",
+    "name": "CG 60",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 272458.039556,
+    "y": 292544.421983,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 15.0,
+    "aircraft": []
+   },
+   {
+    "cls": "OLIVER HAZARD PERRY FFG",
+    "name": "FFG 51",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 282180.865932,
+    "y": 276838.210991,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 9.0,
+    "aircraft": []
+   },
+   {
+    "cls": "ARLEIGH BURKE DDG",
+    "name": "DDG 55",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 286668.404393,
+    "y": 288804.980222,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 10.0,
+    "aircraft": []
+   },
+   {
+    "cls": "TICONDEROGA CG",
+    "name": "CG 51",
+    "type": "SURFENTITY",
+    "alliance": 0,
+    "x": 272778.404393,
+    "y": 272778.057145,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 15.0,
+    "aircraft": []
+   },
+   {
+    "cls": "",
+    "name": "Airport",
+    "type": "BUILDINGENTITY",
+    "alliance": 1,
+    "x": 482570.740658,
+    "y": 613991.336265,
+    "z": 0.0,
+    "course": 180.0,
+    "speed": 0.0,
+    "aircraft": []
+   },
+   {
+    "cls": "VISHNYA AGI",
+    "name": "AGI 201",
+    "type": "SURFENTITY",
+    "alliance": 1,
+    "x": 276624.865932,
+    "y": 301626.518684,
+    "z": 22000.0,
+    "course": 0.0,
+    "speed": 5.0,
+    "aircraft": []
+   },
+   {
+    "cls": "KILO SSK",
+    "name": "SSK",
+    "type": "SUBENTITY",
+    "alliance": 1,
+    "x": 293079.173624,
+    "y": 268076.826376,
+    "z": -100.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   },
+   {
+    "cls": "MERCHANT",
+    "name": "Trawler",
+    "type": "SURFENTITY",
+    "alliance": 8,
+    "x": 267304.411282,
+    "y": 259797.742833,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 8.0,
+    "aircraft": []
+   },
+   {
+    "cls": "",
+    "name": "SSK",
+    "type": "SURFENTITY",
+    "alliance": 8,
+    "x": 299917.32747,
+    "y": 259742.826376,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   },
+   {
+    "cls": "",
+    "name": "CVN 74",
+    "type": "SUBENTITY",
+    "alliance": 1,
+    "x": 296711.942855,
+    "y": 288804.980222,
+    "z": -100.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   },
+   {
+    "cls": "MERCHANT",
+    "name": "Fishing Boat 1",
+    "type": "SURFENTITY",
+    "alliance": 8,
+    "x": 287523.173624,
+    "y": 261666.057145,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   },
+   {
+    "cls": "MERCHANT",
+    "name": "Fishing Boat 2",
+    "type": "SURFENTITY",
+    "alliance": 8,
+    "x": 300985.789009,
+    "y": 274701.287914,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   },
+   {
+    "cls": "VISHNYA AGI",
+    "name": "AGI 208",
+    "type": "SURFENTITY",
+    "alliance": 1,
+    "x": 297566.712086,
+    "y": 266367.287914,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 5.0,
+    "aircraft": []
+   },
+   {
+    "cls": "MERCHANT",
+    "name": "Fishing Boat 3",
+    "type": "SURFENTITY",
+    "alliance": 8,
+    "x": 285813.635163,
+    "y": 250554.057145,
+    "z": 0.0,
+    "course": 0.0,
+    "speed": 6.0,
+    "aircraft": []
+   }
+  ]
+ }
+}

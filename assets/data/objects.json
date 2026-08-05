@@ -1,0 +1,17456 @@
+[
+ {
+  "name": "53 cm Torpedo",
+  "strings": [
+   "53 cm Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "53 cm Torpedo",
+  "strings": [
+   "53 cm Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   " N",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "65 cm Torpedo",
+  "strings": [
+   "65 cm Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "65 cm Torpedo",
+  "strings": [
+   "65 cm Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A 244 Torpedo",
+  "strings": [
+   "A 244 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A 244 Torpedo",
+  "strings": [
+   "A 244 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A-4M Skyhawk",
+  "strings": [
+   "A-4M Skyhawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A-5 Fantan",
+  "strings": [
+   "A-5 Fantan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@B",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-10 Alamo",
+  "strings": [
+   "AA-10 Alamo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-10 Alamo AAM",
+  "strings": [
+   "AA-10 Alamo AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-11 Archer",
+  "strings": [
+   "AA-11 Archer"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-11 Archer AAM",
+  "strings": [
+   "AA-11 Archer AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   " N",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-12",
+  "strings": [
+   "AA-12"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-12 Adder AAM",
+  "strings": [
+   "AA-12 Adder AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-8 Aphid",
+  "strings": [
+   "AA-8 Aphid"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AA-8 Aphid AAM",
+  "strings": [
+   "AA-8 Aphid AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AB 212 Agusta",
+  "strings": [
+   "AB 212 Agusta"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Abukuma FFG",
+  "strings": [
+   "Abukuma FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "aD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AEW-2/7 Sea King",
+  "strings": [
+   "AEW-2/7 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AGM-65 Maverick",
+  "strings": [
+   "AGM-65 Maverick"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AGM-65 Maverick ASM",
+  "strings": [
+   "AGM-65 Maverick ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "0u",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AGM-88 HARM",
+  "strings": [
+   "AGM-88 HARM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AGM-88 HARM ASM",
+  "strings": [
+   "AGM-88 HARM ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AH-1W Cobra",
+  "strings": [
+   "AH-1W Cobra"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>",
+   "zC"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AIM-120 AMRAAM",
+  "strings": [
+   "AIM-120 AMRAAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AIM-120 AMRAAM AAM",
+  "strings": [
+   "AIM-120 AMRAAM AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AIM-54C Phoenix",
+  "strings": [
+   "AIM-54C Phoenix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Phoenix",
+  "strings": [
+   "Phoenix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AIM-9 Sidewinder",
+  "strings": [
+   "AIM-9 Sidewinder"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AIM-9 Sidewinder AAM",
+  "strings": [
+   "AIM-9 Sidewinder AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Airbus A300",
+  "strings": [
+   "Airbus A300"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "airbus300",
+  "strings": [
+   "airbus300"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Airport",
+  "strings": [
+   "Airport"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Airport",
+  "strings": [
+   "Airport"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Akula SSN",
+  "strings": [
+   "Akula SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "333?",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Alligator LST",
+  "strings": [
+   "Alligator LST"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Almirante Brown DDG",
+  "strings": [
+   "Almirante Brown DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Alvand FFG",
+  "strings": [
+   "Alvand FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "aD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Arleigh Burke DDG",
+  "strings": [
+   "Arleigh Burke DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.3,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "I#"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Armory",
+  "strings": [
+   "Armory"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Armory",
+  "strings": [
+   "Armory"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-10 Karen",
+  "strings": [
+   "AS-10 Karen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-10 Karen ASM",
+  "strings": [
+   "AS-10 Karen ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-12 Kegler",
+  "strings": [
+   "AS-12 Kegler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-12 Kegler ASM",
+  "strings": [
+   "AS-12 Kegler ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-14 Kedge",
+  "strings": [
+   "AS-14 Kedge"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-14 Kedge ASM",
+  "strings": [
+   "AS-14 Kedge ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-4 Kitchen",
+  "strings": [
+   "AS-4 Kitchen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-4 Kitchen ASM",
+  "strings": [
+   "AS-4 Kitchen ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-5 Kelt",
+  "strings": [
+   "AS-5 Kelt"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-5 Kelt ASM",
+  "strings": [
+   "AS-5 Kelt ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "0W",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-565 Panther",
+  "strings": [
+   "AS-565 Panther"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-6 Kingfish",
+  "strings": [
+   "AS-6 Kingfish"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-6 Kingfish ASM",
+  "strings": [
+   "AS-6 Kingfish ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Asagiri DDG",
+  "strings": [
+   "Asagiri DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Aspide",
+  "strings": [
+   "Aspide"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Aspide SAM",
+  "strings": [
+   "Aspide SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Aster",
+  "strings": [
+   "Aster"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Aster 15 SAM",
+  "strings": [
+   "Aster 15 SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Atlantique Mk 2",
+  "strings": [
+   "Atlantique Mk 2"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade",
+   "747"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Atlantique Mk 2 Gen",
+  "strings": [
+   "Atlantique Mk 2 Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade",
+   "747"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AV-8B Harrier",
+  "strings": [
+   "AV-8B Harrier"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Avenger MCM",
+  "strings": [
+   "Avenger MCM"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Babr DD",
+  "strings": [
+   "Babr DD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Badger",
+  "strings": [
+   "Badger"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "airbus300",
+  "strings": [
+   "airbus300"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "`g"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Badger Gen",
+  "strings": [
+   "Badger Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "airbus300",
+  "strings": [
+   "airbus300"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "`g"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Beechcraft Prop",
+  "strings": [
+   "Beechcraft Prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Boeing 747",
+  "strings": [
+   "Boeing 747",
+   "747"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@]",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Boghammer",
+  "strings": [
+   "Boghammer"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Boris Chilikin AOR",
+  "strings": [
+   "Boris Chilikin AOR"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Bougainville LPD",
+  "strings": [
+   "Bougainville LPD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Bremen FFG",
+  "strings": [
+   "Bremen FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Broadsword FFG",
+  "strings": [
+   "Broadsword FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Building2",
+  "strings": [
+   "Building2"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Embassy",
+  "strings": [
+   "Embassy"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Building4",
+  "strings": [
+   "Building4"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Barracks",
+  "strings": [
+   "Barracks"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Building5",
+  "strings": [
+   "Building5"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Command Center",
+  "strings": [
+   "Command Center"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Bunker",
+  "strings": [
+   "Bunker"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mess Tent",
+  "strings": [
+   "Mess Tent"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "C 201",
+  "strings": [
+   "C 201"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "C 201 SSM",
+  "strings": [
+   "C 201 SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "C 801",
+  "strings": [
+   "C 801"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "C 801 SSM",
+  "strings": [
+   "C 801 SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missileskim",
+  "strings": [
+   "missileskim"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "C 802",
+  "strings": [
+   "C 802"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "C 802 ASM",
+  "strings": [
+   "C 802 ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Car Carrier",
+  "strings": [
+   "Car Carrier"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship",
+   " @"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Cargo Ship",
+  "strings": [
+   "Cargo Ship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship",
+   " @"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Cassard DDG",
+  "strings": [
+   "Cassard DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Chaff",
+  "strings": [
+   "Chaff"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Chaff",
+  "strings": [
+   "Chaff"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Countermeasure",
+  "strings": [
+   "Countermeasure",
+   "cm",
+   "zD"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.3,
+   1000.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ChemicalPlant",
+  "strings": [
+   "ChemicalPlant"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Chemical Plant",
+  "strings": [
+   "Chemical Plant"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Cheng Kung FFG",
+  "strings": [
+   "Cheng Kung FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.3,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Cimarron AO",
+  "strings": [
+   "Cimarron AO"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Circe MHC",
+  "strings": [
+   "Circe MHC"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Clemenceau CV",
+  "strings": [
+   "Clemenceau CV"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Collins SSK",
+  "strings": [
+   "Collins SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Colossus CV",
+  "strings": [
+   "Colossus CV"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.3,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Combattante II PCFG",
+  "strings": [
+   "Combattante II PCFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Contact Mine",
+  "strings": [
+   "Contact Mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Contact Mine",
+  "strings": [
+   "Contact Mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "mine",
+  "strings": [
+   "mine"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "mine",
+  "strings": [
+   "mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Crotale",
+  "strings": [
+   "Crotale"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Crotale SAM",
+  "strings": [
+   "Crotale SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CSS-N-3 Shaddock",
+  "strings": [
+   "CSS-N-3 Shaddock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CSS-N-3 Shaddock",
+  "strings": [
+   "CSS-N-3 Shaddock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "D'Orves FFG",
+  "strings": [
+   "D'Orves FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Daphne SSK",
+  "strings": [
+   "Daphne SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "333?",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "De Gaulle CVN",
+  "strings": [
+   "De Gaulle CVN"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Decoy",
+  "strings": [
+   "Decoy"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Active Decoy",
+  "strings": [
+   "Active Decoy"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubCM",
+  "strings": [
+   "SubCM",
+   "cm",
+   "zD"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.3,
+   1000.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Deepak AOR",
+  "strings": [
+   "Deepak AOR"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "DefenseBullet",
+  "strings": [
+   "DefenseBullet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Cannon",
+  "strings": [
+   "Cannon",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "bullet",
+  "strings": [
+   "bullet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Delhi DDG",
+  "strings": [
+   "Delhi DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Delta IV SSBN",
+  "strings": [
+   "Delta IV SSBN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Depth Charge",
+  "strings": [
+   "Depth Charge"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Depth Charge",
+  "strings": [
+   "Depth Charge"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "DepthCharge",
+  "strings": [
+   "DepthCharge"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "depth",
+  "strings": [
+   "depth",
+   "/D2"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "DM 2A4 Torpedo",
+  "strings": [
+   "DM 2A4 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "DM 2A4 Torpedo",
+  "strings": [
+   "DM 2A4 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Dock",
+  "strings": [
+   "Dock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Dock",
+  "strings": [
+   "Dock"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "DownedPilot",
+  "strings": [
+   "DownedPilot"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Downed Pilot",
+  "strings": [
+   "Downed Pilot"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "float",
+  "strings": [
+   "float",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "DrugFactory",
+  "strings": [
+   "DrugFactory"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Drug Factory",
+  "strings": [
+   "Drug Factory"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Drummond FFG",
+  "strings": [
+   "Drummond FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "/D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Duke FFG",
+  "strings": [
+   "Duke FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Durance AOR",
+  "strings": [
+   "Durance AOR"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "E-2 Hawkeye",
+  "strings": [
+   "E-2 Hawkeye"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop",
+   "-0"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "p0"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "E-2 Hawkeye Gen",
+  "strings": [
+   "E-2 Hawkeye Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop",
+   "-0"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "p0"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "E-3 Sentry",
+  "strings": [
+   "E-3 Sentry"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade",
+   "747",
+   "-0"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "E-3 Sentry Gen",
+  "strings": [
+   "E-3 Sentry Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade",
+   "747",
+   "-0"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "EA-6B Prowler",
+  "strings": [
+   "EA-6B Prowler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "b5"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "zD-"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Enterprise CVN",
+  "strings": [
+   "Enterprise CVN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "lrgwarship",
+  "strings": [
+   "lrgwarship",
+   ",@"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "EP-3 Orion",
+  "strings": [
+   "EP-3 Orion"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Eridan MHC",
+  "strings": [
+   "Eridan MHC"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ES-3 Viking",
+  "strings": [
+   "ES-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "`;"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Espora FFG",
+  "strings": [
+   "Espora FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "@D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ESSM",
+  "strings": [
+   "ESSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ESSM SAM",
+  "strings": [
+   "ESSM SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Etendard IV-PM",
+  "strings": [
+   "Etendard IV-PM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Exocet",
+  "strings": [
+   "Exocet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Exocet",
+  "strings": [
+   "Exocet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missileskim",
+  "strings": [
+   "missileskim"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-14 Tomcat",
+  "strings": [
+   "F-14 Tomcat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-14 Tomcat Gen",
+  "strings": [
+   "F-14 Tomcat Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-15 Eagle",
+  "strings": [
+   "F-15 Eagle"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@KL",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-16 Falcon",
+  "strings": [
+   "F-16 Falcon"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   ";D",
+   "hB"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-16 Falcon Gen",
+  "strings": [
+   "F-16 Falcon Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   ";D",
+   "hB"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-4F Phantom II",
+  "strings": [
+   "F-4F Phantom II"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-5E Tiger II",
+  "strings": [
+   "F-5E Tiger II"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "hB"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-5E Tiger II Gen",
+  "strings": [
+   "F-5E Tiger II Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "hB"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-7 Fishbed",
+  "strings": [
+   "F-7 Fishbed"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "8J"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F/A-18 Hornet",
+  "strings": [
+   "F/A-18 Hornet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F/A-18 Hornet Gen",
+  "strings": [
+   "F/A-18 Hornet Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FA-2 Sea Harrier",
+  "strings": [
+   "FA-2 Sea Harrier"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FA-2 Sea Harrier Gn",
+  "strings": [
+   "FA-2 Sea Harrier Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Factory",
+  "strings": [
+   "Factory"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Factory",
+  "strings": [
+   "Factory"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fishing Boat",
+  "strings": [
+   "Fishing Boat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "fishingboat",
+  "strings": [
+   "fishingboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "L>",
+   "HC"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Foudre LSD",
+  "strings": [
+   "Foudre LSD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "dA"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Foxtrot SS",
+  "strings": [
+   "Foxtrot SS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Frankenthal MHC",
+  "strings": [
+   "Frankenthal MHC"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ft Victoria AOR",
+  "strings": [
+   "Ft Victoria AOR"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fuqing AOR",
+  "strings": [
+   "Fuqing AOR"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Gearing DDG",
+  "strings": [
+   "Gearing DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "George Leygues DDG",
+  "strings": [
+   "George Leygues DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Gepard PCFG",
+  "strings": [
+   "Gepard PCFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Godavari FFG",
+  "strings": [
+   "Godavari FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Grisha V FFL",
+  "strings": [
+   "Grisha V FFL"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hai Lung SSK",
+  "strings": [
+   "Hai Lung SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Hai Ou PCFG",
+  "strings": [
+   "Hai Ou PCFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   " C"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Haibat/Hoku PCFG",
+  "strings": [
+   "Haibat/Hoku PCFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   " C"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Han SSN",
+  "strings": [
+   "Han SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Hangar",
+  "strings": [
+   "Hangar"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hangar",
+  "strings": [
+   "Hangar"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hangor SSK",
+  "strings": [
+   "Hangor SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "New EA model 2-16-99",
+  "strings": [
+   "New EA model 2-16-99"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "333?",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Harpers Ferry LSD",
+  "strings": [
+   "Harpers Ferry LSD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "dA"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Harpoon",
+  "strings": [
+   "Harpoon"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Harpoon",
+  "strings": [
+   "Harpoon"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missileskim",
+  "strings": [
+   "missileskim"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   ";D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Harushio SSK",
+  "strings": [
+   "Harushio SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx",
+  "strings": [
+   "HAS-3/HMA-8 Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "@`",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "@`",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-5/6 Sea King",
+  "strings": [
+   "HAS-5/6 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hellfire",
+  "strings": [
+   "Hellfire"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hellfire ASM",
+  "strings": [
+   "Hellfire ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helo Carrier CVH",
+  "strings": [
+   "Helo Carrier CVH"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   " N"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hospital",
+  "strings": [
+   "Hospital"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hospital",
+  "strings": [
+   "Hospital"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Huchuan PHT",
+  "strings": [
+   "Huchuan PHT"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "4C"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hudong PCFG",
+  "strings": [
+   "Hudong PCFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   " C"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Humaita SSK",
+  "strings": [
+   "Humaita SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "New EA model 2-16-99",
+  "strings": [
+   "New EA model 2-16-99"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Hunt MHC",
+  "strings": [
+   "Hunt MHC"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Huon MHC",
+  "strings": [
+   "Huon MHC"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "IL-38 May",
+  "strings": [
+   "IL-38 May"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "IL-38 May Gen",
+  "strings": [
+   "IL-38 May Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Improved LA SSN",
+  "strings": [
+   "Improved LA SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Influence Mine",
+  "strings": [
+   "Influence Mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Influence Mine",
+  "strings": [
+   "Influence Mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "mine",
+  "strings": [
+   "mine"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "mine",
+  "strings": [
+   "mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Invincible CV",
+  "strings": [
+   "Invincible CV"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "xP"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "IRFlare",
+  "strings": [
+   "IRFlare"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Infrared Flare",
+  "strings": [
+   "Infrared Flare"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Countermeasure",
+  "strings": [
+   "Countermeasure",
+   "cm",
+   "zD"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.3,
+   1000.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Ivan Rogov LPD",
+  "strings": [
+   "Ivan Rogov LPD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "J-8 Finback",
+  "strings": [
+   "J-8 Finback"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Jaguar",
+  "strings": [
+   "Jaguar"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Jaguar Gen",
+  "strings": [
+   "Jaguar Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Jammer",
+  "strings": [
+   "Jammer"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Passive Decoy",
+  "strings": [
+   "Passive Decoy"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubCM",
+  "strings": [
+   "SubCM",
+   "@@!",
+   "cm",
+   "zD"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   3.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.3,
+   1000.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Jianghu I FFG",
+  "strings": [
+   "Jianghu I FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "@D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Jiangwei FFG",
+  "strings": [
+   "Jiangwei FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "HD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix Gen",
+  "strings": [
+   "KA-27 Helix Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-31 Helix",
+  "strings": [
+   "KA-31 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-31 Helix Gen",
+  "strings": [
+   "KA-31 Helix Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kaman PGF",
+  "strings": [
+   "Kaman PGF"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kara CG",
+  "strings": [
+   "Kara CG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kashin DDG",
+  "strings": [
+   "Kashin DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kasturi FSG",
+  "strings": [
+   "Kasturi FSG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "HD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kilo SSK",
+  "strings": [
+   "Kilo SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Kirov CGN",
+  "strings": [
+   "Kirov CGN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kitty Hawk CV",
+  "strings": [
+   "Kitty Hawk CV"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "lrgwarship",
+  "strings": [
+   "lrgwarship",
+   ",@"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "-<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Knox FFG",
+  "strings": [
+   "Knox FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Koni FFG",
+  "strings": [
+   "Koni FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Krivak III FFH",
+  "strings": [
+   "Krivak III FFH"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kuznetsov CV",
+  "strings": [
+   "Kuznetsov CV"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "lrgwarship",
+  "strings": [
+   "lrgwarship",
+   ",@"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "LA SSN",
+  "strings": [
+   "LA SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "LaFayette FFG",
+  "strings": [
+   "LaFayette FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "mD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lekiu FFG",
+  "strings": [
+   "Lekiu FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "HD",
+   "LPD"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "X/"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "LR Bullet",
+  "strings": [
+   "LR Bullet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "bullet",
+  "strings": [
+   "bullet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "LR Shell",
+  "strings": [
+   "LR Shell"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "shell",
+  "strings": [
+   "shell"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Luda I DDG",
+  "strings": [
+   "Luda I DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Luhu DDG",
+  "strings": [
+   "Luhu DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Magar LST",
+  "strings": [
+   "Magar LST"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mig-25 Foxbat",
+  "strings": [
+   "Mig-25 Foxbat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "=W"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mig-25 Foxbat Gen",
+  "strings": [
+   "Mig-25 Foxbat Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "=W"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mig-31 Foxhound",
+  "strings": [
+   "Mig-31 Foxhound"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "=W"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@w",
+   "L>",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mig-31 Foxhound Gen",
+  "strings": [
+   "Mig-31 Foxhound Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter",
+   "=W"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@w",
+   "L>",
+   ";D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mirage 5",
+  "strings": [
+   "Mirage 5"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mirage 5 LIB",
+  "strings": [
+   "Mirage 5 LIB"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mirage 5 PAK",
+  "strings": [
+   "Mirage 5 PAK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mirage III",
+  "strings": [
+   "Mirage III"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "b*"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 2 Tornado",
+  "strings": [
+   "Mk 2 Tornado"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "P-"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 2 Tornado Gen",
+  "strings": [
+   "Mk 2 Tornado Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "P-"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 37 Torpedo",
+  "strings": [
+   "Mk 37 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 37 Torpedo",
+  "strings": [
+   "Mk 37 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 44 Torpedo",
+  "strings": [
+   "Mk 44 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 44 Torpedo",
+  "strings": [
+   "Mk 44 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 46 Torpedo",
+  "strings": [
+   "Mk 46 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "MK 46 Torpedo",
+  "strings": [
+   "MK 46 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 48 ADCAP Torp",
+  "strings": [
+   "Mk 48 ADCAP Torp"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "MK 48 ADCAP Torpedo",
+  "strings": [
+   "MK 48 ADCAP Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Mk 50 Torpedo",
+  "strings": [
+   "Mk 50 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "MK 50 Torpedo",
+  "strings": [
+   "MK 50 Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Moored Mine",
+  "strings": [
+   "Moored Mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Moored Mine",
+  "strings": [
+   "Moored Mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "mine",
+  "strings": [
+   "mine"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "mine",
+  "strings": [
+   "mine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "MR Shell",
+  "strings": [
+   "MR Shell"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "shell",
+  "strings": [
+   "shell"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "MR-2 Nimrod",
+  "strings": [
+   "MR-2 Nimrod"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade",
+   "747"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Nanuchka III FSG",
+  "strings": [
+   "Nanuchka III FSG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Natya MSO",
+  "strings": [
+   "Natya MSO"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Neustrashimy FFG",
+  "strings": [
+   "Neustrashimy FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Newport LST",
+  "strings": [
+   "Newport LST"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Nilgiri FF",
+  "strings": [
+   "Nilgiri FF"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Nimitz CVN",
+  "strings": [
+   "Nimitz CVN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "lrgwarship",
+  "strings": [
+   "lrgwarship",
+   ",@"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "O.H. Perry FFG",
+  "strings": [
+   "O.H. Perry FFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.3,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Oberon SSK",
+  "strings": [
+   "Oberon SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "OffenseBullet",
+  "strings": [
+   "OffenseBullet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "bullet",
+  "strings": [
+   "bullet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ohio SSBN",
+  "strings": [
+   "Ohio SSBN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "sub",
+   ">I",
+   "HD"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   800.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Oil Tanker",
+  "strings": [
+   "Oil Tanker"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "cargoship",
+  "strings": [
+   "cargoship",
+   " @"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Osa II PCFG",
+  "strings": [
+   "Osa II PCFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Oscar SSGN",
+  "strings": [
+   "Oscar SSGN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "fff?",
+   "sub",
+   "|G"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Osprey MHC",
+  "strings": [
+   "Osprey MHC"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ouragan LSD",
+  "strings": [
+   "Ouragan LSD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "dA"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "P-3 Orion",
+  "strings": [
+   "P-3 Orion"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "P-3 Orion Gen",
+  "strings": [
+   "P-3 Orion Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Penguin",
+  "strings": [
+   "Penguin"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Penguin ASM",
+  "strings": [
+   "Penguin ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Perdana PCFG",
+  "strings": [
+   "Perdana PCFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Perth DDG",
+  "strings": [
+   "Perth DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Piers",
+  "strings": [
+   "Piers"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Piers",
+  "strings": [
+   "Piers"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Pondicherry MSO",
+  "strings": [
+   "Pondicherry MSO"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "PowerPlant",
+  "strings": [
+   "PowerPlant"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Power Plant",
+  "strings": [
+   "Power Plant"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-33",
+  "strings": [
+   "R-33"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-33 AAM",
+  "strings": [
+   "R-33 AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-40",
+  "strings": [
+   "R-40"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-40 AAM",
+  "strings": [
+   "R-40 AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-530",
+  "strings": [
+   "R-530"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-530 AAM",
+  "strings": [
+   "R-530 AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-550 Magic",
+  "strings": [
+   "R-550 Magic"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "R-550 Magic AAM",
+  "strings": [
+   "R-550 Magic AAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Rafale M",
+  "strings": [
+   "Rafale M"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "8J",
+   "RAM"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "RAM SAM",
+  "strings": [
+   "RAM SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "RBU Rocket",
+  "strings": [
+   "RBU Rocket"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "RBU Rocket",
+  "strings": [
+   "RBU Rocket"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D2"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Rubis SSN",
+  "strings": [
+   "Rubis SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "S-2E Tracker",
+  "strings": [
+   "S-2E Tracker"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "2)",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-2E Tracker Gen",
+  "strings": [
+   "S-2E Tracker Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "2)",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-3 Viking",
+  "strings": [
+   "S-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "zD",
+   "`;"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-365 Dauphin",
+  "strings": [
+   "SA-365 Dauphin"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-365 Dauphin Gen",
+  "strings": [
+   "SA-365 Dauphin Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-6",
+  "strings": [
+   "SA-6"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-6 SAM",
+  "strings": [
+   "SA-6 SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "0u",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-1 Goa",
+  "strings": [
+   "SA-N-1 Goa"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-1 Goa SAM",
+  "strings": [
+   "SA-N-1 Goa SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-11 Grisson",
+  "strings": [
+   "SA-N-11 Grisson"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-11 Grison SAM",
+  "strings": [
+   "SA-N-11 Grison SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-4 Gecko",
+  "strings": [
+   "SA-N-4 Gecko"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-4 Gecko SAM",
+  "strings": [
+   "SA-N-4 Gecko SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-5 Grail",
+  "strings": [
+   "SA-N-5 Grail"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-5 Grail SAM",
+  "strings": [
+   "SA-N-5 Grail SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-6 Grumble",
+  "strings": [
+   "SA-N-6 Grumble"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-6 Grumble SAM",
+  "strings": [
+   "SA-N-6 Grumble SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-7 Gadfly",
+  "strings": [
+   "SA-N-7 Gadfly"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-7 Gadfly SAM",
+  "strings": [
+   "SA-N-7 Gadfly SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-9 Gauntlet",
+  "strings": [
+   "SA-N-9 Gauntlet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-N-9 Gauntlet SAM",
+  "strings": [
+   "SA-N-9 Gauntlet SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sacramento AOE",
+  "strings": [
+   "Sacramento AOE"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "lrgwarship",
+  "strings": [
+   "lrgwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "SAM"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SAM Site",
+  "strings": [
+   "SAM Site"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sandown MHC",
+  "strings": [
+   "Sandown MHC"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Dart",
+  "strings": [
+   "Sea Dart"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Dart SAM",
+  "strings": [
+   "Sea Dart SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Eagle",
+  "strings": [
+   "Sea Eagle"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Eagle ASM",
+  "strings": [
+   "Sea Eagle ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Killer II",
+  "strings": [
+   "Sea Killer II"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Killer II SSM",
+  "strings": [
+   "Sea Killer II SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Skua",
+  "strings": [
+   "Sea Skua"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Skua ASM",
+  "strings": [
+   "Sea Skua ASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Wolf SSN",
+  "strings": [
+   "Sea Wolf SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk",
+  "strings": [
+   "SH-60B Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60F Sea Hawk",
+  "strings": [
+   "SH-60F Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60R Sea Hawk",
+  "strings": [
+   "SH-60R Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Slava CG",
+  "strings": [
+   "Slava CG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SLMM",
+  "strings": [
+   "SLMM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SLMM",
+  "strings": [
+   "SLMM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SM-1 MR",
+  "strings": [
+   "SM-1 MR"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SM-1 MR SAM",
+  "strings": [
+   "SM-1 MR SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SM-2",
+  "strings": [
+   "SM-2"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SM-2 SAM",
+  "strings": [
+   "SM-2 SAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "guided",
+  "strings": [
+   "guided"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "C<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sonalysts",
+  "strings": [
+   "Sonalysts"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sonalysts",
+  "strings": [
+   "Sonalysts"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Song SSK",
+  "strings": [
+   "Song SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Sovremenny DDG",
+  "strings": [
+   "Sovremenny DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Spearfish Torpedo",
+  "strings": [
+   "Spearfish Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Spearfish Torpedo",
+  "strings": [
+   "Spearfish Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Spruance DD",
+  "strings": [
+   "Spruance DD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SR Shell",
+  "strings": [
+   "SR Shell"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns",
+   "*h"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "shell",
+  "strings": [
+   "shell"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-C-1B Sepal",
+  "strings": [
+   "SS-C-1B Sepal"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-C-1B Sepal SSM",
+  "strings": [
+   "SS-C-1B Sepal SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-12 Sandbox",
+  "strings": [
+   "SS-N-12 Sandbox"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-12 Sandbox SSM",
+  "strings": [
+   "SS-N-12 Sandbox SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-19 Shipwreck",
+  "strings": [
+   "SS-N-19 Shipwreck"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-19 Shipwreck SSM",
+  "strings": [
+   "SS-N-19 Shipwreck SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-2 Styx",
+  "strings": [
+   "SS-N-2 Styx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-2 Styx SSM",
+  "strings": [
+   "SS-N-2 Styx SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-22 Sunburn",
+  "strings": [
+   "SS-N-22 Sunburn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-22 Sunburn SSM",
+  "strings": [
+   "SS-N-22 Sunburn SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-25",
+  "strings": [
+   "SS-N-25"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-25 SSM",
+  "strings": [
+   "SS-N-25 SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-9 Siren",
+  "strings": [
+   "SS-N-9 Siren"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SS-N-9 Siren SSM",
+  "strings": [
+   "SS-N-9 Siren SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<",
+   "SSM"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SSM Site",
+  "strings": [
+   "SSM Site"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Stingray Torpedo",
+  "strings": [
+   "Stingray Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Stingray Torpedo",
+  "strings": [
+   "Stingray Torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpedo",
+  "strings": [
+   "torpedo"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "torpinwater",
+  "strings": [
+   "torpinwater"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "torp",
+  "strings": [
+   "torp",
+   "L>",
+   "B<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-22 Fitter",
+  "strings": [
+   "SU-22 Fitter"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-24 Fencer",
+  "strings": [
+   "SU-24 Fencer"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-24 Fencer Gen",
+  "strings": [
+   "SU-24 Fencer Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-25 Frogfoot",
+  "strings": [
+   "SU-25 Frogfoot"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "(#"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-27 Flanker B",
+  "strings": [
+   "SU-27 Flanker B"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-27 Flanker B Gen",
+  "strings": [
+   "SU-27 Flanker B Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-33 Flanker D",
+  "strings": [
+   "SU-33 Flanker D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>",
+   "po"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Success AOR",
+  "strings": [
+   "Success AOR"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Etendard",
+  "strings": [
+   "Super Etendard"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@w",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Etendard Gen",
+  "strings": [
+   "Super Etendard Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FighterEvade",
+  "strings": [
+   "FighterEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "jetfighter",
+  "strings": [
+   "jetfighter"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@w",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Frelon",
+  "strings": [
+   "Super Frelon"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Frelon Gen",
+  "strings": [
+   "Super Frelon Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HeloDipping",
+  "strings": [
+   "HeloDipping"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Supply AOE",
+  "strings": [
+   "Supply AOE"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.2,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SY-1",
+  "strings": [
+   "SY-1"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SY-1 SSM",
+  "strings": [
+   "SY-1 SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "T 43 MSO",
+  "strings": [
+   "T 43 MSO"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tag Name",
+  "strings": [
+   "Tag Name"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Object Name",
+  "strings": [
+   "Object Name"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Default",
+  "strings": [
+   "Default",
+   "Wav"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SimType",
+  "strings": [
+   "SimType"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tarantul III FSG",
+  "strings": [
+   "Tarantul III FSG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tariq DD",
+  "strings": [
+   "Tariq DD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "zD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TASM",
+  "strings": [
+   "TASM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TASM SSM",
+  "strings": [
+   "TASM SSM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missileskim",
+  "strings": [
+   "missileskim"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tent_G_L",
+  "strings": [
+   "Tent_G_L"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Supply Tent",
+  "strings": [
+   "Supply Tent"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tent_G_M",
+  "strings": [
+   "Tent_G_M"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "2 Man Tent",
+  "strings": [
+   "2 Man Tent"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tent_G_S",
+  "strings": [
+   "Tent_G_S"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Green Pup Tent",
+  "strings": [
+   "Green Pup Tent"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tent_T_L",
+  "strings": [
+   "Tent_T_L"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tank Canopy Tent",
+  "strings": [
+   "Tank Canopy Tent"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tent_T_M",
+  "strings": [
+   "Tent_T_M"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ammo Tent",
+  "strings": [
+   "Ammo Tent"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tent_T_S",
+  "strings": [
+   "Tent_T_S"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tan Pup Tent",
+  "strings": [
+   "Tan Pup Tent"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TICO CG",
+  "strings": [
+   "TICO CG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TICO CG (VLS)",
+  "strings": [
+   "TICO CG (VLS)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tiger PCFG",
+  "strings": [
+   "Tiger PCFG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TLAM",
+  "strings": [
+   "TLAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TLAM SLCM",
+  "strings": [
+   "TLAM SLCM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TLAM",
+  "strings": [
+   "TLAM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "missile",
+  "strings": [
+   "missile",
+   "/D<"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tourville DDG",
+  "strings": [
+   "Tourville DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Guns",
+  "strings": [
+   "Guns"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TowedCM",
+  "strings": [
+   "TowedCM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Towed Decoy",
+  "strings": [
+   "Towed Decoy",
+   "@@!",
+   "cm",
+   "zD"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Trafalgar SSN",
+  "strings": [
+   "Trafalgar SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "fff?",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.9,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "TrainingFacility",
+  "strings": [
+   "TrainingFacility"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Training Facility",
+  "strings": [
+   "Training Facility"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Trawler",
+  "strings": [
+   "Trawler"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "fishingboat",
+  "strings": [
+   "fishingboat",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TU-142 Bear F",
+  "strings": [
+   "TU-142 Bear F"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TU-142 Bear F Gen",
+  "strings": [
+   "TU-142 Bear F Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TU-142 Bear J",
+  "strings": [
+   "TU-142 Bear J"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "prop",
+  "strings": [
+   "prop"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "TU-22 Backfire",
+  "strings": [
+   "TU-22 Backfire"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "airbus300",
+  "strings": [
+   "airbus300",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "plane",
+  "strings": [
+   "plane",
+   "@KL",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Type 206 SSK",
+  "strings": [
+   "Type 206 SSK"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Type 209 SS",
+  "strings": [
+   "Type 209 SS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "dieselsubsubmerged",
+  "strings": [
+   "dieselsubsubmerged",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Type 42 DDG",
+  "strings": [
+   "Type 42 DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Typhoon SSBN",
+  "strings": [
+   "Typhoon SSBN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.5,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Udaloy DDG",
+  "strings": [
+   "Udaloy DDG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "V-22 Osprey",
+  "strings": [
+   "V-22 Osprey"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "BomberEvade",
+  "strings": [
+   "BomberEvade"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "helo",
+  "strings": [
+   "helo",
+   "L>"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Victor III SSN",
+  "strings": [
+   "Victor III SSN"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SubDef",
+  "strings": [
+   "SubDef"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "nukesub",
+  "strings": [
+   "nukesub",
+   "L?",
+   "sub"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.8,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.4,
+   500.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Vishnya AGI",
+  "strings": [
+   "Vishnya AGI"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Wasp LHD",
+  "strings": [
+   "Wasp LHD"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "33"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.3,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Whouse",
+  "strings": [
+   "Whouse"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Warehouse",
+  "strings": [
+   "Warehouse"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "rock",
+  "strings": [
+   "rock"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Xiangyang Hong AGI",
+  "strings": [
+   "Xiangyang Hong AGI"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "CIWS",
+  "strings": [
+   "CIWS"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "patrolboat",
+  "strings": [
+   "patrolboat"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Yukan LST",
+  "strings": [
+   "Yukan LST"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "medwarship",
+  "strings": [
+   "medwarship",
+   "ff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   2.1,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ship",
+  "strings": [
+   "ship"
+  ],
+  "numbers": []
+ }
+]

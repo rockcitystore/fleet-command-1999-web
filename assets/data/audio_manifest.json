@@ -1,0 +1,79 @@
+[
+ {
+  "file": "AegMus6.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 219.17,
+  "sizeBytes": 9665662
+ },
+ {
+  "file": "Aegmus1.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 163.29,
+  "sizeBytes": 7201406
+ },
+ {
+  "file": "Aegmus2.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 296.8,
+  "sizeBytes": 13088894
+ },
+ {
+  "file": "Aegmus3.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 245.67,
+  "sizeBytes": 10834046
+ },
+ {
+  "file": "Aegmus4.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 217.29,
+  "sizeBytes": 9582718
+ },
+ {
+  "file": "Aegmus5.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 164.17,
+  "sizeBytes": 7239806
+ },
+ {
+  "file": "CMNDCNTR.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 45.88,
+  "sizeBytes": 2023550
+ },
+ {
+  "file": "Credits.wav",
+  "valid": true,
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSec": 95.82,
+  "sizeBytes": 4225834
+ },
+ {
+  "file": "sfx.agg",
+  "note": "aggregate sfx archive, unparsed",
+  "sizeBytes": 130253330
+ }
+]

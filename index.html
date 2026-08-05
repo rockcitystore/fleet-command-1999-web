@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#06121f" />
+  <title>FLEET COMMAND '99</title>
+  <link rel="icon" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ============ MENU SCREEN ============ -->
+  <div id="screen-menu" class="screen">
+    <div class="menu-inner">
+      <div class="title-block">
+        <h1 class="title">FLEET COMMAND '99</h1>
+        <p class="subtitle">JANE'S COMBAT SIMULATIONS</p>
+      </div>
+
+      <div class="menu-body">
+        <nav id="main-menu" class="main-menu" aria-label="Main menu">
+          <button class="menu-btn" data-act="campaign" type="button">CAMPAIGN</button>
+          <button class="menu-btn" data-act="single" type="button">SINGLE MISSIONS</button>
+          <button class="menu-btn" data-act="tutorials" type="button">TUTORIALS</button>
+          <button class="menu-btn" data-act="editor" type="button">MISSION EDITOR</button>
+          <button class="menu-btn" data-act="reference" type="button">REFERENCE</button>
+          <button class="menu-btn" data-act="options" type="button">OPTIONS</button>
+        </nav>
+
+        <div class="menu-content">
+          <div id="sub-welcome" class="subpanel">
+            <div class="welcome-card glass">
+              <p class="welcome-lead">FLEET COMMAND '99 &mdash; COMBAT INFORMATION CENTER</p>
+              <p class="welcome-text">Select an option from the navigation panel to begin.
+                Launch a single mission, study the order of battle in the Jane's Reference
+                Library, or review campaign and tutorial content.</p>
+              <p class="welcome-hint">TIP: Click a unit on the tactical map to inspect its
+                weapons and sensors.</p>
+            </div>
+          </div>
+
+          <div id="sub-single" class="subpanel hidden">
+            <div class="subpanel-head">
+              <span class="subpanel-title">SELECT SINGLE MISSION</span>
+            </div>
+            <div id="scenario-list"></div>
+          </div>
+
+          <div id="sub-placeholder" class="subpanel hidden">
+            <div class="subpanel-head">
+              <span class="subpanel-title" id="placeholder-title"></span>
+            </div>
+            <div id="placeholder-body" class="placeholder-body glass"></div>
+          </div>
+
+          <div id="sub-tutorials" class="subpanel hidden">
+            <div class="subpanel-head">
+              <span class="subpanel-title">TUTORIALS</span>
+            </div>
+            <div class="tut-card glass">
+              <p class="tut-lead">TACTICAL BASICS</p>
+              <p class="tut-text">A guided first mission. Coach marks will walk you through
+                panning, zooming, box-selecting your units, and issuing orders.</p>
+              <button id="btn-launch-tutorial" class="btn btn-go" type="button">LAUNCH TUTORIAL &rsaquo;</button>
+            </div>
+            <div class="tut-list glass">
+              <div class="tut-row"><span class="tut-k">DRAG</span> pan the map (on a unit)</div>
+              <div class="tut-row"><span class="tut-k">BOX</span> drag on empty sea to select units</div>
+              <div class="tut-row"><span class="tut-k">SCROLL</span> zoom in / out</div>
+              <div class="tut-row"><span class="tut-k">CLICK</span> a unit to inspect it</div>
+              <div class="tut-row"><span class="tut-k">ORDER</span> click empty sea to move; click a detected hostile to attack</div>
+            </div>
+          </div>
+
+          <div id="sub-editor" class="subpanel hidden">
+            <div class="subpanel-head">
+              <span class="subpanel-title">MISSION EDITOR</span>
+            </div>
+            <div class="editor-card glass">
+              <label class="editor-field">
+                <span>PLAYER SHIPS</span>
+                <input id="ed-player" type="range" min="1" max="6" value="3" />
+                <output id="ed-player-out">3</output>
+              </label>
+              <label class="editor-field">
+                <span>HOSTILE SHIPS</span>
+                <input id="ed-enemy" type="range" min="1" max="6" value="2" />
+                <output id="ed-enemy-out">2</output>
+              </label>
+              <label class="editor-field">
+                <span>THEATER</span>
+                <select id="ed-theater">
+                  <option value="norwegian">Norwegian Sea</option>
+                  <option value="med">Mediterranean</option>
+                </select>
+              </label>
+              <button id="btn-launch-editor" class="btn btn-go" type="button">LAUNCH ENGAGEMENT &rsaquo;</button>
+            </div>
+          </div>
+
+          <div id="sub-options" class="subpanel hidden">
+            <div class="subpanel-head">
+              <span class="subpanel-title">OPTIONS</span>
+            </div>
+            <div class="options-card glass">
+              <div class="opt-row">
+                <span>TACTICAL GRID</span>
+                <button id="opt-grid" class="btn opt-toggle" type="button" data-on="1">ON</button>
+              </div>
+              <div class="opt-row">
+                <span>SYMBOLS</span>
+                <button id="opt-symbol" class="btn opt-toggle" type="button" data-on="ntds">NTDS</button>
+              </div>
+              <div class="opt-row">
+                <span>MUSIC</span>
+                <button id="opt-music" class="btn opt-toggle" type="button" data-on="1">ON</button>
+              </div>
+              <p class="opt-note">Grid &amp; symbol changes apply to the next battle. Music toggles live.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ REFERENCE (JANE'S LIBRARY) SCREEN ============ -->
+  <div id="screen-reference" class="screen hidden">
+    <div class="ref-inner glass">
+      <div class="ref-head">
+        <button class="btn btn-back" id="btn-ref-back" type="button">&lsaquo; MENU</button>
+        <h2 class="ref-title">JANE'S COMBAT SIMULATIONS &mdash; REFERENCE LIBRARY</h2>
+      </div>
+      <div class="ref-filters">
+        <div class="ref-tabs" id="ref-cat" role="tablist"></div>
+        <div class="ref-countries" id="ref-country"></div>
+      </div>
+      <div class="ref-grid" id="ref-grid"></div>
+      <div class="ref-foot" id="ref-foot"></div>
+    </div>
+  </div>
+
+  <!-- ============ BATTLE SCREEN ============ -->
+  <div id="screen-battle" class="screen hidden">
+    <canvas id="map"></canvas>
+
+    <!-- Original FC99 CIC: bottom three panels -->
+    <div id="bottom-panels">
+      <div id="panel-minimap" class="bottom-panel">
+        <div class="panel-caption">TACTICAL OVERVIEW</div>
+        <canvas id="minimap"></canvas>
+      </div>
+      <div id="panel-3d" class="bottom-panel">
+        <div class="panel-caption">3D VIEW</div>
+        <div class="view3d-placeholder">3D VIEW NOT AVAILABLE</div>
+      </div>
+      <div id="panel-info" class="bottom-panel">
+        <div class="panel-caption">UNIT INFORMATION</div>
+        <div id="infopanel">
+          <div class="info-line"><span class="info-label">NAME</span> <span id="info-name">NO UNIT SELECTED</span></div>
+          <div class="info-line"><span class="info-label">CLASS</span> <span id="info-class">—</span></div>
+          <div class="info-line"><span class="info-label">TRACK #</span> <span id="info-track">—</span></div>
+          <div class="info-line"><span class="info-label">COURSE</span> <span id="info-course">—</span></div>
+          <div class="info-line"><span class="info-label">SPEED</span> <span id="info-speed">—</span></div>
+          <div class="info-line"><span class="info-label">%DAMAGE</span> <span id="info-damage">—</span></div>
+          <div class="info-line"><span class="info-label">ORDERS</span> <span id="info-orders">—</span></div>
+          <div class="info-line info-weapons-head"><span class="info-label">WEAPONS</span></div>
+          <div id="info-weapons" class="info-weapons">—</div>
+          <div id="info-ac-actions" class="info-ac-actions hidden">
+            <button id="btn-ac-recover" class="btn btn-sm" type="button">RECOVER</button>
+            <button id="btn-ac-route" class="btn btn-sm" type="button">DRAW ROUTE</button>
+          </div>
+          <div class="info-foot">
+            <span>TIME: <span id="info-time">12:00</span></span>
+            <span>SCALE: <span id="info-scale">=</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="controlbar">
+      <button id="btn-menu-exit" class="btn" type="button">MENU</button>
+      <button id="btn-pause" class="btn" type="button">PAUSE</button>
+      <button id="btn-1x" class="btn" type="button">1x</button>
+      <button id="btn-2x" class="btn" type="button">2x</button>
+      <button id="btn-4x" class="btn" type="button">4x</button>
+      <button id="btn-zoomout" class="btn" type="button">ZOOM &minus;</button>
+      <button id="btn-zoomin" class="btn" type="button">ZOOM +</button>
+      <button id="btn-reset" class="btn" type="button">RESET VIEW</button>
+      <button id="btn-music" class="btn" type="button">MUSIC</button>
+      <span class="hud-cell hud-scenario-cell"><span id="hud-scenario">&mdash;</span></span>
+      <span class="hud-cell"><span class="hud-label">ALLY</span> <span id="hud-player">0</span></span>
+      <span class="hud-cell"><span class="hud-label">HOSTILE</span> <span id="hud-enemy">0</span></span>
+      <span class="hud-cell"><span class="hud-label">T</span> <span id="hud-time">T+00:00</span></span>
+      <span class="hud-cell"><span class="hud-label">STATUS</span> <span id="hud-status">1x</span></span>
+    </div>
+
+    <div id="coach" class="coach hidden">
+      <div class="coach-step" id="coach-step">1 / 4</div>
+      <div class="coach-text" id="coach-text"></div>
+      <div class="coach-actions">
+        <button id="coach-skip" class="btn coach-btn" type="button">SKIP</button>
+        <button id="coach-next" class="btn coach-btn" type="button">NEXT &rsaquo;</button>
+      </div>
+    </div>
+
+    <div id="endscreen" class="hidden">
+      <div class="endscreen-inner">
+        <div id="end-result" class="end-result">VICTORY</div>
+        <div id="end-detail" class="end-detail"></div>
+        <button id="btn-menu" class="btn btn-menu" type="button">MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

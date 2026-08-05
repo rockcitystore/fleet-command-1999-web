@@ -1,0 +1,3481 @@
+[
+ {
+  "name": "Australia",
+  "strings": [
+   "Australia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Adelaide FFG",
+  "strings": [
+   "Adelaide FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-70 Seahawk",
+  "strings": [
+   "S-70 Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Iran",
+  "strings": [
+   "Iran"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Babr DD",
+  "strings": [
+   "Babr DD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AB 212 Agusta",
+  "strings": [
+   "AB 212 Agusta"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AB-212 Agusta",
+  "strings": [
+   "AB-212 Agusta"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Japan",
+  "strings": [
+   "Japan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Asagiri DDG",
+  "strings": [
+   "Asagiri DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60 Seahawk",
+  "strings": [
+   "SH-60 Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United Kingdom",
+  "strings": [
+   "United Kingdom"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Assault Ship LPD",
+  "strings": [
+   "Assault Ship LPD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King",
+  "strings": [
+   "HAS-5/6 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-5/6 Sea King",
+  "strings": [
+   "HAS-5/6 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Argentina",
+  "strings": [
+   "Argentina"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Almirante Brown DDG",
+  "strings": [
+   "Almirante Brown DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Chetak",
+  "strings": [
+   "SA-319 Chetak"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Germany",
+  "strings": [
+   "Germany"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Bremen FFG",
+  "strings": [
+   "Bremen FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Lynx MK 88",
+  "strings": [
+   "Sea Lynx MK 88"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United Kingdom",
+  "strings": [
+   "United Kingdom"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Broadsword FFG",
+  "strings": [
+   "Broadsword FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx",
+  "strings": [
+   "HAS-3/HMA-8 Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx",
+  "strings": [
+   "HAS-3/HMA-8 Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Brazil",
+  "strings": [
+   "Brazil"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Broadsword FFG",
+  "strings": [
+   "Broadsword FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Lynx",
+  "strings": [
+   "Super Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Cassard DDG",
+  "strings": [
+   "Cassard DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AS-565 Panther",
+  "strings": [
+   "AS-565 Panther"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-565 Panther",
+  "strings": [
+   "AS-565 Panther"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Charles de Gaulle CVN",
+  "strings": [
+   "Charles de Gaulle CVN",
+   "`;"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Rafale M",
+  "strings": [
+   "Rafale M"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Rafale M",
+  "strings": [
+   "Rafale M"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Super Etendard",
+  "strings": [
+   "Super Etendard"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Etendard",
+  "strings": [
+   "Super Etendard"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Super Frelon Gen",
+  "strings": [
+   "Super Frelon Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-321G Super Frelon",
+  "strings": [
+   "SA-321G Super Frelon"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "AS-565 Panther",
+  "strings": [
+   "AS-565 Panther"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-565 Panther",
+  "strings": [
+   "AS-565 Panther"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Taiwan",
+  "strings": [
+   "Taiwan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Cheng Kung FFG",
+  "strings": [
+   "Cheng Kung FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-70 Thunderhawk",
+  "strings": [
+   "S-70 Thunderhawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Clemenceau CV",
+  "strings": [
+   "Clemenceau CV"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Super Etendard",
+  "strings": [
+   "Super Etendard"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Etendard",
+  "strings": [
+   "Super Etendard"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Rafale M",
+  "strings": [
+   "Rafale M"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Rafale M",
+  "strings": [
+   "Rafale M"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SA-365 Dauphin",
+  "strings": [
+   "SA-365 Dauphin"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-365 Dauphin",
+  "strings": [
+   "SA-365 Dauphin"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Argentina",
+  "strings": [
+   "Argentina"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Colossus CV",
+  "strings": [
+   "Colossus CV"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Super Etendard Gen",
+  "strings": [
+   "Super Etendard Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Etendard",
+  "strings": [
+   "Super Etendard"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "S-2E Tracker Gen",
+  "strings": [
+   "S-2E Tracker Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-2E Tracker",
+  "strings": [
+   "S-2E Tracker",
+   "ASW"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-3 Sea King",
+  "strings": [
+   "AS-3 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Brazil",
+  "strings": [
+   "Brazil"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Colossus CV",
+  "strings": [
+   "Colossus CV",
+   " 0"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "S-2E Tracker Gen",
+  "strings": [
+   "S-2E Tracker Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-2E Tracker",
+  "strings": [
+   "S-2E Tracker"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Super Lynx",
+  "strings": [
+   "Super Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "India",
+  "strings": [
+   "India"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Deepak AOR",
+  "strings": [
+   "Deepak AOR"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Chetak",
+  "strings": [
+   "SA-319 Chetak"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "India",
+  "strings": [
+   "India"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Delhi DDG",
+  "strings": [
+   "Delhi DDG",
+   "06"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea King MK 42",
+  "strings": [
+   "Sea King MK 42"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United Kingdom",
+  "strings": [
+   "United Kingdom"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Duke FFG",
+  "strings": [
+   "Duke FFG",
+   "xG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx",
+  "strings": [
+   "HAS-3/HMA-8 Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx",
+  "strings": [
+   "HAS-3/HMA-8 Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Durance AOR",
+  "strings": [
+   "Durance AOR"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lynx MK 4",
+  "strings": [
+   "Lynx MK 4"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Enterprise CVN",
+  "strings": [
+   "Enterprise CVN"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "F-14 Tomcat",
+  "strings": [
+   "F-14 Tomcat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-14 Tomcat",
+  "strings": [
+   "F-14 Tomcat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "F/A-18 Hornet",
+  "strings": [
+   "F/A-18 Hornet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F/A-18 Hornet",
+  "strings": [
+   "F/A-18 Hornet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60F Sea Hawk",
+  "strings": [
+   "SH-60F Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60F Seahawk",
+  "strings": [
+   "SH-60F Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "EA-6B Prowler",
+  "strings": [
+   "EA-6B Prowler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "EA-6B Prowler",
+  "strings": [
+   "EA-6B Prowler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Electronic Warfare",
+  "strings": [
+   "Electronic Warfare"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "E-2 Hawkeye",
+  "strings": [
+   "E-2 Hawkeye"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "E-2 Hawkeye",
+  "strings": [
+   "E-2 Hawkeye"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Airborne Early Warning",
+  "strings": [
+   "Airborne Early Warning"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "S-3 Viking",
+  "strings": [
+   "S-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-3 Viking",
+  "strings": [
+   "S-3 Viking",
+   "ASW"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ES-3 Viking",
+  "strings": [
+   "ES-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ES-3 Viking",
+  "strings": [
+   "ES-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Electronic Reconnaissance",
+  "strings": [
+   "Electronic Reconnaissance"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Argentina",
+  "strings": [
+   "Argentina"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Espora FFG",
+  "strings": [
+   "Espora FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United Kingdom",
+  "strings": [
+   "United Kingdom"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fort Victoria AOR",
+  "strings": [
+   "Fort Victoria AOR"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King",
+  "strings": [
+   "HAS-5/6 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-5/6 Sea King",
+  "strings": [
+   "HAS-5/6 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Foudre LSD",
+  "strings": [
+   "Foudre LSD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Super Frelon Gen",
+  "strings": [
+   "Super Frelon Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-321G Super Frelon",
+  "strings": [
+   "SA-321G Super Frelon"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Pakistan",
+  "strings": [
+   "Pakistan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Gearing DDG",
+  "strings": [
+   "Gearing DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Taiwan",
+  "strings": [
+   "Taiwan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Gearing DDG",
+  "strings": [
+   "Gearing DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-70 Thunderhawk",
+  "strings": [
+   "S-70 Thunderhawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Georges Leygues DDG",
+  "strings": [
+   "Georges Leygues DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lynx MK 4",
+  "strings": [
+   "Lynx MK 4"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "India",
+  "strings": [
+   "India"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Godavari FFG",
+  "strings": [
+   "Godavari FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea King MK 42",
+  "strings": [
+   "Sea King MK 42"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Harpers Ferry LSD",
+  "strings": [
+   "Harpers Ferry LSD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AH-1W Cobra",
+  "strings": [
+   "AH-1W Cobra"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AH-1W Super Cobra",
+  "strings": [
+   "AH-1W Super Cobra"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter Carrier CVH",
+  "strings": [
+   "Helicopter Carrier CVH",
+   " t"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SA-365 Dauphin",
+  "strings": [
+   "SA-365 Dauphin"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-365 Dauphin",
+  "strings": [
+   "SA-365 Dauphin"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lynx MK 4",
+  "strings": [
+   "Lynx MK 4"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Argentina",
+  "strings": [
+   "Argentina"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hercules DDG",
+  "strings": [
+   "Hercules DDG",
+   "8}"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "India",
+  "strings": [
+   "India"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Hermes CV",
+  "strings": [
+   "Hermes CV"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "FA-2 Sea Harrier",
+  "strings": [
+   "FA-2 Sea Harrier"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea Harrier",
+  "strings": [
+   "Sea Harrier"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea King MK 42",
+  "strings": [
+   "Sea King MK 42"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix Gen",
+  "strings": [
+   "KA-27 Helix Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United Kingdom",
+  "strings": [
+   "United Kingdom"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Invincible CVS",
+  "strings": [
+   "Invincible CVS"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "FA-2 Sea Harrier Gn",
+  "strings": [
+   "FA-2 Sea Harrier Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FA-2 Sea Harrier",
+  "strings": [
+   "FA-2 Sea Harrier"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King",
+  "strings": [
+   "HAS-5/6 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-5/6 Sea King",
+  "strings": [
+   "HAS-5/6 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "AEW-2/7 Sea King",
+  "strings": [
+   "AEW-2/7 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AEW-2/7 Sea King",
+  "strings": [
+   "AEW-2/7 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "China",
+  "strings": [
+   "China"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Jiangwei FFG",
+  "strings": [
+   "Jiangwei FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-365 Dauphin Gen",
+  "strings": [
+   "SA-365 Dauphin Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ZHI-9 Haitun",
+  "strings": [
+   "ZHI-9 Haitun"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Taiwan",
+  "strings": [
+   "Taiwan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kang Ding FFG",
+  "strings": [
+   "Kang Ding FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-70 Thunderhawk",
+  "strings": [
+   "S-70 Thunderhawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kara CG",
+  "strings": [
+   "Kara CG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Malaysia",
+  "strings": [
+   "Malaysia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kasturi FSG",
+  "strings": [
+   "Kasturi FSG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lynx",
+  "strings": [
+   "Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kirov CGN",
+  "strings": [
+   "Kirov CGN"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kitty Hawk CV",
+  "strings": [
+   "Kitty Hawk CV"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "F-14 Tomcat",
+  "strings": [
+   "F-14 Tomcat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-14 Tomcat",
+  "strings": [
+   "F-14 Tomcat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "F/A-18 Hornet",
+  "strings": [
+   "F/A-18 Hornet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F/A-18 Hornet",
+  "strings": [
+   "F/A-18 Hornet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60F Sea Hawk",
+  "strings": [
+   "SH-60F Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60F Seahawk",
+  "strings": [
+   "SH-60F Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "EA-6B Prowler",
+  "strings": [
+   "EA-6B Prowler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "EA-6B Prowler",
+  "strings": [
+   "EA-6B Prowler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Electronic Warfare",
+  "strings": [
+   "Electronic Warfare"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "E-2 Hawkeye",
+  "strings": [
+   "E-2 Hawkeye"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "E-2 Hawkeye",
+  "strings": [
+   "E-2 Hawkeye"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Airborne Early Warning",
+  "strings": [
+   "Airborne Early Warning"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "S-3 Viking",
+  "strings": [
+   "S-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-3 Viking",
+  "strings": [
+   "S-3 Viking",
+   "ASW"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ES-3 Viking",
+  "strings": [
+   "ES-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ES-3 Viking",
+  "strings": [
+   "ES-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Electronic Reconnaissance",
+  "strings": [
+   "Electronic Reconnaissance"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Taiwan",
+  "strings": [
+   "Taiwan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Knox FFG",
+  "strings": [
+   "Knox FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-70 Thunderhawk",
+  "strings": [
+   "S-70 Thunderhawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Krivak III FFH",
+  "strings": [
+   "Krivak III FFH"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Kuznetsov CV",
+  "strings": [
+   "Kuznetsov CV"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SU-33 Flanker D",
+  "strings": [
+   "SU-33 Flanker D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-33 Flanker D",
+  "strings": [
+   "SU-33 Flanker D"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SU-25 Frogfoot",
+  "strings": [
+   "SU-25 Frogfoot"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SU-25 Frogfoot",
+  "strings": [
+   "SU-25 Frogfoot"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "La Fayette FFG",
+  "strings": [
+   "La Fayette FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AS-565 Panther",
+  "strings": [
+   "AS-565 Panther"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AS-565 Panther",
+  "strings": [
+   "AS-565 Panther"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Pakistan",
+  "strings": [
+   "Pakistan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Leander FF",
+  "strings": [
+   "Leander FF"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-319 Alouette Gen",
+  "strings": [
+   "SA-319 Alouette Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-319 Alouette",
+  "strings": [
+   "SA-319 Alouette"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Malaysia",
+  "strings": [
+   "Malaysia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lekiu FFG",
+  "strings": [
+   "Lekiu FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lynx",
+  "strings": [
+   "Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "China",
+  "strings": [
+   "China"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Luda I DDG",
+  "strings": [
+   "Luda I DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-365 Dauphin Gen",
+  "strings": [
+   "SA-365 Dauphin Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ZHI-9 Haitun",
+  "strings": [
+   "ZHI-9 Haitun"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "China",
+  "strings": [
+   "China"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Luhu DDG",
+  "strings": [
+   "Luhu DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-365 Dauphin Gen",
+  "strings": [
+   "SA-365 Dauphin Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ZHI-9 Haitun",
+  "strings": [
+   "ZHI-9 Haitun"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "India",
+  "strings": [
+   "India"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Magar LST",
+  "strings": [
+   "Magar LST",
+   "XK"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea King MK 42",
+  "strings": [
+   "Sea King MK 42"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Neustrashimy FFG",
+  "strings": [
+   "Neustrashimy FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Newport LST",
+  "strings": [
+   "Newport LST"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AH-1W Cobra",
+  "strings": [
+   "AH-1W Cobra"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AH-1W Super Cobra",
+  "strings": [
+   "AH-1W Super Cobra"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Australia",
+  "strings": [
+   "Australia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Newport LST",
+  "strings": [
+   "Newport LST"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60B Sea Hawk Gen",
+  "strings": [
+   "SH-60B Sea Hawk Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-70 Seahawk",
+  "strings": [
+   "S-70 Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "India",
+  "strings": [
+   "India"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Nilgiri FF",
+  "strings": [
+   "Nilgiri FF"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sea King MK 42",
+  "strings": [
+   "Sea King MK 42"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Nimitz CVN",
+  "strings": [
+   "Nimitz CVN"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "F-14 Tomcat",
+  "strings": [
+   "F-14 Tomcat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F-14 Tomcat",
+  "strings": [
+   "F-14 Tomcat"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "F/A-18 Hornet",
+  "strings": [
+   "F/A-18 Hornet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "F/A-18 Hornet",
+  "strings": [
+   "F/A-18 Hornet"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60F Sea Hawk",
+  "strings": [
+   "SH-60F Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60F Seahawk",
+  "strings": [
+   "SH-60F Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "EA-6B Prowler",
+  "strings": [
+   "EA-6B Prowler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "EA-6B Prowler",
+  "strings": [
+   "EA-6B Prowler"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Electronic Warfare",
+  "strings": [
+   "Electronic Warfare"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "E-2 Hawkeye",
+  "strings": [
+   "E-2 Hawkeye"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "E-2 Hawkeye",
+  "strings": [
+   "E-2 Hawkeye"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Airborne Early Warning",
+  "strings": [
+   "Airborne Early Warning"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "S-3 Viking",
+  "strings": [
+   "S-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "S-3 Viking",
+  "strings": [
+   "S-3 Viking",
+   "ASW"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ES-3 Viking",
+  "strings": [
+   "ES-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ES-3 Viking",
+  "strings": [
+   "ES-3 Viking"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Electronic Reconnaissance",
+  "strings": [
+   "Electronic Reconnaissance"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Oliver Hazard Perry FFG",
+  "strings": [
+   "Oliver Hazard Perry FFG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60R Sea Hawk",
+  "strings": [
+   "SH-60R Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60R Seahawk",
+  "strings": [
+   "SH-60R Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ouragan LSD",
+  "strings": [
+   "Ouragan LSD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Super Frelon Gen",
+  "strings": [
+   "Super Frelon Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SA-321G Super Frelon",
+  "strings": [
+   "SA-321G Super Frelon"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "India",
+  "strings": [
+   "India"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Rajput DDG",
+  "strings": [
+   "Rajput DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix Gen",
+  "strings": [
+   "KA-27 Helix Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Slava CG",
+  "strings": [
+   "Slava CG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sovremenny DDG",
+  "strings": [
+   "Sovremenny DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "China",
+  "strings": [
+   "China"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Sovremenny DDG",
+  "strings": [
+   "Sovremenny DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SA-365 Dauphin Gen",
+  "strings": [
+   "SA-365 Dauphin Gen"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ZHI-9 Haitun",
+  "strings": [
+   "ZHI-9 Haitun"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Spruance DD",
+  "strings": [
+   "Spruance DD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60R Sea Hawk",
+  "strings": [
+   "SH-60R Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60R Seahawk",
+  "strings": [
+   "SH-60R Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Pakistan",
+  "strings": [
+   "Pakistan"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tariq DD",
+  "strings": [
+   "Tariq DD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lynx",
+  "strings": [
+   "Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ticonderoga CG",
+  "strings": [
+   "Ticonderoga CG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60R Sea Hawk",
+  "strings": [
+   "SH-60R Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60R Seahawk",
+  "strings": [
+   "SH-60R Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ticonderoga VLS CG",
+  "strings": [
+   "Ticonderoga VLS CG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60R Sea Hawk",
+  "strings": [
+   "SH-60R Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60R Seahawk",
+  "strings": [
+   "SH-60R Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "France",
+  "strings": [
+   "France"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Tourville DDG",
+  "strings": [
+   "Tourville DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx Gn",
+  "strings": [
+   "HAS-3/HMA-8 Lynx Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Lynx MK 4",
+  "strings": [
+   "Lynx MK 4"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United Kingdom",
+  "strings": [
+   "United Kingdom"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Type 42 DDG",
+  "strings": [
+   "Type 42 DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx",
+  "strings": [
+   "HAS-3/HMA-8 Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-3/HMA-8 Lynx",
+  "strings": [
+   "HAS-3/HMA-8 Lynx"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Russia",
+  "strings": [
+   "Russia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Udaloy DDG",
+  "strings": [
+   "Udaloy DDG"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "KA-27 Helix",
+  "strings": [
+   "KA-27 Helix"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "United States",
+  "strings": [
+   "United States"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Wasp LHD",
+  "strings": [
+   "Wasp LHD"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AV-8B Harrier",
+  "strings": [
+   "AV-8B Harrier"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AV-8 Harrier",
+  "strings": [
+   "AV-8 Harrier"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Fighter/Attack",
+  "strings": [
+   "Fighter/Attack"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "AH-1W Cobra",
+  "strings": [
+   "AH-1W Cobra"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AH-1W Super Cobra",
+  "strings": [
+   "AH-1W Super Cobra"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "SH-60R Sea Hawk",
+  "strings": [
+   "SH-60R Sea Hawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "SH-60R Seahawk",
+  "strings": [
+   "SH-60R Seahawk"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ },
+ {
+  "name": "Australia",
+  "strings": [
+   "Australia"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Success AOR",
+  "strings": [
+   "Success AOR",
+   "0@"
+  ],
+  "numbers": [
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HAS-5/6 Sea King Gn",
+  "strings": [
+   "HAS-5/6 Sea King Gn"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HAS-50 Sea King",
+  "strings": [
+   "HAS-50 Sea King"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Helicopter",
+  "strings": [
+   "Helicopter"
+  ],
+  "numbers": [
+   0.0
+  ]
+ }
+]

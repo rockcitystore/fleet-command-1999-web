@@ -1,0 +1,461 @@
+{
+ "shared.grp": [
+  {
+   "name": "arrowd.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "arrowu.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "caret.bmp",
+   "w": 23,
+   "h": 23
+  },
+  {
+   "name": "cbbutton.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "DI_BTMLFT.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "DI_BTMMID.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "DI_BTMRT.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "DI_BTNS.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "DI_BTNSsm.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "DI_MIDLFT.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "DI_MIDMID.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "DI_MIDRT.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "DI_UPLFT.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "DI_UPMID.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "DI_UPRT.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "dialog.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "fclogo.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "font3D.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "font3Da.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "font3Dsm.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "font3dsma.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "fru_bold.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "fru_plain.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "fru_small.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "GREEN_DOWN.b",
+   "w": 28781,
+   "h": 28
+  },
+  {
+   "name": "GREEN_THUMB.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "GREEN_TRACK.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "GREEN_UP.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "hcaret.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "help.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "HGREEN_DOWN.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "HGREEN_UP.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "hsimpled.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "hsimpleu.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "hyellow_up.b",
+   "w": 28781,
+   "h": 28
+  },
+  {
+   "name": "j3font.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "j3font256.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "janes_down.b",
+   "w": 28781,
+   "h": 28
+  },
+  {
+   "name": "janes_thumb.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "janes_track.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "janes_up.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "lucidaj12.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "lucidaj12a.b",
+   "w": 28781,
+   "h": 28
+  },
+  {
+   "name": "newmsg.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "radio.bmp",
+   "w": 23,
+   "h": 23
+  },
+  {
+   "name": "radiobtnnew.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "scrollthumb.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "simpled.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "simpleu.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "slider.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "tex1.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "tscale.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "tscalec.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "VOL_BTNLFT.b",
+   "w": 28781,
+   "h": 28
+  },
+  {
+   "name": "VOL_BTNRT.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "VOL_THUMB.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "VOL_TRACK.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "volcaret.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "vold.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "volu.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "yellow_down.",
+   "w": 7368034,
+   "h": 29
+  },
+  {
+   "name": "yellow_up.bm",
+   "w": 112,
+   "h": 27
+  }
+ ],
+ "cursor.grp": [
+  {
+   "name": "aircrrdr.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "airstn.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "arrow.bmp",
+   "w": 23,
+   "h": 23
+  },
+  {
+   "name": "beam.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "cross.bmp",
+   "w": 23,
+   "h": 23
+  },
+  {
+   "name": "grab.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "hand.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "hourglass.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "invalid.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "minvalid.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "mposition.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "mtarget.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "mvid.bmp",
+   "w": 22,
+   "h": 22
+  },
+  {
+   "name": "position.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "rescue.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "rngcircle.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "scroll_d.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "scroll_dl.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "scroll_dr.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "scroll_l.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "scroll_r.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "scroll_u.bmp",
+   "w": 0,
+   "h": 26
+  },
+  {
+   "name": "scroll_ul.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "scroll_ur.bm",
+   "w": 112,
+   "h": 27
+  },
+  {
+   "name": "search.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "shipstn.bmp",
+   "w": 25,
+   "h": 25
+  },
+  {
+   "name": "target.bmp",
+   "w": 24,
+   "h": 24
+  },
+  {
+   "name": "vid.bmp",
+   "w": 21,
+   "h": 21
+  },
+  {
+   "name": "zoom.bmp",
+   "w": 22,
+   "h": 22
+  }
+ ]
+}

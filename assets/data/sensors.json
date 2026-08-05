@@ -1,0 +1,1131 @@
+[
+ {
+  "name": "A/C Visual",
+  "strings": [
+   "A/C Visual"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A/C Visual",
+  "strings": [
+   "A/C Visual",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "A/C ESM (LR)",
+  "strings": [
+   "A/C ESM (LR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A/C ESM (LR)",
+  "strings": [
+   "A/C ESM (LR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "A/C ESM (MR)",
+  "strings": [
+   "A/C ESM (MR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A/C ESM (MR)",
+  "strings": [
+   "A/C ESM (MR)",
+   "0u"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AEW Radar (LR)",
+  "strings": [
+   "AEW Radar (LR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AEW Radar (LR)",
+  "strings": [
+   "AEW Radar (LR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "AEW Radar (MR)",
+  "strings": [
+   "AEW Radar (MR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "AEW Radar (MR)",
+  "strings": [
+   "AEW Radar (MR)",
+   "`["
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "A/C Radar (LR)",
+  "strings": [
+   "A/C Radar (LR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A/C Radar (LR)",
+  "strings": [
+   "A/C Radar (LR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "A/C Radar (MR)",
+  "strings": [
+   "A/C Radar (MR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A/C Radar (MR)",
+  "strings": [
+   "A/C Radar (MR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "A/C Radar (SR)",
+  "strings": [
+   "A/C Radar (SR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "A/C Radar (SR)",
+  "strings": [
+   "A/C Radar (SR)",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HF Act Son",
+  "strings": [
+   "HF Act Son"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HF Act Son",
+  "strings": [
+   "HF Act Son"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "MF Act Son",
+  "strings": [
+   "MF Act Son"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "MF Act Son",
+  "strings": [
+   "MF Act Son",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "HF Pas Son",
+  "strings": [
+   "HF Pas Son"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "HF Pas Son",
+  "strings": [
+   "HF Pas Son",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "LF Pas Son",
+  "strings": [
+   "LF Pas Son"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "LF Pas Son",
+  "strings": [
+   "LF Pas Son",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Active Sonobuoy",
+  "strings": [
+   "Active Sonobuoy"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Active Sonobuoy",
+  "strings": [
+   "Active Sonobuoy"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Dipping Sonar",
+  "strings": [
+   "Dipping Sonar"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Dipping Sonar",
+  "strings": [
+   "Dipping Sonar",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Active Intercept",
+  "strings": [
+   "Active Intercept"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Active Intercept",
+  "strings": [
+   "Active Intercept"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Passive Sonobuoy",
+  "strings": [
+   "Passive Sonobuoy"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Passive Sonobuoy",
+  "strings": [
+   "Passive Sonobuoy"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Visual",
+  "strings": [
+   "Visual"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Visual",
+  "strings": [
+   "Visual",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Surf ESM",
+  "strings": [
+   "Surf ESM"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Surf ESM",
+  "strings": [
+   "Surf ESM"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Ship Air Radar (LR)",
+  "strings": [
+   "Ship Air Radar (LR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ship Air Radar (LR)",
+  "strings": [
+   "Ship Air Radar (LR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Ship Air Radar (MR)",
+  "strings": [
+   "Ship Air Radar (MR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ship Air Radar (MR)",
+  "strings": [
+   "Ship Air Radar (MR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Ship Air Radar (SR)",
+  "strings": [
+   "Ship Air Radar (SR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ship Air Radar (SR)",
+  "strings": [
+   "Ship Air Radar (SR)",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Ship Surf Radar(MR)",
+  "strings": [
+   "Ship Surf Radar(MR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ship Surf Radar(MR)",
+  "strings": [
+   "Ship Surf Radar(MR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Ship Surf Radar(SR)",
+  "strings": [
+   "Ship Surf Radar(SR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Ship Surf Radar(SR)",
+  "strings": [
+   "Ship Surf Radar(SR)",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Wep Radar",
+  "strings": [
+   "Wep Radar"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Wep Radar",
+  "strings": [
+   "Wep Radar",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Wep Sonar",
+  "strings": [
+   "Wep Sonar"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Wep Sonar",
+  "strings": [
+   "Wep Sonar"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Wep IR",
+  "strings": [
+   "Wep IR"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Wep IR",
+  "strings": [
+   "Wep IR"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Wep AntiRad",
+  "strings": [
+   "Wep AntiRad"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Wep AntiRad",
+  "strings": [
+   "Wep AntiRad",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Wep Vis/Vid/LG",
+  "strings": [
+   "Wep Vis/Vid/LG"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Wep Vis/Vid/LG",
+  "strings": [
+   "Wep Vis/Vid/LG",
+   "MAD",
+   "MAD",
+   "IR",
+   "IR"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "FC Radar",
+  "strings": [
+   "FC Radar"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FC Radar",
+  "strings": [
+   "FC Radar",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "ActiveDecoy",
+  "strings": [
+   "ActiveDecoy"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "ActiveDecoy",
+  "strings": [
+   "ActiveDecoy"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "PassiveDecoy",
+  "strings": [
+   "PassiveDecoy"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "PassiveDecoy",
+  "strings": [
+   "PassiveDecoy"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "IRFlare",
+  "strings": [
+   "IRFlare"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "IRFlare",
+  "strings": [
+   "IRFlare"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "RadarChaff",
+  "strings": [
+   "RadarChaff"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "RadarChaff",
+  "strings": [
+   "RadarChaff"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "FCRadarJam",
+  "strings": [
+   "FCRadarJam"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "FCRadarJam",
+  "strings": [
+   "FCRadarJam"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "RadarJam",
+  "strings": [
+   "RadarJam"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "RadarJam",
+  "strings": [
+   "RadarJam"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "InfMine",
+  "strings": [
+   "InfMine"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "InfMine",
+  "strings": [
+   "InfMine"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Surf Search Radar",
+  "strings": [
+   "Surf Search Radar"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Surf Search Radar",
+  "strings": [
+   "Surf Search Radar",
+   "`["
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Landbase Air Radar (MR)",
+  "strings": [
+   "Landbase Air Radar (MR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Landbase Air Radar (MR)",
+  "strings": [
+   "Landbase Air Radar (MR)"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "name": "Landbase Air Radar (SR)",
+  "strings": [
+   "Landbase Air Radar (SR)"
+  ],
+  "numbers": []
+ },
+ {
+  "name": "Landbase Air Radar (SR)",
+  "strings": [
+   "Landbase Air Radar (SR)",
+   " N"
+  ],
+  "numbers": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ }
+]

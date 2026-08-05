@@ -1,0 +1,3515 @@
+{
+ "objects": [
+  {
+   "name": "53 cm Torpedo",
+   "behavior": "torpedo",
+   "range_m": 20000,
+   "speed_x": 45,
+   "depth_i": -500,
+   "f252": 100.0
+  },
+  {
+   "name": "65 cm Torpedo",
+   "behavior": "torpedo",
+   "range_m": 70000,
+   "speed_x": 50,
+   "depth_i": -300,
+   "f252": 100.0
+  },
+  {
+   "name": "A 244 Torpedo",
+   "behavior": "torpedo",
+   "range_m": 8000,
+   "speed_x": 30,
+   "depth_i": -330,
+   "f252": 100.0
+  },
+  {
+   "name": "A-4M Skyhawk",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed_x": 8520230,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "A-5 Fantan",
+   "behavior": "FighterEvade",
+   "range_m": 1000000,
+   "speed_x": 8520380,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "AA-10 Alamo",
+   "behavior": "missile",
+   "range_m": 40000,
+   "speed_x": 2400,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "AA-11 Archer",
+   "behavior": "missile",
+   "range_m": 20000,
+   "speed_x": 1500,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "AA-12",
+   "behavior": "missile",
+   "range_m": 86000,
+   "speed_x": 1700,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "AA-8 Aphid",
+   "behavior": "missile",
+   "range_m": 6000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "AB 212 Agusta",
+   "behavior": "HeloDipping",
+   "range_m": 720000,
+   "speed_x": 120,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Abukuma FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 900.0
+  },
+  {
+   "name": "AEW-2/7 Sea King",
+   "behavior": "BomberEvade",
+   "range_m": 1600000,
+   "speed_x": 135,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "AGM-65 Maverick",
+   "behavior": "guided",
+   "range_m": 30000,
+   "speed_x": 1000,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "AGM-88 HARM",
+   "behavior": "missile",
+   "range_m": 100000,
+   "speed_x": 1300,
+   "depth_i": 1,
+   "f252": 500.0
+  },
+  {
+   "name": "AH-1W Cobra",
+   "behavior": "BomberEvade",
+   "range_m": 730000,
+   "speed_x": 152,
+   "depth_i": 0,
+   "f252": 250.0
+  },
+  {
+   "name": "AIM-120 AMRAAM",
+   "behavior": "missile",
+   "range_m": 60000,
+   "speed_x": 2400,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "AIM-54C Phoenix",
+   "behavior": "guided",
+   "range_m": 180000,
+   "speed_x": 3000,
+   "depth_i": 1,
+   "f252": 500.0
+  },
+  {
+   "name": "AIM-9 Sidewinder",
+   "behavior": "missile",
+   "range_m": 10000,
+   "speed_x": 1500,
+   "depth_i": 1,
+   "f252": 350.0
+  },
+  {
+   "name": "Airbus A300",
+   "behavior": "airbus300",
+   "range_m": 4000000,
+   "speed_x": 8520175,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "Airport",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Akula SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": -433,
+   "f252": 500.0
+  },
+  {
+   "name": "Alligator LST",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 35,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "Almirante Brown DDG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 31,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Alvand FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 39,
+   "depth_i": 0,
+   "f252": 900.0
+  },
+  {
+   "name": "Arleigh Burke DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Armory",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "AS-10 Karen",
+   "behavior": "guided",
+   "range_m": 12000,
+   "speed_x": 550,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "AS-12 Kegler",
+   "behavior": "guided",
+   "range_m": 26000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "AS-14 Kedge",
+   "behavior": "guided",
+   "range_m": 8000,
+   "speed_x": 1000,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "AS-4 Kitchen",
+   "behavior": "missile",
+   "range_m": 430000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "AS-5 Kelt",
+   "behavior": "missile",
+   "range_m": 350000,
+   "speed_x": 700,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "AS-565 Panther",
+   "behavior": "BomberEvade",
+   "range_m": 1050000,
+   "speed_x": 160,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "AS-6 Kingfish",
+   "behavior": "missile",
+   "range_m": 700000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Asagiri DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1100.0
+  },
+  {
+   "name": "Aspide",
+   "behavior": "guided",
+   "range_m": 14000,
+   "speed_x": 2400,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "Aster",
+   "behavior": "guided",
+   "range_m": 16000,
+   "speed_x": 2400,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Atlantique Mk 2",
+   "behavior": "FighterEvade",
+   "range_m": 9800000,
+   "speed_x": 6553950,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "Atlantique Mk 2 Gen",
+   "behavior": "FighterEvade",
+   "range_m": 9800000,
+   "speed_x": 6553950,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "AV-8B Harrier",
+   "behavior": "FighterEvade",
+   "range_m": 1220000,
+   "speed_x": 562,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "Avenger MCM",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 13,
+   "depth_i": 0,
+   "f252": 450.0
+  },
+  {
+   "name": "Babr DD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Badger",
+   "behavior": "BomberEvade",
+   "range_m": 7000000,
+   "speed_x": 8520280,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "Badger Gen",
+   "behavior": "BomberEvade",
+   "range_m": 7000000,
+   "speed_x": 8520280,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "Beechcraft Prop",
+   "behavior": "prop",
+   "range_m": 3000000,
+   "speed_x": 5243160,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "Boeing 747",
+   "behavior": "747",
+   "range_m": 13000000,
+   "speed_x": 8520207,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "Boghammer",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 46,
+   "depth_i": 0,
+   "f252": 100.0
+  },
+  {
+   "name": "Boris Chilikin AOR",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed_x": 19,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "Bougainville LPD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 33,
+   "depth_i": 0,
+   "f252": 1290.0
+  },
+  {
+   "name": "Bremen FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Broadsword FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1120.0
+  },
+  {
+   "name": "Building2",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Building4",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Building5",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Bunker",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "C 201",
+   "behavior": "missile",
+   "range_m": 164000,
+   "speed_x": 540,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "C 801",
+   "behavior": "missileskim",
+   "range_m": 44000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "C 802",
+   "behavior": "missile",
+   "range_m": 130000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Car Carrier",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed_x": 20,
+   "depth_i": 0,
+   "f252": 1420.0
+  },
+  {
+   "name": "Cargo Ship",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed_x": 18,
+   "depth_i": 0,
+   "f252": 1390.0
+  },
+  {
+   "name": "Cassard DDG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1110.0
+  },
+  {
+   "name": "Chaff",
+   "behavior": "Countermeasure",
+   "range_m": 0,
+   "speed_x": 5,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "ChemicalPlant",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Cheng Kung FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 29,
+   "depth_i": 0,
+   "f252": 1100.0
+  },
+  {
+   "name": "Cimarron AO",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 19,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "Circe MHC",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "Clemenceau CV",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "Collins SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 20,
+   "depth_i": -330,
+   "f252": 500.0
+  },
+  {
+   "name": "Colossus CV",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 24,
+   "depth_i": 0,
+   "f252": 1400.0
+  },
+  {
+   "name": "Combattante II PCFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 37,
+   "depth_i": 0,
+   "f252": 350.0
+  },
+  {
+   "name": "Contact Mine",
+   "behavior": "mine",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": -100,
+   "f252": 0.0
+  },
+  {
+   "name": "Crotale",
+   "behavior": "guided",
+   "range_m": 14000,
+   "speed_x": 1380,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "CSS-N-3 Shaddock",
+   "behavior": "missile",
+   "range_m": 90000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "D'Orves FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 23,
+   "depth_i": 0,
+   "f252": 600.0
+  },
+  {
+   "name": "Daphne SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 16,
+   "depth_i": -328,
+   "f252": 500.0
+  },
+  {
+   "name": "De Gaulle CVN",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 1400.0
+  },
+  {
+   "name": "Decoy",
+   "behavior": "SubCM",
+   "range_m": 0,
+   "speed_x": 50,
+   "depth_i": -1000,
+   "f252": 1000.0
+  },
+  {
+   "name": "Deepak AOR",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "DefenseBullet",
+   "behavior": "bullet",
+   "range_m": 4000,
+   "speed_x": 2160,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Delhi DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": 0,
+   "f252": 1300.0
+  },
+  {
+   "name": "Delta IV SSBN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 24,
+   "depth_i": -328,
+   "f252": 500.0
+  },
+  {
+   "name": "Depth Charge",
+   "behavior": "DepthCharge",
+   "range_m": 2000,
+   "speed_x": 200,
+   "depth_i": -550,
+   "f252": 700.0
+  },
+  {
+   "name": "DM 2A4 Torpedo",
+   "behavior": "torpedo",
+   "range_m": 22000,
+   "speed_x": 34,
+   "depth_i": -500,
+   "f252": 100.0
+  },
+  {
+   "name": "Dock",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "DownedPilot",
+   "behavior": "float",
+   "range_m": 0,
+   "speed_x": 1600,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "DrugFactory",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Drummond FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 23,
+   "depth_i": 0,
+   "f252": 700.0
+  },
+  {
+   "name": "Duke FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": 0,
+   "f252": 1080.0
+  },
+  {
+   "name": "Durance AOR",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "E-2 Hawkeye",
+   "behavior": "BomberEvade",
+   "range_m": 3000000,
+   "speed_x": 6750546,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "E-2 Hawkeye Gen",
+   "behavior": "BomberEvade",
+   "range_m": 3000000,
+   "speed_x": 6750546,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "E-3 Sentry",
+   "behavior": "BomberEvade",
+   "range_m": 10000000,
+   "speed_x": 8847820,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "E-3 Sentry Gen",
+   "behavior": "BomberEvade",
+   "range_m": 10000000,
+   "speed_x": 8847820,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "EA-6B Prowler",
+   "behavior": "BomberEvade",
+   "range_m": 2200000,
+   "speed_x": 8520330,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Enterprise CVN",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 33,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "EP-3 Orion",
+   "behavior": "BomberEvade",
+   "range_m": 8000000,
+   "speed_x": 9175451,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "Eridan MHC",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "ES-3 Viking",
+   "behavior": "BomberEvade",
+   "range_m": 4000000,
+   "speed_x": 7864770,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Espora FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 770.0
+  },
+  {
+   "name": "ESSM",
+   "behavior": "guided",
+   "range_m": 16000,
+   "speed_x": 2400,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Etendard IV-PM",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed_x": 8520380,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Exocet",
+   "behavior": "missileskim",
+   "range_m": 80000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "F-14 Tomcat",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed_x": 8193200,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "F-14 Tomcat Gen",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed_x": 8193200,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "F-15 Eagle",
+   "behavior": "FighterEvade",
+   "range_m": 5000000,
+   "speed_x": 8193500,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "F-16 Falcon",
+   "behavior": "FighterEvade",
+   "range_m": 4200000,
+   "speed_x": 8520880,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "F-16 Falcon Gen",
+   "behavior": "FighterEvade",
+   "range_m": 4200000,
+   "speed_x": 8520880,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "F-4F Phantom II",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed_x": 9831500,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "F-5E Tiger II",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed_x": 8520580,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "F-5E Tiger II Gen",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed_x": 8520580,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "F-7 Fishbed",
+   "behavior": "FighterEvade",
+   "range_m": 1830000,
+   "speed_x": 8520780,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "F/A-18 Hornet",
+   "behavior": "FighterEvade",
+   "range_m": 3600000,
+   "speed_x": 8782904,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "F/A-18 Hornet Gen",
+   "behavior": "FighterEvade",
+   "range_m": 3600000,
+   "speed_x": 8782904,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "FA-2 Sea Harrier",
+   "behavior": "FighterEvade",
+   "range_m": 1220000,
+   "speed_x": 600,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "FA-2 Sea Harrier Gn",
+   "behavior": "FighterEvade",
+   "range_m": 1220000,
+   "speed_x": 600,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Factory",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Fishing Boat",
+   "behavior": "fishingboat",
+   "range_m": 0,
+   "speed_x": 12,
+   "depth_i": 0,
+   "f252": 200.0
+  },
+  {
+   "name": "Foudre LSD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 22,
+   "depth_i": 0,
+   "f252": 1380.0
+  },
+  {
+   "name": "Foxtrot SS",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 18,
+   "depth_i": -328,
+   "f252": 500.0
+  },
+  {
+   "name": "Frankenthal MHC",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "Ft Victoria AOR",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "Fuqing AOR",
+   "behavior": "medwarship",
+   "range_m": 0,
+   "speed_x": 18,
+   "depth_i": 0,
+   "f252": 1320.0
+  },
+  {
+   "name": "Gearing DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "George Leygues DDG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1110.0
+  },
+  {
+   "name": "Gepard PCFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 40,
+   "depth_i": 0,
+   "f252": 420.0
+  },
+  {
+   "name": "Godavari FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Grisha V FFL",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 450.0
+  },
+  {
+   "name": "Hai Lung SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 22,
+   "depth_i": -263,
+   "f252": 500.0
+  },
+  {
+   "name": "Hai Ou PCFG",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 36,
+   "depth_i": 0,
+   "f252": 160.0
+  },
+  {
+   "name": "Haibat/Hoku PCFG",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 36,
+   "depth_i": 0,
+   "f252": 160.0
+  },
+  {
+   "name": "Han SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": -333,
+   "f252": 500.0
+  },
+  {
+   "name": "Hangar",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Hangor SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 16,
+   "depth_i": -328,
+   "f252": 500.0
+  },
+  {
+   "name": "Harpers Ferry LSD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 22,
+   "depth_i": 0,
+   "f252": 1380.0
+  },
+  {
+   "name": "Harpoon",
+   "behavior": "missileskim",
+   "range_m": 140000,
+   "speed_x": 510,
+   "depth_i": 1,
+   "f252": 750.0
+  },
+  {
+   "name": "Harushio SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 20,
+   "depth_i": -263,
+   "f252": 500.0
+  },
+  {
+   "name": "HAS-3/HMA-8 Lynx",
+   "behavior": "HeloDipping",
+   "range_m": 680000,
+   "speed_x": 140,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "HAS-3/HMA-8 Lynx Gn",
+   "behavior": "HeloDipping",
+   "range_m": 680000,
+   "speed_x": 140,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "HAS-5/6 Sea King",
+   "behavior": "HeloDipping",
+   "range_m": 1600000,
+   "speed_x": 135,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "HAS-5/6 Sea King Gn",
+   "behavior": "HeloDipping",
+   "range_m": 1600000,
+   "speed_x": 135,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Hellfire",
+   "behavior": "guided",
+   "range_m": 10000,
+   "speed_x": 700,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Helo Carrier CVH",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 1350.0
+  },
+  {
+   "name": "Hospital",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Huchuan PHT",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 50,
+   "depth_i": 0,
+   "f252": 180.0
+  },
+  {
+   "name": "Hudong PCFG",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 36,
+   "depth_i": 0,
+   "f252": 160.0
+  },
+  {
+   "name": "Humaita SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 17,
+   "depth_i": -219,
+   "f252": 500.0
+  },
+  {
+   "name": "Hunt MHC",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "Huon MHC",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "IL-38 May",
+   "behavior": "BomberEvade",
+   "range_m": 8800000,
+   "speed_x": 8520080,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "IL-38 May Gen",
+   "behavior": "BomberEvade",
+   "range_m": 8800000,
+   "speed_x": 8520080,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "Improved LA SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": -491,
+   "f252": 500.0
+  },
+  {
+   "name": "Influence Mine",
+   "behavior": "mine",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": -100,
+   "f252": 0.0
+  },
+  {
+   "name": "Invincible CV",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": 0,
+   "f252": 1400.0
+  },
+  {
+   "name": "IRFlare",
+   "behavior": "Countermeasure",
+   "range_m": 0,
+   "speed_x": 5,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Ivan Rogov LPD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 33,
+   "depth_i": 0,
+   "f252": 1320.0
+  },
+  {
+   "name": "J-8 Finback",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed_x": 8520980,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Jaguar",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed_x": 8520580,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Jaguar Gen",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed_x": 8520580,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Jammer",
+   "behavior": "SubCM",
+   "range_m": 0,
+   "speed_x": 50,
+   "depth_i": -1000,
+   "f252": 1000.0
+  },
+  {
+   "name": "Jianghu I FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 26,
+   "depth_i": 0,
+   "f252": 770.0
+  },
+  {
+   "name": "Jiangwei FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": 0,
+   "f252": 800.0
+  },
+  {
+   "name": "KA-27 Helix",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed_x": 130,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "KA-27 Helix Gen",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed_x": 130,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "KA-31 Helix",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed_x": 130,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "KA-31 Helix Gen",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed_x": 130,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Kaman PGF",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 37,
+   "depth_i": 0,
+   "f252": 350.0
+  },
+  {
+   "name": "Kara CG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1350.0
+  },
+  {
+   "name": "Kashin DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 35,
+   "depth_i": 0,
+   "f252": 1100.0
+  },
+  {
+   "name": "Kasturi FSG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": 0,
+   "f252": 800.0
+  },
+  {
+   "name": "Kilo SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 17,
+   "depth_i": -263,
+   "f252": 500.0
+  },
+  {
+   "name": "Kirov CGN",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1400.0
+  },
+  {
+   "name": "Kitty Hawk CV",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1480.0
+  },
+  {
+   "name": "Knox FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 1070.0
+  },
+  {
+   "name": "Koni FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "Krivak III FFH",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Kuznetsov CV",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1430.0
+  },
+  {
+   "name": "LA SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": -491,
+   "f252": 500.0
+  },
+  {
+   "name": "LaFayette FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": 0,
+   "f252": 950.0
+  },
+  {
+   "name": "Lekiu FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": 0,
+   "f252": 800.0
+  },
+  {
+   "name": "LPD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 21,
+   "depth_i": 0,
+   "f252": 1320.0
+  },
+  {
+   "name": "LR Bullet",
+   "behavior": "bullet",
+   "range_m": 8000,
+   "speed_x": 2000,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "LR Shell",
+   "behavior": "shell",
+   "range_m": 36000,
+   "speed_x": 500,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Luda I DDG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1050.0
+  },
+  {
+   "name": "Luhu DDG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 31,
+   "depth_i": 0,
+   "f252": 1100.0
+  },
+  {
+   "name": "Magar LST",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 20,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "Mig-25 Foxbat",
+   "behavior": "FighterEvade",
+   "range_m": 1550000,
+   "speed_x": 8521280,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Mig-25 Foxbat Gen",
+   "behavior": "FighterEvade",
+   "range_m": 1550000,
+   "speed_x": 8521280,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Mig-31 Foxhound",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed_x": 8521280,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "Mig-31 Foxhound Gen",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed_x": 8521280,
+   "depth_i": 0,
+   "f252": 750.0
+  },
+  {
+   "name": "Mirage 5",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed_x": 10290252,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Mirage 5 LIB",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed_x": 10290252,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Mirage 5 PAK",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed_x": 10290252,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Mirage III",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed_x": 10290252,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Mk 2 Tornado",
+   "behavior": "FighterEvade",
+   "range_m": 3000000,
+   "speed_x": 7537940,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Mk 2 Tornado Gen",
+   "behavior": "FighterEvade",
+   "range_m": 3000000,
+   "speed_x": 7537940,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Mk 37 Torpedo",
+   "behavior": "torpedo",
+   "range_m": 22000,
+   "speed_x": 26,
+   "depth_i": -330,
+   "f252": 100.0
+  },
+  {
+   "name": "Mk 44 Torpedo",
+   "behavior": "torpedo",
+   "range_m": 6000,
+   "speed_x": 30,
+   "depth_i": -330,
+   "f252": 100.0
+  },
+  {
+   "name": "Mk 46 Torpedo",
+   "behavior": "torpedo",
+   "range_m": 12000,
+   "speed_x": 50,
+   "depth_i": -500,
+   "f252": 100.0
+  },
+  {
+   "name": "Mk 48 ADCAP Torp",
+   "behavior": "torpedo",
+   "range_m": 52000,
+   "speed_x": 55,
+   "depth_i": -833,
+   "f252": 500.0
+  },
+  {
+   "name": "Mk 50 Torpedo",
+   "behavior": "torpedo",
+   "range_m": 22000,
+   "speed_x": 60,
+   "depth_i": -666,
+   "f252": 100.0
+  },
+  {
+   "name": "Moored Mine",
+   "behavior": "mine",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": -100,
+   "f252": 0.0
+  },
+  {
+   "name": "MR Shell",
+   "behavior": "shell",
+   "range_m": 26000,
+   "speed_x": 1591,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "MR-2 Nimrod",
+   "behavior": "FighterEvade",
+   "range_m": 10000000,
+   "speed_x": 6554100,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Nanuchka III FSG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 33,
+   "depth_i": 0,
+   "f252": 310.0
+  },
+  {
+   "name": "Natya MSO",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "Neustrashimy FFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1100.0
+  },
+  {
+   "name": "Newport LST",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 20,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "Nilgiri FF",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "Nimitz CVN",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "O.H. Perry FFG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 29,
+   "depth_i": 0,
+   "f252": 1100.0
+  },
+  {
+   "name": "Oberon SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 17,
+   "depth_i": -219,
+   "f252": 500.0
+  },
+  {
+   "name": "OffenseBullet",
+   "behavior": "bullet",
+   "range_m": 4000,
+   "speed_x": 2160,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Ohio SSBN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 24,
+   "depth_i": -491,
+   "f252": 800.0
+  },
+  {
+   "name": "Oil Tanker",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed_x": 20,
+   "depth_i": 0,
+   "f252": 1400.0
+  },
+  {
+   "name": "Osa II PCFG",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 37,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Oscar SSGN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 28,
+   "depth_i": -333,
+   "f252": 500.0
+  },
+  {
+   "name": "Osprey MHC",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "Ouragan LSD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 22,
+   "depth_i": 0,
+   "f252": 1380.0
+  },
+  {
+   "name": "P-3 Orion",
+   "behavior": "BomberEvade",
+   "range_m": 8000000,
+   "speed_x": 9175451,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "P-3 Orion Gen",
+   "behavior": "BomberEvade",
+   "range_m": 8000000,
+   "speed_x": 9175451,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "Penguin",
+   "behavior": "missile",
+   "range_m": 36000,
+   "speed_x": 500,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Perdana PCFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 37,
+   "depth_i": 0,
+   "f252": 350.0
+  },
+  {
+   "name": "Perth DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1050.0
+  },
+  {
+   "name": "Piers",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Pondicherry MSO",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "PowerPlant",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "R-33",
+   "behavior": "missile",
+   "range_m": 132000,
+   "speed_x": 2400,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "R-40",
+   "behavior": "missile",
+   "range_m": 38000,
+   "speed_x": 2700,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "R-530",
+   "behavior": "missile",
+   "range_m": 16000,
+   "speed_x": 2700,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "R-550 Magic",
+   "behavior": "missile",
+   "range_m": 10000,
+   "speed_x": 1300,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "Rafale M",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed_x": 8520780,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "RAM",
+   "behavior": "missile",
+   "range_m": 10000,
+   "speed_x": 1300,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "RBU Rocket",
+   "behavior": "missile",
+   "range_m": 6000,
+   "speed_x": 300,
+   "depth_i": -550,
+   "f252": 700.0
+  },
+  {
+   "name": "Rubis SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": -383,
+   "f252": 500.0
+  },
+  {
+   "name": "S-2E Tracker",
+   "behavior": "BomberEvade",
+   "range_m": 2700000,
+   "speed_x": 4587710,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "S-2E Tracker Gen",
+   "behavior": "BomberEvade",
+   "range_m": 2700000,
+   "speed_x": 4587710,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "S-3 Viking",
+   "behavior": "BomberEvade",
+   "range_m": 4000000,
+   "speed_x": 7864770,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "SA-319 Alouette",
+   "behavior": "BomberEvade",
+   "range_m": 580000,
+   "speed_x": 110,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "SA-319 Alouette Gen",
+   "behavior": "BomberEvade",
+   "range_m": 580000,
+   "speed_x": 110,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "SA-365 Dauphin",
+   "behavior": "HeloDipping",
+   "range_m": 1050000,
+   "speed_x": 160,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "SA-365 Dauphin Gen",
+   "behavior": "HeloDipping",
+   "range_m": 1050000,
+   "speed_x": 160,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "SA-6",
+   "behavior": "guided",
+   "range_m": 30000,
+   "speed_x": 1500,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "SA-N-1 Goa",
+   "behavior": "guided",
+   "range_m": 34000,
+   "speed_x": 2100,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SA-N-11 Grisson",
+   "behavior": "guided",
+   "range_m": 8000,
+   "speed_x": 1300,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SA-N-4 Gecko",
+   "behavior": "guided",
+   "range_m": 16000,
+   "speed_x": 1300,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SA-N-5 Grail",
+   "behavior": "missile",
+   "range_m": 4000,
+   "speed_x": 660,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SA-N-6 Grumble",
+   "behavior": "guided",
+   "range_m": 108000,
+   "speed_x": 1600,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SA-N-7 Gadfly",
+   "behavior": "guided",
+   "range_m": 26000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SA-N-9 Gauntlet",
+   "behavior": "guided",
+   "range_m": 12000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Sacramento AOE",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 26,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "SAM",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Sandown MHC",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "Sea Dart",
+   "behavior": "guided",
+   "range_m": 50000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 500.0
+  },
+  {
+   "name": "Sea Eagle",
+   "behavior": "missile",
+   "range_m": 112000,
+   "speed_x": 510,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Sea Killer II",
+   "behavior": "guided",
+   "range_m": 26000,
+   "speed_x": 1100,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Sea Skua",
+   "behavior": "missile",
+   "range_m": 14000,
+   "speed_x": 500,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Sea Wolf SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 35,
+   "depth_i": -491,
+   "f252": 500.0
+  },
+  {
+   "name": "SH-60B Sea Hawk",
+   "behavior": "BomberEvade",
+   "range_m": 1200000,
+   "speed_x": 133,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "SH-60B Sea Hawk Gen",
+   "behavior": "BomberEvade",
+   "range_m": 1200000,
+   "speed_x": 133,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "SH-60F Sea Hawk",
+   "behavior": "HeloDipping",
+   "range_m": 1200000,
+   "speed_x": 133,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "SH-60R Sea Hawk",
+   "behavior": "HeloDipping",
+   "range_m": 1200000,
+   "speed_x": 133,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Slava CG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1360.0
+  },
+  {
+   "name": "SLMM",
+   "behavior": "torpinwater",
+   "range_m": 22000,
+   "speed_x": 26,
+   "depth_i": -100,
+   "f252": 500.0
+  },
+  {
+   "name": "SM-1 MR",
+   "behavior": "guided",
+   "range_m": 50000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 500.0
+  },
+  {
+   "name": "SM-2",
+   "behavior": "guided",
+   "range_m": 162000,
+   "speed_x": 1800,
+   "depth_i": 1,
+   "f252": 400.0
+  },
+  {
+   "name": "Sonalysts",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Song SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 22,
+   "depth_i": -263,
+   "f252": 500.0
+  },
+  {
+   "name": "Sovremenny DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1340.0
+  },
+  {
+   "name": "Spearfish Torpedo",
+   "behavior": "torpedo",
+   "range_m": 60000,
+   "speed_x": 75,
+   "depth_i": -1000,
+   "f252": 100.0
+  },
+  {
+   "name": "Spruance DD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 33,
+   "depth_i": 0,
+   "f252": 1350.0
+  },
+  {
+   "name": "SR Shell",
+   "behavior": "shell",
+   "range_m": 14000,
+   "speed_x": 1800,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "SS-C-1B Sepal",
+   "behavior": "missile",
+   "range_m": 120000,
+   "speed_x": 850,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SS-N-12 Sandbox",
+   "behavior": "missile",
+   "range_m": 600000,
+   "speed_x": 1500,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SS-N-19 Shipwreck",
+   "behavior": "missile",
+   "range_m": 600000,
+   "speed_x": 1500,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SS-N-2 Styx",
+   "behavior": "missile",
+   "range_m": 90000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SS-N-22 Sunburn",
+   "behavior": "missile",
+   "range_m": 136000,
+   "speed_x": 1500,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SS-N-25",
+   "behavior": "missile",
+   "range_m": 130000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SS-N-9 Siren",
+   "behavior": "missile",
+   "range_m": 112000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "SSM",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Stingray Torpedo",
+   "behavior": "torpedo",
+   "range_m": 12000,
+   "speed_x": 45,
+   "depth_i": -750,
+   "f252": 100.0
+  },
+  {
+   "name": "SU-22 Fitter",
+   "behavior": "FighterEvade",
+   "range_m": 2800000,
+   "speed_x": 8520780,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "SU-24 Fencer",
+   "behavior": "FighterEvade",
+   "range_m": 3400000,
+   "speed_x": 8520680,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "SU-24 Fencer Gen",
+   "behavior": "FighterEvade",
+   "range_m": 3400000,
+   "speed_x": 8520680,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "SU-25 Frogfoot",
+   "behavior": "FighterEvade",
+   "range_m": 3000000,
+   "speed_x": 7209460,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "SU-27 Flanker B",
+   "behavior": "FighterEvade",
+   "range_m": 4000000,
+   "speed_x": 8520980,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "SU-27 Flanker B Gen",
+   "behavior": "FighterEvade",
+   "range_m": 4000000,
+   "speed_x": 8520980,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "SU-33 Flanker D",
+   "behavior": "FighterEvade",
+   "range_m": 4000000,
+   "speed_x": 8520980,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "Success AOR",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "Super Etendard",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed_x": 8520480,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Super Etendard Gen",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed_x": 8520480,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Super Frelon",
+   "behavior": "HeloDipping",
+   "range_m": 1100000,
+   "speed_x": 140,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Super Frelon Gen",
+   "behavior": "HeloDipping",
+   "range_m": 1100000,
+   "speed_x": 140,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Supply AOE",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 25,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "SY-1",
+   "behavior": "missile",
+   "range_m": 50000,
+   "speed_x": 570,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "T 43 MSO",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 500.0
+  },
+  {
+   "name": "Tag Name",
+   "behavior": "Default",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Tarantul III FSG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 36,
+   "depth_i": 0,
+   "f252": 300.0
+  },
+  {
+   "name": "Tariq DD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 27,
+   "depth_i": 0,
+   "f252": 1000.0
+  },
+  {
+   "name": "TASM",
+   "behavior": "missileskim",
+   "range_m": 500000,
+   "speed_x": 510,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Tent_G_L",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Tent_G_M",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Tent_G_S",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Tent_T_L",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Tent_T_M",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Tent_T_S",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "TICO CG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1350.0
+  },
+  {
+   "name": "TICO CG (VLS)",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1350.0
+  },
+  {
+   "name": "Tiger PCFG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 36,
+   "depth_i": 0,
+   "f252": 350.0
+  },
+  {
+   "name": "TLAM",
+   "behavior": "TLAM",
+   "range_m": 2000000,
+   "speed_x": 510,
+   "depth_i": 1,
+   "f252": 700.0
+  },
+  {
+   "name": "Tourville DDG",
+   "behavior": "Guns",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": 0,
+   "f252": 1200.0
+  },
+  {
+   "name": "TowedCM",
+   "behavior": "cm",
+   "range_m": 0,
+   "speed_x": 50,
+   "depth_i": -1000,
+   "f252": 1000.0
+  },
+  {
+   "name": "Trafalgar SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 32,
+   "depth_i": -328,
+   "f252": 500.0
+  },
+  {
+   "name": "TrainingFacility",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Trawler",
+   "behavior": "fishingboat",
+   "range_m": 0,
+   "speed_x": 13,
+   "depth_i": 0,
+   "f252": 260.0
+  },
+  {
+   "name": "TU-142 Bear F",
+   "behavior": "BomberEvade",
+   "range_m": 13550000,
+   "speed_x": 9175540,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "TU-142 Bear F Gen",
+   "behavior": "BomberEvade",
+   "range_m": 13550000,
+   "speed_x": 9175540,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "TU-142 Bear J",
+   "behavior": "BomberEvade",
+   "range_m": 13550000,
+   "speed_x": 9175540,
+   "depth_i": 0,
+   "f252": 1750.0
+  },
+  {
+   "name": "TU-22 Backfire",
+   "behavior": "BomberEvade",
+   "range_m": 5000000,
+   "speed_x": 9831600,
+   "depth_i": 0,
+   "f252": 1500.0
+  },
+  {
+   "name": "Type 206 SSK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 17,
+   "depth_i": -200,
+   "f252": 500.0
+  },
+  {
+   "name": "Type 209 SS",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 22,
+   "depth_i": -284,
+   "f252": 500.0
+  },
+  {
+   "name": "Type 42 DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 29,
+   "depth_i": 0,
+   "f252": 1080.0
+  },
+  {
+   "name": "Typhoon SSBN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 26,
+   "depth_i": -328,
+   "f252": 500.0
+  },
+  {
+   "name": "Udaloy DDG",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": 0,
+   "f252": 1350.0
+  },
+  {
+   "name": "V-22 Osprey",
+   "behavior": "BomberEvade",
+   "range_m": 1030000,
+   "speed_x": 345,
+   "depth_i": 0,
+   "f252": 1250.0
+  },
+  {
+   "name": "Victor III SSN",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed_x": 30,
+   "depth_i": -433,
+   "f252": 500.0
+  },
+  {
+   "name": "Vishnya AGI",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 16,
+   "depth_i": 0,
+   "f252": 600.0
+  },
+  {
+   "name": "Wasp LHD",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 22,
+   "depth_i": 0,
+   "f252": 1410.0
+  },
+  {
+   "name": "Whouse",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed_x": 0,
+   "depth_i": 0,
+   "f252": 0.0
+  },
+  {
+   "name": "Xiangyang Hong AGI",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed_x": 15,
+   "depth_i": 0,
+   "f252": 600.0
+  },
+  {
+   "name": "Yukan LST",
+   "behavior": "medwarship",
+   "range_m": 0,
+   "speed_x": 20,
+   "depth_i": 0,
+   "f252": 1200.0
+  }
+ ],
+ "sensors": [
+  {
+   "name": "A/C Visual",
+   "nonzero": {
+    "0": 541273921,
+    "4": 1970497878,
+    "8": 27745,
+    "40": 541273921,
+    "44": 1970497878,
+    "48": 27745,
+    "80": 262145,
+    "84": 655361,
+    "88": 15000,
+    "92": 20000,
+    "104": 100,
+    "112": 100000,
+    "128": 65536,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "A/C ESM (LR)",
+   "nonzero": {
+    "0": 541273921,
+    "4": 541938501,
+    "8": 693259304,
+    "40": 541273921,
+    "44": 541938501,
+    "48": 693259304,
+    "80": 196610,
+    "88": 75000,
+    "92": 120000,
+    "104": 90,
+    "112": 100000,
+    "136": 65536
+   }
+  },
+  {
+   "name": "A/C ESM (MR)",
+   "nonzero": {
+    "0": 541273921,
+    "4": 541938501,
+    "8": 693259560,
+    "40": 541273921,
+    "44": 541938501,
+    "48": 693259560,
+    "80": 196611,
+    "88": 30000,
+    "92": 60000,
+    "104": 90,
+    "112": 100000,
+    "136": 65536
+   }
+  },
+  {
+   "name": "AEW Radar (LR)",
+   "nonzero": {
+    "0": 542590273,
+    "4": 1633968466,
+    "8": 1277698162,
+    "12": 10578,
+    "40": 542590273,
+    "44": 1633968466,
+    "48": 1277698162,
+    "52": 10578,
+    "80": 589828,
+    "84": 655361,
+    "88": 400000,
+    "92": 500000,
+    "104": 90,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "AEW Radar (MR)",
+   "nonzero": {
+    "0": 542590273,
+    "4": 1633968466,
+    "8": 1294475378,
+    "12": 10578,
+    "40": 542590273,
+    "44": 1633968466,
+    "48": 1294475378,
+    "52": 10578,
+    "80": 589829,
+    "84": 655361,
+    "88": 200000,
+    "92": 220000,
+    "104": 90,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536,
+    "148": 90
+   }
+  },
+  {
+   "name": "A/C Radar (LR)",
+   "nonzero": {
+    "0": 541273921,
+    "4": 1633968466,
+    "8": 1277698162,
+    "12": 10578,
+    "40": 541273921,
+    "44": 1633968466,
+    "48": 1277698162,
+    "52": 10578,
+    "80": 589830,
+    "84": 655361,
+    "88": 150000,
+    "92": 200000,
+    "104": 90,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536,
+    "148": 90
+   }
+  },
+  {
+   "name": "A/C Radar (MR)",
+   "nonzero": {
+    "0": 541273921,
+    "4": 1633968466,
+    "8": 1294475378,
+    "12": 10578,
+    "40": 541273921,
+    "44": 1633968466,
+    "48": 1294475378,
+    "52": 10578,
+    "80": 589831,
+    "84": 655361,
+    "88": 50000,
+    "92": 150000,
+    "104": 90,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536,
+    "148": 90
+   }
+  },
+  {
+   "name": "A/C Radar (SR)",
+   "nonzero": {
+    "0": 541273921,
+    "4": 1633968466,
+    "8": 1395138674,
+    "12": 10578,
+    "40": 541273921,
+    "44": 1633968466,
+    "48": 1395138674,
+    "52": 10578,
+    "80": 589832,
+    "84": 655361,
+    "88": 20000,
+    "92": 50000,
+    "104": 90,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536,
+    "148": 90
+   }
+  },
+  {
+   "name": "HF Act Son",
+   "nonzero": {
+    "0": 1092634184,
+    "4": 1394635875,
+    "8": 28271,
+    "40": 1092634184,
+    "44": 1394635875,
+    "48": 28271,
+    "80": 65545,
+    "84": 1966081,
+    "88": 5000,
+    "92": 10000,
+    "104": 100,
+    "116": 4294964296,
+    "124": 65538,
+    "128": 65537,
+    "132": 1,
+    "136": 1,
+    "148": 150
+   }
+  },
+  {
+   "name": "MF Act Son",
+   "nonzero": {
+    "0": 1092634189,
+    "4": 1394635875,
+    "8": 28271,
+    "40": 1092634189,
+    "44": 1394635875,
+    "48": 28271,
+    "80": 65546,
+    "84": 3932161,
+    "88": 8000,
+    "92": 20000,
+    "96": 8000,
+    "100": 20,
+    "104": 100,
+    "108": 75,
+    "116": 4294964296,
+    "124": 65538,
+    "128": 65537,
+    "132": 1,
+    "136": 1,
+    "148": 150
+   }
+  },
+  {
+   "name": "HF Pas Son",
+   "nonzero": {
+    "0": 1344292424,
+    "4": 1394635617,
+    "8": 28271,
+    "40": 1344292424,
+    "44": 1394635617,
+    "48": 28271,
+    "80": 458763,
+    "84": 655361,
+    "88": 10000,
+    "92": 20000,
+    "104": 75,
+    "116": 4294964296,
+    "124": 65536,
+    "128": 1,
+    "132": 65536,
+    "136": 1,
+    "148": 150
+   }
+  },
+  {
+   "name": "LF Pas Son",
+   "nonzero": {
+    "0": 1344292428,
+    "4": 1394635617,
+    "8": 28271,
+    "40": 1344292428,
+    "44": 1394635617,
+    "48": 28271,
+    "80": 458764,
+    "84": 655361,
+    "88": 20000,
+    "92": 40000,
+    "96": 8000,
+    "100": 30,
+    "104": 75,
+    "108": 75,
+    "116": 4294964296,
+    "124": 65536,
+    "128": 1,
+    "132": 65536,
+    "136": 1,
+    "148": 150
+   }
+  },
+  {
+   "name": "Active Sonobuoy",
+   "nonzero": {
+    "0": 1769235265,
+    "4": 1394632054,
+    "8": 1651469935,
+    "12": 7958389,
+    "40": 1769235265,
+    "44": 1394632054,
+    "48": 1651469935,
+    "52": 7958389,
+    "80": 65549,
+    "84": 983041,
+    "88": 3000,
+    "92": 6000,
+    "104": 73,
+    "116": 4294964296,
+    "120": 1,
+    "124": 65538,
+    "128": 65537,
+    "132": 1
+   }
+  },
+  {
+   "name": "Dipping Sonar",
+   "nonzero": {
+    "0": 1886415172,
+    "4": 543649385,
+    "8": 1634627411,
+    "12": 114,
+    "40": 1886415172,
+    "44": 543649385,
+    "48": 1634627411,
+    "52": 114,
+    "80": 65550,
+    "84": 655361,
+    "88": 8000,
+    "92": 20000,
+    "104": 80,
+    "112": 50,
+    "116": 4294964296,
+    "124": 65538,
+    "128": 65537,
+    "132": 1,
+    "136": 1
+   }
+  },
+  {
+   "name": "Active Intercept",
+   "nonzero": {
+    "0": 1769235265,
+    "4": 1226859894,
+    "8": 1919251566,
+    "12": 1953523043,
+    "40": 1769235265,
+    "44": 1226859894,
+    "48": 1919251566,
+    "52": 1953523043,
+    "80": 131087,
+    "116": 4294964296,
+    "148": 150
+   }
+  },
+  {
+   "name": "Passive Sonobuoy",
+   "nonzero": {
+    "0": 1936941392,
+    "4": 543520361,
+    "8": 1869508435,
+    "12": 2037347682,
+    "40": 1936941392,
+    "44": 543520361,
+    "48": 1869508435,
+    "52": 2037347682,
+    "80": 458768,
+    "84": 983041,
+    "88": 2000,
+    "92": 4000,
+    "104": 90,
+    "116": 4294964296,
+    "120": 1,
+    "124": 65536,
+    "128": 1,
+    "132": 65536
+   }
+  },
+  {
+   "name": "Visual",
+   "nonzero": {
+    "0": 1970497878,
+    "4": 27745,
+    "40": 1970497878,
+    "44": 27745,
+    "80": 262161,
+    "84": 655361,
+    "88": 15000,
+    "92": 20000,
+    "104": 100,
+    "112": 100000,
+    "128": 65536,
+    "132": 1,
+    "136": 65536,
+    "140": 1
+   }
+  },
+  {
+   "name": "Surf ESM",
+   "nonzero": {
+    "0": 1718777171,
+    "4": 1297302816,
+    "40": 1718777171,
+    "44": 1297302816,
+    "80": 196626,
+    "88": 22000,
+    "92": 45000,
+    "104": 90,
+    "112": 100000,
+    "136": 65536
+   }
+  },
+  {
+   "name": "Ship Air Radar (LR)",
+   "nonzero": {
+    "0": 1885956179,
+    "4": 1919500576,
+    "8": 1684099616,
+    "12": 673215073,
+    "16": 2708044,
+    "40": 1885956179,
+    "44": 1919500576,
+    "48": 1684099616,
+    "52": 673215073,
+    "56": 2708044,
+    "80": 589843,
+    "84": 983041,
+    "88": 200000,
+    "92": 300000,
+    "104": 98,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "Ship Air Radar (MR)",
+   "nonzero": {
+    "0": 1885956179,
+    "4": 1919500576,
+    "8": 1684099616,
+    "12": 673215073,
+    "16": 2708045,
+    "40": 1885956179,
+    "44": 1919500576,
+    "48": 1684099616,
+    "52": 673215073,
+    "56": 2708045,
+    "80": 589844,
+    "84": 983041,
+    "88": 100000,
+    "92": 150000,
+    "104": 98,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "Ship Air Radar (SR)",
+   "nonzero": {
+    "0": 1885956179,
+    "4": 1919500576,
+    "8": 1684099616,
+    "12": 673215073,
+    "16": 2708051,
+    "40": 1885956179,
+    "44": 1919500576,
+    "48": 1684099616,
+    "52": 673215073,
+    "56": 2708051,
+    "80": 589845,
+    "84": 983041,
+    "88": 20000,
+    "92": 60000,
+    "104": 98,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "Ship Surf Radar(MR)",
+   "nonzero": {
+    "0": 1885956179,
+    "4": 1920291616,
+    "8": 1632772198,
+    "12": 678584676,
+    "16": 2708045,
+    "40": 1885956179,
+    "44": 1920291616,
+    "48": 1632772198,
+    "52": 678584676,
+    "56": 2708045,
+    "80": 589846,
+    "84": 983041,
+    "88": 40000,
+    "92": 60000,
+    "104": 95,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "Ship Surf Radar(SR)",
+   "nonzero": {
+    "0": 1885956179,
+    "4": 1920291616,
+    "8": 1632772198,
+    "12": 678584676,
+    "16": 2708051,
+    "40": 1885956179,
+    "44": 1920291616,
+    "48": 1632772198,
+    "52": 678584676,
+    "56": 2708051,
+    "80": 589847,
+    "84": 983041,
+    "88": 20000,
+    "92": 40000,
+    "104": 95,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "Wep Radar",
+   "nonzero": {
+    "0": 544236887,
+    "4": 1633968466,
+    "8": 114,
+    "40": 544236887,
+    "44": 1633968466,
+    "48": 114,
+    "80": 655384,
+    "84": 131073,
+    "88": 10000,
+    "92": 20000,
+    "104": 99,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "148": 60
+   }
+  },
+  {
+   "name": "Wep Sonar",
+   "nonzero": {
+    "0": 544236887,
+    "4": 1634627411,
+    "8": 114,
+    "40": 544236887,
+    "44": 1634627411,
+    "48": 114,
+    "80": 65561,
+    "84": 327681,
+    "88": 3000,
+    "92": 10000,
+    "104": 100,
+    "116": 4294964296,
+    "124": 65538,
+    "128": 65537,
+    "132": 1,
+    "148": 90
+   }
+  },
+  {
+   "name": "Wep IR",
+   "nonzero": {
+    "0": 544236887,
+    "4": 21065,
+    "40": 544236887,
+    "44": 21065,
+    "80": 393242,
+    "84": 131073,
+    "88": 8000,
+    "92": 10000,
+    "104": 90,
+    "112": 100000,
+    "128": 65536,
+    "132": 65537,
+    "148": 60
+   }
+  },
+  {
+   "name": "Wep AntiRad",
+   "nonzero": {
+    "0": 544236887,
+    "4": 1769238081,
+    "8": 6578514,
+    "40": 544236887,
+    "44": 1769238081,
+    "48": 6578514,
+    "80": 196635,
+    "88": 20000,
+    "92": 60000,
+    "104": 90,
+    "112": 100000,
+    "136": 65536,
+    "148": 10
+   }
+  },
+  {
+   "name": "Wep Vis/Vid/LG",
+   "nonzero": {
+    "0": 544236887,
+    "4": 796092758,
+    "8": 795109718,
+    "12": 18252,
+    "40": 544236887,
+    "44": 796092758,
+    "48": 795109718,
+    "52": 18252,
+    "80": 262172,
+    "84": 131073,
+    "88": 6000,
+    "92": 15000,
+    "104": 90,
+    "112": 100000,
+    "128": 65536,
+    "132": 1,
+    "136": 65536,
+    "148": 60
+   }
+  },
+  {
+   "name": "MAD",
+   "nonzero": {
+    "0": 4473165,
+    "40": 4473165,
+    "80": 327709,
+    "84": 327681,
+    "88": 2000,
+    "92": 4000,
+    "104": 90,
+    "112": 100000,
+    "132": 1
+   }
+  },
+  {
+   "name": "IR",
+   "nonzero": {
+    "0": 21065,
+    "40": 21065,
+    "80": 393246,
+    "84": 131073,
+    "88": 4000,
+    "92": 10000,
+    "104": 90,
+    "112": 100000,
+    "128": 65536,
+    "132": 65537,
+    "148": 150
+   }
+  },
+  {
+   "name": "FC Radar",
+   "nonzero": {
+    "0": 1377846086,
+    "4": 1918985313,
+    "40": 1377846086,
+    "44": 1918985313,
+    "80": 655391,
+    "84": 131073,
+    "88": 10000,
+    "92": 20000,
+    "104": 99,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1
+   }
+  },
+  {
+   "name": "ActiveDecoy",
+   "nonzero": {
+    "0": 1769235265,
+    "4": 1698981238,
+    "8": 7958371,
+    "40": 1769235265,
+    "44": 1698981238,
+    "48": 7958371,
+    "80": 786464,
+    "84": 327681,
+    "88": 4000,
+    "92": 10000,
+    "96": 7000,
+    "100": 20,
+    "104": 1310793,
+    "108": 53,
+    "116": 4294964296,
+    "124": 65537,
+    "128": 1,
+    "132": 65536
+   }
+  },
+  {
+   "name": "PassiveDecoy",
+   "nonzero": {
+    "0": 1936941392,
+    "4": 1147500137,
+    "8": 2037343077,
+    "40": 1936941392,
+    "44": 1147500137,
+    "48": 2037343077,
+    "80": 786465,
+    "84": 327681,
+    "88": 2000,
+    "92": 8000,
+    "96": 7000,
+    "100": 20,
+    "104": 1310793,
+    "108": 53,
+    "116": 4294964296,
+    "124": 65543,
+    "128": 1,
+    "132": 65536
+   }
+  },
+  {
+   "name": "IRFlare",
+   "nonzero": {
+    "0": 1816547913,
+    "4": 6648417,
+    "40": 1816547913,
+    "44": 6648417,
+    "80": 786466,
+    "84": 327681,
+    "88": 500,
+    "92": 1000,
+    "104": 90,
+    "112": 100000,
+    "124": 6,
+    "132": 65537
+   }
+  },
+  {
+   "name": "RadarChaff",
+   "nonzero": {
+    "0": 1633968466,
+    "4": 1634222962,
+    "8": 26214,
+    "40": 1633968466,
+    "44": 1634222962,
+    "48": 26214,
+    "80": 786467,
+    "84": 327681,
+    "88": 500,
+    "92": 1000,
+    "104": 90,
+    "112": 100000,
+    "124": 10,
+    "128": 65537,
+    "132": 1
+   }
+  },
+  {
+   "name": "FCRadarJam",
+   "nonzero": {
+    "0": 1632781126,
+    "4": 1249010020,
+    "8": 28001,
+    "40": 1632781126,
+    "44": 1249010020,
+    "48": 28001,
+    "80": 852004,
+    "84": 327680,
+    "88": 120000,
+    "92": 150000,
+    "104": 90,
+    "112": 100000,
+    "124": 10,
+    "136": 65536
+   }
+  },
+  {
+   "name": "RadarJam",
+   "nonzero": {
+    "0": 1633968466,
+    "4": 1835092594,
+    "40": 1633968466,
+    "44": 1835092594,
+    "80": 852005,
+    "84": 327680,
+    "88": 120000,
+    "92": 150000,
+    "104": 90,
+    "112": 100000,
+    "124": 9,
+    "136": 65536
+   }
+  },
+  {
+   "name": "InfMine",
+   "nonzero": {
+    "0": 1298558537,
+    "4": 6647401,
+    "40": 1298558537,
+    "44": 6647401,
+    "80": 262182,
+    "84": 327681,
+    "88": 100,
+    "92": 110,
+    "104": 90,
+    "116": 4294966296
+   }
+  },
+  {
+   "name": "Surf Search Radar",
+   "nonzero": {
+    "0": 1718777171,
+    "4": 1634030368,
+    "8": 543712114,
+    "12": 1633968466,
+    "16": 114,
+    "40": 1718777171,
+    "44": 1634030368,
+    "48": 543712114,
+    "52": 1633968466,
+    "56": 114,
+    "80": 589863,
+    "84": 655361,
+    "88": 200000,
+    "92": 220000,
+    "104": 90,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536,
+    "148": 90
+   }
+  },
+  {
+   "name": "Landbase Air Radar (MR)",
+   "nonzero": {
+    "0": 1684955468,
+    "4": 1702060386,
+    "8": 1919500576,
+    "12": 1684099616,
+    "16": 673215073,
+    "20": 2708045,
+    "40": 1684955468,
+    "44": 1702060386,
+    "48": 1919500576,
+    "52": 1684099616,
+    "56": 673215073,
+    "60": 2708045,
+    "80": 589864,
+    "84": 983041,
+    "88": 100000,
+    "92": 150000,
+    "104": 98,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  },
+  {
+   "name": "Landbase Air Radar (SR)",
+   "nonzero": {
+    "0": 1684955468,
+    "4": 1702060386,
+    "8": 1919500576,
+    "12": 1684099616,
+    "16": 673215073,
+    "20": 2708051,
+    "40": 1684955468,
+    "44": 1702060386,
+    "48": 1919500576,
+    "52": 1684099616,
+    "56": 673215073,
+    "60": 2708051,
+    "80": 589845,
+    "84": 983041,
+    "88": 20000,
+    "92": 60000,
+    "104": 98,
+    "112": 100000,
+    "124": 3,
+    "128": 65537,
+    "132": 1,
+    "136": 65536
+   }
+  }
+ ],
+ "launcher_stride": 196,
+ "launcher_records": 832
+}

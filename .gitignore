@@ -1,0 +1,16 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Dependencies (none bundled locally, but keep standard)
+node_modules/
+
+# WorkBuddy session data
+.workbuddy/
+
+# Local build / coverage artifacts
+*.log
+.cache/
+
+# Original game audio is large; kept out of git history (files remain on disk locally).
+assets/audio/

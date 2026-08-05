@@ -1,0 +1,3 @@
+# iCloud exclusion marker.
+# This folder holds a git repository with high-churn files; keeping it out of
+# iCloud Drive avoids sync corruption. Do not delete.

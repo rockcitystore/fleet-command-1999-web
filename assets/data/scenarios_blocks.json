@@ -1,0 +1,492 @@
+[
+ {
+  "file": " Region1.scc",
+  "ext": ".scc",
+  "fields": {
+   "INTELMESSAGE": "Intelligence Message. The Indian CVBG is operating in the Gulf of Mannar (about 35 NM Northwest of Colombo). Russia has deployed TU-22M Backfire aircraft to India. China has delivered a squadron of B-6 Badger aircraft to India. Indian Submarine activity in\nthe region is significant. U. S. Embassy in Sri Lanka is urging all Americans to leave the country.  All Indian Naval forces are considered hostile.",
+   "DESCRIPTION": "Campaign Region 1: \"BAY OF BENGAL.\"<R>\n\nIndia has mobilized amphibious assault forces and has deployed INS Viraat in the Gulf of Mannar.  Your forces are to transit to Southwest coast of Sri Lanka to pressure India to withdraw forces.  Sri Lanka fears Indian mi\nlitary buildup in preparation to final invasion force and collapse of the government. The United Nations has requested that a U.S. CVBG be sent to the area to stabilize the region.",
+   "TASKINGMESSAGE": "Tasking Message.  Transit to within 35 NM Southwest of the Sri Lanka coast.  Repulse Indian Naval forces which attempt to prevent U. S. CVBG forces from completing this mission.  U. S. Ambassador may be extracted from Embassy in Sri Lanka if situation worse\nns.  Be alert to neutral air and merchant traffic operating in this area. Additional tasking may be received during this mission.",
+   "MISSIONTITLE": "Bay of Bengal"
+  }
+ },
+ {
+  "file": " Region2.scc",
+  "ext": ".scc",
+  "fields": {
+   "INTELMESSAGE": "Intelligence Message:  A U. S. Destroyer escorting two U. S. flagged merchants through the Strait has been attacked and damaged by SSMs launched by a PLAN frigate.  Rangoon airport and port have been taken over by PLAN military forces and are attempting to\nblock the strait to all U. S. forces.  Russian forces may be cooperating with PLAN forces in the blockade of the strait.  PLAN forces are also believed to be supported with several squadrons of Badger, Fencer, Flanker and Backfire strike aircraft.  Signifi\ncant submarine threat exists to shipping in and around the Strait.",
+   "DESCRIPTION": "Campaign Region 2:  \"Strait of Malacca.\"        China's People's Liberation Army (PLA) forces have conducted a massive incursion into Burma.  The port and airport at Rangoon have been converted to PLA military operating bases.  The Burmese government in exi\nle in Thailand has requested U.S., Allied, and U.N. assistance to force the withdrawal of the PLA forces. A large People's Liberation Army Navy (PLAN) force supported by Russian surface and subsurface units positioned on a north-south axis in the Andaman S\nea has taken control of the northern approaches to the Strait of Malacca.  Your mission is to engage the PLAN/Russian naval forces in the Andaman Sea blockading the Strait of Malacca, and conduct air and Tomahawk strikes against the PLAN naval and air forc\nes/facilities at Rangoon.  You will rendezvous enroute with a force of up to 2 British and 2 Australian surface combatants which may be part of your alliance during this operation.",
+   "TASKINGMESSAGE": "Tasking:  Continue on your Easterly transit to engage PLAN and possible Russian forces in the Andaman Sea blockading U. S. and allied forces from entering the Strait of Malacca. You will rendezvous with a force of up to two British and two Australian surfac\ne combatants which may be part of your alliance during this operation. You must neutralize the blockading forces to allow a second CVBG enroute from the Western Pacific clear passage through the Strait enroute to the Sri Lanka area of operations. Clear a p\nath with the aircraft carrier battle group.  Good Hunting.",
+   "MISSIONTITLE": "Strait of Malacca"
+  }
+ },
+ {
+  "file": " Region3.scc",
+  "ext": ".scc",
+  "fields": {
+   "INTELMESSAGE": "Intelligence Message:  During recent joint Taiwanese and U. S. Naval exercises one U. S. destroyer and two Taiwanese frigates were sunk by a massive PLAN air and surface launched cruise missile strike.  In addition, Taiwanese naval bases at Tsoying, Makung,\nand Keelung were damaged by air attacks and long range land-based ballistic missiles.  PLAN forces continue to mobilize to take control of the Strait in preparation for an eventual assault on Taiwan.  The PRC government is trying to save face and build a\nbase of power after recent setbacks in Burma and Strait of Malacca.",
+   "DESCRIPTION": "Campaign Region 3:  \"Taiwan Strait.\"  China has initiated a very intense media campaign to gain support for a forcible reunification with Taiwan.  China is mobilizing a major PLAN force to take control of the Taiwan Strait and begin an assault on Taiwan.  Y\nour mission is to proceed toward Taiwan and assume an optimum tactical position from which to operate with Taiwan naval and air units to launch air, surface, and subsurface attacks against PLAN forces. .",
+   "TASKINGMESSAGE": "Tasking Message:  Proceed to a position to the southwest of Taiwan and together with allied Taiwanese naval forces thwart PLAN forces from closing the Strait.  You are also responsible for preventing any invasion forces from assaulting Taiwan. Your mission\nwill be completed when PLAN forces withdraw or cease hostilities. You may receive tasking to eliminate designated land targets. Good Luck.",
+   "MISSIONTITLE": "Taiwan Strait"
+  }
+ },
+ {
+  "file": " Region4.scc",
+  "ext": ".scc",
+  "fields": {
+   "INTELMESSAGE": "Intelligence Message:  Hostilities between Japanese Maritime Defense Force (JMDF) and Russian forces have broken out over economic rights concerning the Kuril Islands.  Russian Naval forces have established a formidable blockading surface and submarine unit\ns also supported by several squadrons of long range strike aircraft based out of airfields.",
+   "DESCRIPTION": "Campaign Region 4: \"Kuril Islands.\"   Japan has established a major sea bed mining operation 20 nmi west of the island of Kunashiri. Kunashiri is claimed by Japan, but occupied by the Russians.",
+   "TASKINGMESSAGE": "Mission Tasking:  You are in tactical control of all U.S. forces which include USAF land-based aircraft and JMDF forces in the Kuril Island area of operations.  You must defend your forces against attack and take control of as much territory as possible. Co\nmpletion of this tasking is expected to establish stability in this region until a United Nations settlement can be negotiated.  Good Luck.",
+   "MISSIONTITLE": "Kuril Island"
+  }
+ },
+ {
+  "file": " Single01.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Expect attack by TU-22M Backfire bombers equipped with long range AS-4 Kitchen air-to-surface missiles.  Kill all hostile aircraft.  Targeting information may be provided by TU-142 Bear J AEW aircraft.",
+   "DESCRIPTION": "Protect your Carrier from cruise missile attack.",
+   "TASKINGMESSAGE": "Protect the carrier from attack by bombers equipped with long range air-to-surface missiles. Kill all hostile aircraft.",
+   "MISSIONTITLE": "CVBG Norwegian Sea"
+  }
+ },
+ {
+  "file": " Single02.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Patrol boats carrying Chinese special forces may try to insert the special forces into Taiwan before dawn today.",
+   "DESCRIPTION": "Chinese special forces invade Taiwan.",
+   "TASKINGMESSAGE": "You are assigned the Northern patrol sector. Sink any Chinese patrol boats within 50 miles of Taiwan. Numerous fishing vessels may be present, do not attack civilian boats.<R>",
+   "MISSIONTITLE": "Chinese Special Forces"
+  }
+ },
+ {
+  "file": " Single03.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Chinese forces have not responded with ships and submarines to this incursion to their territorial waters. The Chinese airport to the North continues with normal operations.  Designated land based targets have been located and identified.",
+   "DESCRIPTION": "Shore bombardment of hostile land targets.",
+   "TASKINGMESSAGE": "The U. S. surface combatant is directed to destroy known hostile land targets with their guns. The WASP Class LHD has Harrier fighters and Cobra gunship helicopters available to perform air protection, target destruction, and to identify unknown contacts. Y\nour mission is complete once all designated land targets have been neutralized.",
+   "MISSIONTITLE": "Shore Bombardment"
+  }
+ },
+ {
+  "file": " Single04.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Pirates have been using fishing trawlers to make their escape to a local airport.  Small turbo prop aircraft are then being used for the trip to Australia.",
+   "DESCRIPTION": "Pirates in the South Pacific raid a cruise liner.",
+   "TASKINGMESSAGE": "Pirates have raided a cruise ship sailing the South Pacific. American and Australian citizens have been robbed and murdered.  This is the third act of piracy in the area this month.  You are ordered to intercept the pirate's vessel and destroy it.  The vess\nel was spotted in the vicinity of 01-50 S / 123-15 E on a northerly heading.  If the pirates reach near shore, they will attempt to escape in an aircraft along with other fugitives already at the airport. The pirate aircraft should also be destroyed.<R>\n\n<R>\n\nNume\nrous commercial fishing vessels and aircraft operate in the area.  No civilian casualties can occur. Positively identify all targets prior to engagement.<R>\n\n<R>",
+   "MISSIONTITLE": "Pacific Pirates"
+  }
+ },
+ {
+  "file": " Single05.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Argentina claims a 200 mile wide economic zone off of their coast.  Argentina has been harassing Brazilian commercial fishermen operating off the mouth of the Rio de la Plata.  Known Argentine assets in the area are up to two Espora class frigates and embar\nked helos.",
+   "DESCRIPTION": "Brazil and Argentina fight over fishing rights.",
+   "TASKINGMESSAGE": "By authority of the Admiral of the 5th Naval District, with headquarters at Rio Grande, you are tasked to seek out and destroy Argentina military units operating within 25 nautical miles of 36-30 S / 051-20 W. Assets under your command are the frigates Dods\nworth and Bosisio, if available.  You are authorized to destroy all Argentine frigates.  Avoid casualties to civilian ships and aircraft.",
+   "MISSIONTITLE": "Macho Madness"
+  }
+ },
+ {
+  "file": " Single06.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Expect long range air-to-surface cruise missile engagements at any time from Iraqi aircraft. The Iraqis have been known to use commercial air corridors to mask their movement.",
+   "DESCRIPTION": "Conduct a Tomahawk cruise missile strike against a secret chemical weapons plant.",
+   "TASKINGMESSAGE": "Upon receipt of weapons release orders, conduct pre-emptive Tomahawk strike mission against Iraqi target. Detailed Tasking Message and Targeting Package will be supplied in follow-on communications.  Do not engage civilian aircraft.",
+   "MISSIONTITLE": "Iraqi Strike"
+  }
+ },
+ {
+  "file": " Single07.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "The Russian submarines detected off the U.S. east coast in recent weeks are an Akula Class SSN and a Victor III Class SSN. Both boats are capable of carrying the 65 cm torpedo.  Although the weapon has a reported range in excess of 25 nautical miles, operat\nional firing ranges are expected to be limited by sensor performance and should be within 10 nautical miles.",
+   "DESCRIPTION": "Help an SSBN start her ballistic missile deterrence patrol.",
+   "TASKINGMESSAGE": "The USS Wyoming (SSBN-742), under the command of Captain John Christmas, has departed the submarine base at Kings Bay, Georgia and is headed for deep water.  Once the Wyoming reaches the 300 Fathom curve (1800 feet) she'll be able to run silent and deep and\ncommence her ballistic missile deterrence patrol.  In recent weeks, Russian submarines have been detected in the waters off the east coast of the United States, and may be in waiting to oppose the Wyoming's transit.  P-3 aircraft from the Naval Air Statio\nn at Jacksonville, Florida have been assigned to patrol the area around the Wyoming.  Additionally, the newly commissioned USS Connecticut (SSN-22), the second sub in the Seawolf Class, may be available for area clearance operations.  Engage any detected R\nussian submarines and destroy them before they can attack the Wyoming.",
+   "MISSIONTITLE": "Wyoming Deploys"
+  }
+ },
+ {
+  "file": " Single08.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Various sources indicate that your carrier battle group is being targeted for elimination.  Be alert for attacks.",
+   "DESCRIPTION": "Defend yourself against long range cruise missile attacks and diesel submarine torpedoes.  Your CVBG is deployed in the Eastern Mediterrenean Sea.",
+   "TASKINGMESSAGE": "The Admiral has gone to lunch and you have taken command of a United States carrier battle group. Your orders are to keep the force out of danger. Intelligence reports Russian forces are determined to sink a United States aircraft carrier in the Mediterrane\nan using long range bombers and a diesel submarine. Protect the CVBG for the next thirty minutes. Have a good watch, Captain.",
+   "MISSIONTITLE": "Hair Trigger"
+  }
+ },
+ {
+  "file": " Single09.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "The Iraqis have recently fired surface-to-air missiles at NATO fighters conducting No-Fly Zone patrols in Northern Iraq, and are suspected of having several SAM sites along the northern border of the No-Fly zone. Saddam is known for placing his military equ\nipment near civilian buildings such as schools, hospitals, and religious training facilities.",
+   "DESCRIPTION": "Conduct No-Fly Zone patrols in Northern Iraq.",
+   "TASKINGMESSAGE": "Conduct No-Fly Zone / SAM Trap patrols out of the NATO air base in Turkey. Engage and destroy any SAM Sites located in the operations area as defined by your intel message. Be on alert for hostile aircraft which may try and cross the 36th parallel. Avoid co\nllateral damage to civilian sites.",
+   "MISSIONTITLE": "No-Fly Zone"
+  }
+ },
+ {
+  "file": " Single10.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "The intentions of Russian forces remains a mystery, however, speculation is that they have orders to destroy any U. S. forces in this part of the world. An intelligence gathering vessel may attempt to shadow U. S. naval ships. A Russian guided missile cruis\ner is believed to be operating in this area.",
+   "DESCRIPTION": "Warships transit the Red Sea southern entrance.",
+   "TASKINGMESSAGE": "You are in tactical control of a two ship Surface Action Group (SAG) transiting to or from the Red Sea. There are U. S. aircraft located at a land based airport available to provide air protection for transiting surface combatants. Your primary objective is\nto transit along an ordered track and destroy a hostile Russian cruiser, Russian intelligence gathering ship, Russian aircraft, and a hostile land based airport. Defend all U. S. forces during this mission.<R>",
+   "MISSIONTITLE": "Deadly Transit"
+  }
+ },
+ {
+  "file": " Single11.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Russia has decided to deny all U. S. forces from entering the Red Sea. They have dispatched forces in the vicinity of the Southern Red Sea entrance. No evidence of any undersea threat for this mission.  The U. S. has countered with assigning your forces wit\nh the mission to eliminate all Russian forces in this operating area.",
+   "DESCRIPTION": "U. S. Red Sea revenge mission.",
+   "TASKINGMESSAGE": "The primary task is to destroy all Russian forces located at the entrance to the Red Sea. Two U. S. surface warships and U. S. land based aircraft are available to support this mission. Be prepared to defend your forces with all available assets.",
+   "MISSIONTITLE": "Strike Back"
+  }
+ },
+ {
+  "file": " Single12.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Expect air-to-surface cruise missile engagement at any time. There have also been reports of Iranian Kilo class submarines in the area.",
+   "DESCRIPTION": "Withdraw from the Gulf.",
+   "TASKINGMESSAGE": "Withdraw from the Persian Gulf. Be alert to hostile acts by elements of the Iranian military. Complete the mission by engaging and destroying all hostile Iranian platforms, or safely exiting the Gulf with the carrier afloat.",
+   "MISSIONTITLE": "Iranian Attack"
+  }
+ },
+ {
+  "file": " Single13.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "An Indian Carrier Battle Group is on patrol in the Indian Ocean.  Aircraft with long range air-to-surface missiles have also been operating out of airbases in India.",
+   "DESCRIPTION": "Transit Indian Ocean.  Engage hostile Indian naval and air units.<R>",
+   "TASKINGMESSAGE": "You are authorized to engage hostile Indian units utilizing the full force of your battle group.  Two 688(I) class submarines have been assigned to your control and will report when ready for tasking. To complete the mission, engage the Indian battle group\nand inflict at least 50% damage to each surface unit.",
+   "MISSIONTITLE": "Indian Ocean Transit"
+  }
+ },
+ {
+  "file": " Single14.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "The munitions factory is located in the vicinity of 53-30N / 159-55E.  All pilots have been briefed with photos of the factory and should visually ID the target prior to engagement.  Possible SAM site in the area.<R>\n\nConsider all Russian units in the area as h\nostile. Civilian aircraft are also in the area and must not be engaged.",
+   "DESCRIPTION": "CVBG STRIKE MISSION:<R>\n\nConduct strike against chemical/biological munitions factory on the Kamchatka Peninsula.<R>",
+   "TASKINGMESSAGE": "Conduct Strike Mission Against Biological/Chemical Munitions Factory located in the vicinity of Latitude 53-32 N Longitude 159-56 E.<R>\n\nPositively ID units as Russian prior to engaging.  Do not engage civilian platforms.",
+   "MISSIONTITLE": "Bugs and Drugs"
+  }
+ },
+ {
+  "file": " Single15.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Libya has recently reasserted their claim to all waters of the Gulf of Sidra, a claim condemmed universally by the international community.  Libya has established a \"Line of Death\" at 32 degrees North latitude as the boundary of the Gulf of Sidra.  Libya is\nexpected to react in a hostile manner to any force crossing south of the \"Line of Death\" into the Gulf of Sidra.",
+   "DESCRIPTION": "A two ship Surface Action Group (SAG) has been detached to demonstrate Freedom of Navigation in the Libyan Gulf of Sidra.",
+   "TASKINGMESSAGE": "Your mission is to conduct a Freedom of Navigation transit in the Gulf of Sidra.  A two ship Surface Action Group (SAG) has been detached from your battle group to conduct a transit South of Latitude 32 degrees North into the Gulf of Sidra, following a trac\nk remaining outside of the recognized 12 mile international territorial limit.  The rest of the battle group is to remain North of the \"Line of Death\", latitude 32 degrees North, and cover the SAG transit.  Once intelligence concerning the location of the\nairport is known, your forces will be ordered to eliminate this obstacle.",
+   "MISSIONTITLE": "A Line in the Sand"
+  }
+ },
+ {
+  "file": " Single16.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Recent Intelligence indicates that PLAN forces will attack.  PLAN forces believe they can achieve sufficient superiority of forces to sink one or more U. S. ships.  PLAN forces may be supported with land-based strike aircraft.  The possibility of a diesel e\nlectric submarine is suspected and as of yet not confirmed.",
+   "DESCRIPTION": "A U. S. Surface Action Group (SAG), consisting of a guided missile cruiser and two guided missile destroyers is transiting the Formosa Strait.",
+   "TASKINGMESSAGE": "A three ship U. S. Surface Action Group (SAG) consisting of one Aegis guided missile cruiser, the formation leader, and two guided missile destroyers is transiting the Formosa Strait to rendezvous with an oiler. The Aircraft Carrier Battle Group (CVBG) is t\no provide aircraft to assist with suppressing PLAN ship, submarine, and air attacks.  An additional task will be to destroy a PLAN airport when the target has been authorized for engagement.",
+   "MISSIONTITLE": "Strait and Narrow"
+  }
+ },
+ {
+  "file": " Single17.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "The Ukrainian renegade force has taken control of the Kuznetsov carrier battle group.  The Ukranian renegade force is not supported by any land-based aircraft.  Rogue force are believed to have diesel submarines in their possession.",
+   "DESCRIPTION": "A joint United States/Russian Battle Group (JBG) operating in the Black Sea must seek out and destroy renegade Ukrainian Naval forces.",
+   "TASKINGMESSAGE": "Destroy the renegade Ukranian naval flotilla.  The primary objective during this mission is to locate and destroy the Kuznetsov-Class aircraft carrier.  Destroy any submarines encountered, since your forces have none.  Good Luck.",
+   "MISSIONTITLE": "Rogue Fleet"
+  }
+ },
+ {
+  "file": " Single18.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "The Viraat aircraft carrier battle group is underway.  There are indications that they will attack all forces in the Indian Ocean.  In addition, land-based strike aircraft are preparing to attack U. S. CVBG forces.",
+   "DESCRIPTION": "A U. S. Carrier Battle Group (CVBG) must transit to a position 100 miles south of the India-Pakistan border to be ready for an evacuation of U. S. civilians from India.",
+   "TASKINGMESSAGE": "Your forces are to transit to latitude 22-20N, longitude 067E.  An evacuation of U. S. civilians from India is probable.  Pakistan is allied with U. S. Forces and is relying on your firepower to deter any further hostilities with India.",
+   "MISSIONTITLE": "Hold the Tiger at Bay"
+  }
+ },
+ {
+  "file": " Single19.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Sources indicate a Russian Surface Action Group (SAG) may be patrolling in your area of operations.  Be on the lookout for aerial reconnaissance and submarine activity.",
+   "DESCRIPTION": "Command an Allied SAG on patrol in the Arctic Ocean. The SAG is on alert due to reports of Russian activity in the area.",
+   "TASKINGMESSAGE": "Your naval forces are to locate, identify, and destroy Russian forces operating in the Arctic Ocean, north of Norway.  The Air Force has an E-3 Sentry AWACS aircraft already in the area.  The U. S. Aegis guided missile cruiser is the formation leader of the\nallied SAG.",
+   "MISSIONTITLE": "Norway Alta Fjord"
+  }
+ },
+ {
+  "file": " Single20.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "A Russian auxiliary intelligence gathering vessel (AGI) may be shadowing your forces and providing targeting information. Activity at Russian airfields suggests possible preparations to conduct long range air strikes against maritime shipping to enforce exc\nlusion zone around Japan.",
+   "DESCRIPTION": "Search for and destroy an Oscar Class submarine operating in the North Pacific Ocean with a two ship search attack unit (SAU).",
+   "TASKINGMESSAGE": "Search for and destroy Oscar Class submarine in your North Pacific area of operations.  Locate and destroy Russian AGI (intelligence gathering ship) if located in your vicinity.  Land-based P-3 Orion maritime patrol aircraft are available from an airport in\nJapan. With luck you may turn in an Oscar winning performance.",
+   "MISSIONTITLE": "Nominated for an Oscar"
+  }
+ },
+ {
+  "file": " Single21.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "A Russian AGI may be operating in the vicinity of the aircraft carrier battle group. Russian forces have deployed from homeports and are seeking revenge for the sinking of an Oscar Class submarine south of the Kuril Islands. Heavy communications and logisti\ncs efforts noted from all airfields in vicinity of Sea of Okhotsk. The Kuznetsov CVBG is underway and headed to the south.",
+   "DESCRIPTION": "Stop Russian forces from operating south of the Kuril Islands. U. S. and Japanese forces are allied in this mission.",
+   "TASKINGMESSAGE": "Detect, track, and destroy Russian Forces encountered south of the Kuril Islands. Destruction of the Kuznetsov aircraft carrier is your only required task. Secondary tasks are to eliminate all other Russian units. Seize control of as much territory as possi\nble in case there is a negotiated United Nations cease fire agreement.  Good Luck",
+   "MISSIONTITLE": "Pay-Backs Are Hell"
+  }
+ },
+ {
+  "file": " Single22.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "The Iranians have placed coastal surface to surface missile batteries on the Musandam Peninsula.  There are indications that there may be minefields within the approaches of the Strait of Hormuz.  Iranian air, surface, and subsurface units may have orders t\no attack commercial and naval vessels.",
+   "DESCRIPTION": "Coordinated strike, surface, subsurface, and mine warfare operations in the Gulf of Oman.",
+   "TASKINGMESSAGE": "Your mission is to transit to the Gulf of Oman and conduct coordinated strike, surface, subsurface, and mine warfare operations as necessary to open the Strait of Hormuz and force an Iranian withdrawal from the Musandam Peninsula. Protect minesweeping ships\nheaded to the Strait of Hormuz with carrier-based aircraft. Clear out all Iranian naval forces from the Gulf of Oman and Strait of Hormuz. Destroy all land based Iranian targets. Good Luck.",
+   "MISSIONTITLE": "Running the Gauntlet"
+  }
+ },
+ {
+  "file": " Single23.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Expect determined opposition to your transit. North Fleet submarines are unlocated and are probably positioned to intercept. Surface and subsurface missile platforms will be positioned for coordinated attacks.  Land-based air has been moved forward into Nor\nwegian airfields. This puts the battle group within striking distance for Badgers and Backfires.",
+   "DESCRIPTION": "A U.S. CVBG conducts an opposed transit of the southern portion of the Greenland-Iceland-United Kingdom (GIUK) gap to enter the Norwegian Sea.",
+   "TASKINGMESSAGE": "Your mission is to transit through the southern portion of the GIUK gap and enter the Norwegian Sea. You must arrive in the vicinity of the Faeroe Islands to complete your mission. This is the first phase of a two phase operation. An amphibious assault forc\ne is two days behind you headed to Norway and your CVBG is clearing the way. Due to tensions in the Pacific the Russian Navy is attempting to prevent your carrier group from entering the Norwegian Sea.<R>\n\n<R>\n\n<R>",
+   "MISSIONTITLE": "Plugging the Gap"
+  }
+ },
+ {
+  "file": " Single24.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Intelligence agents that penetrated the cartel report that there is a corrupt faction within the Colombian Navy that is actually using naval vessels to smuggle drugs to Caribbean ports.  These ports are only transhipment points; the ultimate destination for\nthe drugs is the U. S. mainland.  There are two Colombian bases on the Atlantic coast, Cartagena and Barranquilla.  It is not known whether the drugs are leaving one or both of these bases.",
+   "DESCRIPTION": "A small U. S. task group is positioned to stem the flow of drugs from a Colombian cartel.",
+   "TASKINGMESSAGE": "Colombian drugs lords have allied with a faction within the Colombian Navy.  Yesterday, a Coast Guard cutter was sunk by an unknown assailant while investigating a cargo ship believed to be carrying a shipment of drugs to the U.S mainland.  Your SAG has bee\nn dispatched with all haste to investigate, and if possible, destroy whomever is responsible for the loss of our Coast Guard ship.  Your ships are the only ones close enough to engage, a larger CVBG is being assembled.  Be extremely careful to identify all\npotential tracks before engaging, we don't want to anger any other nations which may be operating within their own coastal waters.",
+   "MISSIONTITLE": "War on Drugs"
+  }
+ },
+ {
+  "file": " Single25.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Rebel forces have gained strength and are in control of most of the country.  Forces loyal to the government are concentrated in the area of Monrovia and only control a 15 mile radius around the city.  Rebel forces have acquired an assortment of rotary wing\naircraft and are very mobile.  They are also reported to have installed surface-to-air missiles at their major bases, several of which ring the capital city.  It will be necessary to provide protection for the evacuation aircraft.",
+   "DESCRIPTION": "A NATO task group tries to prevent the takeover of the capitol city, Monrovia, while rescuing personnel from the embassies of several European countries.",
+   "TASKINGMESSAGE": "1.  When government forces are able to stabilize the situation and move the embassy staffs to the airport, located at 06-20N/010-46W, evacuate all embassy personnel by helicopter lift from the airport at Monrovia.  NATO is not intervening in the conflict ot\nher than to protect foreign nationals.  Engage rebel forces only as required to ensure the safety of those being evacuated.  <R>\n\n2.  Use aircraft on Jeanne D'Arc (CVH97) for evacuation and aircraft on Boxer (LHD4) for providing cover.<R>\n\n3.  Set up air plan to h\nave protective aircraft in the air throughout the rescue operation.",
+   "MISSIONTITLE": "Liberating Liberia"
+  }
+ },
+ {
+  "file": " Single26.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Serbian forces are believed to be massing on the Kosovo border.",
+   "DESCRIPTION": "NATO task force enforces peacekeeping sanctions.",
+   "TASKINGMESSAGE": "1.  Maintain a NATO presence in the Adriatic Sea.  Respond promptly to contingency operations.<R>\n\n2.  Be prepared to conduct strikes on Serbian strongholds if the Serbian Army does not cease operations in Kosovo.  Dispatch Tomahawk shooters as required should\nthe decision be made to hit the missile targets.  Do not attack non-designated targets.<R>\n\n3.  Keep organic air assets ready for tasking that requires a man-in-the-loop.  <R>\n\n<R>\n\n<R>",
+   "MISSIONTITLE": "Peace Keepers"
+  }
+ },
+ {
+  "file": " Single27.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Iran/Iraq relations are not improved; however, the situation in the Gulf is such that the armed forces of both nations are considered hostile to the U.S.  Iraq is again attacking Kuwaiti forces and will attack U.S. forces that are positioned to defend Kuwai\nt.  Iran resents the U.S. interference in the region and can be expected to react in a hostile manner, especially if there is no immediate benefit to Iraq's military operations.",
+   "DESCRIPTION": "Battle Group Operations in the Persian Gulf.",
+   "TASKINGMESSAGE": "1.  The carrier battle group (CVBG) is to prepare the battle space and provide defensive cover for the amphibious ready group (ARG) that is in transit to station south of the Iraqi coast.  <R>\n\n2.  Be prepared to conduct strikes against Iraqi targets in defense\nof Kuwait.<R>\n\n3.  Keep aircraft ready for reconnaissance and strike missions.",
+   "MISSIONTITLE": "He's At It Again!"
+  }
+ },
+ {
+  "file": " Single28.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Chinese forces have taken Okinawa in a dawn raid.  They are now staging air strikes from there and are expected to work their way from island to island as they work north toward Kyushu.  Han-class SSNs are unlocated and are expected to be operating forward\nof the Chinese task force that is in the central East China Sea.",
+   "DESCRIPTION": "Japan defends her southern islands from a Chinese invasion.",
+   "TASKINGMESSAGE": "1.  The Emperor expects you to defeat the enemies of Japan using the surface, subsurface, and air forces under your command.<R>\n\n2.  U.S. forces operating in the East China Sea will support you if tasked.<R>\n\n3.  Locate each of the Chinese Surface Action Groups (SA\nGs) and attack them before they can reach Japan's home waters.<R>\n\n<R>",
+   "MISSIONTITLE": "Ancient Rivalry"
+  }
+ },
+ {
+  "file": " Single29.scs",
+  "ext": ".scs",
+  "fields": {
+   "DESCRIPTION": "The U.S. maintains a naval presence in the Eastern Mediterranean to enforce the latest Middle East peace accords.",
+   "TASKINGMESSAGE": "1.  Conduct continuous surveillance and maintain a continuous strike posture.  CIA personnel on the ground in the disputed areas are attempting to pinpoint the training camps for the radical forces (on both sides) that are trying to undermine the peace thro\nugh terrorism.  <R>\n\n2.  Surgical strikes on those training locations may be required on short notice.  Keep missile shooters and aircraft ready for strike missions.<R>",
+   "MISSIONTITLE": "Palestinian Peace"
+  }
+ },
+ {
+  "file": " Single30.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Russia has decided to deny all U. S. forces from entering the Red Sea.  They have dispatched surface, air, and subsurface forces in the Red Sea chokepoint.  There is no evidence of mines in this area.",
+   "DESCRIPTION": "Russian surface, subsurface, and air forces are located at a chokepoint off the coast of Yemen.  You are in command of two U. S. guided missile cruisers.",
+   "TASKINGMESSAGE": "Your primary task is to perform a safe transit into the Red Sea through the chokepoint with two U. S. surface combatants.  U. S. land based aircraft are available to support this chokepoint transit.  Be prepared to defend your forces with all resources at y\nour disposal.  Additional tasking to eliminate important designated land targets may occur.",
+   "MISSIONTITLE": "Red Sea Chokepoint"
+  }
+ },
+ {
+  "file": " Single31.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "It is believed that the Russians are expecting an attempt by U.S. forces to penetrate the blockade in the vicinity of Vestfjord and are massing surface and air forces to defend the Norwegian coast.   The Kuznetsov CVBG is a major part of the Russian blockad\ne.  Additional aircraft have been deployed to airports at Trondheim, Bodo, and Tromso.",
+   "DESCRIPTION": "Breaking the Russian blockade of Vestfjord.",
+   "TASKINGMESSAGE": "1.  Your battle group is to break the blockade of Vestfjord.  Conduct strike warfare, air warfare, surface warfare, and undersea warfare operations as required.  You must neutralize Russian forces in preparation for an amphibious invasion of Norway.<R>\n\n2.  Dev\nelop a flight plan for CAP aircraft  and deploy ships capable of anti-aircraft operations so that the carrier is protected against air and air-launched missile attacks.<R>\n\n3.  Deploy ASW-capable aircraft and ships to screen the battle group against Russian su\nbmarine activity.<R>\n\n<R>",
+   "MISSIONTITLE": "A Furor in the Fjord"
+  }
+ },
+ {
+  "file": " Single32.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Underwater sensors have reported snorkeling diesel submarines operating in the vicinity of the Falkland Islands.  COLOSSUS carrier battle group is believed to be operating in close proximity to the Falkland Islands.  Recon reports heightened flight operatio\nns from Port Stanley airport located at Latitude 51-40S, Longitude 057-53W with at least two SAM sites.<R>\n\n<R>",
+   "DESCRIPTION": "UK Forces attempt to break the Argentine naval blockade of the Falkland Islands (Malvinas) in order to clear the way for an Amphibious Group to land on the islands.",
+   "TASKINGMESSAGE": "1.  Your United Kingdom Carrier Battle Group, consisting of HMS Ark Royal and HMS Invincible, is to break through the Argentine naval blockade around the Falkland Islands.  For your information, Brazil has formed an alliance with Argentina.<R>\n\n2.  Prepare air-\ncapable ships for flight ops.  Develop an air plan to support reconnaissance and ASW needs.<R>\n\n3.  Factor the protection of the amphibious group into your plans.<R>\n\n<R>",
+   "MISSIONTITLE": "Nuestras Malvinas"
+  }
+ },
+ {
+  "file": " Single33.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "Russia has successfully negotiated permission to operate fighter and attack aircraft from an airport in Yemen.  The intentions of the Russian forces remains a mystery. Speculation is that there are orders to ambush any U. S. forces transiting to or from the\nSuez Canal from the Indian Ocean.  A Russian Kilo Class submarine may be operating in the vicinity of the Red Sea chokepoint. An intelligence gathering vessel may attempt to shadow U. S. naval ships.  A Russian guided missile cruiser is believed to be ope\nrating in this area.",
+   "DESCRIPTION": "Two U. S. warships are transiting to or from the Red Sea.  Good luck and protect your forces.",
+   "TASKINGMESSAGE": "You are in tactical control of a two ship Surface Action Group (SAG) transiting to or from the Red Sea.  There are U. S. aircraft located at a land based airport to assist in protecting these units during their transit.  Your primary objective is to transit\nalong an ordered track for about twenty miles.  You will be specifically ordered to perform a humanitarian rescue of a downed pilot during this mission.  Defend U. S. forces from a potential ambush while accomplishing your transit.",
+   "MISSIONTITLE": "Red Sea Ambush"
+  }
+ },
+ {
+  "file": " Single34.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "NATO has suspended Germany from the alliance, however, all NATO equipment within German borders has been siezed by Germany. Sensitive intelligence sources indicate a significant number of surface combatants and some diesel submarines may be involved in the\nblockade. You will be supported with intelligence updates during this mission.",
+   "DESCRIPTION": "You are the Commander of French Naval Forces ordered to break through a Baltic Sea blockade.",
+   "TASKINGMESSAGE": "Neutralize all German Baltic Forces encountered and break through the blockade. Additional tasking messages will be sent after specific land based targets have been either located and or approved for elimination. Protect the Charles De Gaulle aircraft carri\ner from receiving any damage. One French SAG is to transit North of the island and the second French SAG is to transit to the South. Good Luck.",
+   "MISSIONTITLE": "Baltic Sea Magic"
+  }
+ },
+ {
+  "file": " Single35.scs",
+  "ext": ".scs",
+  "fields": {
+   "INTELMESSAGE": "1. Reconnaisance indicates a Chinese flotilla of indeterminate size is currently north of SEAAC forces on a heading bearing 176.6 degrees. 2 Fast Attack detachments have evaded surveillance and their current position is unknown. <R>\n\n<R>\n\n2. Intelligence operatives\nreport the Chinese are using one of their Sovremenny class destroyers as the flotilla flagship.  Extra communication gear was noted being loaded onto the Huangfen 7120 and the Hoku 2 which likely indicates that they may be serving as command and control n\nodes.  Targeting these specific ships may very well cripple the invading fleet, forcing them to withdraw. <R>\n\n<R>\n\n3. Indications are that SEAAC forces are as yet undetected by the Chinese.  All SEAAC forces have been granted weapons free status.  <R>\n\n<R>\n\n4. Be advised\n, the Chinese are using merchant and fishing vessels to screen their advance.  Avoid collateral damage at all costs.<R>\n\n<R>\n\n<R>\n\n<R>\n\n<R>\n\n<R>\n\n<R>\n\n<R>\n\n<R>",
+   "DESCRIPTION": "Battle Group Commander of South East Asian Australian Coalition (SEAAC) opposes Chinese invasion of Spratly Islands.",
+   "TASKINGMESSAGE": "1.  Protect Spratly Islands from Chinese invasion force.  Use element of surprise to your tactical advantage.  Consider use of emissions control (EMCON).<R>\n\n2.  Check the Intel Board, CIC has updated the Force Composition of the Chinese fleet.<R>\n\n3.  Make prudent\nuse of early warning aircraft so as not to give away the position of the main body.<R>\n\n4.  Deploy ASW-capable units to screen the main body.<R>\n\n5.  Good Hunting.<R>\n\n<R>\n\n<R>\n\n<R>",
+   "MISSIONTITLE": "South China Slugfest"
+  }
+ },
+ {
+  "file": "Multi01.scm",
+  "ext": ".scm",
+  "fields": {
+   "INTELMESSAGE": "The opposing force has equal strength.  There is not a subsurface threat during this mission.",
+   "DESCRIPTION": "United Kingdom and France have a naval duel with aircraft carrier battle groups in the English Channel.",
+   "TASKINGMESSAGE": "Eliminate as much of your opponent as possible, there are opportunities to generate additional air assets with the destruction of either an airport, aircraft carrier, or airborne surveillance aircraft.",
+   "MISSIONTITLE": "Channel Fever"
+  }
+ },
+ {
+  "file": "Multi02.scm",
+  "ext": ".scm",
+  "fields": {
+   "INTELMESSAGE": "None Available.",
+   "DESCRIPTION": "United States is trying to repulse Argentina and Russia from operating in the Florida Strait.",
+   "TASKINGMESSAGE": "United States primary objective is to sink either the Russian aircraft carrier or the Argentine aircraft carrier.<R>\n\nRussian primary objective is to destroy the United States airport or the Argentine aircraft carrier.<R>\n\nArgentine primary objective is to destroy\nthe United States airport or the Russian aircraft carrier. <R>\n\nGood Luck.<R>\n\n<R>\n\n<R>",
+   "MISSIONTITLE": "Florida Straits"
+  }
+ },
+ {
+  "file": "Multi03.scm",
+  "ext": ".scm",
+  "fields": {
+   "DESCRIPTION": "United States, Russia, and French forces are battling off the Kamchatka Peninsula.<R>",
+   "TASKINGMESSAGE": "United States, Russian, and French forces are battling off the coast of Kamchatka.  Your task is to destroy all opposing assets from the other two countries.",
+   "MISSIONTITLE": "The Good Bad & Ugly"
+  }
+ },
+ {
+  "file": "Multi04.scm",
+  "ext": ".scm",
+  "fields": {
+   "INTELMESSAGE": "Each country desires to claim more territory in the Caribbean Sea and is ready to fight.",
+   "DESCRIPTION": "Germany, France, United Kingdom, and Argentina duel with surface, air, and submarine forces in Caribbean Sea.",
+   "TASKINGMESSAGE": "Try to stay out of harm's way. Keep other forces from entering your territory. Defend your airport.  Good Hunting.",
+   "MISSIONTITLE": "Island Turmoil"
+  }
+ },
+ {
+  "file": "Multi05.scm",
+  "ext": ".scm",
+  "fields": {
+   "INTELMESSAGE": "None Available.",
+   "DESCRIPTION": "Four separate countries have deployed a surface action group to the South Pacific.",
+   "TASKINGMESSAGE": "The first player to sink the formation leader of an opposing country completes the mission.",
+   "MISSIONTITLE": "Sink the Leader"
+  }
+ },
+ {
+  "file": "Multi06.scm",
+  "ext": ".scm",
+  "fields": {
+   "INTELMESSAGE": "None available.",
+   "DESCRIPTION": "Six different countries are in a race to get to an illegal factory building in the Mediterranean Sea, near the coast of Italy.",
+   "TASKINGMESSAGE": "First player to get their helo to the illegal factory building wins the mission.<R>\n\n<R>",
+   "MISSIONTITLE": "Six Shooter"
+  }
+ },
+ {
+  "file": "Multi07.scm",
+  "ext": ".scm",
+  "fields": {
+   "INTELMESSAGE": "The neutral downed pilot is what the international press has published, but this is actually a secret agent.",
+   "DESCRIPTION": "Six different countries are in a race to recover a downed pilot in the Mediterranean Sea, between Italy and Sardinia.",
+   "TASKINGMESSAGE": "First player to get their helo or ship to recover the downed pilot (spy) wins the mission.<R>\n\n<R>",
+   "MISSIONTITLE": "Deadly Recovery"
+  }
+ },
+ {
+  "file": "Tutorial_1.sct",
+  "ext": ".sct",
+  "fields": {
+   "DESCRIPTION": "Fleet Command interface training tutorial.",
+   "TASKINGMESSAGE": "Follow the audio prompts to become familiar with the game screens and to practice using the game interfaces. Use the \"p\" key at anytime to pause the tutorial."
+  }
+ },
+ {
+  "file": "Tutorial_2.sct",
+  "ext": ".sct",
+  "fields": {
+   "DESCRIPTION": "Fleet Command air combat operations tutorial.",
+   "TASKINGMESSAGE": "Follow the audio prompts to become familiar with basic air combat operations.  The player will practice air-to-air and air-to-ground combat operations."
+  }
+ },
+ {
+  "file": "Tutorial_3.sct",
+  "ext": ".sct",
+  "fields": {
+   "DESCRIPTION": "Fleet Command surface combat operations tutorial.",
+   "TASKINGMESSAGE": "Follow the audio prompts to become familiar with basic surface combat operations.  The player will practice helo air control, surface warfare (SUW), air warfare (AAW), and undersea warfare (USW) from a surface combatant's perspective."
+  }
+ },
+ {
+  "file": "Tutorial_4.sct",
+  "ext": ".sct",
+  "fields": {
+   "DESCRIPTION": "Fleet Command carrier combat operations tutorial.",
+   "TASKINGMESSAGE": "Follow the audio prompts to become familiar with carrier combat operations.  The player will practice controlling aircraft in combat air patrol (CAP) missions and ordering the launch of aircraft from the carrier deck to identify and intercept inbound air bo\ngeys.  Be careful not to engage civilian commercial aircraft."
+  }
+ }
+]

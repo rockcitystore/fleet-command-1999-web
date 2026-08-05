@@ -1,0 +1,2586 @@
+{
+ "platforms": [
+  {
+   "name": "J-8 Finback",
+   "kind": "aircraft",
+   "country": "China",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed": 8520980,
+   "depth": 0
+  },
+  {
+   "name": "Mirage 5",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed": 10290252,
+   "depth": 0
+  },
+  {
+   "name": "Mirage 5 LIB",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed": 10290252,
+   "depth": 0
+  },
+  {
+   "name": "Mirage 5 PAK",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed": 10290252,
+   "depth": 0
+  },
+  {
+   "name": "Mirage III",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed": 10290252,
+   "depth": 0
+  },
+  {
+   "name": "Rafale M",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed": 8520780,
+   "depth": 0
+  },
+  {
+   "name": "SA-365 Dauphin",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "HeloDipping",
+   "range_m": 1050000,
+   "speed": 160,
+   "depth": 0
+  },
+  {
+   "name": "SA-365 Dauphin Gen",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "HeloDipping",
+   "range_m": 1050000,
+   "speed": 160,
+   "depth": 0
+  },
+  {
+   "name": "Super Etendard",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed": 8520480,
+   "depth": 0
+  },
+  {
+   "name": "Super Etendard Gen",
+   "kind": "aircraft",
+   "country": "France",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed": 8520480,
+   "depth": 0
+  },
+  {
+   "name": "A-5 Fantan",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "FighterEvade",
+   "range_m": 1000000,
+   "speed": 8520380,
+   "depth": 0
+  },
+  {
+   "name": "AB 212 Agusta",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "HeloDipping",
+   "range_m": 720000,
+   "speed": 120,
+   "depth": 0
+  },
+  {
+   "name": "Airbus A300",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "airbus300",
+   "range_m": 4000000,
+   "speed": 8520175,
+   "depth": 0
+  },
+  {
+   "name": "Badger",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "BomberEvade",
+   "range_m": 7000000,
+   "speed": 8520280,
+   "depth": 0
+  },
+  {
+   "name": "Badger Gen",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "BomberEvade",
+   "range_m": 7000000,
+   "speed": 8520280,
+   "depth": 0
+  },
+  {
+   "name": "Beechcraft Prop",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "prop",
+   "range_m": 3000000,
+   "speed": 5243160,
+   "depth": 0
+  },
+  {
+   "name": "Boeing 747",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "747",
+   "range_m": 13000000,
+   "speed": 8520207,
+   "depth": 0
+  },
+  {
+   "name": "Etendard IV-PM",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed": 8520380,
+   "depth": 0
+  },
+  {
+   "name": "F-5E Tiger II",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed": 8520580,
+   "depth": 0
+  },
+  {
+   "name": "F-5E Tiger II Gen",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "FighterEvade",
+   "range_m": 2200000,
+   "speed": 8520580,
+   "depth": 0
+  },
+  {
+   "name": "F-7 Fishbed",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "FighterEvade",
+   "range_m": 1830000,
+   "speed": 8520780,
+   "depth": 0
+  },
+  {
+   "name": "Jaguar",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed": 8520580,
+   "depth": 0
+  },
+  {
+   "name": "Jaguar Gen",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed": 8520580,
+   "depth": 0
+  },
+  {
+   "name": "S-2E Tracker",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "BomberEvade",
+   "range_m": 2700000,
+   "speed": 4587710,
+   "depth": 0
+  },
+  {
+   "name": "S-2E Tracker Gen",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "BomberEvade",
+   "range_m": 2700000,
+   "speed": 4587710,
+   "depth": 0
+  },
+  {
+   "name": "SA-319 Alouette",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "BomberEvade",
+   "range_m": 580000,
+   "speed": 110,
+   "depth": 0
+  },
+  {
+   "name": "SA-319 Alouette Gen",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "BomberEvade",
+   "range_m": 580000,
+   "speed": 110,
+   "depth": 0
+  },
+  {
+   "name": "Super Frelon",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "HeloDipping",
+   "range_m": 1100000,
+   "speed": 140,
+   "depth": 0
+  },
+  {
+   "name": "Super Frelon Gen",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "HeloDipping",
+   "range_m": 1100000,
+   "speed": 140,
+   "depth": 0
+  },
+  {
+   "name": "V-22 Osprey",
+   "kind": "aircraft",
+   "country": "Other",
+   "behavior": "BomberEvade",
+   "range_m": 1030000,
+   "speed": 345,
+   "depth": 0
+  },
+  {
+   "name": "AS-565 Panther",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 1050000,
+   "speed": 160,
+   "depth": 0
+  },
+  {
+   "name": "IL-38 May",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 8800000,
+   "speed": 8520080,
+   "depth": 0
+  },
+  {
+   "name": "IL-38 May Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 8800000,
+   "speed": 8520080,
+   "depth": 0
+  },
+  {
+   "name": "KA-27 Helix",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed": 130,
+   "depth": 0
+  },
+  {
+   "name": "KA-27 Helix Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed": 130,
+   "depth": 0
+  },
+  {
+   "name": "KA-31 Helix",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed": 130,
+   "depth": 0
+  },
+  {
+   "name": "KA-31 Helix Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 860000,
+   "speed": 130,
+   "depth": 0
+  },
+  {
+   "name": "Mig-25 Foxbat",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 1550000,
+   "speed": 8521280,
+   "depth": 0
+  },
+  {
+   "name": "Mig-25 Foxbat Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 1550000,
+   "speed": 8521280,
+   "depth": 0
+  },
+  {
+   "name": "Mig-31 Foxhound",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed": 8521280,
+   "depth": 0
+  },
+  {
+   "name": "Mig-31 Foxhound Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 1800000,
+   "speed": 8521280,
+   "depth": 0
+  },
+  {
+   "name": "SU-22 Fitter",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 2800000,
+   "speed": 8520780,
+   "depth": 0
+  },
+  {
+   "name": "SU-24 Fencer",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 3400000,
+   "speed": 8520680,
+   "depth": 0
+  },
+  {
+   "name": "SU-24 Fencer Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 3400000,
+   "speed": 8520680,
+   "depth": 0
+  },
+  {
+   "name": "SU-25 Frogfoot",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 3000000,
+   "speed": 7209460,
+   "depth": 0
+  },
+  {
+   "name": "SU-27 Flanker B",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 4000000,
+   "speed": 8520980,
+   "depth": 0
+  },
+  {
+   "name": "SU-27 Flanker B Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 4000000,
+   "speed": 8520980,
+   "depth": 0
+  },
+  {
+   "name": "SU-33 Flanker D",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "FighterEvade",
+   "range_m": 4000000,
+   "speed": 8520980,
+   "depth": 0
+  },
+  {
+   "name": "TU-142 Bear F",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 13550000,
+   "speed": 9175540,
+   "depth": 0
+  },
+  {
+   "name": "TU-142 Bear F Gen",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 13550000,
+   "speed": 9175540,
+   "depth": 0
+  },
+  {
+   "name": "TU-142 Bear J",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 13550000,
+   "speed": 9175540,
+   "depth": 0
+  },
+  {
+   "name": "TU-22 Backfire",
+   "kind": "aircraft",
+   "country": "Russia/USSR",
+   "behavior": "BomberEvade",
+   "range_m": 5000000,
+   "speed": 9831600,
+   "depth": 0
+  },
+  {
+   "name": "FA-2 Sea Harrier",
+   "kind": "aircraft",
+   "country": "UK",
+   "behavior": "FighterEvade",
+   "range_m": 1220000,
+   "speed": 600,
+   "depth": 0
+  },
+  {
+   "name": "FA-2 Sea Harrier Gn",
+   "kind": "aircraft",
+   "country": "UK",
+   "behavior": "FighterEvade",
+   "range_m": 1220000,
+   "speed": 600,
+   "depth": 0
+  },
+  {
+   "name": "MR-2 Nimrod",
+   "kind": "aircraft",
+   "country": "UK",
+   "behavior": "FighterEvade",
+   "range_m": 10000000,
+   "speed": 6554100,
+   "depth": 0
+  },
+  {
+   "name": "A-4M Skyhawk",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed": 8520230,
+   "depth": 0
+  },
+  {
+   "name": "AEW-2/7 Sea King",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 1600000,
+   "speed": 135,
+   "depth": 0
+  },
+  {
+   "name": "AH-1W Cobra",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 730000,
+   "speed": 152,
+   "depth": 0
+  },
+  {
+   "name": "AV-8B Harrier",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 1220000,
+   "speed": 562,
+   "depth": 0
+  },
+  {
+   "name": "Atlantique Mk 2",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 9800000,
+   "speed": 6553950,
+   "depth": 0
+  },
+  {
+   "name": "Atlantique Mk 2 Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 9800000,
+   "speed": 6553950,
+   "depth": 0
+  },
+  {
+   "name": "E-2 Hawkeye",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 3000000,
+   "speed": 6750546,
+   "depth": 0
+  },
+  {
+   "name": "E-2 Hawkeye Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 3000000,
+   "speed": 6750546,
+   "depth": 0
+  },
+  {
+   "name": "E-3 Sentry",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 10000000,
+   "speed": 8847820,
+   "depth": 0
+  },
+  {
+   "name": "E-3 Sentry Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 10000000,
+   "speed": 8847820,
+   "depth": 0
+  },
+  {
+   "name": "EA-6B Prowler",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 2200000,
+   "speed": 8520330,
+   "depth": 0
+  },
+  {
+   "name": "EP-3 Orion",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 8000000,
+   "speed": 9175451,
+   "depth": 0
+  },
+  {
+   "name": "ES-3 Viking",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 4000000,
+   "speed": 7864770,
+   "depth": 0
+  },
+  {
+   "name": "F-14 Tomcat",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed": 8193200,
+   "depth": 0
+  },
+  {
+   "name": "F-14 Tomcat Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 3200000,
+   "speed": 8193200,
+   "depth": 0
+  },
+  {
+   "name": "F-15 Eagle",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 5000000,
+   "speed": 8193500,
+   "depth": 0
+  },
+  {
+   "name": "F-16 Falcon",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 4200000,
+   "speed": 8520880,
+   "depth": 0
+  },
+  {
+   "name": "F-16 Falcon Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 4200000,
+   "speed": 8520880,
+   "depth": 0
+  },
+  {
+   "name": "F-4F Phantom II",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 2400000,
+   "speed": 9831500,
+   "depth": 0
+  },
+  {
+   "name": "F/A-18 Hornet",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 3600000,
+   "speed": 8782904,
+   "depth": 0
+  },
+  {
+   "name": "F/A-18 Hornet Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 3600000,
+   "speed": 8782904,
+   "depth": 0
+  },
+  {
+   "name": "HAS-3/HMA-8 Lynx",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "HeloDipping",
+   "range_m": 680000,
+   "speed": 140,
+   "depth": 0
+  },
+  {
+   "name": "HAS-3/HMA-8 Lynx Gn",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "HeloDipping",
+   "range_m": 680000,
+   "speed": 140,
+   "depth": 0
+  },
+  {
+   "name": "HAS-5/6 Sea King",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "HeloDipping",
+   "range_m": 1600000,
+   "speed": 135,
+   "depth": 0
+  },
+  {
+   "name": "HAS-5/6 Sea King Gn",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "HeloDipping",
+   "range_m": 1600000,
+   "speed": 135,
+   "depth": 0
+  },
+  {
+   "name": "Mk 2 Tornado",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 3000000,
+   "speed": 7537940,
+   "depth": 0
+  },
+  {
+   "name": "Mk 2 Tornado Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "FighterEvade",
+   "range_m": 3000000,
+   "speed": 7537940,
+   "depth": 0
+  },
+  {
+   "name": "P-3 Orion",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 8000000,
+   "speed": 9175451,
+   "depth": 0
+  },
+  {
+   "name": "P-3 Orion Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 8000000,
+   "speed": 9175451,
+   "depth": 0
+  },
+  {
+   "name": "S-3 Viking",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 4000000,
+   "speed": 7864770,
+   "depth": 0
+  },
+  {
+   "name": "SH-60B Sea Hawk",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 1200000,
+   "speed": 133,
+   "depth": 0
+  },
+  {
+   "name": "SH-60B Sea Hawk Gen",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "BomberEvade",
+   "range_m": 1200000,
+   "speed": 133,
+   "depth": 0
+  },
+  {
+   "name": "SH-60F Sea Hawk",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "HeloDipping",
+   "range_m": 1200000,
+   "speed": 133,
+   "depth": 0
+  },
+  {
+   "name": "SH-60R Sea Hawk",
+   "kind": "aircraft",
+   "country": "USA",
+   "behavior": "HeloDipping",
+   "range_m": 1200000,
+   "speed": 133,
+   "depth": 0
+  },
+  {
+   "name": "Oberon SSK",
+   "kind": "submarine",
+   "country": "Australia",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 17,
+   "depth": -219
+  },
+  {
+   "name": "Han SSN",
+   "kind": "submarine",
+   "country": "China",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 25,
+   "depth": -333
+  },
+  {
+   "name": "Hangar",
+   "kind": "submarine",
+   "country": "China",
+   "behavior": "rock",
+   "range_m": 0,
+   "speed": 0,
+   "depth": 0
+  },
+  {
+   "name": "Hangor SSK",
+   "kind": "submarine",
+   "country": "China",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 16,
+   "depth": -328
+  },
+  {
+   "name": "Xiangyang Hong AGI",
+   "kind": "submarine",
+   "country": "China",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Rubis SSN",
+   "kind": "submarine",
+   "country": "France",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 25,
+   "depth": -383
+  },
+  {
+   "name": "Type 206 SSK",
+   "kind": "submarine",
+   "country": "Germany",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 17,
+   "depth": -200
+  },
+  {
+   "name": "Type 209 SS",
+   "kind": "submarine",
+   "country": "Germany",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 22,
+   "depth": -284
+  },
+  {
+   "name": "Collins SSK",
+   "kind": "submarine",
+   "country": "India",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 20,
+   "depth": -330
+  },
+  {
+   "name": "Harushio SSK",
+   "kind": "submarine",
+   "country": "Japan",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 20,
+   "depth": -263
+  },
+  {
+   "name": "Daphne SSK",
+   "kind": "submarine",
+   "country": "Other",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 16,
+   "depth": -328
+  },
+  {
+   "name": "Hai Lung SSK",
+   "kind": "submarine",
+   "country": "Other",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 22,
+   "depth": -263
+  },
+  {
+   "name": "Humaita SSK",
+   "kind": "submarine",
+   "country": "Other",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 17,
+   "depth": -219
+  },
+  {
+   "name": "Improved LA SSN",
+   "kind": "submarine",
+   "country": "Other",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 32,
+   "depth": -491
+  },
+  {
+   "name": "LA SSN",
+   "kind": "submarine",
+   "country": "Other",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 32,
+   "depth": -491
+  },
+  {
+   "name": "Song SSK",
+   "kind": "submarine",
+   "country": "Other",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 22,
+   "depth": -263
+  },
+  {
+   "name": "Akula SSN",
+   "kind": "submarine",
+   "country": "Russia/USSR",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 28,
+   "depth": -433
+  },
+  {
+   "name": "Delta IV SSBN",
+   "kind": "submarine",
+   "country": "Russia/USSR",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 24,
+   "depth": -328
+  },
+  {
+   "name": "Ft Victoria AOR",
+   "kind": "submarine",
+   "country": "Russia/USSR",
+   "behavior": "CIWS",
+   "range_m": 0,
+   "speed": 25,
+   "depth": 0
+  },
+  {
+   "name": "Kilo SSK",
+   "kind": "submarine",
+   "country": "Russia/USSR",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 17,
+   "depth": -263
+  },
+  {
+   "name": "Oscar SSGN",
+   "kind": "submarine",
+   "country": "Russia/USSR",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 28,
+   "depth": -333
+  },
+  {
+   "name": "Typhoon SSBN",
+   "kind": "submarine",
+   "country": "Russia/USSR",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 26,
+   "depth": -328
+  },
+  {
+   "name": "Victor III SSN",
+   "kind": "submarine",
+   "country": "Russia/USSR",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 30,
+   "depth": -433
+  },
+  {
+   "name": "Sea Wolf SSN",
+   "kind": "submarine",
+   "country": "UK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 35,
+   "depth": -491
+  },
+  {
+   "name": "Trafalgar SSN",
+   "kind": "submarine",
+   "country": "UK",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 32,
+   "depth": -328
+  },
+  {
+   "name": "Ohio SSBN",
+   "kind": "submarine",
+   "country": "USA",
+   "behavior": "SubDef",
+   "range_m": 0,
+   "speed": 24,
+   "depth": -491
+  },
+  {
+   "name": "De Gaulle CVN",
+   "kind": "surface",
+   "country": "France",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "Trawler",
+   "kind": "surface",
+   "country": "France",
+   "behavior": "fishingboat",
+   "range_m": 0,
+   "speed": 13,
+   "depth": 0
+  },
+  {
+   "name": "Avenger MCM",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 13,
+   "depth": 0
+  },
+  {
+   "name": "Boris Chilikin AOR",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed": 19,
+   "depth": 0
+  },
+  {
+   "name": "Car Carrier",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed": 20,
+   "depth": 0
+  },
+  {
+   "name": "Circe MHC",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Eridan MHC",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Fishing Boat",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "fishingboat",
+   "range_m": 0,
+   "speed": 12,
+   "depth": 0
+  },
+  {
+   "name": "Fuqing AOR",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "medwarship",
+   "range_m": 0,
+   "speed": 18,
+   "depth": 0
+  },
+  {
+   "name": "Hai Ou PCFG",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 36,
+   "depth": 0
+  },
+  {
+   "name": "Haibat/Hoku PCFG",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 36,
+   "depth": 0
+  },
+  {
+   "name": "Huchuan PHT",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 50,
+   "depth": 0
+  },
+  {
+   "name": "Hudong PCFG",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 36,
+   "depth": 0
+  },
+  {
+   "name": "Huon MHC",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Natya MSO",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Oil Tanker",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed": 20,
+   "depth": 0
+  },
+  {
+   "name": "Osa II PCFG",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 37,
+   "depth": 0
+  },
+  {
+   "name": "Osprey MHC",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Pondicherry MSO",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "T 43 MSO",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Yukan LST",
+   "kind": "surface",
+   "country": "Other",
+   "behavior": "medwarship",
+   "range_m": 0,
+   "speed": 20,
+   "depth": 0
+  },
+  {
+   "name": "Cargo Ship",
+   "kind": "surface",
+   "country": "Russia/USSR",
+   "behavior": "cargoship",
+   "range_m": 0,
+   "speed": 18,
+   "depth": 0
+  },
+  {
+   "name": "Frankenthal MHC",
+   "kind": "surface",
+   "country": "UK",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Hunt MHC",
+   "kind": "surface",
+   "country": "UK",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  },
+  {
+   "name": "Sandown MHC",
+   "kind": "surface",
+   "country": "UK",
+   "behavior": "patrolboat",
+   "range_m": 0,
+   "speed": 15,
+   "depth": 0
+  }
+ ],
+ "weapons": [
+  {
+   "name": "53 cm Torpedo",
+   "type": "torpedo",
+   "range_m": 20000,
+   "speed": 45,
+   "depth": -500
+  },
+  {
+   "name": "65 cm Torpedo",
+   "type": "torpedo",
+   "range_m": 70000,
+   "speed": 50,
+   "depth": -300
+  },
+  {
+   "name": "A 244 Torpedo",
+   "type": "torpedo",
+   "range_m": 8000,
+   "speed": 30,
+   "depth": -330
+  },
+  {
+   "name": "AA-10 Alamo",
+   "type": "missile",
+   "range_m": 40000,
+   "speed": 2400,
+   "depth": 1
+  },
+  {
+   "name": "AA-11 Archer",
+   "type": "missile",
+   "range_m": 20000,
+   "speed": 1500,
+   "depth": 1
+  },
+  {
+   "name": "AA-12",
+   "type": "missile",
+   "range_m": 86000,
+   "speed": 1700,
+   "depth": 1
+  },
+  {
+   "name": "AA-8 Aphid",
+   "type": "missile",
+   "range_m": 6000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "AGM-65 Maverick",
+   "type": "guided",
+   "range_m": 30000,
+   "speed": 1000,
+   "depth": 1
+  },
+  {
+   "name": "AGM-88 HARM",
+   "type": "missile",
+   "range_m": 100000,
+   "speed": 1300,
+   "depth": 1
+  },
+  {
+   "name": "AIM-120 AMRAAM",
+   "type": "missile",
+   "range_m": 60000,
+   "speed": 2400,
+   "depth": 1
+  },
+  {
+   "name": "AIM-54C Phoenix",
+   "type": "guided",
+   "range_m": 180000,
+   "speed": 3000,
+   "depth": 1
+  },
+  {
+   "name": "AIM-9 Sidewinder",
+   "type": "missile",
+   "range_m": 10000,
+   "speed": 1500,
+   "depth": 1
+  },
+  {
+   "name": "AS-10 Karen",
+   "type": "guided",
+   "range_m": 12000,
+   "speed": 550,
+   "depth": 1
+  },
+  {
+   "name": "AS-12 Kegler",
+   "type": "guided",
+   "range_m": 26000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "AS-14 Kedge",
+   "type": "guided",
+   "range_m": 8000,
+   "speed": 1000,
+   "depth": 1
+  },
+  {
+   "name": "AS-4 Kitchen",
+   "type": "missile",
+   "range_m": 430000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "AS-5 Kelt",
+   "type": "missile",
+   "range_m": 350000,
+   "speed": 700,
+   "depth": 1
+  },
+  {
+   "name": "AS-6 Kingfish",
+   "type": "missile",
+   "range_m": 700000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "Abukuma FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "Alligator LST",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 35,
+   "depth": 0
+  },
+  {
+   "name": "Almirante Brown DDG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 31,
+   "depth": 0
+  },
+  {
+   "name": "Alvand FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 39,
+   "depth": 0
+  },
+  {
+   "name": "Arleigh Burke DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Asagiri DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Aspide",
+   "type": "guided",
+   "range_m": 14000,
+   "speed": 2400,
+   "depth": 1
+  },
+  {
+   "name": "Aster",
+   "type": "guided",
+   "range_m": 16000,
+   "speed": 2400,
+   "depth": 1
+  },
+  {
+   "name": "Babr DD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Boghammer",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 46,
+   "depth": 0
+  },
+  {
+   "name": "Bougainville LPD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 33,
+   "depth": 0
+  },
+  {
+   "name": "Bremen FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Broadsword FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "C 201",
+   "type": "missile",
+   "range_m": 164000,
+   "speed": 540,
+   "depth": 1
+  },
+  {
+   "name": "C 801",
+   "type": "missileskim",
+   "range_m": 44000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "C 802",
+   "type": "missile",
+   "range_m": 130000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "CSS-N-3 Shaddock",
+   "type": "missile",
+   "range_m": 90000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "Cassard DDG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Chaff",
+   "type": "Countermeasure",
+   "range_m": 0,
+   "speed": 5,
+   "depth": 0
+  },
+  {
+   "name": "Cheng Kung FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 29,
+   "depth": 0
+  },
+  {
+   "name": "Cimarron AO",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 19,
+   "depth": 0
+  },
+  {
+   "name": "Clemenceau CV",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Colossus CV",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 24,
+   "depth": 0
+  },
+  {
+   "name": "Combattante II PCFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 37,
+   "depth": 0
+  },
+  {
+   "name": "Crotale",
+   "type": "guided",
+   "range_m": 14000,
+   "speed": 1380,
+   "depth": 1
+  },
+  {
+   "name": "D'Orves FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 23,
+   "depth": 0
+  },
+  {
+   "name": "DM 2A4 Torpedo",
+   "type": "torpedo",
+   "range_m": 22000,
+   "speed": 34,
+   "depth": -500
+  },
+  {
+   "name": "Decoy",
+   "type": "SubCM",
+   "range_m": 0,
+   "speed": 50,
+   "depth": -1000
+  },
+  {
+   "name": "Deepak AOR",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 25,
+   "depth": 0
+  },
+  {
+   "name": "Delhi DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 28,
+   "depth": 0
+  },
+  {
+   "name": "Depth Charge",
+   "type": "DepthCharge",
+   "range_m": 2000,
+   "speed": 200,
+   "depth": -550
+  },
+  {
+   "name": "DownedPilot",
+   "type": "float",
+   "range_m": 0,
+   "speed": 1600,
+   "depth": 0
+  },
+  {
+   "name": "Drummond FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 23,
+   "depth": 0
+  },
+  {
+   "name": "Duke FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 28,
+   "depth": 0
+  },
+  {
+   "name": "Durance AOR",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 25,
+   "depth": 0
+  },
+  {
+   "name": "ESSM",
+   "type": "guided",
+   "range_m": 16000,
+   "speed": 2400,
+   "depth": 1
+  },
+  {
+   "name": "Enterprise CVN",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 33,
+   "depth": 0
+  },
+  {
+   "name": "Espora FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "Exocet",
+   "type": "missileskim",
+   "range_m": 80000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "Foudre LSD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 22,
+   "depth": 0
+  },
+  {
+   "name": "Foxtrot SS",
+   "type": "SubDef",
+   "range_m": 0,
+   "speed": 18,
+   "depth": -328
+  },
+  {
+   "name": "Gearing DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "George Leygues DDG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Gepard PCFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 40,
+   "depth": 0
+  },
+  {
+   "name": "Godavari FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "Grisha V FFL",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Harpers Ferry LSD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 22,
+   "depth": 0
+  },
+  {
+   "name": "Harpoon",
+   "type": "missileskim",
+   "range_m": 140000,
+   "speed": 510,
+   "depth": 1
+  },
+  {
+   "name": "Hellfire",
+   "type": "guided",
+   "range_m": 10000,
+   "speed": 700,
+   "depth": 1
+  },
+  {
+   "name": "Helo Carrier CVH",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "IRFlare",
+   "type": "Countermeasure",
+   "range_m": 0,
+   "speed": 5,
+   "depth": 0
+  },
+  {
+   "name": "Invincible CV",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 28,
+   "depth": 0
+  },
+  {
+   "name": "Ivan Rogov LPD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 33,
+   "depth": 0
+  },
+  {
+   "name": "Jammer",
+   "type": "SubCM",
+   "range_m": 0,
+   "speed": 50,
+   "depth": -1000
+  },
+  {
+   "name": "Jianghu I FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 26,
+   "depth": 0
+  },
+  {
+   "name": "Jiangwei FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 25,
+   "depth": 0
+  },
+  {
+   "name": "Kaman PGF",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 37,
+   "depth": 0
+  },
+  {
+   "name": "Kara CG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Kashin DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 35,
+   "depth": 0
+  },
+  {
+   "name": "Kasturi FSG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 28,
+   "depth": 0
+  },
+  {
+   "name": "Kirov CGN",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Kitty Hawk CV",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Knox FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "Koni FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "Krivak III FFH",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Kuznetsov CV",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "LPD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 21,
+   "depth": 0
+  },
+  {
+   "name": "LR Shell",
+   "type": "shell",
+   "range_m": 36000,
+   "speed": 500,
+   "depth": 0
+  },
+  {
+   "name": "LaFayette FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 25,
+   "depth": 0
+  },
+  {
+   "name": "Lekiu FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 28,
+   "depth": 0
+  },
+  {
+   "name": "Luda I DDG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Luhu DDG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 31,
+   "depth": 0
+  },
+  {
+   "name": "MR Shell",
+   "type": "shell",
+   "range_m": 26000,
+   "speed": 1591,
+   "depth": 0
+  },
+  {
+   "name": "Magar LST",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 20,
+   "depth": 0
+  },
+  {
+   "name": "Mk 37 Torpedo",
+   "type": "torpedo",
+   "range_m": 22000,
+   "speed": 26,
+   "depth": -330
+  },
+  {
+   "name": "Mk 44 Torpedo",
+   "type": "torpedo",
+   "range_m": 6000,
+   "speed": 30,
+   "depth": -330
+  },
+  {
+   "name": "Mk 46 Torpedo",
+   "type": "torpedo",
+   "range_m": 12000,
+   "speed": 50,
+   "depth": -500
+  },
+  {
+   "name": "Mk 48 ADCAP Torp",
+   "type": "torpedo",
+   "range_m": 52000,
+   "speed": 55,
+   "depth": -833
+  },
+  {
+   "name": "Mk 50 Torpedo",
+   "type": "torpedo",
+   "range_m": 22000,
+   "speed": 60,
+   "depth": -666
+  },
+  {
+   "name": "Nanuchka III FSG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 33,
+   "depth": 0
+  },
+  {
+   "name": "Neustrashimy FFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Newport LST",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 20,
+   "depth": 0
+  },
+  {
+   "name": "Nilgiri FF",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 28,
+   "depth": 0
+  },
+  {
+   "name": "Nimitz CVN",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "O.H. Perry FFG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 29,
+   "depth": 0
+  },
+  {
+   "name": "Ouragan LSD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 22,
+   "depth": 0
+  },
+  {
+   "name": "Penguin",
+   "type": "missile",
+   "range_m": 36000,
+   "speed": 500,
+   "depth": 1
+  },
+  {
+   "name": "Perdana PCFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 37,
+   "depth": 0
+  },
+  {
+   "name": "Perth DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "R-33",
+   "type": "missile",
+   "range_m": 132000,
+   "speed": 2400,
+   "depth": 1
+  },
+  {
+   "name": "R-40",
+   "type": "missile",
+   "range_m": 38000,
+   "speed": 2700,
+   "depth": 1
+  },
+  {
+   "name": "R-530",
+   "type": "missile",
+   "range_m": 16000,
+   "speed": 2700,
+   "depth": 1
+  },
+  {
+   "name": "R-550 Magic",
+   "type": "missile",
+   "range_m": 10000,
+   "speed": 1300,
+   "depth": 1
+  },
+  {
+   "name": "RAM",
+   "type": "missile",
+   "range_m": 10000,
+   "speed": 1300,
+   "depth": 1
+  },
+  {
+   "name": "RBU Rocket",
+   "type": "missile",
+   "range_m": 6000,
+   "speed": 300,
+   "depth": -550
+  },
+  {
+   "name": "SA-6",
+   "type": "guided",
+   "range_m": 30000,
+   "speed": 1500,
+   "depth": 1
+  },
+  {
+   "name": "SA-N-1 Goa",
+   "type": "guided",
+   "range_m": 34000,
+   "speed": 2100,
+   "depth": 1
+  },
+  {
+   "name": "SA-N-11 Grisson",
+   "type": "guided",
+   "range_m": 8000,
+   "speed": 1300,
+   "depth": 1
+  },
+  {
+   "name": "SA-N-4 Gecko",
+   "type": "guided",
+   "range_m": 16000,
+   "speed": 1300,
+   "depth": 1
+  },
+  {
+   "name": "SA-N-5 Grail",
+   "type": "missile",
+   "range_m": 4000,
+   "speed": 660,
+   "depth": 1
+  },
+  {
+   "name": "SA-N-6 Grumble",
+   "type": "guided",
+   "range_m": 108000,
+   "speed": 1600,
+   "depth": 1
+  },
+  {
+   "name": "SA-N-7 Gadfly",
+   "type": "guided",
+   "range_m": 26000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "SA-N-9 Gauntlet",
+   "type": "guided",
+   "range_m": 12000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "SLMM",
+   "type": "torpinwater",
+   "range_m": 22000,
+   "speed": 26,
+   "depth": -100
+  },
+  {
+   "name": "SM-1 MR",
+   "type": "guided",
+   "range_m": 50000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "SM-2",
+   "type": "guided",
+   "range_m": 162000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "SR Shell",
+   "type": "shell",
+   "range_m": 14000,
+   "speed": 1800,
+   "depth": 0
+  },
+  {
+   "name": "SS-C-1B Sepal",
+   "type": "missile",
+   "range_m": 120000,
+   "speed": 850,
+   "depth": 1
+  },
+  {
+   "name": "SS-N-12 Sandbox",
+   "type": "missile",
+   "range_m": 600000,
+   "speed": 1500,
+   "depth": 1
+  },
+  {
+   "name": "SS-N-19 Shipwreck",
+   "type": "missile",
+   "range_m": 600000,
+   "speed": 1500,
+   "depth": 1
+  },
+  {
+   "name": "SS-N-2 Styx",
+   "type": "missile",
+   "range_m": 90000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "SS-N-22 Sunburn",
+   "type": "missile",
+   "range_m": 136000,
+   "speed": 1500,
+   "depth": 1
+  },
+  {
+   "name": "SS-N-25",
+   "type": "missile",
+   "range_m": 130000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "SS-N-9 Siren",
+   "type": "missile",
+   "range_m": 112000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "SY-1",
+   "type": "missile",
+   "range_m": 50000,
+   "speed": 570,
+   "depth": 1
+  },
+  {
+   "name": "Sacramento AOE",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 26,
+   "depth": 0
+  },
+  {
+   "name": "Sea Dart",
+   "type": "guided",
+   "range_m": 50000,
+   "speed": 1800,
+   "depth": 1
+  },
+  {
+   "name": "Sea Eagle",
+   "type": "missile",
+   "range_m": 112000,
+   "speed": 510,
+   "depth": 1
+  },
+  {
+   "name": "Sea Killer II",
+   "type": "guided",
+   "range_m": 26000,
+   "speed": 1100,
+   "depth": 1
+  },
+  {
+   "name": "Sea Skua",
+   "type": "missile",
+   "range_m": 14000,
+   "speed": 500,
+   "depth": 1
+  },
+  {
+   "name": "Slava CG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Sovremenny DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "Spearfish Torpedo",
+   "type": "torpedo",
+   "range_m": 60000,
+   "speed": 75,
+   "depth": -1000
+  },
+  {
+   "name": "Spruance DD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 33,
+   "depth": 0
+  },
+  {
+   "name": "Stingray Torpedo",
+   "type": "torpedo",
+   "range_m": 12000,
+   "speed": 45,
+   "depth": -750
+  },
+  {
+   "name": "Success AOR",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 25,
+   "depth": 0
+  },
+  {
+   "name": "Supply AOE",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 25,
+   "depth": 0
+  },
+  {
+   "name": "TASM",
+   "type": "missileskim",
+   "range_m": 500000,
+   "speed": 510,
+   "depth": 1
+  },
+  {
+   "name": "TICO CG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "TICO CG (VLS)",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "TLAM",
+   "type": "TLAM",
+   "range_m": 2000000,
+   "speed": 510,
+   "depth": 1
+  },
+  {
+   "name": "Tag Name",
+   "type": "Default",
+   "range_m": 0,
+   "speed": 0,
+   "depth": 0
+  },
+  {
+   "name": "Tarantul III FSG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 36,
+   "depth": 0
+  },
+  {
+   "name": "Tariq DD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 27,
+   "depth": 0
+  },
+  {
+   "name": "Tiger PCFG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 36,
+   "depth": 0
+  },
+  {
+   "name": "Tourville DDG",
+   "type": "Guns",
+   "range_m": 0,
+   "speed": 32,
+   "depth": 0
+  },
+  {
+   "name": "TowedCM",
+   "type": "cm",
+   "range_m": 0,
+   "speed": 50,
+   "depth": -1000
+  },
+  {
+   "name": "Type 42 DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 29,
+   "depth": 0
+  },
+  {
+   "name": "Udaloy DDG",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 30,
+   "depth": 0
+  },
+  {
+   "name": "Vishnya AGI",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 16,
+   "depth": 0
+  },
+  {
+   "name": "Wasp LHD",
+   "type": "CIWS",
+   "range_m": 0,
+   "speed": 22,
+   "depth": 0
+  }
+ ],
+ "sensors": [
+  {
+   "name": "A/C Visual",
+   "r88": 15000,
+   "r92": 20000
+  },
+  {
+   "name": "A/C ESM (LR)",
+   "r88": 75000,
+   "r92": 120000
+  },
+  {
+   "name": "A/C ESM (MR)",
+   "r88": 30000,
+   "r92": 60000
+  },
+  {
+   "name": "AEW Radar (LR)",
+   "r88": 400000,
+   "r92": 500000
+  },
+  {
+   "name": "AEW Radar (MR)",
+   "r88": 200000,
+   "r92": 220000
+  },
+  {
+   "name": "A/C Radar (LR)",
+   "r88": 150000,
+   "r92": 200000
+  },
+  {
+   "name": "A/C Radar (MR)",
+   "r88": 50000,
+   "r92": 150000
+  },
+  {
+   "name": "A/C Radar (SR)",
+   "r88": 20000,
+   "r92": 50000
+  },
+  {
+   "name": "HF Act Son",
+   "r88": 5000,
+   "r92": 10000
+  },
+  {
+   "name": "MF Act Son",
+   "r88": 8000,
+   "r92": 20000
+  },
+  {
+   "name": "HF Pas Son",
+   "r88": 10000,
+   "r92": 20000
+  },
+  {
+   "name": "LF Pas Son",
+   "r88": 20000,
+   "r92": 40000
+  },
+  {
+   "name": "Active Sonobuoy",
+   "r88": 3000,
+   "r92": 6000
+  },
+  {
+   "name": "Dipping Sonar",
+   "r88": 8000,
+   "r92": 20000
+  },
+  {
+   "name": "Active Intercept",
+   "r88": null,
+   "r92": null
+  },
+  {
+   "name": "Passive Sonobuoy",
+   "r88": 2000,
+   "r92": 4000
+  },
+  {
+   "name": "Visual",
+   "r88": 15000,
+   "r92": 20000
+  },
+  {
+   "name": "Surf ESM",
+   "r88": 22000,
+   "r92": 45000
+  },
+  {
+   "name": "Ship Air Radar (LR)",
+   "r88": 200000,
+   "r92": 300000
+  },
+  {
+   "name": "Ship Air Radar (MR)",
+   "r88": 100000,
+   "r92": 150000
+  },
+  {
+   "name": "Ship Air Radar (SR)",
+   "r88": 20000,
+   "r92": 60000
+  },
+  {
+   "name": "Ship Surf Radar(MR)",
+   "r88": 40000,
+   "r92": 60000
+  },
+  {
+   "name": "Ship Surf Radar(SR)",
+   "r88": 20000,
+   "r92": 40000
+  },
+  {
+   "name": "Wep Radar",
+   "r88": 10000,
+   "r92": 20000
+  },
+  {
+   "name": "Wep Sonar",
+   "r88": 3000,
+   "r92": 10000
+  },
+  {
+   "name": "Wep IR",
+   "r88": 8000,
+   "r92": 10000
+  },
+  {
+   "name": "Wep AntiRad",
+   "r88": 20000,
+   "r92": 60000
+  },
+  {
+   "name": "Wep Vis/Vid/LG",
+   "r88": 6000,
+   "r92": 15000
+  },
+  {
+   "name": "MAD",
+   "r88": 2000,
+   "r92": 4000
+  },
+  {
+   "name": "IR",
+   "r88": 4000,
+   "r92": 10000
+  },
+  {
+   "name": "FC Radar",
+   "r88": 10000,
+   "r92": 20000
+  },
+  {
+   "name": "ActiveDecoy",
+   "r88": 4000,
+   "r92": 10000
+  },
+  {
+   "name": "PassiveDecoy",
+   "r88": 2000,
+   "r92": 8000
+  },
+  {
+   "name": "IRFlare",
+   "r88": 500,
+   "r92": 1000
+  },
+  {
+   "name": "RadarChaff",
+   "r88": 500,
+   "r92": 1000
+  },
+  {
+   "name": "FCRadarJam",
+   "r88": 120000,
+   "r92": 150000
+  },
+  {
+   "name": "RadarJam",
+   "r88": 120000,
+   "r92": 150000
+  },
+  {
+   "name": "InfMine",
+   "r88": 100,
+   "r92": 110
+  },
+  {
+   "name": "Surf Search Radar",
+   "r88": 200000,
+   "r92": 220000
+  },
+  {
+   "name": "Landbase Air Radar (MR)",
+   "r88": 100000,
+   "r92": 150000
+  },
+  {
+   "name": "Landbase Air Radar (SR)",
+   "r88": 20000,
+   "r92": 60000
+  }
+ ]
+}
