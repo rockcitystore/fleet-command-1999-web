@@ -2,7 +2,7 @@
 // Pure drawing only. Imports coordinates/constants from engine.js.
 // Authoritative spec: CONTRACT.md section 2.
 
-import { worldToScreen, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS } from './engine.js';
+import { worldToScreen, screenToWorld, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS } from './engine.js';
 import { LAND_POLYGONS_NORM } from './terrain.js';
 
 // Colors: matched to the original Fleet Command '99 CIC screenshot.
@@ -53,38 +53,41 @@ function drawGrid(ctx, world, size) {
   const major = 1000;
   const minor = 500;
 
-  // Extend grid beyond the world edges so the map can be panned freely
-  // while still showing a tactical reference.
-  const EXTEND = WORLD_SIZE;
-  const start = -EXTEND;
-  const end = WORLD_SIZE + EXTEND;
+  // Infinite tactical grid: cover the visible viewport plus one minor spacing.
+  const margin = minor;
+  const tl = screenToWorld(makePoint(-margin, -margin), size, world.camera);
+  const br = screenToWorld(makePoint(size.width + margin, size.height + margin), size, world.camera);
 
-  for (let g = start; g <= end; g += minor) {
-    const isMajor = g % major === 0;
+  const x0 = Math.floor(tl.x / minor) * minor;
+  const x1 = Math.ceil(br.x / minor) * minor;
+  const y0 = Math.floor(tl.y / minor) * minor;
+  const y1 = Math.ceil(br.y / minor) * minor;
+
+  for (let x = x0; x <= x1; x += minor) {
+    const isMajor = x % major === 0;
     ctx.strokeStyle = isMajor ? COLOR_GRID_MAJOR : COLOR_GRID;
     ctx.beginPath();
-    const a = worldToScreen(makePoint(g, start), size, world.camera);
-    const b = worldToScreen(makePoint(g, end), size, world.camera);
+    const a = worldToScreen(makePoint(x, y0), size, world.camera);
+    const b = worldToScreen(makePoint(x, y1), size, world.camera);
     ctx.moveTo(a.x, a.y);
     ctx.lineTo(b.x, b.y);
-    const c = worldToScreen(makePoint(start, g), size, world.camera);
-    const d = worldToScreen(makePoint(end, g), size, world.camera);
-    ctx.moveTo(c.x, c.y);
-    ctx.lineTo(d.x, d.y);
+    ctx.stroke();
+  }
+  for (let y = y0; y <= y1; y += minor) {
+    const isMajor = y % major === 0;
+    ctx.strokeStyle = isMajor ? COLOR_GRID_MAJOR : COLOR_GRID;
+    ctx.beginPath();
+    const a = worldToScreen(makePoint(x0, y), size, world.camera);
+    const b = worldToScreen(makePoint(x1, y), size, world.camera);
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
     ctx.stroke();
   }
   ctx.restore();
 }
 
-function drawBorder(ctx, world, size) {
-  const tl = worldToScreen(makePoint(0, 0), size, world.camera);
-  const br = worldToScreen(makePoint(WORLD_SIZE, WORLD_SIZE), size, world.camera);
-  ctx.save();
-  ctx.strokeStyle = 'rgba(29, 84, 120, 0.45)';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(tl.x, tl.y, br.x - tl.x, br.y - tl.y);
-  ctx.restore();
-}
+// No hard world border — the tactical map is meant to feel unbounded.
+function drawBorder(ctx, world, size) {}
 
 // NTDS-style tactical symbols.
 function drawTacticalSymbol(ctx, ship, r) {
@@ -345,7 +348,6 @@ export function drawBattle(ctx, world, size) {
 
   drawLand(ctx, world, size);
   drawGrid(ctx, world, size);
-  drawBorder(ctx, world, size);
 
   const selected = world.__selected || [];
   for (const ship of world.ships) {

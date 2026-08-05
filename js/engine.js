@@ -361,21 +361,10 @@ export function screenToWorld(p, size, cam) {
   return { x: (p.x - cx) / scale, y: (p.y - cy) / scale };
 }
 
-function clampCamera(cam, size) {
-  const scale = scaleFor(size, cam);
-  const halfW = size.width / (2 * scale);
-  const halfH = size.height / (2 * scale);
-  if (halfW >= WORLD_SIZE / 2) {
-    cam.center.x = WORLD_SIZE / 2;
-  } else {
-    cam.center.x = Math.max(halfW, Math.min(WORLD_SIZE - halfW, cam.center.x));
-  }
-  if (halfH >= WORLD_SIZE / 2) {
-    cam.center.y = WORLD_SIZE / 2;
-  } else {
-    cam.center.y = Math.max(halfH, Math.min(WORLD_SIZE - halfH, cam.center.y));
-  }
-}
+// No hard camera clamp. The tactical map is rendered as an unbounded area
+// (infinite grid + coastline extending beyond the scenario box), so the player
+// is free to pan and zoom past the nominal [0, WORLD_SIZE] gameplay box.
+function clampCamera(cam, size) {}
 
 // Fit the camera so the world fills the viewport along its longer axis. This
 // removes the empty "outside the map" margins on the left/right or top/bottom.

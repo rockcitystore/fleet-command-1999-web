@@ -2,10 +2,12 @@
 // Coordinates are normalized [0,1]; multiply by WORLD_SIZE to get world units.
 
 export const LAND_POLYGONS_NORM = [
-  // Main peninsula (left side, narrow coastal strip)
-  [{ x: 0.00, y: 0.00 }, { x: 0.06, y: 0.00 }, { x: 0.07, y: 0.10 }, { x: 0.05, y: 0.25 },
+  // Main peninsula (left side, narrow coastal strip).  Vertices are pushed
+  // outside the [0,1] scenario box so the coastline appears to continue
+  // naturally off-screen instead of being clipped by the world edge.
+  [{ x: -0.35, y: -0.10 }, { x: 0.06, y: -0.10 }, { x: 0.07, y: 0.10 }, { x: 0.05, y: 0.25 },
    { x: 0.03, y: 0.40 }, { x: 0.035, y: 0.55 }, { x: 0.025, y: 0.70 }, { x: 0.015, y: 0.85 },
-   { x: 0.00, y: 0.90 }],
+   { x: -0.35, y: 0.90 }],
   // Lower island arc
   [{ x: 0.05, y: 0.86 }, { x: 0.16, y: 0.84 }, { x: 0.24, y: 0.90 }, { x: 0.20, y: 0.96 }, { x: 0.08, y: 0.98 }],
   // Upper-right island cluster

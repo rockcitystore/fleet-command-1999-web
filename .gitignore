@@ -13,4 +13,3 @@ node_modules/
 .cache/
 
 # Original game audio is large; kept out of git history (files remain on disk locally).
-assets/audio/
