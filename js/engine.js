@@ -943,6 +943,56 @@ export function shipAmmo(ship) {
   return { loaded, total };
 }
 
+// Pick the best target for a weapon given detection, domain and range gates.
+// Mirrors the FC99 fire-control logic: only fire at contacts OUR side can see,
+// only at domains this weapon can engage, and within its range. SAMs may also
+// intercept incoming enemy rounds (which are, by definition, detected).
+function chooseWeaponTarget(s, w, world) {
+  const domains = w.targets || ['surface'];
+  const sees = (e) => (s.side === 'player' ? e.detected : e.seenByEnemy);
+  const candidates = [];
+
+  // Enemy ships/subs of a domain this weapon can hit — only ones OUR side has
+  // actually detected (no firing at ghosts).
+  for (const e of world.ships) {
+    if (!e.alive || e.side === s.side) continue;
+    if (!sees(e)) continue;
+    if (domains.includes(contactDomain(e)) && distance(s.pos, e.pos) <= w.range) {
+      candidates.push(e);
+    }
+  }
+  // Enemy aircraft (guns/SAMs).
+  if (domains.includes('air')) {
+    for (const a of world.aircraft) {
+      if (a.alive && a.side !== s.side && sees(a) && distance(s.pos, a.pos) <= w.range) {
+        candidates.push(a);
+      }
+    }
+  }
+  // Air-defence battery can also intercept INCOMING enemy missiles/torpedoes.
+  // An inbound round is, by definition, detected (you watch it come), so it is
+  // NOT subject to the sees() gate above.
+  if (w.canIntercept) {
+    for (const p of world.projectiles) {
+      if (p.side !== s.side && (p.type === 'missile' || p.type === 'torpedo') && !p.dead) {
+        if (distance(s.pos, p.pos) <= w.range) candidates.push(p);
+      }
+    }
+  }
+  if (!candidates.length) return null;
+  // Nearest valid target; SAMs prefer the closest inbound threat.
+  candidates.sort((a, b) => distance(s.pos, a.pos) - distance(s.pos, b.pos));
+  return candidates[0];
+}
+
+// Launch a single round and bookkeeping (ammo, sub evade timer).
+function fireOneRound(world, s, w, tgt) {
+  spawnProjectile(world, s, tgt, w);
+  if (w.count > 0) w.count -= 1;
+  // Submarines mark their last torpedo launch so the AI can evade after.
+  if (s.isSub && w.type === 'torpedo') s._lastFireTime = world.time;
+}
+
 export function updateWeapons(world, dt) {
   // Cold war until the player commits: no firing (either side) before the first
   // player attack order. Keeps positioning safe and playable.
@@ -950,54 +1000,42 @@ export function updateWeapons(world, dt) {
   for (const s of world.ships) {
     if (!s.alive) continue;
     for (const w of s.weapons) {
-      let cd = s.cooldowns[w.type] || 0;
-      cd -= dt;
-      if (cd > 0) { s.cooldowns[w.type] = cd; continue; }
-      cd = 0;
+      const salvo = w.salvo ?? 1;
+      const ripple = w.ripple ?? (w.cooldown || 1);
+      const reload = w.reload ?? (w.cooldown || 0);
+      // After a salvo ends, a single-round launcher repeats on RIPPLE; a
+      // multi-round launcher waits the long RELOAD before the next volley.
+      const nextGap = salvo > 1 ? reload : ripple;
 
-      const domains = w.targets || ['surface'];
-      const sees = (e) => (s.side === 'player' ? e.detected : e.seenByEnemy);
-      const candidates = [];
+      // 1) Launcher reloading after a salvo?
+      if (w._reloadLeft > 0) { w._reloadLeft -= dt; continue; }
 
-      // Enemy ships/subs of a domain this weapon can hit — only ones OUR side
-      // has actually detected (no firing at ghosts).
-      for (const e of world.ships) {
-        if (!e.alive || e.side === s.side) continue;
-        if (!sees(e)) continue;
-        if (domains.includes(contactDomain(e)) && distance(s.pos, e.pos) <= w.range) {
-          candidates.push(e);
+      // 2) Mid-salvo: fire the next round when its ripple timer elapses.
+      if (w._salvoLeft > 0) {
+        if (w._salvoNext > 0) { w._salvoNext -= dt; continue; }
+        const tgt = chooseWeaponTarget(s, w, world);
+        if (!tgt || w.count <= 0) {
+          // Lost the target (or dry) mid-volley — stop the salvo.
+          w._salvoLeft = 0;
+          w._reloadLeft = w.count <= 0 ? 0 : reload;
+          continue;
         }
-      }
-      // Enemy aircraft (guns/SAMs).
-      if (domains.includes('air')) {
-        for (const a of world.aircraft) {
-          if (a.alive && a.side !== s.side && sees(a) && distance(s.pos, a.pos) <= w.range) {
-            candidates.push(a);
-          }
-        }
-      }
-      // Air-defence battery can also intercept INCOMING enemy missiles/torpedoes.
-      // An inbound round is, by definition, detected (you watch it come), so it
-      // is NOT subject to the sees() gate above.
-      if (w.canIntercept) {
-        for (const p of world.projectiles) {
-          if (p.side !== s.side && (p.type === 'missile' || p.type === 'torpedo') && !p.dead) {
-            if (distance(s.pos, p.pos) <= w.range) candidates.push(p);
-          }
-        }
+        fireOneRound(world, s, w, tgt);
+        w._salvoLeft -= 1;
+        if (w._salvoLeft > 0) w._salvoNext = ripple;
+        else w._reloadLeft = nextGap;
+        continue;
       }
 
-      if (candidates.length) {
-        // Nearest valid target; SAMs prefer the closest inbound threat.
-        candidates.sort((a, b) => distance(s.pos, a.pos) - distance(s.pos, b.pos));
-        const tgt = candidates[0];
-        spawnProjectile(world, s, tgt, w);
-        if (w.count > 0) w.count -= 1;
-        cd = w.cooldown;
-        // Submarines mark their last torpedo launch so the AI can evade after.
-        if (s.isSub && w.type === 'torpedo') s._lastFireTime = world.time;
+      // 3) Idle: if a valid target is in range and we have ammo, launch a salvo.
+      const tgt = chooseWeaponTarget(s, w, world);
+      if (tgt && w.count > 0) {
+        const n = Math.min(salvo, w.count);
+        fireOneRound(world, s, w, tgt);
+        w._salvoLeft = n - 1;
+        if (w._salvoLeft > 0) w._salvoNext = ripple;
+        else w._reloadLeft = nextGap;
       }
-      s.cooldowns[w.type] = cd;
     }
   }
 }

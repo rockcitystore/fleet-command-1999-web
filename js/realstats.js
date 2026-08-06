@@ -136,6 +136,34 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
   // Cooldowns are tuned for gameplay, not literal reload times (those are not
   // cleanly decoded from the DB). Damage is based on f252 warhead-ish mass
   // when available, otherwise on the original game's class balance.
+  // FC99 firing doctrine [INFERRED]: a launcher fires in a SALVO of N rounds,
+  // with a short RIPPLE interval between rounds inside the salvo, then a longer
+  // RELOAD before the next salvo can be launched. This reproduces the original's
+  // visible "dump a volley, then wait for the tubes to reload" rhythm.
+  //   - Guns (continuous ROF) are modelled as salvo=1, reload=0, so they fire
+  //     one round every RIPPLE seconds (their original per-round cadence).
+  //   - Anti-ship missiles / SAMs / ASW rockets fire 2-round salvos with a
+  //     multi-second ripple, then a long reload (tube replenishment).
+  //   - Sub torpedoes fire a 2-torpedo SPREAD (ripple ~4s) then reload.
+  // Values are tuned so per-class average DPS stays close to the pre-salvo
+  // balance; the salvo itself is what the player actually SEES.
+  // NOTE: these are gameplay-tuned, NOT decoded from launcher.ldb — the
+  // original binary DB is not present in this repo (see conversation).
+  const FIRE_DOCTRINE = {
+    'Harpoon':        { salvo: 2, ripple: 4, reload: 10 },
+    'Exocet':         { salvo: 2, ripple: 3, reload: 8 },
+    'SM-1 MR':        { salvo: 2, ripple: 2, reload: 6 },
+    'SM-2':           { salvo: 2, ripple: 3, reload: 6 },
+    'ESSM':           { salvo: 2, ripple: 1, reload: 5 },
+    'MR Shell':       { salvo: 1, ripple: 0.9, reload: 0 },
+    'LR Shell':       { salvo: 1, ripple: 1.2, reload: 0 },
+    'SR Shell':       { salvo: 1, ripple: 1.0, reload: 0 },
+    'RBU Rocket':     { salvo: 2, ripple: 3, reload: 8 },
+    'Depth Charge':   { salvo: 2, ripple: 2, reload: 2 },
+    'DM 2A4 Torpedo': { salvo: 2, ripple: 4, reload: 8 },
+    '65 cm Torpedo':  { salvo: 1, ripple: 8, reload: 0 },
+  };
+
   const w = (name, damage, cooldown, note) => {
     const raw = R(name);
     const isUnderwater = raw.type === 'torpedo' || raw.type === 'asroc' || raw.type === 'depthCharge';
@@ -152,11 +180,20 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     // Surface-to-air missiles act as the air-defence battery and can also
     // intercept incoming enemy aircraft and anti-ship missiles.
     const isSAM = raw.type === 'missile' && /SM-|ESSM|Sea Sparrow|Sparrow/i.test(name);
+    const fd = FIRE_DOCTRINE[name] || { salvo: 1, ripple: cooldown, reload: 0 };
     return {
       type: raw.type,
       range: rg(name),
       damage,
-      cooldown,
+      cooldown, // retained for UI/reporting; the salvo model below drives timing
+      // FC99 salvo/ripple/reload firing doctrine (see FIRE_DOCTRINE above).
+      salvo: fd.salvo,
+      ripple: fd.ripple,
+      reload: fd.reload,
+      // per-instance fire state (mutated at runtime by updateWeapons)
+      _salvoLeft: 0,
+      _salvoNext: 0,
+      _reloadLeft: 0,
       minDepth: isUnderwater ? Math.max(-800, raw.depth_i) : 0,
       maxDepth: isUnderwater ? 0 : 0,
       realName: name,
