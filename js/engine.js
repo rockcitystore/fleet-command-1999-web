@@ -4,11 +4,12 @@
 
 import { REAL_PLACEMENTS } from './realdata.js';
 import { REAL_SHIP_STATS } from './realstats.js';
-import { isPointOnLand, snapToSea } from './terrain.js';
+import { isPointOnLand, snapToSea, setLand } from './terrain.js';
+import { buildLandPolygons } from './geo.js';
 
 export const WORLD_SIZE = 4000;
 export const METERS_PER_UNIT = 92.6; // ~200 nmi across the battlespace
-export const MIN_ZOOM = 0.5;
+export const MIN_ZOOM = 0.1; // allows zooming out to frame distant real coastlines
 export const MAX_ZOOM = 8.0;
 
 // ---------------------------------------------------------------------------
@@ -374,7 +375,7 @@ export class World {
 
   resetCamera(size) {
     if (size && size.width > 0 && size.height > 0) {
-      fitCameraToWorld(this.camera, size);
+      fitCameraToWorld(this.camera, size, this);
     } else {
       this.camera = makeCamera();
     }
@@ -435,14 +436,40 @@ export function screenToWorld(p, size, cam) {
 // is free to pan and zoom past the nominal [0, WORLD_SIZE] gameplay box.
 function clampCamera(cam, size) {}
 
-// Fit the camera so the world fills the viewport along its longer axis. This
-// removes the empty "outside the map" margins on the left/right or top/bottom.
-export function fitCameraToWorld(cam, size, margin = 0.02) {
-  const base = Math.min(size.width, size.height) / WORLD_SIZE;
-  const minZoom = (Math.max(size.width, size.height) / (base * WORLD_SIZE)) * (1 + margin);
-  cam.zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, minZoom));
-  cam.center.x = WORLD_SIZE / 2;
-  cam.center.y = WORLD_SIZE / 2;
+// Fit the camera so the playable box AND any real coastline (plus the SCS
+// nine-dash line) are visible. Like the original FC99, the operational chart
+// is framed by geography rather than locked to a fixed 200 nmi box. The camera
+// centers on the projection/geo center (WORLD_SIZE/2), which is also where the
+// fleets spawn, and zooms out just far enough to bring the nearest coastline
+// into view at the map edge.
+export function fitCameraToWorld(cam, size, world, margin = 0.12) {
+  const cx = WORLD_SIZE / 2;
+  const cy = WORLD_SIZE / 2;
+
+  // Farthest land / nine-dash vertex from the center dictates the zoom.
+  let maxR = 0;
+  if (world) {
+    const consider = (pt) => {
+      const r = Math.hypot(pt.x - cx, pt.y - cy);
+      if (r > maxR) maxR = r;
+    };
+    if (Array.isArray(world.land)) {
+      for (const poly of world.land) for (const p of poly) consider(p);
+    }
+    if (world.geo && Array.isArray(world.geo.nineDash)) {
+      for (const p of world.geo.nineDash) consider(p);
+    }
+  }
+
+  // Half-extent to display: at least the playable half-box, plus a margin so
+  // the coastline isn't jammed against the screen edge.
+  const halfExtent = Math.max(WORLD_SIZE / 2, maxR) * (1 + margin);
+  // Derived from scaleFor(): a vertex at `halfExtent` world units from center
+  // must land within half the (smaller) viewport dimension.
+  const fitZoom = WORLD_SIZE / (2 * halfExtent);
+  cam.zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, fitZoom));
+  cam.center.x = cx;
+  cam.center.y = cy;
   clampCamera(cam, size);
 }
 
@@ -989,12 +1016,33 @@ export const SCENARIOS = [
   { name: 'Hair Trigger', brief: 'Defend against long-range cruise missile attacks and diesel submarine torpedoes. CVBG deployed in the Eastern Mediterranean.' },
 ];
 
+// Nudge any unit that spawned on land out to the nearest sea point so players
+// never start stuck inside a coastline.
+function ensureShipsAtSea(world) {
+  const seaRef = { x: WORLD_SIZE / 2, y: WORLD_SIZE / 2 };
+  for (const s of world.ships) {
+    if (isPointOnLand(s.pos.x, s.pos.y)) {
+      const safe = snapToSea(s.pos, seaRef);
+      s.pos.x = safe.x;
+      s.pos.y = safe.y;
+    }
+  }
+}
+
 export function makeWorld(index) {
   let i = index;
   if (i < 0) i = 0;
   if (i > 2) i = 2;
+  const name = SCENARIOS[i].name;
   const w = new World();
-  w.scenarioName = SCENARIOS[i].name;
+  w.scenarioName = name;
+
+  // Real geography: each scenario resolves to a real lat/lon area of operations;
+  // the bundled Natural Earth coastline is clipped to that AO and projected.
+  const land = buildLandPolygons(name);
+  w.geo = { lat: land.centerLat, lon: land.centerLon, label: land.label, nineDash: land.nineDash };
+  w.land = land.polygons;
+  setLand(land.polygons);
 
   const real = REAL_PLACEMENTS && REAL_PLACEMENTS[i];
   if (real && real.length) {
@@ -1009,15 +1057,11 @@ export function makeWorld(index) {
         ship.aircraft = [];
         for (const a of u.aircraft) {
           const cnt = a.count || 1;
-          for (let i = 0; i < cnt; i++) w.addParkedAircraft(ship, a.type);
+          for (let j = 0; j < cnt; j++) w.addParkedAircraft(ship, a.type);
         }
       }
     }
-    return w;
-  }
-
-  // Fallback: balanced recreation if real data is unavailable.
-  if (i === 0) {
+  } else if (i === 0) {
     // ASW screen vs 1 submerged submarine + 1 destroyer escort.
     w.addShip('player', 'destroyer', { x: 700, y: 1600 });
     w.addShip('player', 'destroyer', { x: 900, y: 2200 });
@@ -1040,6 +1084,8 @@ export function makeWorld(index) {
     w.addShip('enemy', 'submarine', { x: 3200, y: 1400 }, -150);
     w.addShip('enemy', 'submarine', { x: 3300, y: 2600 }, -150);
   }
+
+  ensureShipsAtSea(w);
   return w;
 }
 
@@ -1072,6 +1118,15 @@ export function makeCustomWorld(opts = {}) {
     const depth = cls === 'submarine' ? -150 : 0;
     w.addShip('enemy', cls, { x: 3200 - (i % 3) * 260, y: yBase + i * 320 }, depth);
   }
+
+  // Real geography for the chosen theater (falls back to North Pacific).
+  const land = buildLandPolygons(
+    theater === 'med' ? 'med' : theater === 'norwegian' ? 'norwegian' : 'Wyoming Deploys'
+  );
+  w.geo = { lat: land.centerLat, lon: land.centerLon, label: land.label, nineDash: land.nineDash };
+  w.land = land.polygons;
+  setLand(land.polygons);
+  ensureShipsAtSea(w);
   return w;
 }
 

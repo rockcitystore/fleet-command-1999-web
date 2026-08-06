@@ -2,6 +2,7 @@
 // Wires engine <-> render <-> input <-> ui. Runs in the browser as an ES module.
 
 import { makeWorld, makeCustomWorld, fitCameraToWorld, makeAircraftOrder } from './engine.js';
+import { buildLandPolygons } from './geo.js';
 import { drawBattle, drawMinimap, RENDER_OPTIONS } from './render.js';
 import { attachInput } from './input.js';
 import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach } from './ui.js';
@@ -204,7 +205,7 @@ function startGame(index) {
   game.mapCtx = dom.map.getContext('2d');
   game.miniCtx = dom.minimap.getContext('2d');
   resizeCanvases();
-  fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight });
+  fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight }, world);
 
   buildBattleHUD(dom.controlbar, world, {
     onControlChange: () => updateHUD(world),
@@ -228,7 +229,7 @@ function startCustom(opts) {
   game.mapCtx = dom.map.getContext('2d');
   game.miniCtx = dom.minimap.getContext('2d');
   resizeCanvases();
-  fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight });
+  fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight }, world);
   buildBattleHUD(dom.controlbar, world, {
     onControlChange: () => updateHUD(world),
     onMenu: () => showMenu(),
@@ -276,3 +277,6 @@ window.addEventListener('resize', resizeCanvases);
 window.__fc = game;
 window.__fc.makeAircraftOrder = makeAircraftOrder;
 window.__fc.RENDER_OPTIONS = RENDER_OPTIONS;
+window.__fc.startGame = startGame;
+window.__fc.startCustom = startCustom;
+window.__fc.buildLandPolygons = buildLandPolygons;

@@ -3,7 +3,7 @@
 // Authoritative spec: CONTRACT.md section 2.
 
 import { worldToScreen, screenToWorld, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS, shipAmmo } from './engine.js';
-import { LAND_POLYGONS_NORM } from './terrain.js';
+import { getLand } from './terrain.js';
 
 // Colors: matched to the original Fleet Command '99 CIC screenshot.
 const COLOR_OCEAN = '#04121f';
@@ -574,11 +574,13 @@ function degMin(decimal, posHemi, negHemi) {
   return `${deg}-${String(min).padStart(2, '0')} ${hemi}`;
 }
 
-function worldToLatLon(x, y) {
+function worldToLatLon(x, y, geo) {
+  const cLat = geo.lat;
+  const cLon = geo.lon;
   const mLat = 111000;
-  const mLon = 111000 * Math.cos(CENTER_LAT * Math.PI / 180);
-  const lat = CENTER_LAT - ((y - WORLD_SIZE / 2) * METERS_PER_UNIT) / mLat;
-  const lon = CENTER_LON + ((x - WORLD_SIZE / 2) * METERS_PER_UNIT) / mLon;
+  const mLon = 111000 * Math.cos((cLat * Math.PI) / 180);
+  const lat = cLat - ((y - WORLD_SIZE / 2) * METERS_PER_UNIT) / mLat;
+  const lon = cLon + ((x - WORLD_SIZE / 2) * METERS_PER_UNIT) / mLon;
   return { lat, lon };
 }
 
@@ -605,8 +607,28 @@ function drawScaleBar(ctx, x, y, zoom, size) {
   ctx.restore();
 }
 
+function drawNineDash(ctx, world, size) {
+  const pts = world.geo.nineDash;
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255, 200, 80, 0.85)';
+  ctx.fillStyle = 'rgba(255, 200, 80, 0.85)';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([6, 5]);
+  ctx.beginPath();
+  for (let i = 0; i < pts.length; i++) {
+    const sp = worldToScreen(pts[i], size, world.camera);
+    if (i === 0) ctx.moveTo(sp.x, sp.y);
+    else ctx.lineTo(sp.x, sp.y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
 function drawGeoOverlay(ctx, world, size) {
-  const { lat, lon } = worldToLatLon(world.camera.center.x, world.camera.center.y);
+  const geo = world.geo || { lat: CENTER_LAT, lon: CENTER_LON, label: 'NORTH PACIFIC' };
+  const { lat, lon } = worldToLatLon(world.camera.center.x, world.camera.center.y, geo);
+
   const depth = depthAt(world.camera.center.x, world.camera.center.y);
   const x = 16;
   const y = 14;
@@ -617,24 +639,27 @@ function drawGeoOverlay(ctx, world, size) {
   ctx.textBaseline = 'top';
   ctx.fillText(`${degMin(lat, 'N', 'S')} / ${degMin(lon, 'E', 'W')}`, x, y);
   ctx.fillText(`Depth: ${depth.toLocaleString()} ft`, x, y + 17);
+  if (geo.label) ctx.fillText(geo.label, x, y + 34);
   ctx.restore();
+
+  if (world.geo && world.geo.nineDash && world.geo.nineDash.length) {
+    drawNineDash(ctx, world, size);
+  }
 
   drawScaleBar(ctx, x, y + 40, world.camera.zoom, size);
 }
 
-function normToWorld(p) {
-  return { x: p.x * WORLD_SIZE, y: p.y * WORLD_SIZE };
-}
-
 function drawLand(ctx, world, size) {
+  const land = getLand();
+  if (!land.length) return;
   ctx.save();
   ctx.fillStyle = COLOR_LAND;
   ctx.strokeStyle = COLOR_LAND_COAST;
   ctx.lineWidth = 1;
-  for (const poly of LAND_POLYGONS_NORM) {
+  for (const poly of land) {
     ctx.beginPath();
     for (let i = 0; i < poly.length; i++) {
-      const sp = worldToScreen(normToWorld(poly[i]), size, world.camera);
+      const sp = worldToScreen(poly[i], size, world.camera);
       if (i === 0) ctx.moveTo(sp.x, sp.y);
       else ctx.lineTo(sp.x, sp.y);
     }
@@ -646,16 +671,18 @@ function drawLand(ctx, world, size) {
 }
 
 function drawLandOnMinimap(ctx, w, h) {
+  const land = getLand();
+  if (!land.length) return;
   ctx.save();
   ctx.fillStyle = COLOR_LAND;
   ctx.strokeStyle = COLOR_LAND_COAST;
   ctx.lineWidth = 1;
-  for (const poly of LAND_POLYGONS_NORM) {
+  for (const poly of land) {
     ctx.beginPath();
     for (let i = 0; i < poly.length; i++) {
       const p = poly[i];
-      const x = p.x * w;
-      const y = p.y * h;
+      const x = p.x / WORLD_SIZE * w;
+      const y = p.y / WORLD_SIZE * h;
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
