@@ -9,6 +9,18 @@ import { buildLandPolygons } from './geo.js';
 
 export const WORLD_SIZE = 4000;
 export const METERS_PER_UNIT = 92.6; // ~200 nmi across the battlespace
+
+// Knots -> world units per GAME-second. Tied to METERS_PER_UNIT so that speed
+// and the 50-nmi scale bar stay mutually consistent.
+//   1 knot = 1 nmi/h = 1852 m / 3600 s; divide by meters-per-unit.
+//   => 30 kts traverses 30 nmi in 1 game-hour == 30*0.005555 = 0.1667 u/s_game.
+export const KNOTS_TO_UPS = 1852 / 3600 / METERS_PER_UNIT; // ≈ 0.005555 (≈ 1/180)
+
+// Convert a real speed in knots to world units per game-second.
+export const ktsToUps = (knots) => knots * KNOTS_TO_UPS;
+// Convert internal units-per-game-second back to knots (for HUD readouts).
+export const upsToKts = (ups) => ups / KNOTS_TO_UPS;
+
 export const MIN_ZOOM = 0.1; // allows zooming out to frame distant real coastlines
 export const MAX_ZOOM = 8.0;
 
@@ -39,33 +51,47 @@ export function distance(a, b) {
 // the spatial-scale caveat.
 export const SHIP_STATS = REAL_SHIP_STATS;
 
-// Game-speed multipliers offered in the HUD. Time is real-time (see
-// advanceRealtime): ×1 = 1 real second = 1 game second; higher values
-// fast-forward the battle. The engine sub-steps integration so even ×20 stays
-// stable (movement/AI/firing don't jump in a single huge step).
-export const SPEED_STEPS = [1, 2, 4, 10, 20];
+// SHIP_STATS carries REAL max speeds in knots (maxSpeedKts). Convert them to
+// world units per game-second so movement stays consistent with the scale bar.
+for (const key of Object.keys(SHIP_STATS)) {
+  const s = SHIP_STATS[key];
+  if (s.maxSpeedKts != null) s.maxSpeed = ktsToUps(s.maxSpeedKts);
+}
+
+// Game-speed multipliers (time compression) offered in the HUD. Time is
+// real-time (see advanceRealtime): ×1 = 1 real second = 1 game second.
+// Because ship/aircraft speeds are now REAL knots (see SHIP_STATS /
+// AIRCRAFT_STATS), ×1 makes units crawl at true pace — the battle needs a
+// high multiplier to be watchable. The engine sub-steps integration so even
+// ×200 stays stable (movement/AI/firing don't jump in a single huge step).
+export const SPEED_STEPS = [1, 10, 25, 50, 100, 200];
 
 // ---------------------------------------------------------------------------
 // AIRCRAFT_STATS
 // ---------------------------------------------------------------------------
 // Air-wing performance, derived from the real types carried by the scenario
-// platforms (see REAL_PLACEMENTS). Speeds/altitudes are scaled to the
-// 4000-unit world; `maxFuel` is expressed in SECONDS of endurance and is
-// consumed 1:1 per simulation second (so a P-3 with maxFuel 240 flies ~4 min
-// before the bingo RTB). Missions are the original FC99 vocabulary
-// (CAP / ASW / Strike / Intercept / Recon / patrol).
+// platforms (see REAL_PLACEMENTS). maxSpeedKts are REAL knots; altitudes are
+// realistic ceiling (m). `maxFuel` is REAL endurance expressed in GAME-SECONDS
+// (so a P-3 at 6 h = 21600 s can patrol far before the bingo RTB). Because the
+// battle runs under time compression, large fuel-second values are expected.
 export const AIRCRAFT_STATS = {
-  'P-3 Orion':       { display: 'P-3 Orion',       category: 'fixed', maxSpeed: 235, maxAlt: 1400, maxFuel: 260, sensorRange: 900, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 600, damage: 30, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 4 },
-  'F/A-18 Hornet':   { display: 'F/A-18 Hornet',   category: 'fixed', maxSpeed: 330, maxAlt: 1800, maxFuel: 210, sensorRange: 850, missions: ['CAP', 'Strike', 'Intercept'], weapon: { type: 'missile', range: 900, damage: 35, realName: 'AGM-84 Harpoon', cooldown: 6 }, ordnance: 4 },
-  'F-14 Tomcat':     { display: 'F-14 Tomcat',     category: 'fixed', maxSpeed: 345, maxAlt: 1900, maxFuel: 220, sensorRange: 900, missions: ['CAP', 'Intercept', 'Strike'], weapon: { type: 'missile', range: 1000, damage: 40, realName: 'AIM-54 Phoenix', cooldown: 6 }, ordnance: 4 },
-  'SH-60F Sea Hawk': { display: 'SH-60F Sea Hawk', category: 'helo',  maxSpeed: 110, maxAlt: 420,  maxFuel: 180, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 500, damage: 28, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
-  'SH-60R Sea Hawk': { display: 'SH-60R Sea Hawk', category: 'helo',  maxSpeed: 110, maxAlt: 420,  maxFuel: 180, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 500, damage: 28, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
-  'EA-6B Prowler':   { display: 'EA-6B Prowler',   category: 'fixed', maxSpeed: 250, maxAlt: 1500, maxFuel: 230, sensorRange: 800, missions: ['Recon', 'CAP', 'patrol'], weapon: null, ordnance: 0 },
-  'S-3 Viking':      { display: 'S-3 Viking',      category: 'fixed', maxSpeed: 240, maxAlt: 1300, maxFuel: 240, sensorRange: 800, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 600, damage: 30, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 3 },
-  'ES-3 Viking':     { display: 'ES-3 Viking',     category: 'fixed', maxSpeed: 240, maxAlt: 1300, maxFuel: 240, sensorRange: 800, missions: ['Recon', 'ASW', 'patrol'], weapon: null, ordnance: 0 },
-  'Super Lynx':      { display: 'Super Lynx',      category: 'helo',  maxSpeed: 120, maxAlt: 450,  maxFuel: 170, sensorRange: 600, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 450, damage: 26, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
-  '__default':       { display: 'Aircraft',        category: 'fixed', maxSpeed: 240, maxAlt: 1400, maxFuel: 210, sensorRange: 800, missions: ['CAP', 'patrol'], weapon: { type: 'missile', range: 800, damage: 30, realName: 'AGM-84 Harpoon', cooldown: 6 }, ordnance: 3 },
+  'P-3 Orion':       { display: 'P-3 Orion',       category: 'fixed', maxSpeedKts: 300, maxAlt: 1400, maxFuel: 21600, sensorRange: 900, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 600, damage: 30, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 4 },
+  'F/A-18 Hornet':   { display: 'F/A-18 Hornet',   category: 'fixed', maxSpeedKts: 480, maxAlt: 1800, maxFuel: 10800, sensorRange: 850, missions: ['CAP', 'Strike', 'Intercept'], weapon: { type: 'missile', range: 900, damage: 35, realName: 'AGM-84 Harpoon', cooldown: 6 }, ordnance: 4 },
+  'F-14 Tomcat':     { display: 'F-14 Tomcat',     category: 'fixed', maxSpeedKts: 520, maxAlt: 1900, maxFuel: 10800, sensorRange: 900, missions: ['CAP', 'Intercept', 'Strike'], weapon: { type: 'missile', range: 1000, damage: 40, realName: 'AIM-54 Phoenix', cooldown: 6 }, ordnance: 4 },
+  'SH-60F Sea Hawk': { display: 'SH-60F Sea Hawk', category: 'helo',  maxSpeedKts: 145, maxAlt: 420,  maxFuel: 10800, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 500, damage: 28, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
+  'SH-60R Sea Hawk': { display: 'SH-60R Sea Hawk', category: 'helo',  maxSpeedKts: 145, maxAlt: 420,  maxFuel: 10800, sensorRange: 650, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 500, damage: 28, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
+  'EA-6B Prowler':   { display: 'EA-6B Prowler',   category: 'fixed', maxSpeedKts: 420, maxAlt: 1500, maxFuel: 14400, sensorRange: 800, missions: ['Recon', 'CAP', 'patrol'], weapon: null, ordnance: 0 },
+  'S-3 Viking':      { display: 'S-3 Viking',      category: 'fixed', maxSpeedKts: 350, maxAlt: 1300, maxFuel: 14400, sensorRange: 800, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 600, damage: 30, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 3 },
+  'ES-3 Viking':     { display: 'ES-3 Viking',     category: 'fixed', maxSpeedKts: 350, maxAlt: 1300, maxFuel: 14400, sensorRange: 800, missions: ['Recon', 'ASW', 'patrol'], weapon: null, ordnance: 0 },
+  'Super Lynx':      { display: 'Super Lynx',      category: 'helo',  maxSpeedKts: 130, maxAlt: 450,  maxFuel: 9000,  sensorRange: 600, missions: ['ASW', 'Recon', 'patrol'], weapon: { type: 'torpedo', range: 450, damage: 26, realName: 'Mk46 Torpedo', cooldown: 6 }, ordnance: 2 },
+  '__default':       { display: 'Aircraft',        category: 'fixed', maxSpeedKts: 350, maxAlt: 1400, maxFuel: 14400, sensorRange: 800, missions: ['CAP', 'patrol'], weapon: { type: 'missile', range: 800, damage: 30, realName: 'AGM-84 Harpoon', cooldown: 6 }, ordnance: 3 },
 };
+
+// Convert real-knot airframe speeds into world units per game-second.
+for (const key of Object.keys(AIRCRAFT_STATS)) {
+  const a = AIRCRAFT_STATS[key];
+  if (a.maxSpeedKts != null) a.maxSpeed = ktsToUps(a.maxSpeedKts);
+}
 
 // Default flight-plan geometry per MISSION, scaled by airframe category. The
 // original FC99 lets the player hand-draw routes per mission; this mirrors that
@@ -153,7 +179,9 @@ export class World {
     this._randState = seed >>> 0 === 0 ? 1n : BigInt(seed >>> 0);
     this.camera = makeCamera();
     this.paused = false;
-    this.speed = 1;
+    // Default time compression. Ship/aircraft speeds are now REAL knots, so
+    // ×1 would crawl; 25x keeps the opening battle watchable out of the box.
+    this.speed = 25;
     this.lastTick = undefined;
     // Combat stays "cold" until the player commits: no side may fire until the
     // player issues an explicit attack order. This prevents the AI from sinking
@@ -749,13 +777,18 @@ export function updateDetection(world) {
 }
 
 function projectileSpeed(type) {
-  // World units per second, tuned for the 4000-unit battlespace.
-  if (type === 'missile') return 800;
-  if (type === 'torpedo') return 120;
-  if (type === 'gun') return 1500;
-  if (type === 'asroc') return 500;
-  if (type === 'depthCharge') return 300;
-  return 600;
+  // Real weapon speeds in knots -> world units per game-second (KNOTS_TO_UPS).
+  // Relative class performance preserved vs ships: missiles ~18-22x a 30-kt
+  // ship, gun shells ~55x, torpedoes ~1.5x (slower than flank but faster than
+  // the target can sprint forever).
+  const kts = {
+    missile: 700,     // anti-ship missile ~ Harpoon/Exocet (510-570 kts)
+    torpedo: 45,      // heavy torpedo ~ 34-50 kts
+    gun: 1800,        // naval shell ~ Mach 2-3
+    asroc: 600,       // ASROC ~ subsonic rocket
+    depthCharge: 200, // dropped charge, short fall
+  }[type];
+  return (kts != null ? kts : 600) * KNOTS_TO_UPS;
 }
 
 function projectileColor(type) {

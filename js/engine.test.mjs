@@ -171,13 +171,13 @@ function check(cond, msg) {
   const shL = wLegacy.aliveShips('player')[0];
   shL.pos.x = 500; shL.pos.y = 500; shL.speed = 0;
   wLegacy.issueOrder({ kind: 'moveTo', pos: { x: 1500, y: 500 } }, [shL.id]);
-  E.updateMovement(wLegacy, 1 / 60);
+  E.updateMovement(wLegacy, (1 / 60) * 100); // 100x time compression (realistic knot speeds need it)
   check(shL.order && shL.order.waypoints && shL.order.waypoints.length === 1,
     'legacy single-point moveTo is normalized to a 1-node waypoint chain');
 
   let passedWp1 = false, arrivedEnd = false, arrivalPos = null, decayTicks = 0;
   for (let k = 0; k < 12000; k++) {
-    E.updateMovement(w, 1 / 60);
+    E.updateMovement(w, (1 / 60) * 100); // 100x time compression (realistic knot speeds need it)
     if (!passedWp1 && ship.order && ship.order.wpIndex >= 1) passedWp1 = true;
     if (!ship.order) {
       if (!arrivedEnd) { arrivedEnd = true; arrivalPos = { x: ship.pos.x, y: ship.pos.y }; }
@@ -198,7 +198,7 @@ function check(cond, msg) {
   w2.issueOrder({ kind: 'moveTo', waypoints: [{ x: 800, y: 500 }, { x: 800, y: 800 }], loop: true }, [sh2.id]);
   let cycles = 0, prevIdx = 0;
   for (let k = 0; k < 6000; k++) {
-    E.updateMovement(w2, 1 / 60);
+    E.updateMovement(w2, (1 / 60) * 100); // 100x time compression (realistic knot speeds need it)
     const idx = sh2.order ? (sh2.order.wpIndex || 0) : -1;
     if (idx === 0 && prevIdx > 0) cycles++;
     if (idx >= 0) prevIdx = idx;
@@ -226,21 +226,24 @@ function check(cond, msg) {
     'launched frame moved from parked list to airborne list');
 
   // Transit: it should climb and advance along the route.
+  // (Realistic knot speeds are tiny, so apply 100x time compression here.)
+  const acStart = { x: ac.pos.x, y: ac.pos.y };
   let passed = false;
   for (let k = 0; k < 1200; k++) {
-    E.updateAircraft(w, 1 / 60);
+    E.updateAircraft(w, (1 / 60) * 100);
     E.updateDetection(w);
     if (ac.order && ac.order.wpIndex >= 1) { passed = true; break; }
   }
   check(passed, 'aircraft advanced past the first waypoint');
   check(ac.alt > 100, `aircraft climbed to altitude (got ${ac.alt.toFixed(0)})`);
-  check(ac.pos.x > 300, `aircraft translated toward its route (x=${ac.pos.x.toFixed(0)})`);
+  const acMoved = Math.hypot(ac.pos.x - acStart.x, ac.pos.y - acStart.y);
+  check(acMoved > 50, `aircraft translated toward its route (moved ${acMoved.toFixed(0)}u)`);
 
   // Recover: command RTB, it should land and re-park.
   w.recoverAircraft(ac.id);
   let reParked = false;
   for (let k = 0; k < 2000; k++) {
-    E.updateAircraft(w, 1 / 60);
+    E.updateAircraft(w, (1 / 60) * 100); // 100x compression (realistic knot speeds)
     if (!w.aircraft.find((a) => a.id === ac.id) && airport.aircraft.find((a) => a.id === ac.id && a.state === 'parked')) {
       reParked = true; break;
     }
@@ -261,7 +264,7 @@ function check(cond, msg) {
   ac3.ordnance = 0; // spent
   let ammoParked = false;
   for (let k = 0; k < 600; k++) {
-    E.updateAircraft(w, 1 / 60);
+    E.updateAircraft(w, (1 / 60) * 100); // 100x compression (realistic knot speeds)
     if (!w.aircraft.find((a) => a.id === ac3.id) && airport.aircraft.find((a) => a.id === ac3.id && a.state === 'parked')) {
       ammoParked = true; break;
     }
@@ -321,7 +324,7 @@ function check(cond, msg) {
   const ac = w.launchAircraft(airport.id, airport.aircraft[0].id, 'patrol', null);
   ac.pos.x = 3900; ac.pos.y = 3900;
   ac.order = { kind: 'flyTo', waypoints: [{ x: 9000, y: 9000, alt: ac.targetAlt, speed: ac.maxSpeed }], wpIndex: 0, loop: false };
-  for (let k = 0; k < 200; k++) E.updateAircraft(w, 1 / 60);
+  for (let k = 0; k < 200; k++) E.updateAircraft(w, (1 / 60) * 100); // 100x time compression (realistic knot speeds need it)
   check(ac.pos.x > 4000, `aircraft flies past WORLD_SIZE with no world clamp (x=${ac.pos.x.toFixed(0)})`);
 
   // Ships too: a position outside the old box is NOT clamped back.
@@ -374,8 +377,8 @@ function check(cond, msg) {
 
   // SPEED_STEPS are exposed and include the fast-forward values.
   const steps = E.SPEED_STEPS;
-  check(Array.isArray(steps) && steps.includes(10) && steps.includes(20),
-    `SPEED_STEPS expose 10x and 20x fast-forward [${steps.join(',')}]`);
+  check(Array.isArray(steps) && steps.includes(1) && steps.includes(50) && steps.includes(200),
+    `SPEED_STEPS expose 1x low and 200x max fast-forward [${steps.join(',')}]`);
 
   // setSpeed clamps to the top step (no runaway multiplier).
   w.setSpeed(999);

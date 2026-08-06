@@ -157,7 +157,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     destroyer: {
       label: 'DDG',
       maxHp: 60,
-      maxSpeed: 180,
+      maxSpeedKts: 31, // Arleigh Burke-class flank speed [COMMON]
       radius: 14,
       sensorRange: cap(Math.max(
         REAL_SENSORS_RAW['Ship Surf Radar(MR)'].r92 * RADAR_RANGE_SCALE,
@@ -176,7 +176,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     frigate: {
       label: 'FFG',
       maxHp: 45,
-      maxSpeed: 170,
+      maxSpeedKts: 29, // Oliver Hazard Perry-class flank speed [COMMON]
       radius: 13,
       sensorRange: cap(Math.max(
         REAL_SENSORS_RAW['Ship Surf Radar(SR)'].r92 * RADAR_RANGE_SCALE,
@@ -195,7 +195,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     cruiser: {
       label: 'CG',
       maxHp: 110,
-      maxSpeed: 160,
+      maxSpeedKts: 30, // Ticonderoga-class flank speed [COMMON]
       radius: 17,
       sensorRange: cap(Math.max(
         REAL_SENSORS_RAW['Ship Air Radar (LR)'].r92 * RADAR_RANGE_SCALE,
@@ -213,7 +213,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     battleship: {
       label: 'BB',
       maxHp: 220,
-      maxSpeed: 110,
+      maxSpeedKts: 33, // Iowa-class flank speed [COMMON]
       radius: 22,
       sensorRange: cap(REAL_SENSORS_RAW['Ship Air Radar (MR)'].r92 * RADAR_RANGE_SCALE),
       isSub: false,
@@ -227,7 +227,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     carrier: {
       label: 'CV',
       maxHp: 260,
-      maxSpeed: 90,
+      maxSpeedKts: 32, // Nimitz-class flank speed (classified ~30+) [COMMON]
       radius: 26,
       sensorRange: cap(REAL_SENSORS_RAW['AEW Radar (LR)'].r92 * RADAR_RANGE_SCALE, RADAR_RANGE_CAP),
       isSub: false,
@@ -241,7 +241,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     submarine: {
       label: 'SSN',
       maxHp: 80,
-      maxSpeed: 140,
+      maxSpeedKts: 25, // Los Angeles-class submerged flank speed [COMMON]
       radius: 12,
       sensorRange: cap(REAL_SENSORS_RAW['LF Pas Son'].r92 * SONAR_RANGE_SCALE, SONAR_RANGE_CAP),
       isSub: true,
@@ -254,7 +254,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
     installation: {
       label: 'BASE',
       maxHp: 150,
-      maxSpeed: 0,
+      maxSpeedKts: 0,
       radius: 20,
       sensorRange: cap(REAL_SENSORS_RAW['Ship Air Radar (LR)'].r92 * RADAR_RANGE_SCALE, RADAR_RANGE_CAP),
       isSub: false,

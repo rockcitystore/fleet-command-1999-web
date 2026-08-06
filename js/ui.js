@@ -1,15 +1,16 @@
 // ui.js — menu / scenario select / HUD DOM (imports engine.js)
 // CONTRACT section 4. No game state mutation except via world methods + handlers.
 
-import { SCENARIOS, SHIP_STATS } from './engine.js';
+import { SCENARIOS, SHIP_STATS, upsToKts } from './engine.js';
 import { RENDER_OPTIONS } from './render.js';
 
 const SPEED_BUTTONS = {
   1: 'btn-1x',
-  2: 'btn-2x',
-  4: 'btn-4x',
   10: 'btn-10x',
-  20: 'btn-20x',
+  25: 'btn-25x',
+  50: 'btn-50x',
+  100: 'btn-100x',
+  200: 'btn-200x',
 };
 
 function el(id) {
@@ -195,7 +196,7 @@ export function buildBattleHUD(rootEl, world, handlers) {
   });
 
   // Speed
-  [1, 2, 4, 10, 20].forEach((n) => {
+  [1, 10, 25, 50, 100, 200].forEach((n) => {
     el(SPEED_BUTTONS[n]).addEventListener('click', () => {
       world.setSpeed(n);
       onControlChange();
@@ -309,7 +310,7 @@ function updateInfoPanel(world) {
       el('info-name').textContent = (p.realName || p.type.toUpperCase());
       el('info-class').textContent = `${p.type.toUpperCase()} / IN FLIGHT`;
       el('info-track').textContent = String(p.id).padStart(4, '0');
-      el('info-course').textContent = `${Math.round(p.speed)} KTS`;
+      el('info-course').textContent = fmtSpeed(p.speed);
       el('info-speed').textContent = `${p.range} RNG`;
       el('info-damage').textContent = `${Math.round(p.damage)}`;
       const target = world.ship(p.targetId);
@@ -336,7 +337,7 @@ function updateInfoPanel(world) {
       el('info-class').textContent = `${ac.category.toUpperCase()} / TRK ${String(ac.id).padStart(4, '0')}`;
       el('info-track').textContent = String(ac.id).padStart(4, '0');
       el('info-course').textContent = `${degrees(ac.heading)}°`;
-      el('info-speed').textContent = `${Math.round(ac.speed)} KTS`;
+      el('info-speed').textContent = fmtSpeed(ac.speed);
       el('info-damage').textContent = ac.state.toUpperCase();
       el('info-orders').textContent = ac.mission
         ? `${ac.mission}${ac.order && ac.order.loop ? ' (LOOP)' : ''}`
@@ -379,7 +380,7 @@ function updateInfoPanel(world) {
   el('info-class').textContent = `${stats.label} / ${s.shipClass.toUpperCase()}`;
   el('info-track').textContent = String(s.id).padStart(4, '0');
   el('info-course').textContent = `${degrees(s.heading)}°`;
-  el('info-speed').textContent = `${Math.round(s.speed)} KTS`;
+  el('info-speed').textContent = fmtSpeed(s.speed);
   el('info-damage').textContent = `${damage}`;
   el('info-orders').textContent = fmtOrder(s);
   el('info-weapons').textContent = fmtWeapons(s);
@@ -456,12 +457,9 @@ function fmtRange(m) {
 
 function fmtSpeed(v) {
   if (!v || v <= 0) return '—';
-  if (v > 1500) { // raw internal unit -> rough knots estimate
-    const kts = v / 12910;
-    if (kts > 40 && kts < 2500) return `≈${Math.round(kts)} kts (est.)`;
-    return '—';
-  }
-  return `${Math.round(v)} kts`;
+  // `v` is world units per game-second; convert back to knots for display so
+  // the readout matches reality (e.g. a 31-kt destroyer shows "31 kts").
+  return `${Math.round(upsToKts(v))} kts`;
 }
 
 function fmtDepth(d) {
