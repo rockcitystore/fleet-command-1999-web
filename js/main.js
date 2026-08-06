@@ -2,7 +2,7 @@
 // Wires engine <-> render <-> input <-> ui. Runs in the browser as an ES module.
 
 import { makeWorld, makeCustomWorld, fitCameraToWorld, makeAircraftOrder } from './engine.js';
-import { drawBattle, drawMinimap } from './render.js';
+import { drawBattle, drawMinimap, RENDER_OPTIONS } from './render.js';
 import { attachInput } from './input.js';
 import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach } from './ui.js';
 
@@ -275,3 +275,4 @@ window.addEventListener('resize', resizeCanvases);
 // Debug hook for automated verification (harmless in production).
 window.__fc = game;
 window.__fc.makeAircraftOrder = makeAircraftOrder;
+window.__fc.RENDER_OPTIONS = RENDER_OPTIONS;

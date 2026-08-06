@@ -2,7 +2,7 @@
 // Pure drawing only. Imports coordinates/constants from engine.js.
 // Authoritative spec: CONTRACT.md section 2.
 
-import { worldToScreen, screenToWorld, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS } from './engine.js';
+import { worldToScreen, screenToWorld, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS, shipAmmo } from './engine.js';
 import { LAND_POLYGONS_NORM } from './terrain.js';
 
 // Colors: matched to the original Fleet Command '99 CIC screenshot.
@@ -22,6 +22,7 @@ const COLOR_TRACK_TEXT = 'rgba(255, 255, 255, 0.92)';
 export const RENDER_OPTIONS = {
   grid: true,          // show tactical grid
   symbolStyle: 'ntds', // 'ntds' | 'simple'
+  statusIcons: true,   // show fuel/ordnance status icons on units
 };
 const COLOR_LAND = 'rgba(20, 60, 35, 0.55)';
 const COLOR_LAND_COAST = 'rgba(60, 140, 80, 0.45)';
@@ -238,6 +239,76 @@ function drawSimpleSymbol(ctx, ship, r) {
   ctx.restore();
 }
 
+// Color thresholds for the fuel/ammo gauges (CIC palette on dark ocean).
+function levelColor(frac) {
+  if (frac <= 0.15) return '#ff4d4d';   // critical — red
+  if (frac <= 0.40) return '#ffcc44';   // low — amber
+  return '#46e6a0';                     // good — green
+}
+
+// Draw a small ring gauge (used for fuel fraction, 0..1).
+function drawGaugeRing(ctx, cx, cy, rad, frac, col) {
+  rad = rad || 7;
+  ctx.save();
+  ctx.lineWidth = 2.8;
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.beginPath();
+  ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.strokeStyle = col;
+  ctx.beginPath();
+  ctx.arc(cx, cy, rad, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(0, Math.min(1, frac)));
+  ctx.stroke();
+  ctx.fillStyle = col;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 1.6, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+// Draw a segmented ammo bar (used for ships, where the magazine is large).
+function drawAmmoBar(ctx, x, cy, frac, w) {
+  const h = 7;
+  const f = Math.max(0, Math.min(1, frac));
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(x, cy - h / 2, w, h);
+  ctx.fillStyle = levelColor(frac);
+  ctx.fillRect(x + 0.5, cy - h / 2 + 0.5, (w - 1) * f, h - 1);
+  ctx.restore();
+}
+
+// Draw individual ordnance pips (used for aircraft, 1 pip per round).
+function drawOrdnancePips(ctx, x, cy, loaded, max) {
+  const pw = 4, gap = 1.8, h = 7;
+  ctx.save();
+  for (let i = 0; i < max; i++) {
+    const px = x + i * (pw + gap);
+    ctx.fillStyle = i < loaded ? '#ffcc66' : 'rgba(255,255,255,0.14)';
+    ctx.fillRect(px, cy - h / 2, pw, h);
+  }
+  ctx.restore();
+}
+
+// Fuel + ordnance status icons drawn to the RIGHT of a unit token.
+// opts: { fuelFrac?, ordKind: 'aircraft'|'ship', ordLoaded?, ordMax?, ordFrac?, barW? }
+function drawStatusIcons(ctx, sp, r, opts) {
+  if (!RENDER_OPTIONS.statusIcons) return;
+  const gx = sp.x + r + (opts.ordKind === 'ship' ? 10 : 6);
+  const cy = sp.y;
+  let cursor = gx;
+  if (opts.fuelFrac != null) {
+    drawGaugeRing(ctx, cursor + 7, cy, 7, opts.fuelFrac, levelColor(opts.fuelFrac));
+    cursor += 22;
+  }
+  if (opts.ordKind === 'aircraft') {
+    drawOrdnancePips(ctx, cursor, cy, opts.ordLoaded, opts.ordMax);
+  } else if (opts.ordKind === 'ship') {
+    drawAmmoBar(ctx, cursor, cy, opts.ordFrac, opts.barW || 18);
+  }
+}
+
 function drawShip(ctx, ship, sp, r, selected) {
   // Heading line first so it appears behind the symbol.
   drawHeadingLine(ctx, ship, sp, r);
@@ -262,6 +333,13 @@ function drawShip(ctx, ship, sp, r, selected) {
   }
 
   drawTrackNumber(ctx, ship, sp, r);
+
+  // Ammo status icon — ships show it only when selected (per design choice).
+  if (selected) {
+    const am = shipAmmo(ship);
+    const frac = am.total > 0 ? am.loaded / am.total : 1;
+    drawStatusIcons(ctx, sp, r, { ordKind: 'ship', ordFrac: frac, barW: 20 });
+  }
 }
 
 function drawAircraftRoute(ctx, ac, size, cam, selected) {
@@ -301,7 +379,7 @@ function drawAircraftRoute(ctx, ac, size, cam, selected) {
   ctx.restore();
 }
 
-function drawAircraftSymbol(ctx, ac, sp, r, selected) {
+function drawAircraftSymbol(ctx, ac, sp, r, selected, scale) {
   const col = ac.side === 'player' ? COLOR_PLAYER : (ac.side === 'enemy' ? COLOR_ENEMY : COLOR_NEUTRAL);
   ctx.save();
   ctx.translate(sp.x, sp.y);
@@ -349,6 +427,20 @@ function drawAircraftSymbol(ctx, ac, sp, r, selected) {
   ctx.fillStyle = ac.side === 'player' ? 'rgba(57,208,255,0.9)' : 'rgba(255,150,150,0.9)';
   ctx.fillText(`${Math.round(ac.alt)}`, sp.x, sp.y + r + 2);
   ctx.restore();
+
+  // Fuel + ordnance status icons — always shown for aircraft, but hidden when
+  // zoomed out so far the token itself is sub-pixel (avoid clutter).
+  if (scale >= 0.12) {
+    const fuelFrac = ac.maxFuel > 0 ? ac.fuel / ac.maxFuel : 1;
+    const ordLoaded = ac.ordnance || 0;
+    const ordMax = ac.ordnanceMax || 0;
+    drawStatusIcons(ctx, sp, r, {
+      fuelFrac,
+      ordKind: 'aircraft',
+      ordLoaded,
+      ordMax,
+    });
+  }
 }
 
 export function drawBattle(ctx, world, size) {
@@ -411,7 +503,7 @@ export function drawBattle(ctx, world, size) {
     if (!ac.alive) continue;
     if (ac.side === 'enemy' && !ac.detected) continue;
     const sp = worldToScreen(ac.pos, size, world.camera);
-    drawAircraftSymbol(ctx, ac, sp, 7, selectedAc.includes(ac.id));
+    drawAircraftSymbol(ctx, ac, sp, 7, selectedAc.includes(ac.id), scale);
   }
 
   // Projectiles / missile & torpedo trails (drawn above ships).

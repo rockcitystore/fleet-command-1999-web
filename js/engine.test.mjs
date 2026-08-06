@@ -338,6 +338,33 @@ function check(cond, msg) {
 }
 
 // ---------------------------------------------------------------------------
+// 10. SHIP AMMO DECREMENTS ON FIRE (status-icon fuel/ammo feature)
+// ---------------------------------------------------------------------------
+{
+  const w = new E.World(7);
+  // Two opposing ships, adjacent so their weapons are always in range.
+  const player = w.addShip('player', 'destroyer', { x: 1000, y: 1000 });
+  const enemy = w.addShip('enemy', 'destroyer', { x: 1000, y: 1200 });
+  // Force a weapon type present on both so a shot is actually fired.
+  player.targetId = enemy.id;
+  enemy.targetId = player.id;
+  w.combatStarted = true;
+
+  const before = E.shipAmmo(player);
+  check(before.total > 0, `ship starts with a magazine (total=${before.total})`);
+  const beforeCount = player.weapons.reduce((a, ww) => a + ww.count, 0);
+
+  // Step the weapons system for a few seconds (cooldowns ~ seconds, dt=1/30).
+  for (let k = 0; k < 300; k++) E.updateWeapons(w, 1 / 30);
+
+  const afterCount = player.weapons.reduce((a, ww) => a + ww.count, 0);
+  check(afterCount < beforeCount, `ship magazine decrements when it fires (${beforeCount} -> ${afterCount})`);
+  const after = E.shipAmmo(player);
+  check(after.loaded === afterCount && after.total === before.total, 'shipAmmo() reports loaded/total correctly');
+  console.log('PASS: ship ammo decrements on fire');
+}
+
+// ---------------------------------------------------------------------------
 // Summary
 // ---------------------------------------------------------------------------
 console.log(`\nChecks passed: ${passed}`);

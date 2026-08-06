@@ -283,7 +283,7 @@ export class World {
       else if (w.type === 'torpedo') count = 4 + (h % 21);
       else if (w.type === 'asroc' || w.type === 'depthCharge') count = 8 + (h % 25);
       else count = 10 + (h % 50);
-      return { ...w, count };
+      return { ...w, count, magMax: count };
     });
 
     const ship = {
@@ -733,6 +733,16 @@ function spawnProjectile(world, source, target, weapon) {
   });
 }
 
+// Aggregate the ship's magazine into loaded/total rounds for the status icon.
+export function shipAmmo(ship) {
+  let loaded = 0, total = 0;
+  for (const w of ship.weapons || []) {
+    loaded += w.count || 0;
+    total += w.magMax || 0;
+  }
+  return { loaded, total };
+}
+
 export function updateWeapons(world, dt) {
   // Cold war until the player commits: no firing (either side) before the first
   // player attack order. Keeps positioning safe and playable.
@@ -749,6 +759,8 @@ export function updateWeapons(world, dt) {
           const d = distance(s.pos, target.pos);
           if (d <= w.range && target.depth >= w.minDepth - 5 && target.depth <= w.maxDepth + 5) {
             spawnProjectile(world, s, target, w);
+            // Burn a magazine round so the ship's ammo icon reflects reality.
+            if (w.count > 0) w.count -= 1;
             cd = w.cooldown;
           }
         }

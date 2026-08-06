@@ -150,12 +150,17 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   const optGrid = el('opt-grid');
   const optSymbol = el('opt-symbol');
   const optMusic = el('opt-music');
+  const optStatus = el('opt-status');
   if (optGrid) optGrid.addEventListener('click', () => {
     RENDER_OPTIONS.grid = !RENDER_OPTIONS.grid;
     syncOptionsUI();
   });
   if (optSymbol) optSymbol.addEventListener('click', () => {
     RENDER_OPTIONS.symbolStyle = RENDER_OPTIONS.symbolStyle === 'ntds' ? 'simple' : 'ntds';
+    syncOptionsUI();
+  });
+  if (optStatus) optStatus.addEventListener('click', () => {
+    RENDER_OPTIONS.statusIcons = !RENDER_OPTIONS.statusIcons;
     syncOptionsUI();
   });
   if (optMusic) optMusic.addEventListener('click', () => {
@@ -168,6 +173,7 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   function syncOptionsUI() {
     if (optGrid) { optGrid.dataset.on = RENDER_OPTIONS.grid ? '1' : '0'; optGrid.textContent = RENDER_OPTIONS.grid ? 'ON' : 'OFF'; }
     if (optSymbol) { optSymbol.dataset.on = RENDER_OPTIONS.symbolStyle; optSymbol.textContent = RENDER_OPTIONS.symbolStyle === 'ntds' ? 'NTDS' : 'SIMPLE'; }
+    if (optStatus) { optStatus.dataset.on = RENDER_OPTIONS.statusIcons ? '1' : '0'; optStatus.textContent = RENDER_OPTIONS.statusIcons ? 'ON' : 'OFF'; }
   }
 
   // Default view
