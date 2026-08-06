@@ -8,6 +8,8 @@ const SPEED_BUTTONS = {
   1: 'btn-1x',
   2: 'btn-2x',
   4: 'btn-4x',
+  10: 'btn-10x',
+  20: 'btn-20x',
 };
 
 function el(id) {
@@ -193,7 +195,7 @@ export function buildBattleHUD(rootEl, world, handlers) {
   });
 
   // Speed
-  [1, 2, 4].forEach((n) => {
+  [1, 2, 4, 10, 20].forEach((n) => {
     el(SPEED_BUTTONS[n]).addEventListener('click', () => {
       world.setSpeed(n);
       onControlChange();

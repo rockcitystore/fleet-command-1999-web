@@ -38,6 +38,12 @@ export function distance(a, b) {
 // the spatial-scale caveat.
 export const SHIP_STATS = REAL_SHIP_STATS;
 
+// Game-speed multipliers offered in the HUD. Time is real-time (see
+// advanceRealtime): ×1 = 1 real second = 1 game second; higher values
+// fast-forward the battle. The engine sub-steps integration so even ×20 stays
+// stable (movement/AI/firing don't jump in a single huge step).
+export const SPEED_STEPS = [1, 2, 4, 10, 20];
+
 // ---------------------------------------------------------------------------
 // AIRCRAFT_STATS
 // ---------------------------------------------------------------------------
@@ -347,12 +353,19 @@ export class World {
     this.paused = !this.paused;
   }
 
+  // Available game-speed multipliers (real-time × N). Exposed in the HUD.
+  // Time is real-time: dt = wallClockDelta × speed, so ×1 = 1 real sec = 1
+  // game sec, ×20 fast-forwards 20×.
+  speedSteps() { return SPEED_STEPS.slice(); }
+
   setSpeed(s) {
-    this.speed = Math.max(0.25, Math.min(8, s));
+    this.speed = Math.max(0.25, Math.min(SPEED_STEPS[SPEED_STEPS.length - 1], s));
   }
 
   cycleSpeed() {
-    this.speed = this.speed >= 4 ? 1 : this.speed * 2;
+    const steps = SPEED_STEPS;
+    const i = steps.indexOf(this.speed);
+    this.speed = steps[(i + 1) % steps.length];
   }
 
   zoomBy(f) {
@@ -374,15 +387,24 @@ export class World {
     this.lastTick = now;
     if (raw < 0) raw = 0;
     if (raw > 0.05) raw = 0.05;
-    const dt = raw * this.speed;
-    this.time += dt;
-    updateMovement(this, dt);
-    updateDetection(this);
-    updateWeapons(this, dt);
-    updateProjectiles(this, dt);
-    updateAircraft(this, dt);
-    updateAI(this, dt);
-    checkEnd(this);
+    let remaining = raw * this.speed; // real-time × speed
+    // Sub-step so a high multiplier (e.g. ×20) integrates as many small steps
+    // rather than one huge Euler jump — keeps movement/AI/firing stable.
+    const MAX_STEP = 0.05;
+    let guard = 0;
+    while (remaining > 1e-6 && guard < 512) {
+      const step = Math.min(remaining, MAX_STEP);
+      this.time += step;
+      updateMovement(this, step);
+      updateDetection(this);
+      updateWeapons(this, step);
+      updateProjectiles(this, step);
+      updateAircraft(this, step);
+      updateAI(this, step);
+      checkEnd(this);
+      remaining -= step;
+      guard++;
+    }
   }
 }
 

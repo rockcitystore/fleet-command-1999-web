@@ -365,6 +365,44 @@ function check(cond, msg) {
 }
 
 // ---------------------------------------------------------------------------
+// 11. TIME IS REAL-TIME × SPEED, with high multipliers sub-stepped
+// ---------------------------------------------------------------------------
+{
+  const w = new E.World(11);
+  w.addShip('player', 'destroyer', { x: 1000, y: 1000 });
+  w.addShip('enemy', 'destroyer', { x: 1200, y: 1000 });
+
+  // SPEED_STEPS are exposed and include the fast-forward values.
+  const steps = E.SPEED_STEPS;
+  check(Array.isArray(steps) && steps.includes(10) && steps.includes(20),
+    `SPEED_STEPS expose 10x and 20x fast-forward [${steps.join(',')}]`);
+
+  // setSpeed clamps to the top step (no runaway multiplier).
+  w.setSpeed(999);
+  check(w.speed === steps[steps.length - 1], `setSpeed clamps to max step (${w.speed})`);
+
+  // cycleSpeed walks the full step list and wraps back to the first step.
+  w.setSpeed(1);
+  const cyc = [1];
+  for (let k = 0; k < steps.length; k++) { w.cycleSpeed(); cyc.push(w.speed); }
+  check(JSON.stringify(cyc) === JSON.stringify([...steps, steps[0]]),
+    `cycleSpeed cycles through all steps and wraps [${cyc.join(',')}]`);
+
+  // Real-time basis: advanceRealtime is real-wall-clock × speed, but each frame's
+  // wall-clock delta is capped at 50ms (anti-jump clamp). Over sustained frames at
+  // ×20, 2 real seconds (40×50ms frames) become 40 game-seconds.
+  const d0 = w.ships[0];
+  d0.order = { kind: 'moveTo', waypoints: [{ x: 1600, y: 1000, speed: d0.maxSpeed }], wpIndex: 0, loop: false };
+  w.setSpeed(20);
+  const x0 = d0.pos.x, t0 = w.time;
+  for (let k = 0; k < 40; k++) { w.lastTick = Date.now() - 50; w.advanceRealtime(); }
+  const realSec = 40 * 0.05; // 2 real seconds
+  check(Math.abs((w.time - t0) - realSec * 20) < 2.0, `at 20x, ${realSec}s real ≈ ${realSec * 20} game sec (Δt=${(w.time - t0).toFixed(1)})`);
+  check(d0.pos.x > x0, `ship advanced under fast-forward (x ${x0.toFixed(0)} -> ${d0.pos.x.toFixed(0)})`);
+  console.log('PASS: time is real-time × speed, fast-forward sub-stepped');
+}
+
+// ---------------------------------------------------------------------------
 // Summary
 // ---------------------------------------------------------------------------
 console.log(`\nChecks passed: ${passed}`);
