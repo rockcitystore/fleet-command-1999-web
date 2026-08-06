@@ -434,6 +434,30 @@ html, body {
   touch-action: none;
 }
 
+/* 3D (WebGL) main battle view — overlays the 2D map; shown in 3D mode. */
+#map3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--bottom-h, 224px) + var(--bar-h, 42px));
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #04121f;
+  touch-action: none;
+  z-index: 5;
+}
+
+/* 2D tactical top-down inside the bottom TACTICAL MAP panel (3D mode). */
+#map2d {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #04121f;
+  touch-action: none;
+}
+
 /* Bottom three-panel CIC strip */
 #bottom-panels {
   position: absolute;

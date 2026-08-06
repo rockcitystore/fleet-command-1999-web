@@ -5,6 +5,8 @@ import { makeWorld, makeCustomWorld, fitCameraToWorld, makeAircraftOrder } from 
 import { buildLandPolygons } from './geo.js';
 import { drawBattle, drawMinimap, RENDER_OPTIONS } from './render.js';
 import { attachInput } from './input.js';
+import { Scene3D } from './render3d.js';
+import { attachInput3D } from './input3d.js';
 import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach } from './ui.js';
 
 const MINIMAP_PX = 140;
@@ -14,6 +16,8 @@ const dom = {
   screenBattle: document.getElementById('screen-battle'),
   screenReference: document.getElementById('screen-reference'),
   map: document.getElementById('map'),
+  map3d: document.getElementById('map3d'),
+  map2d: document.getElementById('map2d'),
   minimap: document.getElementById('minimap'),
   controlbar: document.getElementById('controlbar'),
 };
@@ -31,8 +35,12 @@ const game = {
   world: null,
   rafId: 0,
   detachInput: null,
+  detachInput3d: null,
+  scene3d: null,
+  renderMode: '3d', // '3d' = WebGL perspective main view; '2d' = legacy flat map
   mapCtx: null,
   miniCtx: null,
+  map2dCtx: null,
 };
 
 // --- Real music from the original 1999 Fleet Command (assets/audio/*.wav) ---
@@ -79,13 +87,27 @@ function fitCanvas(canvas, ctx, cssW, cssH) {
 }
 
 function resizeCanvases() {
-  if (!game.mapCtx) return;
   const mw = dom.map.clientWidth || window.innerWidth;
   const mh = dom.map.clientHeight || window.innerHeight;
-  fitCanvas(dom.map, game.mapCtx, mw, mh);
+  if (game.mapCtx) fitCanvas(dom.map, game.mapCtx, mw, mh);
+  if (game.scene3d) game.scene3d.resize(mw, mh);
   const miniW = dom.minimap.clientWidth || MINIMAP_PX;
   const miniH = dom.minimap.clientHeight || MINIMAP_PX;
-  fitCanvas(dom.minimap, game.miniCtx, miniW, miniH);
+  if (game.miniCtx) fitCanvas(dom.minimap, game.miniCtx, miniW, miniH);
+  const twoW = dom.map2d.clientWidth || 320;
+  const twoH = dom.map2d.clientHeight || 180;
+  if (game.map2dCtx) fitCanvas(dom.map2d, game.map2dCtx, twoW, twoH);
+}
+
+// Toggle canvas visibility to match the active render mode, and label the
+// 2D/3D control-bar button.
+function applyRenderModeVisibility() {
+  const is3d = game.renderMode === '3d';
+  if (dom.map) dom.map.classList.toggle('hidden', is3d);
+  if (dom.map3d) dom.map3d.classList.toggle('hidden', !is3d);
+  if (dom.map2d) dom.map2d.classList.toggle('hidden', !is3d);
+  const vb = document.getElementById('btn-viewmode');
+  if (vb) vb.textContent = is3d ? '3D' : '2D';
 }
 
 // --- Screen switching ---
@@ -93,6 +115,8 @@ function showMenu() {
   if (game.rafId) cancelAnimationFrame(game.rafId);
   game.rafId = 0;
   if (game.detachInput) { game.detachInput(); game.detachInput = null; }
+  if (game.detachInput3d) { game.detachInput3d(); game.detachInput3d = null; }
+  if (game.scene3d) { game.scene3d.dispose(); game.scene3d = null; }
   stopMusic();
   game.world = null;
   dom.screenBattle.classList.add('hidden');
@@ -198,46 +222,60 @@ function makeInputHandlers(world) {
 function startGame(index) {
   const world = makeWorld(index);
   world.__selected = [];
-
-  dom.screenMenu.classList.add('hidden');
-  dom.screenBattle.classList.remove('hidden');
-
-  game.mapCtx = dom.map.getContext('2d');
-  game.miniCtx = dom.minimap.getContext('2d');
-  resizeCanvases();
-  fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight }, world);
-
-  buildBattleHUD(dom.controlbar, world, {
-    onControlChange: () => updateHUD(world),
-    onMenu: () => showMenu(),
-    onMusic: (on) => setMusic(on),
-  });
-
-  const handlers = makeInputHandlers(world);
-  world.__handlers = handlers;
-  game.detachInput = attachInput(dom.map, world, handlers);
-
-  game.world = world;
-  if (!game.rafId) loop();
+  mountBattle(world);
 }
 
 function startCustom(opts) {
   const world = makeCustomWorld(opts || {});
   world.__selected = [];
+  mountBattle(world);
+}
+
+// Build the HUD + wire the correct view (3D or 2D) + input for a live world.
+function mountBattle(world) {
   dom.screenMenu.classList.add('hidden');
   dom.screenBattle.classList.remove('hidden');
-  game.mapCtx = dom.map.getContext('2d');
-  game.miniCtx = dom.minimap.getContext('2d');
-  resizeCanvases();
-  fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight }, world);
+
+  // Tear down any previous view first.
+  if (game.detachInput) { game.detachInput(); game.detachInput = null; }
+  if (game.detachInput3d) { game.detachInput3d(); game.detachInput3d = null; }
+  if (game.scene3d) { game.scene3d.dispose(); game.scene3d = null; }
+  game.mapCtx = null;
+
   buildBattleHUD(dom.controlbar, world, {
     onControlChange: () => updateHUD(world),
     onMenu: () => showMenu(),
     onMusic: (on) => setMusic(on),
   });
+
   const handlers = makeInputHandlers(world);
   world.__handlers = handlers;
-  game.detachInput = attachInput(dom.map, world, handlers);
+  applyRenderModeVisibility();
+
+  if (game.renderMode === '3d') {
+    try {
+      game.scene3d = new Scene3D(dom.map3d, world);
+    } catch (err) {
+      // WebGL unavailable (e.g. blocked GPU): degrade gracefully to 2D.
+      console.warn('[3D] WebGL init failed, falling back to 2D view:', err && err.message);
+      game.renderMode = '2d';
+      applyRenderModeVisibility();
+    }
+  }
+
+  if (game.renderMode === '3d' && game.scene3d) {
+    game.miniCtx = dom.minimap.getContext('2d');
+    game.map2dCtx = dom.map2d.getContext('2d');
+    game.detachInput3d = attachInput3D(dom.map3d, world, handlers, game.scene3d);
+  } else {
+    game.mapCtx = dom.map.getContext('2d');
+    game.miniCtx = dom.minimap.getContext('2d');
+    game.map2dCtx = null;
+    fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight }, world);
+    game.detachInput = attachInput(dom.map, world, handlers);
+  }
+
+  resizeCanvases();
   game.world = world;
   if (!game.rafId) loop();
 }
@@ -245,7 +283,45 @@ function startCustom(opts) {
 function startTutorial() {
   startGame(0);
   // Coach marks appear once the battle is on screen.
-  setTimeout(() => showCoach(dom.map), 500);
+  setTimeout(() => showCoach(dom.screenBattle), 500);
+}
+
+// Switch between the 3D perspective main view and the legacy 2D flat map for
+// the currently-loaded battle. Re-uses the existing world + handlers.
+function toggleViewMode() {
+  const world = game.world;
+  if (!world) return;
+  game.renderMode = game.renderMode === '3d' ? '2d' : '3d';
+  if (game.detachInput) { game.detachInput(); game.detachInput = null; }
+  if (game.detachInput3d) { game.detachInput3d(); game.detachInput3d = null; }
+  if (game.scene3d) { game.scene3d.dispose(); game.scene3d = null; }
+  game.mapCtx = null;
+
+  const handlers = world.__handlers || makeInputHandlers(world);
+  applyRenderModeVisibility();
+
+  if (game.renderMode === '3d') {
+    try {
+      game.scene3d = new Scene3D(dom.map3d, world);
+    } catch (err) {
+      console.warn('[3D] WebGL init failed, falling back to 2D view:', err && err.message);
+      game.renderMode = '2d';
+      applyRenderModeVisibility();
+    }
+  }
+
+  if (game.renderMode === '3d' && game.scene3d) {
+    game.miniCtx = dom.minimap.getContext('2d');
+    game.map2dCtx = dom.map2d.getContext('2d');
+    game.detachInput3d = attachInput3D(dom.map3d, world, handlers, game.scene3d);
+  } else {
+    game.mapCtx = dom.map.getContext('2d');
+    game.miniCtx = dom.minimap.getContext('2d');
+    game.map2dCtx = null;
+    fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight }, world);
+    game.detachInput = attachInput(dom.map, world, handlers);
+  }
+  resizeCanvases();
 }
 
 // --- Real-time loop (separate from drawing; no state mutation inside draw) ---
@@ -258,9 +334,24 @@ function loop() {
   world.advanceRealtime();
 
   const msize = { width: dom.map.clientWidth || window.innerWidth, height: dom.map.clientHeight || window.innerHeight };
-  drawBattle(game.mapCtx, world, msize);
-  const minisize = { width: dom.minimap.clientWidth || MINIMAP_PX, height: dom.minimap.clientHeight || MINIMAP_PX };
-  drawMinimap(game.miniCtx, world, minisize, msize);
+
+  if (game.renderMode === '3d' && game.scene3d) {
+    // Keep the bottom 2D top-down + minimap camera synced to the 3D camera.
+    world.camera.center.x = game.scene3d.target.x;
+    world.camera.center.y = game.scene3d.target.z;
+    world.camera.zoom = game.scene3d.topDownZoom(msize.height);
+    game.scene3d.render(world);
+    if (game.map2dCtx) {
+      const two = { width: dom.map2d.clientWidth || 320, height: dom.map2d.clientHeight || 180 };
+      drawBattle(game.map2dCtx, world, two);
+    }
+    const minisize = { width: dom.minimap.clientWidth || MINIMAP_PX, height: dom.minimap.clientHeight || MINIMAP_PX };
+    drawMinimap(game.miniCtx, world, minisize, msize);
+  } else {
+    drawBattle(game.mapCtx, world, msize);
+    const minisize = { width: dom.minimap.clientWidth || MINIMAP_PX, height: dom.minimap.clientHeight || MINIMAP_PX };
+    drawMinimap(game.miniCtx, world, minisize, msize);
+  }
   updateHUD(world);
 }
 
@@ -273,6 +364,8 @@ buildMenu(null, {
   onMusic: (on) => setMusic(on),
 });
 window.addEventListener('resize', resizeCanvases);
+const viewBtn = document.getElementById('btn-viewmode');
+if (viewBtn) viewBtn.addEventListener('click', () => toggleViewMode());
 // Debug hook for automated verification (harmless in production).
 window.__fc = game;
 window.__fc.makeAircraftOrder = makeAircraftOrder;

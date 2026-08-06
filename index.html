@@ -146,6 +146,7 @@
   <!-- ============ BATTLE SCREEN ============ -->
   <div id="screen-battle" class="screen hidden">
     <canvas id="map"></canvas>
+    <canvas id="map3d" class="hidden"></canvas>
 
     <!-- Original FC99 CIC: bottom three panels -->
     <div id="bottom-panels">
@@ -154,8 +155,8 @@
         <canvas id="minimap"></canvas>
       </div>
       <div id="panel-3d" class="bottom-panel">
-        <div class="panel-caption">3D VIEW</div>
-        <div class="view3d-placeholder">3D VIEW NOT AVAILABLE</div>
+        <div class="panel-caption">TACTICAL MAP</div>
+        <canvas id="map2d"></canvas>
       </div>
       <div id="panel-info" class="bottom-panel">
         <div class="panel-caption">UNIT INFORMATION</div>
@@ -193,6 +194,7 @@
       <button id="btn-zoomout" class="btn" type="button">ZOOM &minus;</button>
       <button id="btn-zoomin" class="btn" type="button">ZOOM +</button>
       <button id="btn-reset" class="btn" type="button">RESET VIEW</button>
+      <button id="btn-viewmode" class="btn" type="button">3D</button>
       <button id="btn-music" class="btn" type="button">MUSIC</button>
       <span class="hud-cell hud-scenario-cell"><span id="hud-scenario">&mdash;</span></span>
       <span class="hud-cell"><span class="hud-label">ALLY</span> <span id="hud-player">0</span></span>

@@ -23,7 +23,15 @@ function check(cond, msg) {
 const browser = await puppeteer.launch({
   executablePath: CHROME,
   headless: 'new',
-  args: ['--no-sandbox', '--disable-gpu', '--window-size=1000,800'],
+  args: [
+    '--no-sandbox',
+    '--disable-gpu-sandbox',
+    '--use-gl=angle',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+    '--ignore-gpu-blocklist',
+    '--window-size=1000,800',
+  ],
 });
 try {
   const page = await browser.newPage();
