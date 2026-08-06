@@ -8,10 +8,14 @@
 // Field discovery:
 //   objects.odb : 329 records x 284 bytes. offset +236 = weapon RANGE (meters).
 //                 offset +112 ~ weapon SPEED (knots). offset +120 ~ depth.
+//                 offset +248 = weapon RELOAD (float, MINUTES -> x60 = seconds).
+//                 offset +252 = warhead mass (f252).  [RELOAD +248 decoded &
+//                 verified against the original binary database.]
 //   sensors.sdb : 41 records x 152 bytes. offset +88 / +92 = sensor DETECTION
 //                 RANGE (meters), two values (typically nominal / max).
 //   launcher.ldb: 832 records x 196 bytes. offset +124 = weapon reference ID
-//                 (points back into objects.odb); carries no stat values.
+//                 (points back into objects.odb); carries no reload/stat values
+//                 (reload lives in objects.odb at +248).
 //
 // IMPORTANT — spatial scale caveat:
 //   The web game world is WORLD_SIZE = 4000 units. Real missions span
@@ -133,35 +137,47 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
   const R = (name) => REAL_WEAPONS_RAW[name];
   const rg = (name) => mToUnits(R(name).range_m);
 
-  // Cooldowns are tuned for gameplay, not literal reload times (those are not
-  // cleanly decoded from the DB). Damage is based on f252 warhead-ish mass
-  // when available, otherwise on the original game's class balance.
-  // FC99 firing doctrine [INFERRED]: a launcher fires in a SALVO of N rounds,
-  // with a short RIPPLE interval between rounds inside the salvo, then a longer
-  // RELOAD before the next salvo can be launched. This reproduces the original's
-  // visible "dump a volley, then wait for the tubes to reload" rhythm.
-  //   - Guns (continuous ROF) are modelled as salvo=1, reload=0, so they fire
-  //     one round every RIPPLE seconds (their original per-round cadence).
-  //   - Anti-ship missiles / SAMs / ASW rockets fire 2-round salvos with a
-  //     multi-second ripple, then a long reload (tube replenishment).
-  //   - Sub torpedoes fire a 2-torpedo SPREAD (ripple ~4s) then reload.
-  // Values are tuned so per-class average DPS stays close to the pre-salvo
-  // balance; the salvo itself is what the player actually SEES.
-  // NOTE: these are gameplay-tuned, NOT decoded from launcher.ldb — the
-  // original binary DB is not present in this repo (see conversation).
+  // FC99 firing doctrine.
+  //   RELONE scalar decoded from objects.odb at offset +248 (float, MINUTES ->
+  //   seconds x60). The original binary stores a SINGLE per-weapon reload time
+  //   = the per-launch-tube replenishment period. That maps directly onto this
+  //   model's inter-volley RELOAD (engine.js: for salvo>1 the post-salvo gap is
+  //   RELOAD). SALVO = number of tubes dumped in one trigger-pull (the visible
+  //   volley); RIPPLE = the quick sequential launch spacing INSIDE the salvo
+  //   (FC99 launches a salvo's rounds within ~1 s of each other, so this is a
+  //   small value). Total volley-to-volley cycle ~= (salvo-1)*ripple + reload,
+  //   i.e. it tracks the authentic reload.
+  //
+  //   RELONE values [KNOWN] — decoded & verified against the original binary
+  //   (objects.odb, 329 records x 284 bytes):
+  //     Harpoon      idx=133  f62=0.100 -> 6.0s     Exocet     idx=100  f62=0.100 -> 6.0s
+  //     SM-1 MR      idx=262  f62=0.030 -> 1.8s     SM-2       idx=263  f62=0.030 -> 1.8s
+  //     ESSM         idx=98   f62=0.030 -> 1.8s     RBU Rocket idx=231  f62=0.030 -> 1.8s
+  //     Depth Charge idx=80   f62=0.030 -> 1.8s
+  //     DM 2A4 Torp  idx=81   f62=0.200 -> 12.0s    65 cm Torp idx=1    f62=0.200 -> 12.0s
+  //     (other torpedoes — Mk46/48, 53cm, A244, Spearfish, Mk37/44/50 — all 0.2 -> 12.0s)
+  //     Gun MOUNTS (30 records, e.g. idx=22 Almirante Brown) f62=0.300 -> 18.0s
+  //       (mount magazine-reload cycle). Gun SHELL records have f62=0 because the
+  //       ROF is governed at the mount, so guns are modelled as continuous fire
+  //       (salvo=1, reload=0) — the 18 s is a known reference, not applied.
+  //
+  //   SALVO and RIPPLE remain [INFERRED] design choices (the original binary
+  //   carries only the single reload scalar, not a salvo/ripple split). The
+  //   prior [INFERRED] tuned reload values are now replaced by the [KNOWN]
+  //   decoded ones above.
   const FIRE_DOCTRINE = {
-    'Harpoon':        { salvo: 2, ripple: 4, reload: 10 },
-    'Exocet':         { salvo: 2, ripple: 3, reload: 8 },
-    'SM-1 MR':        { salvo: 2, ripple: 2, reload: 6 },
-    'SM-2':           { salvo: 2, ripple: 3, reload: 6 },
-    'ESSM':           { salvo: 2, ripple: 1, reload: 5 },
-    'MR Shell':       { salvo: 1, ripple: 0.9, reload: 0 },
-    'LR Shell':       { salvo: 1, ripple: 1.2, reload: 0 },
-    'SR Shell':       { salvo: 1, ripple: 1.0, reload: 0 },
-    'RBU Rocket':     { salvo: 2, ripple: 3, reload: 8 },
-    'Depth Charge':   { salvo: 2, ripple: 2, reload: 2 },
-    'DM 2A4 Torpedo': { salvo: 2, ripple: 4, reload: 8 },
-    '65 cm Torpedo':  { salvo: 1, ripple: 8, reload: 0 },
+    'Harpoon':        { salvo: 2, ripple: 0.6, reload: 6 },    // [KNOWN] 6.0s
+    'Exocet':         { salvo: 2, ripple: 0.6, reload: 6 },    // [KNOWN] 6.0s
+    'SM-1 MR':        { salvo: 2, ripple: 0.4, reload: 1.8 },  // [KNOWN] 1.8s
+    'SM-2':           { salvo: 2, ripple: 0.4, reload: 1.8 },  // [KNOWN] 1.8s
+    'ESSM':           { salvo: 2, ripple: 0.3, reload: 1.8 },  // [KNOWN] 1.8s
+    'MR Shell':       { salvo: 1, ripple: 0.9, reload: 0 },    // [KNOWN] mount 18s; continuous
+    'LR Shell':       { salvo: 1, ripple: 1.2, reload: 0 },    // [KNOWN] mount 18s; continuous
+    'SR Shell':       { salvo: 1, ripple: 1.0, reload: 0 },    // [KNOWN] mount 18s; continuous
+    'RBU Rocket':     { salvo: 2, ripple: 0.5, reload: 1.8 },  // [KNOWN] 1.8s
+    'Depth Charge':   { salvo: 2, ripple: 0.5, reload: 1.8 },  // [KNOWN] 1.8s
+    'DM 2A4 Torpedo': { salvo: 2, ripple: 0.6, reload: 12 },   // [KNOWN] 12.0s
+    '65 cm Torpedo':  { salvo: 1, ripple: 12,  reload: 12 },   // [KNOWN] 12.0s (single heavy torpedo)
   };
 
   const w = (name, damage, cooldown, note) => {
