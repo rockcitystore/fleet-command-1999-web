@@ -675,7 +675,7 @@ function drawLand(ctx, world, size) {
   ctx.restore();
 }
 
-function drawLandOnMinimap(ctx, w, h) {
+function drawLandOnMinimap(ctx, mapX, mapY) {
   const land = getLand();
   if (!land.length) return;
   ctx.save();
@@ -687,8 +687,8 @@ function drawLandOnMinimap(ctx, w, h) {
     ctx.beginPath();
     for (let i = 0; i < pts.length; i++) {
       const p = pts[i];
-      const x = p.x / WORLD_SIZE * w;
-      const y = p.y / WORLD_SIZE * h;
+      const x = mapX(p.x);
+      const y = mapY(p.y);
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
@@ -705,13 +705,43 @@ export function drawMinimap(ctx, world, size) {
 
   const w = size.width;
   const h = size.height;
-  drawLandOnMinimap(ctx, w, h);
+
+  // Build an extent that includes both the playable box and the real coastline.
+  // The real coast projects outside [0,WORLD_SIZE], so without this it would be
+  // clipped off the minimap.
+  const extent = { xMin: 0, xMax: WORLD_SIZE, yMin: 0, yMax: WORLD_SIZE };
+  for (const poly of getLand()) {
+    const b = poly.bbox;
+    if (!b) continue;
+    if (b.xMin < extent.xMin) extent.xMin = b.xMin;
+    if (b.xMax > extent.xMax) extent.xMax = b.xMax;
+    if (b.yMin < extent.yMin) extent.yMin = b.yMin;
+    if (b.yMax > extent.yMax) extent.yMax = b.yMax;
+  }
+  const ew = extent.xMax - extent.xMin;
+  const eh = extent.yMax - extent.yMin;
+  const pad = 0.02;
+  extent.xMin -= ew * pad;
+  extent.xMax += ew * pad;
+  extent.yMin -= eh * pad;
+  extent.yMax += eh * pad;
+
+  const mapX = (x) => ((x - extent.xMin) / (extent.xMax - extent.xMin)) * w;
+  const mapY = (y) => ((y - extent.yMin) / (extent.yMax - extent.yMin)) * h;
+
+  drawLandOnMinimap(ctx, mapX, mapY);
+
+  // Faint outline of the original playable box so the operational area is
+  // still visually anchored on the overview.
+  ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(mapX(0), mapY(0), mapX(WORLD_SIZE) - mapX(0), mapY(WORLD_SIZE) - mapY(0));
 
   for (const ship of world.ships) {
     if (!ship.alive) continue;
     if (ship.side === 'enemy' && !ship.detected) continue;
-    const mx = ship.pos.x / WORLD_SIZE * w;
-    const my = ship.pos.y / WORLD_SIZE * h;
+    const mx = mapX(ship.pos.x);
+    const my = mapY(ship.pos.y);
     ctx.fillStyle = ship.side === 'player' ? COLOR_PLAYER : COLOR_ENEMY;
     ctx.fillRect(mx - 2, my - 2, 4, 4);
   }
@@ -719,8 +749,8 @@ export function drawMinimap(ctx, world, size) {
   for (const ac of world.aircraft) {
     if (!ac.alive) continue;
     if (ac.side === 'enemy' && !ac.detected) continue;
-    const mx = ac.pos.x / WORLD_SIZE * w;
-    const my = ac.pos.y / WORLD_SIZE * h;
+    const mx = mapX(ac.pos.x);
+    const my = mapY(ac.pos.y);
     ctx.fillStyle = ac.side === 'player' ? COLOR_PLAYER : COLOR_ENEMY;
     ctx.beginPath();
     ctx.arc(mx, my, 2, 0, Math.PI * 2);
@@ -729,12 +759,12 @@ export function drawMinimap(ctx, world, size) {
 
   // Viewport rectangle in magenta.
   const cam = world.camera;
-  const baseW = w / WORLD_SIZE;
-  const baseH = h / WORLD_SIZE;
+  const baseW = w / (extent.xMax - extent.xMin);
+  const baseH = h / (extent.yMax - extent.yMin);
   const sw = size.width / (baseW * cam.zoom);
   const sh = size.height / (baseH * cam.zoom);
-  const rx = (cam.center.x - sw / 2) * baseW;
-  const ry = (cam.center.y - sh / 2) * baseH;
+  const rx = mapX(cam.center.x - sw / 2);
+  const ry = mapY(cam.center.y - sh / 2);
   const rw = sw * baseW;
   const rh = sh * baseH;
   ctx.save();
