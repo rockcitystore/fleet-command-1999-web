@@ -129,10 +129,11 @@ export function buildLandPolygons(name) {
   const { lat: cLat, lon: cLon, label } = geo;
   const project = makeProjector(cLat, cLon);
 
-  // AO half-span in meters, with a generous margin so real coastlines that
-  // sit beyond the ~200 nmi playable box still render at the map edges (the
-  // original FC99 showed coastline framing the operational area).
-  const halfM = (WORLD_SIZE / 2) * METERS_PER_UNIT * 3.5;
+  // AO half-span in meters. Must stay large enough that every theater retains
+  // its real coastline (Norwegian Sea / Spratly dropped to ~0 vertices below
+  // ~3x). 3.2x keeps all theaters framed while sitting a touch tighter than the
+  // original 3.5x.
+  const halfM = (WORLD_SIZE / 2) * METERS_PER_UNIT * 3.2;
   const dLat = halfM / 111000;
   const dLon = halfM / (111000 * Math.cos((cLat * Math.PI) / 180));
   const ao = {

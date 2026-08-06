@@ -24,8 +24,12 @@ export const RENDER_OPTIONS = {
   symbolStyle: 'ntds', // 'ntds' | 'simple'
   statusIcons: true,   // show fuel/ordnance status icons on units
 };
-const COLOR_LAND = 'rgba(32, 92, 48, 0.78)';
-const COLOR_LAND_COAST = 'rgba(110, 235, 140, 0.85)';
+// Classic muted military-green land fill / coastline, restored to the original
+// game's look (dark desaturated green, not neon). Opacity is bumped from the
+// original 0.55/0.45 because the real coastline now sits at the map edges as a
+// thin fringe and would otherwise vanish against the dark CIC ocean.
+const COLOR_LAND = 'rgba(24, 70, 42, 0.80)';
+const COLOR_LAND_COAST = 'rgba(72, 156, 98, 0.90)';
 
 const FONT_TRACK = '11px SFMono-Regular, Consolas, monospace';
 
