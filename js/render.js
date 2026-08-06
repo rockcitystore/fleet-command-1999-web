@@ -24,8 +24,8 @@ export const RENDER_OPTIONS = {
   symbolStyle: 'ntds', // 'ntds' | 'simple'
   statusIcons: true,   // show fuel/ordnance status icons on units
 };
-const COLOR_LAND = 'rgba(20, 60, 35, 0.55)';
-const COLOR_LAND_COAST = 'rgba(60, 140, 80, 0.45)';
+const COLOR_LAND = 'rgba(32, 92, 48, 0.78)';
+const COLOR_LAND_COAST = 'rgba(110, 235, 140, 0.85)';
 
 const FONT_TRACK = '11px SFMono-Regular, Consolas, monospace';
 
