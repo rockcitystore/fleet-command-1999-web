@@ -260,7 +260,7 @@ function loop() {
   const msize = { width: dom.map.clientWidth || window.innerWidth, height: dom.map.clientHeight || window.innerHeight };
   drawBattle(game.mapCtx, world, msize);
   const minisize = { width: dom.minimap.clientWidth || MINIMAP_PX, height: dom.minimap.clientHeight || MINIMAP_PX };
-  drawMinimap(game.miniCtx, world, minisize);
+  drawMinimap(game.miniCtx, world, minisize, msize);
   updateHUD(world);
 }
 

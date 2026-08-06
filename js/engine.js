@@ -459,6 +459,14 @@ export function fitCameraToWorld(cam, size, world, margin = 0.12) {
     if (world.geo && Array.isArray(world.geo.nineDash)) {
       for (const p of world.geo.nineDash) consider(p);
     }
+    // Immobile installations (airfields/bases) must also be inside the initial
+    // view, otherwise the player sees an airport floating in empty ocean while
+    // the real coastline that it snapped to sits off-screen.
+    if (Array.isArray(world.ships)) {
+      for (const s of world.ships) {
+        if (s.immobile) consider(s.pos);
+      }
+    }
   }
 
   // Half-extent to display: at least the playable half-box, plus a margin so

@@ -2,7 +2,7 @@
 // Pure drawing only. Imports coordinates/constants from engine.js.
 // Authoritative spec: CONTRACT.md section 2.
 
-import { worldToScreen, screenToWorld, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS, shipAmmo } from './engine.js';
+import { worldToScreen, screenToWorld, scaleFor, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS, shipAmmo } from './engine.js';
 import { getLand } from './terrain.js';
 
 // Colors: matched to the original Fleet Command '99 CIC screenshot.
@@ -699,7 +699,7 @@ function drawLandOnMinimap(ctx, mapX, mapY) {
   ctx.restore();
 }
 
-export function drawMinimap(ctx, world, size) {
+export function drawMinimap(ctx, world, size, mapSize) {
   ctx.fillStyle = 'rgba(2, 11, 20, 0.95)';
   ctx.fillRect(0, 0, size.width, size.height);
 
@@ -733,9 +733,11 @@ export function drawMinimap(ctx, world, size) {
 
   // Faint outline of the original playable box so the operational area is
   // still visually anchored on the overview.
-  ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+  ctx.strokeStyle = 'rgba(255,255,255,0.14)';
   ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
   ctx.strokeRect(mapX(0), mapY(0), mapX(WORLD_SIZE) - mapX(0), mapY(WORLD_SIZE) - mapY(0));
+  ctx.setLineDash([]);
 
   for (const ship of world.ships) {
     if (!ship.alive) continue;
@@ -757,19 +759,36 @@ export function drawMinimap(ctx, world, size) {
     ctx.fill();
   }
 
-  // Viewport rectangle in magenta.
+  // Viewport rectangle in magenta. The rectangle must represent the main map's
+  // current view in world units, remapped through the minimap extent. This
+  // requires the main map viewport size; without it we accidentally used the
+  // minimap dimensions and the rectangle ended up in the wrong place.
   const cam = world.camera;
-  const baseW = w / (extent.xMax - extent.xMin);
-  const baseH = h / (extent.yMax - extent.yMin);
-  const sw = size.width / (baseW * cam.zoom);
-  const sh = size.height / (baseH * cam.zoom);
-  const rx = mapX(cam.center.x - sw / 2);
-  const ry = mapY(cam.center.y - sh / 2);
-  const rw = sw * baseW;
-  const rh = sh * baseH;
+  let rx = mapX(cam.center.x - WORLD_SIZE / 2);
+  let ry = mapY(cam.center.y - WORLD_SIZE / 2);
+  let rw = mapX(cam.center.x + WORLD_SIZE / 2) - rx;
+  let rh = mapY(cam.center.y + WORLD_SIZE / 2) - ry;
+  if (mapSize && mapSize.width > 0 && mapSize.height > 0) {
+    const mapScale = scaleFor(mapSize, cam); // main-map pixels per world unit
+    const halfW = mapSize.width / (2 * mapScale);
+    const halfH = mapSize.height / (2 * mapScale);
+    rx = mapX(cam.center.x - halfW);
+    ry = mapY(cam.center.y - halfH);
+    rw = mapX(cam.center.x + halfW) - rx;
+    rh = mapY(cam.center.y + halfH) - ry;
+  }
   ctx.save();
   ctx.strokeStyle = '#ff00ff';
-  ctx.lineWidth = 1.5;
+  ctx.lineWidth = 2.5;
   ctx.strokeRect(rx, ry, rw, rh);
+  // Small corner ticks so the viewport frame is easy to spot even when it
+  // coincides with the playable-box outline.
+  const tick = Math.min(12, rw * 0.15, rh * 0.15);
+  ctx.beginPath();
+  ctx.moveTo(rx, ry + tick); ctx.lineTo(rx, ry); ctx.lineTo(rx + tick, ry);
+  ctx.moveTo(rx + rw, ry + tick); ctx.lineTo(rx + rw, ry); ctx.lineTo(rx + rw - tick, ry);
+  ctx.moveTo(rx, ry + rh - tick); ctx.lineTo(rx, ry + rh); ctx.lineTo(rx + tick, ry + rh);
+  ctx.moveTo(rx + rw, ry + rh - tick); ctx.lineTo(rx + rw, ry + rh); ctx.lineTo(rx + rw - tick, ry + rh);
+  ctx.stroke();
   ctx.restore();
 }

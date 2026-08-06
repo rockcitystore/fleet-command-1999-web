@@ -66,7 +66,7 @@ world.__selected = [];
 try { buildBattleHUD(document.getElementById('controlbar'), world, { onControlChange() {}, onMenu() {} }); } catch (e) { hudOk = false; console.log('hud threw', e.message); }
 try {
   drawBattle(fakeCtx, world, { width: 900, height: 640 });
-  drawMinimap(fakeCtx, world, { width: 140, height: 140 });
+  drawMinimap(fakeCtx, world, { width: 140, height: 140 }, { width: 900, height: 640 });
   updateHUD(world);
 } catch (e) { drawOk = false; console.log('draw threw', e.message); }
 check('buildMenu/buildBattleHUD/updateHUD/draw* run without throwing', menuOk && hudOk && drawOk);
