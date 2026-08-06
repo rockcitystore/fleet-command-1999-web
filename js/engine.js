@@ -51,6 +51,27 @@ export function distance(a, b) {
 // the spatial-scale caveat.
 export const SHIP_STATS = REAL_SHIP_STATS;
 
+// ---------------------------------------------------------------------------
+// Ammunition magazines.
+// These are [INFERRED] placeholder values, NOT decoded from the original
+// binary. The authentic per-platform loadouts live in platforms.sdb (a
+// platform/loadout database that was NOT among the provided files); the
+// provided mission.db's loadout section is an unparseable padded numeric
+// layout, and launcher.ldb carries only launcher/mount definitions (no
+// magazine counts). The ONLY verified anchor is the user's screenshot of the
+// Wyoming SSBN742 submarine: 65 cm Torpedo = 12 and DM 2A4 Torpedo = 12, so
+// torpedo magazines are set to 12. All other values are reasonable FC99-era
+// magnitudes; they will be replaced by [KNOWN] decoded numbers once
+// platforms.sdb is supplied. Keyed by weapon realName; swap for a
+// per-ship-class table when decoding.
+const INFERRED_MAGAZINE = {
+  'Harpoon': 8, 'Exocet': 6,
+  'SM-1 MR': 16, 'SM-2': 16, 'ESSM': 24,
+  '65 cm Torpedo': 12, 'DM 2A4 Torpedo': 12,
+  'RBU Rocket': 12, 'Depth Charge': 12,
+  'MR Shell': 400, 'LR Shell': 600, 'SR Shell': 300,
+};
+
 // SHIP_STATS carries REAL max speeds in knots (maxSpeedKts). Convert them to
 // world units per game-second so movement stays consistent with the scale bar.
 for (const key of Object.keys(SHIP_STATS)) {
@@ -317,20 +338,19 @@ export class World {
     return true;
   }
 
+  // Ammunition magazines are assigned by INFERRED_MAGAZINE (module-level);
+  // see its declaration for the [INFERRED] vs [KNOWN] provenance note.
+
   addShip(side, shipClass, pos, depth) {
     const stat = SHIP_STATS[shipClass];
     const d = depth !== undefined ? depth : stat.defaultDepth;
     const id = this.nextId++;
 
-    // Cosmetic ammo counts for the info panel (deterministic per ship/weapon).
-    const weapons = stat.weapons.map((w, idx) => {
-      const h = ((id * 37 + idx * 13) ^ 0x9e3779b9) >>> 0;
-      let count;
-      if (w.type === 'gun') count = 400 + (h % 5601);
-      else if (w.type === 'missile') count = 4 + (h % 45);
-      else if (w.type === 'torpedo') count = 4 + (h % 21);
-      else if (w.type === 'asroc' || w.type === 'depthCharge') count = 8 + (h % 25);
-      else count = 10 + (h % 50);
+    // Deterministic, class-appropriate magazine sizes (see INFERRED_MAGAZINE
+    // above). Replaces the old per-type RANDOM generation so ammo is stable
+    // and matches FC99-era magnitudes instead of e.g. 400-5960 random shells.
+    const weapons = stat.weapons.map((w) => {
+      const count = INFERRED_MAGAZINE[w.realName] ?? 10;
       return { ...w, count, magMax: count };
     });
 
