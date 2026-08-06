@@ -255,6 +255,19 @@ export class World {
       fuel: st.maxFuel,
       maxFuel: st.maxFuel,
       sensorRange: st.sensorRange,
+      // Aircrew sensors: radar (sees air + low surface) + ESM; helos also dip
+      // sonar to hunt subs — this is how CAP finds bandits and ASW finds boats.
+      sensors:
+        st.category === 'helo'
+          ? [
+              { kind: 'airRadar', range: Math.round(st.sensorRange * 0.7) },
+              { kind: 'activeSonar', range: 160 },
+              { kind: 'esm', range: Math.round(st.sensorRange * 0.5) },
+            ]
+          : [
+              { kind: 'airRadar', range: st.sensorRange },
+              { kind: 'esm', range: Math.round(st.sensorRange * 0.6) },
+            ],
       weapon: st.weapon ? { ...st.weapon } : null,
       ordnance: st.ordnance || 0,
       ordnanceMax: st.ordnance || 0,
@@ -334,7 +347,10 @@ export class World {
       depth: d,
       targetDepth: d,
       sensorRange: stat.sensorRange,
+      sensors: stat.sensors ? stat.sensors.map((x) => ({ ...x })) : [{ kind: 'surfaceRadar', range: stat.sensorRange }],
       detected: false,
+      chaff: stat.isSub ? 0 : 6, // soft-kill decoys (subs carry none)
+      _lastFireTime: -999,
       weapons,
       cooldowns: {},
       targetId: null,
@@ -624,6 +640,32 @@ export function nearestEnemy(ship, world) {
   return best;
 }
 
+function nearestFriendly(ship, world) {
+  let best = undefined;
+  let bd = Infinity;
+  for (const o of world.ships) {
+    if (!o.alive || o === ship || o.side !== ship.side) continue;
+    const d = distance(ship.pos, o.pos);
+    if (d < bd) { bd = d; best = o; }
+  }
+  return best;
+}
+
+function nearestCapital(ship, world) {
+  let best = undefined;
+  let bd = Infinity;
+  for (const o of world.ships) {
+    if (!o.alive || o.side !== ship.side) continue;
+    const capital =
+      o.shipClass === 'carrier' || o.shipClass === 'battleship' ||
+      o.shipClass === 'cruiser' || o.immobile;
+    if (!capital) continue;
+    const d = distance(ship.pos, o.pos);
+    if (d < bd) { bd = d; best = o; }
+  }
+  return best;
+}
+
 // Nearest enemy SHIP within `range` of a source unit (used by airborne
 // aircraft to find targets for their ordnance). Returns the ship or null.
 export function nearestEnemyShipInRange(src, world, range) {
@@ -681,8 +723,9 @@ export function updateMovement(world, dt) {
     if (order && order.kind === 'attack') {
       const t = world.ship(order.targetId);
       if (t && t.alive) {
-        const maxR = Math.max(...s.weapons.map((w) => w.range));
-        const standoff = maxR * 0.85;
+        // AI sets a role-appropriate stand-off (missileers far, ASW close);
+        // fall back to 85% of max weapon range.
+        const standoff = s._standoff != null ? s._standoff : Math.max(...s.weapons.map((w) => w.range)) * 0.85;
         const d = distance(s.pos, t.pos) || 1e-9;
         const dir = { x: (t.pos.x - s.pos.x) / d, y: (t.pos.y - s.pos.y) / d };
         goal = { x: t.pos.x - dir.x * standoff, y: t.pos.y - dir.y * standoff };
@@ -697,7 +740,22 @@ export function updateMovement(world, dt) {
         goal = res.goal;
         desired = res.speed;
       }
+    } else if (order && order.kind === 'formation') {
+      // Escort screens its capital ship instead of wandering or stacking.
+      const guide = nearestCapital(s, world) || nearestFriendly(s, world);
+      if (guide) {
+        const ang = (s.id * 2.3999632) % (Math.PI * 2); // golden-angle ring
+        const r = 260 + (s.id % 4) * 110;
+        const gx = guide.pos.x + Math.cos(ang) * r;
+        const gy = guide.pos.y + Math.sin(ang) * r;
+        const gd = distance(s.pos, { x: gx, y: gy });
+        if (gd > 14) { goal = { x: gx, y: gy }; desired = s.maxSpeed * 0.6; }
+        else desired = 0;
+      }
     }
+
+    // Mission kill (FC99-style casualty): a crippled hull limps at 30% speed.
+    if (s.hp <= 0.2 * s.maxHp) desired = Math.min(desired, s.maxSpeed * 0.3);
 
     // depth approach
     if (s.depth < s.targetDepth) s.depth = Math.min(s.targetDepth, s.depth + 30 * dt);
@@ -752,11 +810,60 @@ export function updateMovement(world, dt) {
   }
 }
 
-// Detection is mutual across ALL contacts (ships + airborne aircraft). A
-// contact is detected if any opposing, alive contact's sensor reaches it. The
-// submarine depth factor only applies to the DETECTOR when it is submerged.
-function sensorFactor(o) {
-  return o.depth != null && o.depth < 0 ? Math.max(0.3, 1 + o.depth / 300) : 1;
+// ---------------------------------------------------------------------------
+// Detection — FC99 first principle.
+// A contact is detected only when an OPPOSING sensor of the matching KIND can
+// physically reach it. Sensors are type- and depth-aware:
+//   * airRadar     -> sees AIR contacts (long range)
+//   * surfaceRadar -> sees SURFACE ships (and low-flying air, reduced)
+//   * passiveSonar -> hears SUBS (and noisy surface screws at short range)
+//   * activeSonar  -> pings SUBS + SURFACE (reveals the pinger's position)
+//   * esm          -> passively hears RADAR EMITTERS (surface ships/aircraft);
+//                     a silent submerged sub emits nothing, so ESM can't see it
+//   * visual       -> all-round, very short
+// A submerged platform has its masts down: radar/ESM/visual are blind, only
+// sonar works. That is why subs are the fog-of-war in this sim.
+// ---------------------------------------------------------------------------
+export function contactDomain(c) {
+  if (c.kind === 'aircraft') return 'air';
+  if (c.alt != null && c.alt > 40) return 'air';
+  if (c.depth != null && c.depth < -5) return 'sub';
+  return 'surface';
+}
+
+function detectorBlindAtDepth(P) {
+  return P.depth != null && P.depth < -5;
+}
+
+export function sensorCanSee(P, C) {
+  const dom = contactDomain(C);
+  const d = distance(P.pos, C.pos);
+  const detectorSubmerged = detectorBlindAtDepth(P);
+  for (const s of P.sensors || []) {
+    // Masts down: no radar/ESM/visual while deep.
+    if (detectorSubmerged && s.kind !== 'passiveSonar' && s.kind !== 'activeSonar') continue;
+    if (s.kind === 'airRadar') {
+      if (dom === 'air' && d <= s.range) return true;
+    } else if (s.kind === 'surfaceRadar') {
+      if (dom === 'surface' && d <= s.range) return true;
+      if (dom === 'air' && C.alt != null && C.alt < 200 && d <= s.range * 0.5) return true;
+    } else if (s.kind === 'passiveSonar') {
+      if (dom === 'sub') {
+        const r = C.depth != null && C.depth > -40 ? s.range : s.range * 0.6;
+        if (d <= r) return true;
+      } else if (dom === 'surface') {
+        if (d <= s.range * 0.4) return true; // screw noise
+      }
+    } else if (s.kind === 'activeSonar') {
+      if ((dom === 'sub' || dom === 'surface') && d <= s.range) return true; // pings
+    } else if (s.kind === 'esm') {
+      // Emitters only: surface ships (radar on) and aircraft. Quiet subs = silent.
+      if ((dom === 'surface' || dom === 'air') && d <= s.range) return true;
+    } else if (s.kind === 'visual') {
+      if (d <= Math.min(s.range, 200)) return true;
+    }
+  }
+  return false;
 }
 
 export function updateDetection(world) {
@@ -764,15 +871,18 @@ export function updateDetection(world) {
   for (const s of world.ships) if (s.alive) contacts.push(s);
   for (const a of world.aircraft) if (a.alive) contacts.push(a);
   for (const c of contacts) {
-    let detected = false;
+    let byPlayer = false;
+    let byEnemy = false;
     for (const o of contacts) {
-      if (!o.alive || o.side === c.side) continue;
-      if (distance(c.pos, o.pos) <= o.sensorRange * sensorFactor(o)) {
-        detected = true;
-        break;
-      }
+      if (!o.alive) continue;
+      if (o.side === 'player' && sensorCanSee(o, c)) byPlayer = true;
+      if (o.side === 'enemy' && sensorCanSee(o, c)) byEnemy = true;
     }
-    c.detected = detected;
+    // `detected` keeps meaning "the PLAYER side can see this" (drives rendering
+    // and the fog-of-war). `seenByEnemy` lets the AI only shoot at contacts its
+    // own sensors have actually found — FC99 never fires blind.
+    c.detected = byPlayer;
+    c.seenByEnemy = byEnemy;
   }
 }
 
@@ -842,18 +952,50 @@ export function updateWeapons(world, dt) {
     for (const w of s.weapons) {
       let cd = s.cooldowns[w.type] || 0;
       cd -= dt;
-      if (cd <= 0) {
-        cd = 0;
-        const target = s.targetId != null ? world.ship(s.targetId) : nearestEnemy(s, world);
-        if (target && target.alive) {
-          const d = distance(s.pos, target.pos);
-          if (d <= w.range && target.depth >= w.minDepth - 5 && target.depth <= w.maxDepth + 5) {
-            spawnProjectile(world, s, target, w);
-            // Burn a magazine round so the ship's ammo icon reflects reality.
-            if (w.count > 0) w.count -= 1;
-            cd = w.cooldown;
+      if (cd > 0) { s.cooldowns[w.type] = cd; continue; }
+      cd = 0;
+
+      const domains = w.targets || ['surface'];
+      const sees = (e) => (s.side === 'player' ? e.detected : e.seenByEnemy);
+      const candidates = [];
+
+      // Enemy ships/subs of a domain this weapon can hit — only ones OUR side
+      // has actually detected (no firing at ghosts).
+      for (const e of world.ships) {
+        if (!e.alive || e.side === s.side) continue;
+        if (!sees(e)) continue;
+        if (domains.includes(contactDomain(e)) && distance(s.pos, e.pos) <= w.range) {
+          candidates.push(e);
+        }
+      }
+      // Enemy aircraft (guns/SAMs).
+      if (domains.includes('air')) {
+        for (const a of world.aircraft) {
+          if (a.alive && a.side !== s.side && sees(a) && distance(s.pos, a.pos) <= w.range) {
+            candidates.push(a);
           }
         }
+      }
+      // Air-defence battery can also intercept INCOMING enemy missiles/torpedoes.
+      // An inbound round is, by definition, detected (you watch it come), so it
+      // is NOT subject to the sees() gate above.
+      if (w.canIntercept) {
+        for (const p of world.projectiles) {
+          if (p.side !== s.side && (p.type === 'missile' || p.type === 'torpedo') && !p.dead) {
+            if (distance(s.pos, p.pos) <= w.range) candidates.push(p);
+          }
+        }
+      }
+
+      if (candidates.length) {
+        // Nearest valid target; SAMs prefer the closest inbound threat.
+        candidates.sort((a, b) => distance(s.pos, a.pos) - distance(s.pos, b.pos));
+        const tgt = candidates[0];
+        spawnProjectile(world, s, tgt, w);
+        if (w.count > 0) w.count -= 1;
+        cd = w.cooldown;
+        // Submarines mark their last torpedo launch so the AI can evade after.
+        if (s.isSub && w.type === 'torpedo') s._lastFireTime = world.time;
       }
       s.cooldowns[w.type] = cd;
     }
@@ -863,18 +1005,35 @@ export function updateWeapons(world, dt) {
 export function updateProjectiles(world, dt) {
   const remaining = [];
   for (const p of world.projectiles) {
+    if (p.dead) continue;
     p.lifetime += dt;
     if (p.lifetime > p.maxLifetime) continue;
 
-    const target = world.ship(p.targetId);
-    if (!target || !target.alive) continue;
+    // Target may be a ship/aircraft OR an incoming projectile being intercepted.
+    const tgtShip = world.ship(p.targetId);
+    const tgtProj = tgtShip ? null : world.projectiles.find((q) => q.id === p.targetId && !q.dead);
+    const target = tgtShip || tgtProj;
+    if (!target) continue;
 
     const dx = target.pos.x - p.pos.x;
     const dy = target.pos.y - p.pos.y;
     const d = Math.hypot(dx, dy);
     const step = p.speed * dt;
+    const hitR = (target.radius || 6) + (tgtProj ? 6 : 0);
 
-    if (d <= step + target.radius) {
+    if (d <= step + hitR) {
+      if (tgtProj) {
+        // SAM/CIWS kill the incoming round. Both are destroyed.
+        tgtProj.dead = true;
+        p.dead = true;
+        continue;
+      }
+      // Anti-ship missile vs a ship: chaff may decoy it (soft kill).
+      if (p.type === 'missile' && target.chaff > 0 && world.rand() < 0.5) {
+        target.chaff -= 1;
+        p.dead = true;
+        continue;
+      }
       // Impact: accuracy falls with stand-off distance at launch.
       const accuracy = Math.max(0.3, 1 - (p.originDist / Math.max(p.range, 1)) * 0.6);
       if (world.rand() <= accuracy) {
@@ -882,6 +1041,7 @@ export function updateProjectiles(world, dt) {
         target.hp -= dmg;
         if (target.hp <= 0) target.alive = false;
       }
+      p.dead = true;
       continue;
     }
 
@@ -893,7 +1053,8 @@ export function updateProjectiles(world, dt) {
     if (p.trail.length > 12) p.trail.shift();
     remaining.push(p);
   }
-  world.projectiles = remaining;
+  // Drop dead rounds (intercepted / decoyed / spent).
+  world.projectiles = remaining.filter((p) => !p.dead);
 }
 
 export function updateAircraft(world, dt) {
@@ -1019,20 +1180,70 @@ export function updateAI(world, dt) {
       if (launched) s._lastLaunch = world.time;
     }
   }
+
   for (const s of world.ships) {
     if (!s.alive || s.side !== 'enemy') continue;
-    const cur = s.targetId != null ? world.ship(s.targetId) : undefined;
-    if (!cur || !cur.alive) {
-      const t = nearestEnemy(s, world);
-      if (t) {
-        s.targetId = t.id;
+
+    const foes = world.ships.filter((e) => e.alive && e.side !== s.side);
+    const enemySubs = foes.filter((e) => contactDomain(e) === 'sub');
+    const enemySurf = foes.filter((e) => contactDomain(e) === 'surface');
+    const enemyAir = world.aircraft.filter((a) => a.alive && a.side !== s.side);
+
+    // ---- SUBMARINE doctrine -------------------------------------------------
+    if (s.isSub) {
+      const t = enemySurf[0] || foes[0];
+      if (!t) { s.targetId = null; s.targetDepth = s.defaultDepth; s.order = null; continue; }
+      s.targetId = t.id;
+      const torp = s.weapons.find((w) => w.type === 'torpedo');
+      const d = distance(s.pos, t.pos);
+      const evading = s._lastFireTime != null && world.time - s._lastFireTime < 20;
+      if (evading) {
+        // Snake away from the last target after shooting.
+        s.targetDepth = -200;
+        const ax = s.pos.x + (s.pos.x - t.pos.x);
+        const ay = s.pos.y + (s.pos.y - t.pos.y);
+        s.order = { kind: 'moveTo', waypoints: [{ x: ax, y: ay, speed: s.maxSpeed }] };
+      } else if (torp && d <= torp.range * 0.9) {
+        s.targetDepth = -15; // rise to periscope depth to fire
         s.order = { kind: 'attack', targetId: t.id };
       } else {
-        s.targetId = null;
+        s.targetDepth = s.defaultDepth; // stay deep while stalking
+        s.order = { kind: 'attack', targetId: t.id };
       }
+      continue;
     }
-    if (s.isSub && s.targetId == null) {
-      s.targetDepth = -160;
+
+    // ---- SURFACE doctrine ---------------------------------------------------
+    const missile = s.weapons.find((w) => w.type === 'missile');
+    const asw = s.weapons.find((w) => w.type === 'torpedo' || w.type === 'asroc' || w.type === 'depthCharge');
+
+    let target = null;
+    let standoff = 300;
+    if (asw && enemySubs.length) {
+      // ASW hunter closes to put the sub inside torpedo/ASROC range.
+      target = enemySubs[0];
+      standoff = Math.min(asw.range * 0.85, 360);
+    } else if (missile && enemySurf.length) {
+      // Missile ship is a STAND-OFF shooter: lob from max range, never close.
+      target = enemySurf[0];
+      standoff = missile.range * 0.9;
+    } else if (enemySurf.length) {
+      target = enemySurf[0];
+      standoff = 300; // gunner closes a little
+    } else if (enemyAir.length && s.weapons.some((w) => w.canIntercept)) {
+      // Nothing to shoot at but bandits overhead — the SAM battery just holds
+      // station (it auto-fires via updateWeapons) and keeps formation.
+      target = null;
+    }
+
+    if (target) {
+      s.targetId = target.id;
+      s._standoff = standoff;
+      s.order = { kind: 'attack', targetId: target.id };
+    } else {
+      // Idle: hold formation station around the nearest friendly capital ship.
+      s.targetId = null;
+      s.order = { kind: 'formation' };
     }
   }
 }

@@ -139,6 +139,19 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
   const w = (name, damage, cooldown, note) => {
     const raw = R(name);
     const isUnderwater = raw.type === 'torpedo' || raw.type === 'asroc' || raw.type === 'depthCharge';
+    // FC99 firing doctrine: which target DOMAINS this weapon may engage.
+    //   torpedo  -> surface + sub      missile -> surface only (anti-ship)
+    //   gun      -> surface + air       asroc/depthCharge -> sub only
+    const targetsByType = {
+      torpedo: ['surface', 'sub'],
+      missile: ['surface'],
+      gun: ['surface', 'air'],
+      asroc: ['sub'],
+      depthCharge: ['sub'],
+    };
+    // Surface-to-air missiles act as the air-defence battery and can also
+    // intercept incoming enemy aircraft and anti-ship missiles.
+    const isSAM = raw.type === 'missile' && /SM-|ESSM|Sea Sparrow|Sparrow/i.test(name);
     return {
       type: raw.type,
       range: rg(name),
@@ -148,6 +161,8 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
       maxDepth: isUnderwater ? 0 : 0,
       realName: name,
       note,
+      targets: targetsByType[raw.type] || ['surface'],
+      canIntercept: !!isSAM,
     };
   };
 
@@ -270,6 +285,41 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
 
 // Pre-built for the default 4000-unit world.
 export const REAL_SHIP_STATS = buildRealShipStats(4000);
+
+// ---------------------------------------------------------------------------
+// Sensor suites (FC99 first principle: detection is TYPE- and DEPTH-aware).
+// Each platform carries a set of sensors; a contact is detected only when an
+// opposing sensor of the matching KIND can reach it. A submerged platform has
+// its masts down, so radar/ESM/visual go blind — only sonar works.
+// ---------------------------------------------------------------------------
+function sensorKindFromName(name) {
+  if (/Son|buoy/i.test(name)) return /Pas/i.test(name) ? 'passiveSonar' : 'activeSonar';
+  if (/ESM/i.test(name)) return 'esm';
+  if (/AEW|A\/C Radar|Air Radar/i.test(name)) return 'airRadar';
+  if (/Surf|Surface/i.test(name)) return 'surfaceRadar';
+  return 'surfaceRadar';
+}
+
+// Real sensor names (from sensors.sdb) assigned to each web class.
+const SHIP_SENSOR_KINDS = {
+  destroyer:   ['Ship Surf Radar(MR)', 'Ship Air Radar (MR)', 'HF Pas Son', 'MF Act Son', 'Surf ESM'],
+  frigate:     ['Ship Surf Radar(SR)', 'Ship Air Radar (SR)', 'HF Pas Son', 'HF Act Son', 'Surf ESM'],
+  cruiser:     ['Ship Surf Radar(MR)', 'Ship Air Radar (LR)', 'LF Pas Son', 'MF Act Son', 'Surf ESM'],
+  battleship:  ['Ship Surf Radar(MR)', 'Ship Air Radar (MR)', 'HF Pas Son', 'Surf ESM'],
+  carrier:     ['AEW Radar (LR)', 'Ship Surf Radar(MR)', 'LF Pas Son', 'Surf ESM'],
+  installation:['Ship Air Radar (LR)', 'Ship Surf Radar(MR)', 'Surf ESM'],
+  submarine:   ['LF Pas Son', 'MF Act Son'], // no radar/ESM — submerged blind to surface
+};
+
+for (const [cls, stat] of Object.entries(REAL_SHIP_STATS)) {
+  const kinds = SHIP_SENSOR_KINDS[cls] || ['Ship Surf Radar(MR)'];
+  stat.sensors = kinds.map((name) => ({
+    kind: sensorKindFromName(name),
+    range: sensorToUnits(REAL_SENSORS_RAW[name]),
+  }));
+  // Visual (short, all-round) layered on top of the emission/reflection suites.
+  stat.sensors.push({ kind: 'visual', range: 180 });
+}
 
 // Backward-compatible alias for consumers that expect a scalar list.
 export const REAL_WEAPON_RANGE_M = {

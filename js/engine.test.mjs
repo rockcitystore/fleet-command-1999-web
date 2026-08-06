@@ -352,6 +352,9 @@ function check(cond, msg) {
   player.targetId = enemy.id;
   enemy.targetId = player.id;
   w.combatStarted = true;
+  // Detection is now gated: a ship only fires at contacts its own sensors have
+  // found, so establish mutual detection before stepping the weapons system.
+  E.updateDetection(w);
 
   const before = E.shipAmmo(player);
   check(before.total > 0, `ship starts with a magazine (total=${before.total})`);
