@@ -4,7 +4,7 @@
 
 import { REAL_PLACEMENTS } from './realdata.js';
 import { REAL_SHIP_STATS } from './realstats.js';
-import { isPointOnLand, snapToSea, setLand } from './terrain.js';
+import { isPointOnLand, snapToSea, snapToLand, setLand } from './terrain.js';
 import { buildLandPolygons } from './geo.js';
 
 export const WORLD_SIZE = 4000;
@@ -1016,12 +1016,18 @@ export const SCENARIOS = [
   { name: 'Hair Trigger', brief: 'Defend against long-range cruise missile attacks and diesel submarine torpedoes. CVBG deployed in the Eastern Mediterranean.' },
 ];
 
-// Nudge any unit that spawned on land out to the nearest sea point so players
-// never start stuck inside a coastline.
-function ensureShipsAtSea(world) {
+// Ensure every unit spawns on the correct terrain: ships at sea, immobile
+// installations (airfields/bases) on land.
+function ensureSpawnPositions(world) {
   const seaRef = { x: WORLD_SIZE / 2, y: WORLD_SIZE / 2 };
   for (const s of world.ships) {
-    if (isPointOnLand(s.pos.x, s.pos.y)) {
+    if (s.immobile) {
+      if (!isPointOnLand(s.pos.x, s.pos.y)) {
+        const safe = snapToLand(s.pos);
+        s.pos.x = safe.x;
+        s.pos.y = safe.y;
+      }
+    } else if (isPointOnLand(s.pos.x, s.pos.y)) {
       const safe = snapToSea(s.pos, seaRef);
       s.pos.x = safe.x;
       s.pos.y = safe.y;
@@ -1085,7 +1091,7 @@ export function makeWorld(index) {
     w.addShip('enemy', 'submarine', { x: 3300, y: 2600 }, -150);
   }
 
-  ensureShipsAtSea(w);
+  ensureSpawnPositions(w);
   return w;
 }
 
@@ -1126,7 +1132,7 @@ export function makeCustomWorld(opts = {}) {
   w.geo = { lat: land.centerLat, lon: land.centerLon, label: land.label, nineDash: land.nineDash };
   w.land = land.polygons;
   setLand(land.polygons);
-  ensureShipsAtSea(w);
+  ensureSpawnPositions(w);
   return w;
 }
 

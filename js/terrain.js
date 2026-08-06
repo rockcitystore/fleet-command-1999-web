@@ -60,3 +60,40 @@ export function snapToSea(pos, from, steps = 12) {
   }
   return { x: from.x, y: from.y };
 }
+
+function closestPointOnSegment(px, py, ax, ay, bx, by) {
+  const abx = bx - ax, aby = by - ay;
+  const denom = abx * abx + aby * aby;
+  if (denom === 0) return { x: ax, y: ay };
+  let t = ((px - ax) * abx + (py - ay) * aby) / denom;
+  t = Math.max(0, Math.min(1, t));
+  return { x: ax + abx * t, y: ay + aby * t };
+}
+
+// Move a position onto the nearest land coastline and nudge it slightly inward
+// so immobile bases (airfields/installations) end up unambiguously on solid
+// ground, not hovering on the coastline edge.
+export function snapToLand(pos) {
+  let best = null;
+  let bestDist = Infinity;
+  for (const poly of LAND_POLYGONS) {
+    const pts = poly.pts;
+    for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+      const a = pts[j], b = pts[i];
+      const cp = closestPointOnSegment(pos.x, pos.y, a.x, a.y, b.x, b.y);
+      const dx = cp.x - pos.x, dy = cp.y - pos.y;
+      const d = dx * dx + dy * dy;
+      if (d < bestDist) {
+        bestDist = d;
+        best = cp;
+      }
+    }
+  }
+  if (!best) return { x: pos.x, y: pos.y };
+  const dx = best.x - pos.x, dy = best.y - pos.y;
+  const len = Math.hypot(dx, dy);
+  if (len === 0) return best;
+  // Nudge ~2 world units (≈185 m) inland, along the vector from sea to coast.
+  const nudge = 2.0;
+  return { x: best.x + (dx / len) * nudge, y: best.y + (dy / len) * nudge };
+}
