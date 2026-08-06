@@ -661,9 +661,10 @@ function drawLand(ctx, world, size) {
   ctx.strokeStyle = COLOR_LAND_COAST;
   ctx.lineWidth = 1;
   for (const poly of land) {
+    const pts = poly.pts || poly;
     ctx.beginPath();
-    for (let i = 0; i < poly.length; i++) {
-      const sp = worldToScreen(poly[i], size, world.camera);
+    for (let i = 0; i < pts.length; i++) {
+      const sp = worldToScreen(pts[i], size, world.camera);
       if (i === 0) ctx.moveTo(sp.x, sp.y);
       else ctx.lineTo(sp.x, sp.y);
     }
@@ -682,9 +683,10 @@ function drawLandOnMinimap(ctx, w, h) {
   ctx.strokeStyle = COLOR_LAND_COAST;
   ctx.lineWidth = 1;
   for (const poly of land) {
+    const pts = poly.pts || poly;
     ctx.beginPath();
-    for (let i = 0; i < poly.length; i++) {
-      const p = poly[i];
+    for (let i = 0; i < pts.length; i++) {
+      const p = pts[i];
       const x = p.x / WORLD_SIZE * w;
       const y = p.y / WORLD_SIZE * h;
       if (i === 0) ctx.moveTo(x, y);
