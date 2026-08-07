@@ -422,40 +422,43 @@ html, body {
 }
 
 #map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: calc(var(--bottom-h, 224px) + var(--bar-h, 42px));
-  width: 100%;
-  height: auto;
   display: block;
   background: #04121f;
   touch-action: none;
 }
 
-/* 3D (WebGL) main battle view — overlays the 2D map; shown in 3D mode. */
+/* 3D (WebGL) battle view — shown in 3D mode, placed via .main-slot/.panel3-slot. */
 #map3d {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: calc(var(--bottom-h, 224px) + var(--bar-h, 42px));
-  width: 100%;
-  height: auto;
   display: block;
   background: #04121f;
   touch-action: none;
   z-index: 5;
 }
 
-/* 2D tactical top-down inside the bottom TACTICAL MAP panel (3D mode). */
+/* 2D tactical top-down — placed via .main-slot (main screen) or
+   .panel3-slot (bottom TACTICAL MAP panel) depending on the SWAP toggle. */
 #map2d {
-  width: 100%;
-  height: 100%;
   display: block;
   background: #04121f;
   touch-action: none;
+}
+
+/* Slot classes drive which container a battle canvas fills. They are toggled by
+   the SWAP button, which exchanges the main screen and the bottom-centre panel. */
+.main-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--bottom-h, 224px) + var(--bar-h, 42px));
+  width: 100%;
+  height: auto;
+}
+.panel3-slot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Bottom three-panel CIC strip */

@@ -38,6 +38,9 @@ const game = {
   detachInput3d: null,
   scene3d: null,
   renderMode: '3d', // '3d' = WebGL perspective main view; '2d' = legacy flat map
+  swapped: false,   // when true, main screen shows the 2D tactical map and the
+                    // bottom-centre panel shows the primary (3D/2D) view.
+  detachInput2dTac: null, // input for the big tactical map when swapped
   mapCtx: null,
   miniCtx: null,
   map2dCtx: null,
@@ -87,9 +90,11 @@ function fitCanvas(canvas, ctx, cssW, cssH) {
 }
 
 function resizeCanvases() {
-  const mw = dom.map.clientWidth || window.innerWidth;
-  const mh = dom.map.clientHeight || window.innerHeight;
-  if (game.mapCtx) fitCanvas(dom.map, game.mapCtx, mw, mh);
+  // The 3D renderer is sized from whichever canvas currently holds it
+  // (#map3d), which is in the bottom panel when SWAP is active.
+  const mw = dom.map3d.clientWidth || dom.map.clientWidth || window.innerWidth;
+  const mh = dom.map3d.clientHeight || dom.map.clientHeight || window.innerHeight;
+  if (game.mapCtx) fitCanvas(dom.map, game.mapCtx, dom.map.clientWidth || mw, dom.map.clientHeight || mh);
   if (game.scene3d) game.scene3d.resize(mw, mh);
   const miniW = dom.minimap.clientWidth || MINIMAP_PX;
   const miniH = dom.minimap.clientHeight || MINIMAP_PX;
@@ -100,14 +105,58 @@ function resizeCanvases() {
 }
 
 // Toggle canvas visibility to match the active render mode, and label the
-// 2D/3D control-bar button.
+// 2D/3D control-bar button. The 2D tactical map is always shown when SWAP is
+// active (it becomes the main view); otherwise only in 3D mode.
 function applyRenderModeVisibility() {
   const is3d = game.renderMode === '3d';
   if (dom.map) dom.map.classList.toggle('hidden', is3d);
   if (dom.map3d) dom.map3d.classList.toggle('hidden', !is3d);
-  if (dom.map2d) dom.map2d.classList.toggle('hidden', !is3d);
+  if (dom.map2d) dom.map2d.classList.toggle('hidden', !(is3d || game.swapped));
   const vb = document.getElementById('btn-viewmode');
   if (vb) vb.textContent = is3d ? '3D' : '2D';
+}
+
+// Reparent the battle canvases so the main screen and the bottom-centre
+// TACTICAL MAP panel swap contents. Driven by game.swapped.
+function applySwapLayout() {
+  const main = dom.screenBattle;
+  const panel = document.getElementById('panel-3d');
+  if (!panel) return;
+  const move = (el, parent, slot) => {
+    if (!el) return;
+    if (el.parentElement !== parent) parent.appendChild(el);
+    el.classList.toggle('main-slot', slot === 'main');
+    el.classList.toggle('panel3-slot', slot === 'panel');
+  };
+  if (game.swapped) {
+    move(dom.map2d, main, 'main');    // tactical map -> main screen
+    move(dom.map3d, panel, 'panel');  // 3D -> bottom-centre panel
+    move(dom.map, panel, 'panel');    // flat 2D -> bottom-centre panel
+  } else {
+    move(dom.map3d, main, 'main');    // 3D -> main screen
+    move(dom.map, main, 'main');      // flat 2D -> main screen
+    move(dom.map2d, panel, 'panel');  // tactical map -> bottom-centre panel
+  }
+}
+
+// When SWAP is active in 3D mode, the big 2D tactical map becomes the
+// authoritative camera and the small 3D view follows it. Attach the unified
+// 2D input (with its right-click context menu) to that canvas.
+function refreshViewInput() {
+  if (game.detachInput2dTac) { game.detachInput2dTac(); game.detachInput2dTac = null; }
+  const wantTacInput = game.swapped && game.renderMode === '3d' && game.world && game.map2dCtx;
+  if (wantTacInput) {
+    game.detachInput2dTac = attachInput(dom.map2d, game.world, game.world.__handlers);
+  }
+}
+
+function setSwapped(on) {
+  if (game.swapped === !!on) return;
+  game.swapped = !!on;
+  applySwapLayout();
+  applyRenderModeVisibility();
+  refreshViewInput();
+  resizeCanvases();
 }
 
 // --- Screen switching ---
@@ -275,6 +324,9 @@ function mountBattle(world) {
     game.detachInput = attachInput(dom.map, world, handlers);
   }
 
+  applySwapLayout();
+  applyRenderModeVisibility();
+  refreshViewInput();
   resizeCanvases();
   game.world = world;
   if (!game.rafId) loop();
@@ -321,6 +373,9 @@ function toggleViewMode() {
     fitCameraToWorld(world.camera, { width: dom.map.clientWidth, height: dom.map.clientHeight }, world);
     game.detachInput = attachInput(dom.map, world, handlers);
   }
+  applySwapLayout();
+  applyRenderModeVisibility();
+  refreshViewInput();
   resizeCanvases();
 }
 
@@ -336,11 +391,23 @@ function loop() {
   const msize = { width: dom.map.clientWidth || window.innerWidth, height: dom.map.clientHeight || window.innerHeight };
 
   if (game.renderMode === '3d' && game.scene3d) {
-    // Keep the bottom 2D top-down + minimap camera synced to the 3D camera.
-    world.camera.center.x = game.scene3d.target.x;
-    world.camera.center.y = game.scene3d.target.z;
-    world.camera.zoom = game.scene3d.topDownZoom(msize.height);
-    game.scene3d.render(world);
+    if (game.swapped) {
+      // SWAP: the big 2D tactical map (now main) is authoritative — its own
+      // input drives world.camera, and the small 3D view in the bottom-centre
+      // panel mirrors it.
+      const threeH = dom.map3d.clientHeight || msize.height;
+      const fov = (game.scene3d.camera.fov * Math.PI) / 180;
+      game.scene3d.target.x = world.camera.center.x;
+      game.scene3d.target.z = world.camera.center.y;
+      game.scene3d.distance = Math.max(80, (threeH / 2) / (world.camera.zoom || 1) / Math.tan(fov / 2));
+      game.scene3d.render(world);
+    } else {
+      // Default: 3D (main) drives the bottom 2D top-down + minimap camera.
+      world.camera.center.x = game.scene3d.target.x;
+      world.camera.center.y = game.scene3d.target.z;
+      world.camera.zoom = game.scene3d.topDownZoom(msize.height);
+      game.scene3d.render(world);
+    }
     if (game.map2dCtx) {
       const two = { width: dom.map2d.clientWidth || 320, height: dom.map2d.clientHeight || 180 };
       drawBattle(game.map2dCtx, world, two);
@@ -366,6 +433,8 @@ buildMenu(null, {
 window.addEventListener('resize', resizeCanvases);
 const viewBtn = document.getElementById('btn-viewmode');
 if (viewBtn) viewBtn.addEventListener('click', () => toggleViewMode());
+const swapBtn = document.getElementById('btn-swap');
+if (swapBtn) swapBtn.addEventListener('click', () => setSwapped(!game.swapped));
 // Debug hook for automated verification (harmless in production).
 window.__fc = game;
 window.__fc.makeAircraftOrder = makeAircraftOrder;
