@@ -3,12 +3,9 @@
 //
 // Each model is a set of self-contained parts (hull, superstructure, turrets...)
 // with LOCAL vertex/normal/uv buffers and a parent/offset hierarchy. We rebuild
-// that hierarchy exactly, scale the whole thing to a target length, and cache by
-// key so the 876 models are only fetched on first use.
-//
-// Textures (phase 2) are not applied yet — J3D materials carry a diffuse colour
-// which we use directly, so ships already read as the original Navy grey / Soviet
-// hull tones rather than flat procedural blocks.
+// that hierarchy exactly, apply the original BMP textures when available, scale
+// the whole thing to a target length, and cache by key so the 876 models are
+// only fetched on first use.
 
 import * as THREE from './vendor/three.module.js';
 
@@ -21,7 +18,7 @@ function matColor(material) {
   return (Math.round(r * 255) << 16) | (Math.round(g * 255) << 8) | Math.round(b * 255);
 }
 
-function buildPart(part) {
+function buildPart(part, textures) {
   const verts = part.vertices, norms = part.normals, uvs = part.uvs, idx = part.indices;
   const nv = verts.length / 3;
   const pos = new Float32Array(verts);
@@ -36,8 +33,14 @@ function buildPart(part) {
   geo.setIndex(new THREE.BufferAttribute(indices, 1));
   if (!nor) geo.computeVertexNormals();
 
-  const color = matColor(part.material);
-  const mat = new THREE.MeshLambertMaterial({ color });
+  const texName = part.texture ? part.texture.toLowerCase() : null;
+  const tex = texName ? textures[texName] : null;
+  // If the part carries a texture, let the BMP drive the colour; otherwise use
+  // the J3D material diffuse colour.
+  const mat = new THREE.MeshLambertMaterial(tex
+    ? { map: tex, color: 0xffffff }
+    : { color: matColor(part.material) });
+
   const mesh = new THREE.Mesh(geo, mat);
   mesh.position.set(part.offset[0], part.offset[1], part.offset[2]);
   return mesh;
@@ -46,10 +49,10 @@ function buildPart(part) {
 // Build a Group from parsed model JSON, scaled so its longest horizontal extent
 // equals `targetLen` world units. Models use +Z as forward; we keep that and let
 // the caller rotate by heading.
-function buildGroup(model, targetLen) {
+function buildGroup(model, targetLen, textures) {
   // First pass: collect all part meshes (we resolve parent/child after).
   const meshes = {};
-  for (const p of model.parts) meshes[p.name || `p${Object.keys(meshes).length}`] = buildPart(p);
+  for (const p of model.parts) meshes[p.name || `p${Object.keys(meshes).length}`] = buildPart(p, textures);
 
   const root = new THREE.Group();
   // The J3D tree is parent/child by index; since offsets are already world-ish
@@ -73,7 +76,9 @@ function buildGroup(model, targetLen) {
 
 export class ModelLibrary {
   constructor() {
-    this.cache = new Map();   // key -> Promise<Group template>
+    this.cache = new Map();      // key -> Promise<Group template>
+    this.textures = new Map();   // lowercase texture name -> Promise<Texture|null>
+    this.loader = new THREE.TextureLoader();
   }
 
   // Returns a *cloned* Group (so each instance can be transformed independently),
@@ -91,7 +96,7 @@ export class ModelLibrary {
 
   _tint(group, hex) {
     // Subtle side tint on the base material so factions read at a glance,
-    // while keeping the original hull shading.
+    // while keeping the original hull shading / texture.
     group.traverse((o) => {
       if (o.isMesh && o.material) {
         o.material = o.material.clone();
@@ -100,12 +105,40 @@ export class ModelLibrary {
     });
   }
 
+  _loadTexture(name) {
+    if (this.textures.has(name)) return this.textures.get(name);
+    const url = `assets/textures/${name}.bmp`;
+    const p = new Promise((resolve) => {
+      this.loader.load(url,
+        (tex) => {
+          if (THREE.SRGBColorSpace) tex.colorSpace = THREE.SRGBColorSpace;
+          resolve(tex);
+        },
+        undefined,
+        () => { resolve(null); } // missing texture -> fall back to diffuse colour
+      );
+    });
+    this.textures.set(name, p);
+    return p;
+  }
+
   _load(key) {
     if (this.cache.has(key)) return this.cache.get(key);
     const url = `assets/models3d/${key}/model.json`;
     const p = fetch(url)
       .then((r) => { if (!r.ok) throw new Error(`model ${key} ${r.status}`); return r.json(); })
-      .then((model) => buildGroup(model, 1)) // unit length; caller scales via targetLen
+      .then(async (model) => {
+        // Collect every texture this model references and preload them.
+        const texNames = new Set();
+        for (const part of model.parts || []) {
+          if (part.texture) texNames.add(part.texture.toLowerCase());
+        }
+        const textures = {};
+        await Promise.all([...texNames].map(async (n) => {
+          textures[n] = await this._loadTexture(n);
+        }));
+        return buildGroup(model, 1, textures); // unit length; caller scales via targetLen
+      })
       .catch((e) => { console.warn('[modellib]', e.message); return null; });
     this.cache.set(key, p);
     return p;

@@ -78,7 +78,7 @@ export class Scene3D {
   _buildStatic(world) {
     const water = new THREE.Mesh(
       new THREE.PlaneGeometry(60000, 60000),
-      new THREE.MeshBasicMaterial({ color: 0x0b2336 })
+      new THREE.MeshBasicMaterial({ color: 0x0b2336, side: THREE.DoubleSide })
     );
     water.rotation.x = -Math.PI / 2;
     water.position.y = 0;
@@ -93,7 +93,7 @@ export class Scene3D {
     // Land polygons (world.land is an array of point-arrays [[{x,y}...]]).
     let polys = [];
     try { polys = getLand() || []; } catch (_) { polys = (world && world.land) || []; }
-    const landMat = new THREE.MeshLambertMaterial({ color: 0x1f5a32 });
+    const landMat = new THREE.MeshLambertMaterial({ color: 0x1f5a32, side: THREE.DoubleSide });
     const coastMat = new THREE.LineBasicMaterial({ color: 0x49a06a, transparent: true, opacity: 0.9 });
     for (const poly of polys) {
       const pts = Array.isArray(poly) ? poly : (poly && poly.pts) || [];
@@ -335,6 +335,9 @@ export class Scene3D {
       this.target.y + this.distance * se,
       this.target.z + this.distance * ce * ca
     );
+    // Keep the camera above the waterline so aggressive zoom/orbit cannot
+    // duck beneath the ocean plane and reveal the underside of land meshes.
+    this.camera.position.y = Math.max(this.target.y + 3, this.camera.position.y);
     this.camera.lookAt(this.target);
   }
 

@@ -36,12 +36,16 @@ try {
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 
-  // Track failed model fetches so a bad model key surfaces as a failure.
+  // Track failed model/texture fetches so a bad key surfaces as a failure.
   const modelFails = [];
+  const texFails = [];
   page.on('response', (res) => {
     const u = res.url();
     if (u.includes('/models3d/') && u.endsWith('.json') && !res.ok()) {
       modelFails.push(u.split('/').pop() + ' ' + res.status());
+    }
+    if (u.includes('/textures/') && u.endsWith('.bmp') && !res.ok()) {
+      texFails.push(u.split('/').pop() + ' ' + res.status());
     }
   });
 
@@ -135,6 +139,25 @@ try {
     `authentic ship models swapped in (${modelStats.shipModels}/${modelStats.ships})`);
   check(modelFails.length === 0, `no model fetches failed (${modelFails.length})`);
   if (modelFails.length) modelFails.slice(0, 10).forEach((e) => console.log('   modelfail: ' + e));
+
+  // Verify original BMP textures actually loaded onto the authentic models.
+  const texStats = await page.evaluate(() => {
+    const s = window.__fc.scene3d;
+    let total = 0, mapped = 0;
+    for (const m of s.shipMeshes.values()) {
+      m.traverse((o) => {
+        if (o.isMesh) {
+          total++;
+          if (o.material && o.material.map) mapped++;
+        }
+      });
+    }
+    return { total, mapped };
+  });
+  check(texStats.mapped > 0,
+    `original BMP textures applied (${texStats.mapped}/${texStats.total} ship parts)`);
+  check(texFails.length === 0, `no texture fetches failed (${texFails.length})`);
+  if (texFails.length) texFails.slice(0, 10).forEach((e) => console.log('   texfail: ' + e));
 
   // The test scenario starts with no airborne aircraft, so launch one CAP
   // sortie from a carrier to exercise the authentic-aircraft render path

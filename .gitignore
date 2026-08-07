@@ -17,3 +17,6 @@ node_modules/
 # Converted native 3D models (~164 MB generated from original .j3d files).
 # Keep the converter scripts; regenerate locally with tools/batch_convert_j3d.py.
 assets/models3d/
+
+# Original .bmp textures copied from 3d.grp (~45 MB).
+assets/textures/
