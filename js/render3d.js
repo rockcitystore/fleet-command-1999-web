@@ -365,9 +365,9 @@ export class Scene3D {
 
   // --- camera ---
   _updateCamera() {
-    // SUB VIEW: dive below the surface. The sea is translucent (set in
-    // setUnderwater), submarines are drawn at real negative depth, and the
-    // camera is pinned just under the water looking down at them.
+    // SUB VIEW: orbit freely around the subs while staying below the surface.
+    // The camera may rise to just under the water (looking down) or sink deep
+    // (looking up) — right-drag up/down actually moves the view.
     if (this.underwater) {
       const ce = Math.cos(this.elevation), se = Math.sin(this.elevation);
       const ca = Math.cos(this.azimuth), sa = Math.sin(this.azimuth);
@@ -376,8 +376,9 @@ export class Scene3D {
         this.target.y + this.distance * se,
         this.target.z + this.distance * ce * ca
       );
-      // Force the camera to stay beneath the surface regardless of orbit/zoom.
-      this.camera.position.y = Math.min(this.camera.position.y, -8);
+      // Keep the camera beneath the surface regardless of orbit/zoom, but let
+      // it travel vertically between the surface and the deep.
+      this.camera.position.y = Math.min(this.camera.position.y, -3);
       // Keep the fill light with the camera so subs are lit from the viewer.
       this._subLight.position.copy(this.camera.position);
       this.camera.lookAt(this.target);
@@ -437,7 +438,13 @@ export class Scene3D {
 
   orbit(daz, del) {
     this.azimuth += daz * 0.005;
-    this.elevation = Math.max(0.08, Math.min(1.45, this.elevation - del * 0.005));
+    // Underwater lets the view pitch from near-surface (looking down) to deep
+    // (looking up), so the elevation range is wider than in the surface view.
+    if (this.underwater) {
+      this.elevation = Math.max(-1.2, Math.min(1.3, this.elevation - del * 0.005));
+    } else {
+      this.elevation = Math.max(0.08, Math.min(1.45, this.elevation - del * 0.005));
+    }
   }
 
   zoom(factor) {
