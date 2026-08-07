@@ -46,6 +46,12 @@ export class Scene3D {
     sun.position.set(1200, 2400, 800);
     this.scene.add(sun);
 
+    // Portable fill light used only in SUB VIEW to illuminate submarines from
+    // the camera side (the sun/hemi are above water and do little from below).
+    this._subLight = new THREE.PointLight(0x8fd6ff, 2.2, 2200, 0.9);
+    this._subLight.visible = false;
+    this.scene.add(this._subLight);
+
     // Camera controller state (spherical around `target`).
     this.target = new THREE.Vector3(2000, 0, 2000); // world centre
     this.azimuth = 0;          // 0 => camera behind target, looking toward -Z (north away)
@@ -56,6 +62,11 @@ export class Scene3D {
     this.acGroup = new THREE.Group();
     this.projGroup = new THREE.Group();
     this.scene.add(this.shipGroup, this.acGroup, this.projGroup);
+
+    // When true, the camera dives below the surface and the sea becomes
+    // translucent so submarines (drawn at their real negative depth) are
+    // clearly visible — a "sub-surface" view the original FC99 never had.
+    this.underwater = false;
 
     this.shipMeshes = new Map(); // id -> Group
     this.acMeshes = new Map();   // id -> Group
@@ -82,6 +93,7 @@ export class Scene3D {
     );
     water.rotation.x = -Math.PI / 2;
     water.position.y = 0;
+    this.water = water;
     this.scene.add(water);
 
     const grid = new THREE.GridHelper(8000, 32, 0x1d4a66, 0x0e2f44);
@@ -192,6 +204,18 @@ export class Scene3D {
     container.add(ring);
     container.userData.ring = ring;
 
+    // SUB VIEW: a bright, self-illuminated sonar-contact sphere that guarantees
+    // submerged submarines remain visible even when the detailed 3D model is
+    // back-lit by surface light or rendered by software WebGL.
+    const contactColor = ship.side === 'player' ? PLAYER_COLOR : ENEMY_COLOR;
+    const contact = new THREE.Mesh(
+      new THREE.SphereGeometry((ship.radius || 30) * 1.4, 16, 12),
+      new THREE.MeshBasicMaterial({ color: contactColor, transparent: true, opacity: 0.75 })
+    );
+    contact.visible = false;
+    container.add(contact);
+    container.userData.contact = contact;
+
     const key = shipModelKey(ship);
     if (key) {
       const len = (ship.radius || 30) * 2.6;
@@ -252,16 +276,22 @@ export class Scene3D {
         this.shipGroup.add(m);
         this.shipMeshes.set(s.id, m);
       }
-      // Ships are rendered well above the opaque water plane (y=0). Surface
-      // units sit at y=2 so they cannot be coplanar with / clipped by the sea
-      // on any driver. Submarines are shown at a small positive offset when
-      // detected, so they remain visible as surfaced/periscope contacts.
-      const surfaceY = s.isSub ? 0.8 : 2.0;
-      m.position.set(s.pos.x, surfaceY, s.pos.y);
+      // Surface units sit at y=2.0 (clearly above the opaque water plane).
+      // In SUB VIEW, submarines drop to their real simulation depth (negative
+      // y) so you look *down* at them through the now-translucent sea; in the
+      // normal surface view a detected sub is shown just under the surface as
+      // a periscope/snorkel contact.
+      const y = s.isSub
+        ? (this.underwater ? (s.depth || 0) : 0.8)
+        : 2.0;
+      m.position.set(s.pos.x, y, s.pos.y);
       m.rotation.y = -s.heading;
       m.visible = s.side === 'player' || !!s.detected;
-      this._applySelected(m, sel.includes(s.id));
+      this._applySelected(m, sel.includes(s.id), s.isSub);
       if (m.userData.ring) m.userData.ring.visible = sel.includes(s.id);
+      if (m.userData.contact) {
+        m.userData.contact.visible = this.underwater && s.isSub;
+      }
     }
     for (const [id, m] of this.shipMeshes) {
       if (!seenS.has(id)) { this.shipGroup.remove(m); this._disposeGroup(m); this.shipMeshes.delete(id); }
@@ -283,7 +313,7 @@ export class Scene3D {
       m.position.set(a.pos.x, y, a.pos.y);
       m.rotation.y = -a.heading;
       m.visible = a.side === 'player' || !!a.detected;
-      this._applySelected(m, sel.includes(a.id));
+      this._applySelected(m, sel.includes(a.id), false);
       if (m.userData.ring) m.userData.ring.visible = sel.includes(a.id);
     }
     for (const [id, m] of this.acMeshes) {
@@ -318,9 +348,11 @@ export class Scene3D {
   }
 
   // Toggle the selection glow on whatever body is currently active (procedural or
-  // the loaded authentic model).
-  _applySelected(container, on) {
-    const hex = on ? 0x123a2a : 0x000000;
+  // the loaded authentic model). When submerged in SUB VIEW, submarines also get
+  // a faint base glow so they remain visible against the dark deep.
+  _applySelected(container, on, isSub) {
+    const baseHex = (this.underwater && isSub) ? 0x66aacc : 0x000000;
+    const hex = on ? 0x123a2a : baseHex;
     const body = container.userData.body;
     if (!body) return;
     body.traverse((o) => {
@@ -333,6 +365,24 @@ export class Scene3D {
 
   // --- camera ---
   _updateCamera() {
+    // SUB VIEW: dive below the surface. The sea is translucent (set in
+    // setUnderwater), submarines are drawn at real negative depth, and the
+    // camera is pinned just under the water looking down at them.
+    if (this.underwater) {
+      const ce = Math.cos(this.elevation), se = Math.sin(this.elevation);
+      const ca = Math.cos(this.azimuth), sa = Math.sin(this.azimuth);
+      this.camera.position.set(
+        this.target.x + this.distance * ce * sa,
+        this.target.y + this.distance * se,
+        this.target.z + this.distance * ce * ca
+      );
+      // Force the camera to stay beneath the surface regardless of orbit/zoom.
+      this.camera.position.y = Math.min(this.camera.position.y, -8);
+      // Keep the fill light with the camera so subs are lit from the viewer.
+      this._subLight.position.copy(this.camera.position);
+      this.camera.lookAt(this.target);
+      return;
+    }
     const ce = Math.cos(this.elevation), se = Math.sin(this.elevation);
     const ca = Math.cos(this.azimuth), sa = Math.sin(this.azimuth);
     this.camera.position.set(
@@ -344,6 +394,38 @@ export class Scene3D {
     // duck beneath the ocean plane and reveal the underside of land meshes.
     this.camera.position.y = Math.max(this.target.y + 3, this.camera.position.y);
     this.camera.lookAt(this.target);
+  }
+
+  // Toggle the sub-surface (underwater) camera. When ON the sea becomes
+  // translucent, the look-at target drops to periscope depth, and sync() draws
+  // submarines at their real negative depth. When OFF everything is restored
+  // to the surface view.
+  setUnderwater(on) {
+    this.underwater = !!on;
+    const w = this.water;
+    if (this.underwater) {
+      w.material.transparent = true;
+      w.material.opacity = 0.32;
+      w.material.color.setHex(0x0a3a52);
+      // Lighter blue fog/background so submerged objects don't disappear
+      // into pitch-black; the fill light handles close-up submarine shading.
+      this.scene.background.setHex(0x0c2b3d);
+      this.scene.fog.color.setHex(0x0c2b3d);
+      this._subLight.visible = true;
+      // Drop the look-at point to the band where most subs live and zoom in so
+      // submerged contacts fill the frame instead of being tiny silhouettes.
+      this.target.y = -120;
+      this.elevation = 0.28;
+      this.distance = Math.max(260, Math.min(900, this.distance));
+    } else {
+      w.material.transparent = false;
+      w.material.opacity = 1.0;
+      w.material.color.setHex(0x0b2336);
+      this.scene.background.setHex(0x06121f);
+      this.scene.fog.color.setHex(0x06121f);
+      this._subLight.visible = false;
+      this.target.y = 0;
+    }
   }
 
   pan(dx, dy) {
@@ -363,8 +445,10 @@ export class Scene3D {
   }
 
   reset() {
-    this.target.set(2000, 0, 2000);
-    this.azimuth = 0; this.elevation = 0.62; this.distance = 1300;
+    this.target.set(2000, this.underwater ? -120 : 0, 2000);
+    this.azimuth = 0;
+    this.elevation = this.underwater ? 0.28 : 0.62;
+    this.distance = this.underwater ? 600 : 1300;
   }
 
   // Frame the camera on the current live ships so they are centred and fit in

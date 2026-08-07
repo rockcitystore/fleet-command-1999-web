@@ -46,6 +46,7 @@ const game = {
   renderMode: '3d', // '3d' = WebGL perspective main view; '2d' = legacy flat map
   swapped: false,   // when true, main screen shows the 2D tactical map and the
                     // bottom-centre panel shows the primary (3D/2D) view.
+  subView: false,   // when true, the 3D camera is dived below the surface.
   detachInput2dTac: null, // input for the big tactical map when swapped
   mapCtx: null,
   miniCtx: null,
@@ -320,6 +321,7 @@ function mountBattle(world) {
 
   if (game.renderMode === '3d' && game.scene3d) {
     game.scene3d.frameShips(world);
+    if (game.subView) game.scene3d.setUnderwater(true);
     game.miniCtx = dom.minimap.getContext('2d');
     game.map2dCtx = dom.map2d.getContext('2d');
     game.detachInput3d = attachInput3D(dom.map3d, world, handlers, game.scene3d);
@@ -429,6 +431,7 @@ function toggleViewMode() {
 
   if (game.renderMode === '3d' && game.scene3d) {
     game.scene3d.frameShips(world);
+    if (game.subView) game.scene3d.setUnderwater(true);
     game.miniCtx = dom.minimap.getContext('2d');
     game.map2dCtx = dom.map2d.getContext('2d');
     game.detachInput3d = attachInput3D(dom.map3d, world, handlers, game.scene3d);
@@ -513,6 +516,20 @@ if (aiBtn) aiBtn.addEventListener('click', () => {
 });
 const aiPanel = document.getElementById('ai-cic-panel');
 if (aiPanel) aiPanel.addEventListener('click', () => aiPanel.classList.toggle('expanded'));
+// SUB VIEW: dive the 3D camera below the surface so submarines (drawn at real
+// depth through the now-translucent sea) become visible.
+const subBtn = document.getElementById('btn-subview');
+function toggleSubView() {
+  if (!game.scene3d) return;
+  game.subView = !game.subView;
+  game.scene3d.setUnderwater(game.subView);
+  if (subBtn) subBtn.classList.toggle('active', !!game.subView);
+}
+if (subBtn) subBtn.addEventListener('click', toggleSubView);
+// Convenience key: 'U' toggles the sub-surface view (ignored while typing).
+window.addEventListener('keydown', (e) => {
+  if ((e.key === 'u' || e.key === 'U') && !/input|textarea/i.test(e.target.tagName)) toggleSubView();
+});
 // Debug hook for automated verification (harmless in production).
 window.__fc = game;
 window.__fc.makeAircraftOrder = makeAircraftOrder;
