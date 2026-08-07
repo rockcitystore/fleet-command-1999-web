@@ -8,6 +8,12 @@ import { attachInput } from './input.js';
 import { Scene3D } from './render3d.js';
 import { attachInput3D } from './input3d.js';
 import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach } from './ui.js';
+import { AICommander } from './aiCommander.js';
+
+// Local-LLM (Ollama / qwen3.5:4b) RED fleet commander. Created once and reused
+// across battles; reset to BUILTIN at each battle start.
+const aiCommander = new AICommander();
+
 
 const MINIMAP_PX = 140;
 
@@ -329,7 +335,65 @@ function mountBattle(world) {
   refreshViewInput();
   resizeCanvases();
   game.world = world;
+
+  // Enemy command source starts as the built-in deterministic doctrine.
+  world.aiMode = 'builtin';
+  aiCommander.setEnabled(false);
+  aiCommander.lastError = null;
+  syncAIModeUI();
+
   if (!game.rafId) loop();
+}
+
+// Toggle the RED fleet between the built-in doctrine and the local LLM.
+function setAIMode(mode) {
+  const world = game.world;
+  if (!world) return;
+  if (mode === 'llm') {
+    world.aiMode = 'llm';
+    aiCommander.setEnabled(true);
+    // Kick off an immediate first decision (don't wait a full throttle window).
+    aiCommander.tick(world, { force: true }).catch(() => {});
+  } else {
+    world.aiMode = 'builtin';
+    aiCommander.setEnabled(false);
+  }
+  syncAIModeUI();
+}
+
+// Reflect the current AI mode in the control-bar button + status readout.
+function syncAIModeUI() {
+  const btn = document.getElementById('btn-ai');
+  const status = document.getElementById('ai-status');
+  const live = document.getElementById('ai-live');
+  const panel = document.getElementById('ai-cic-panel');
+  const panelText = document.getElementById('ai-cic-text');
+  const llm = game.world && game.world.aiMode === 'llm';
+  if (btn) {
+    btn.textContent = llm ? 'AI: LLM' : 'AI: BUILTIN';
+    btn.classList.toggle('active', !!llm);
+  }
+  if (status) {
+    status.textContent = aiCommander.statusText();
+    status.classList.toggle('ai-llm', !!llm && !aiCommander.lastError);
+    status.classList.toggle('ai-error', !!aiCommander.lastError);
+    status.title = aiCommander.lastBrief || '';
+  }
+  if (live) {
+    const streaming = aiCommander.phase === 'thinking' || aiCommander.phase === 'streaming';
+    live.textContent = aiCommander.livePreview();
+    live.classList.toggle('live', !!streaming);
+    live.title = streaming ? aiCommander.liveText : (aiCommander.lastBrief || '');
+  }
+  if (panel && panelText) {
+    const show = !!llm || !!aiCommander.lastError || (aiCommander.liveText && aiCommander.liveText !== '');
+    panel.classList.toggle('hidden', !show);
+    panelText.textContent = aiCommander.livePreview();
+    panel.classList.toggle('thinking', aiCommander.phase === 'thinking');
+    panel.classList.toggle('streaming', aiCommander.phase === 'streaming');
+    panel.classList.toggle('done', aiCommander.phase === 'done');
+    panel.classList.toggle('error', !!aiCommander.lastError);
+  }
 }
 
 function startTutorial() {
@@ -388,6 +452,12 @@ function loop() {
   resizeCanvases();
   world.advanceRealtime();
 
+  // Local-LLM RED fleet commander: throttled + async, fire-and-forget. It is a
+  // no-op unless the player has switched AI mode to LLM. Keeps the enemy acting
+  // without ever blocking the render loop.
+  if (world.aiMode === 'llm') aiCommander.tick(world).catch(() => {});
+  syncAIModeUI();
+
   const msize = { width: dom.map.clientWidth || window.innerWidth, height: dom.map.clientHeight || window.innerHeight };
 
   if (game.renderMode === '3d' && game.scene3d) {
@@ -435,10 +505,18 @@ const viewBtn = document.getElementById('btn-viewmode');
 if (viewBtn) viewBtn.addEventListener('click', () => toggleViewMode());
 const swapBtn = document.getElementById('btn-swap');
 if (swapBtn) swapBtn.addEventListener('click', () => setSwapped(!game.swapped));
+const aiBtn = document.getElementById('btn-ai');
+if (aiBtn) aiBtn.addEventListener('click', () => {
+  setAIMode(game.world && game.world.aiMode === 'llm' ? 'builtin' : 'llm');
+});
+const aiPanel = document.getElementById('ai-cic-panel');
+if (aiPanel) aiPanel.addEventListener('click', () => aiPanel.classList.toggle('expanded'));
 // Debug hook for automated verification (harmless in production).
 window.__fc = game;
 window.__fc.makeAircraftOrder = makeAircraftOrder;
 window.__fc.RENDER_OPTIONS = RENDER_OPTIONS;
 window.__fc.startGame = startGame;
+window.__fc.setAIMode = setAIMode;
+window.__fc.aiCommander = aiCommander;
 window.__fc.startCustom = startCustom;
 window.__fc.buildLandPolygons = buildLandPolygons;

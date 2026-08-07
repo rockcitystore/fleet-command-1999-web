@@ -209,6 +209,10 @@ export class World {
     // player ships in the opening seconds (e.g. enemy subs already in torpedo
     // range at spawn) and gives the player agency over when the war starts.
     this.combatStarted = false;
+    // Enemy command source: 'builtin' (deterministic doctrine below) or 'llm'
+    // (a local Ollama model drives the RED fleet via js/aiCommander.js). When
+    // 'llm' the built-in doctrine loop is skipped (air-wing launches still run).
+    this.aiMode = 'builtin';
   }
 
   rand() {
@@ -1229,6 +1233,8 @@ export function updateAircraft(world, dt) {
 
 export function updateAI(world, dt) {
   // Enemy air wings launch on patrol once the war has gone hot (throttled).
+  // This runs in BOTH builtin and LLM modes so the RED force always gets its
+  // patrol air wing once combat starts; the LLM can reposition/recall them.
   if (world.combatStarted) {
     for (const s of world.ships) {
       if (!s.alive || s.side !== 'enemy' || !s.aircraft || !s.aircraft.length) continue;
@@ -1239,6 +1245,18 @@ export function updateAI(world, dt) {
     }
   }
 
+  // When a local LLM owns the RED fleet, it issues orders out-of-band
+  // (throttled + async, see js/aiCommander.js). Skip the deterministic
+  // doctrine so the two commanders don't fight over the same ships.
+  if (world.aiMode === 'llm') return;
+
+  runBuiltinDoctrine(world);
+}
+
+// Deterministic RED fleet doctrine (the classic Fleet Command AI). Extracted
+// from updateAI so the LLM commander can fall back to it on error without
+// re-entering the air-wing launch block.
+export function runBuiltinDoctrine(world) {
   for (const s of world.ships) {
     if (!s.alive || s.side !== 'enemy') continue;
 
