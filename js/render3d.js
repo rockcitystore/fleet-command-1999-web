@@ -102,9 +102,11 @@ export class Scene3D {
 
     const hemi = new THREE.HemisphereLight(0x9fc4e8, 0x16242e, 1.05);
     this.scene.add(hemi);
+    this._hemi = hemi;
     const sun = new THREE.DirectionalLight(0xffffff, 0.85);
     sun.position.set(1200, 2400, 800);
     this.scene.add(sun);
+    this._sunLight = sun;
 
     // Portable fill light used only in SUB VIEW to illuminate submarines from
     // the camera side (the sun/hemi are above water and do little from below).
@@ -476,67 +478,96 @@ export class Scene3D {
   // --- environment linkage: sea state / weather / time-of-day ---
   //
   // The mission header carries a sea-state (Beaufort-ish 0-5), a weather index
-  // (0 clear .. 3 storm) and an hour of day. We translate those into the sky
-  // gradient, sun strength, water chop and fog so a night storm in the Barents
-  // reads completely differently from a calm midday in the Bay of Bengal — the
-  // same 3D engine, just a different palette and wave energy.
-  applyEnvironment(env) {
+  // (0 clear .. 3 storm) and a start hour. Lighting is a *continuous* function
+  // of the in-game clock (hour = startHour + world.time/3600), so the sun
+  // arcs across the sky and the palette eases through dawn -> day -> dusk ->
+  // night, tracking the on-screen clock. Weather only thickens the haze and
+  // dims the sun; the day/night colours always win.
+  applyEnvironment(env, hourOverride) {
     if (!env) return;
     this._lastEnv = env;
-    const hour = typeof env.timeOfDay === 'number' ? env.timeOfDay : (parseInt(env.timeOfDay, 10) || 12);
-    const wx = typeof env.weather === 'number' ? env.weather : (parseInt(env.weather, 10) || 0);
-    const sea = typeof env.seaState === 'number' ? env.seaState : 2;
     if (this.underwater) return; // SUB VIEW owns its own palette
 
-    // Base palette by time of day.
-    let pal;
-    if (hour < 6 || hour >= 20) {
-      pal = { top: 0x0b1f3a, hor: 0x223a52, bot: 0x05101e, sun: 0xcdd9ff, sunI: 0.20, bg: 0x0b1f3a, fog: 0x223a52 };
-    } else if (hour < 9 || hour >= 17) {
-      pal = { top: 0x8f6fb0, hor: 0xf0b070, bot: 0x352a48, sun: 0xffd9a0, sunI: 0.55, bg: 0xc89a78, fog: 0xe0b088 };
-    } else {
-      pal = { top: 0x5c9fd8, hor: 0xcfe4f0, bot: 0x1c5270, sun: 0xfff3d0, sunI: 0.85, bg: 0x9fc4e8, fog: 0xcfe4f0 };
-    }
+    const startHour = typeof env.timeOfDay === 'number' ? env.timeOfDay
+                    : (parseInt(env.timeOfDay, 10) || 12);
+    const hour = (((hourOverride != null ? hourOverride : startHour) % 24) + 24) % 24;
+    const wx = typeof env.weather === 'number' ? env.weather : (parseInt(env.weather, 10) || 0);
+    const sea = typeof env.seaState === 'number' ? env.seaState : 2;
 
-    // Weather overrides (denser haze + weaker sun as it worsens).
+    // Sun arc across the sky (mid-latitude look: never perfectly overhead).
+    const elev = Math.sin((hour - 6) / 12 * Math.PI);   // -1..1, 0 at 6 & 18
+    const az = (hour - 12) / 12 * Math.PI;              // -π/2 dawn(E) .. +π/2 dusk(W)
+    const maxElev = 0.82;
+    const sy = maxElev * elev;
+    const horiz = Math.sqrt(Math.max(0, 1 - sy * sy));
+    const sx = -horiz * Math.sin(az);   // east(+) at dawn, west(-) at dusk
+    const sz = horiz * Math.cos(az);    // always southern sky
+    const dir = new THREE.Vector3(sx, sy, sz).normalize();
+
+    const day = Math.max(0, Math.min(1, (elev + 0.15) / 0.4));        // night..day
+    const golden = Math.max(0, Math.min(1, 1 - Math.abs(elev) / 0.25)); // dawn/dusk glow
+    const lerpHex = (a, b, t) => new THREE.Color(a).lerp(new THREE.Color(b), t).getHex();
+
+    // Night <-> day base palettes.
+    const top = lerpHex(0x0b1f3a, 0x5c9fd8, day);
+    let hor = lerpHex(0x223a52, 0xcfe4f0, day);
+    const bot = lerpHex(0x05101e, 0x1c5270, day);
+    let sunC = lerpHex(0xcdd9ff, 0xfff3d0, day);
+    const bg = lerpHex(0x0b1f3a, 0x9fc4e8, day);
+    let fog = lerpHex(0x223a52, 0xcfe4f0, day);
+    const hemiSky = lerpHex(0x223a52, 0x9fc4e8, day);
+    const hemiGround = lerpHex(0x0a1420, 0x16242e, day);
+    const sunI = 0.20 + (0.85 - 0.20) * day;
+
+    // Warm tint at sunrise / sunset.
+    hor = lerpHex(hor, 0xf0a85a, golden * 0.55);
+    sunC = lerpHex(sunC, 0xffb060, golden * 0.6);
+    fog = lerpHex(fog, 0xe0b088, golden * 0.4);
+    bg = lerpHex(bg, 0xc89a78, golden * 0.35);
+
+    // Weather: thicker haze + weaker direct sun (colours still follow day/night).
     let fogNear = 3800, fogFar = 17000;
-    if (wx === 1) {            // overcast
-      pal.hor = 0xb9c4cc; pal.top = 0x7d93a3; pal.bot = 0x35424a;
-      pal.sun = 0xdfe6ea; pal.sunI = 0.5; pal.bg = 0x9fb0b8; pal.fog = 0xb9c4cc;
-      fogNear = 2600; fogFar = 14000;
-    } else if (wx === 2) {     // rain
-      pal.top = 0x53626c; pal.hor = 0x8a969e; pal.bot = 0x2a333a;
-      pal.sunI = 0.3; pal.bg = 0x6b767e; pal.fog = 0x8a969e;
-      fogNear = 1800; fogFar = 11000;
-    } else if (wx === 3) {     // storm
-      pal.top = 0x3a444c; pal.hor = 0x6b757c; pal.bot = 0x20272c;
-      pal.sunI = 0.15; pal.bg = 0x55605c; pal.fog = 0x6b757c;
-      fogNear = 1200; fogFar = 8000;
-    }
+    if (wx === 1) { fogNear = 2600; fogFar = 14000; }
+    else if (wx === 2) { fogNear = 1800; fogFar = 11000; }
+    else if (wx === 3) { fogNear = 1200; fogFar = 8000; }
 
     if (this.sky && this.sky.material.uniforms) {
-      this.sky.material.uniforms.topColor.value.setHex(pal.top);
-      this.sky.material.uniforms.horizonColor.value.setHex(pal.hor);
-      this.sky.material.uniforms.bottomColor.value.setHex(pal.bot);
+      this.sky.material.uniforms.topColor.value.setHex(top);
+      this.sky.material.uniforms.horizonColor.value.setHex(hor);
+      this.sky.material.uniforms.bottomColor.value.setHex(bot);
     }
     if (this.sun) {
-      this.sun.material.color.setHex(pal.sun);
-      this.sun.visible = pal.sunI > 0.2;
+      this.sun.position.copy(dir).multiplyScalar(26000);
+      this.sun.material.color.setHex(sunC);
+      this.sun.visible = sy > 0.01;
     }
     if (this.sunHalo) {
-      this.sunHalo.material.opacity = 0.22 * Math.min(1, pal.sunI * 1.4);
+      this.sunHalo.position.copy(this.sun ? this.sun.position : dir.clone().multiplyScalar(26000));
+      this.sunHalo.material.opacity = 0.22 * Math.min(1, sunI * 1.4) * (sy > 0.01 ? 1 : 0);
       this.sunHalo.visible = this.sun ? this.sun.visible : false;
     }
     if (this.water && this.water.material.uniforms) {
       const u = this.water.material.uniforms;
       u.uSeaState.value = sea;
-      u.uFogColor.value.setHex(pal.fog);
+      u.uSunDir.value.copy(dir);
+      u.uFogColor.value.setHex(fog);
       u.uFogNear.value = fogNear;
       u.uFogFar.value = fogFar;
-      u.horizonColor.value.setHex(pal.fog);
+      u.horizonColor.value.setHex(fog);
+      u.sunColor.value.setHex(sunC);
     }
-    this.scene.background.setHex(pal.bg);
-    this.scene.fog.color.setHex(pal.fog);
+    if (this._sunLight) {
+      this._sunLight.position.copy(dir).multiplyScalar(1000);
+      this._sunLight.color.setHex(sunC);
+      this._sunLight.intensity = 0.9 * Math.max(0, sy);
+    }
+    if (this._hemi) {
+      this._hemi.color.setHex(hemiSky);
+      this._hemi.groundColor.setHex(hemiGround);
+      this._hemi.intensity = 0.25 + 0.8 * day;
+    }
+    this.scene.background.setHex(bg);
+    this.scene.fog.color.setHex(fog);
     this.scene.fog.near = fogNear;
     this.scene.fog.far = fogFar;
   }
@@ -1141,9 +1172,12 @@ export class Scene3D {
 
   render(world) {
     const env = world && world.environment;
-    if (env) {
-      const key = (env.seaState || 0) + '|' + (env.weather != null ? env.weather : '') + '|' + (env.timeOfDay != null ? env.timeOfDay : '');
-      if (key !== this._envKey) { this._envKey = key; this.applyEnvironment(env); }
+    if (env && !this.underwater) {
+      // Lighting follows the in-game clock: hour = mission start + elapsed time.
+      const startHour = typeof env.timeOfDay === 'number' ? env.timeOfDay
+                      : (parseInt(env.timeOfDay, 10) || 12);
+      const hour = (startHour + (world.time || 0) / 3600) % 24;
+      this.applyEnvironment(env, hour);
     }
     this.sync(world);
     const now = performance.now();
