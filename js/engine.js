@@ -4,7 +4,7 @@
 
 import { REAL_PLACEMENTS } from './realdata.js';
 import { REAL_SHIP_STATS } from './realstats.js';
-import { isPointOnLand, snapToSea, snapToLand, setLand } from './terrain.js';
+import { isPointOnLand, snapToSea, snapToLand, setLand, planSeaRoute, nearestSea, distToLand } from './terrain.js';
 import { buildLandPolygons } from './geo.js';
 import { bindGoals, evaluateGoals, hudObjectives, goalVerdict, goalDebrief } from './goals.js';
 
@@ -490,14 +490,36 @@ export class World {
       if (order && order.kind === 'moveTo' && s.immobile) continue;
       if (order && order.kind === 'moveTo') {
         // Normalize to a waypoint chain so multi-leg routes (and the legacy
-        // single-point form) share one code path. A lone `pos` becomes a
-        // one-element waypoint list; an explicit `waypoints` array (with
-        // optional per-node `speed`) is preserved as-is. `loop` makes the
-        // route patrol (re-arm at the first node) instead of ending.
-        const wps = order.waypoints
-          ? order.waypoints.map((p) => ({ x: p.x, y: p.y, speed: p.speed }))
-          : [{ x: order.pos.x, y: order.pos.y, speed: s.maxSpeed }];
-        s.order = { kind: 'moveTo', waypoints: wps, wpIndex: 0, loop: !!order.loop };
+        // single-point form) share one code path. `loop` makes the route patrol
+        // (re-arm at the first node) instead of ending.
+        //
+        // Auto-routing: the original FC99 had no land-avoidance (the player
+        // plotted waypoints by hand). For a single-point destination we now
+        // plan a sea lane around any coastline between the ship and the goal;
+        // clear-water moves collapse to one waypoint (unchanged behaviour).
+        // For an explicit multi-waypoint route the player is deliberately
+        // plotting, so we only snap any coastal-clicked node to the nearest
+        // sea instead of re-routing the whole leg.
+        const explicit = order.waypoints && order.waypoints.length > 1;
+        let wps;
+        if (explicit) {
+          wps = order.waypoints.map((p) => {
+            const node = { x: p.x, y: p.y, speed: p.speed };
+            if (isPointOnLand(p.x, p.y)) {
+              const snapped = nearestSea(p.x, p.y, (s.radius || 13) + 6);
+              node.x = snapped.x; node.y = snapped.y;
+            }
+            return node;
+          });
+        } else {
+          const goal = order.pos || (order.waypoints && order.waypoints[0]) || null;
+          if (!goal) { s.order = null; continue; }
+          const margin = (s.radius || 13) + 6;
+          wps = planSeaRoute({ x: s.pos.x, y: s.pos.y }, { x: goal.x, y: goal.y }, { margin });
+          wps = wps.map((p) => ({ x: p.x, y: p.y, speed: s.maxSpeed }));
+        }
+        if (wps.length) s.order = { kind: 'moveTo', waypoints: wps, wpIndex: 0, loop: !!order.loop };
+        else s.order = null;
       } else {
         s.order = order;
         if (order.kind === 'attack') s.targetId = order.targetId;
