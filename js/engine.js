@@ -1179,12 +1179,19 @@ export function updateWeapons(world, dt) {
   // than the AI; both have random jitter so salvoes read as a ragged volley.
   if (!world._weaponsCombatStarted) {
     world._weaponsCombatStarted = true;
+    // Reaction delay is expressed in GAME seconds, but it is decremented by the
+    // (speed-scaled) frame dt. At high time compression that window collapses
+    // to milliseconds of real time, so the fleet appears to fire at once. Scale
+    // the assignment by the current speed so the delay reads as the same REAL
+    // duration (0.6-2.8s) regardless of time compression — visible stagger at
+    // any speed, identical feel at 1x.
+    const spd = Math.max(0.1, world.speed || 1);
     for (const s of world.ships) {
       if (!s.alive) continue;
       for (const w of s.weapons) {
         const base = s.side === 'player' ? 0.25 : 0.6;
         const jitter = s.side === 'player' ? 0.9 : 2.2;
-        w._reactionLeft = base + world.rand() * jitter;
+        w._reactionLeft = (base + world.rand() * jitter) * spd;
       }
     }
   }
