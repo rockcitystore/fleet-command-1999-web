@@ -84,6 +84,17 @@ export class Scene3D {
     this.shipMeshes = new Map(); // id -> Group
     this.acMeshes = new Map();   // id -> Group
     this.projPool = [];          // reused projectile meshes
+    this.projTrailPool = [];     // reused projectile-trail lines (parallel to projPool)
+
+    // --- polish state ---
+    this.wakeGroup = new THREE.Group();   // ship wake trails
+    this.fxGroup = new THREE.Group();     // transient explosions / flashes
+    this.scene.add(this.wakeGroup, this.fxGroup);
+    this._wakeTrails = new Map();  // shipId -> { pts:[{x,z}], line }
+    this._effects = [];            // active explosion / flash effects
+    this._prevAlive = new Map();   // shipId -> last-known alive flag (death detection)
+    this._envKey = null;           // de-dupe environment application
+    this._lastT = 0;               // last render timestamp (effect dt)
 
     this._modelLib = new ModelLibrary(); // authentic .j3d models (lazy)
     this._geoCache = new Map();  // ship-class key -> shared geometries
@@ -247,6 +258,7 @@ export class Scene3D {
         time: { value: 0 },
         opacity: { value: 1.0 },
         uUnderwater: { value: 0.0 },
+        uSeaState: { value: 2.0 },
         uFogColor: { value: new THREE.Color(0xcfe4f0) },
         uFogNear: { value: 3800 },
         uFogFar: { value: 17000 },
@@ -271,6 +283,7 @@ export class Scene3D {
         uniform float time;
         uniform float opacity;
         uniform float uUnderwater;
+        uniform float uSeaState;
         uniform vec3 uFogColor;
         uniform float uFogNear;
         uniform float uFogFar;
@@ -312,19 +325,29 @@ export class Scene3D {
           float warp = fbm(p * 0.0025 + vec2(time * 0.015, time * 0.012));
           vec2 wp = p + vec2(sin(warp * 6.28318), cos(warp * 6.28318)) * 22.0;
 
-          // Non-orthogonal travelling waves at a couple of scales.
+          // Non-orthogonal travelling waves at a couple of scales. Sea state
+          // (Beaufort 0-5) scales the swell height and chop so a calm sea is
+          // glassy and a storm is heavily textured.
+          float sea = clamp(uSeaState / 4.0, 0.0, 1.3);
+          float amp = 0.5 + sea * 0.9;
           float w1 = sin(wp.x * 0.008 + wp.y * 0.003 + time * 0.40);
           float w2 = sin(wp.x * 0.005 - wp.y * 0.007 + time * 0.30);
           float w3 = sin(wp.x * 0.013 + wp.y * 0.010 - time * 0.65);
           float w4 = sin(wp.x * 0.022 - wp.y * 0.016 + time * 1.10);
-          float sineWave = (w1 * 0.40 + w2 * 0.30 + w3 * 0.20 + w4 * 0.10) * 0.5 + 0.5;
+          float sineWave = (w1 * 0.40 + w2 * 0.30 + w3 * 0.20 + w4 * 0.10) * amp * 0.5 + 0.5;
 
           // Small sparkle noise — bright glints on wave crests, not bands.
+          // Choppier seas throw more glints.
           float spark = fbm(wp * 0.035 + vec2(time * 0.35, time * 0.28));
-          spark = pow(spark, 5.0);
+          spark = pow(spark, 5.0) * (0.6 + sea * 0.8);
 
           // Mix: sine waves give the swell, noise gives irregular sparkle.
           float wave = sineWave * 0.75 + spark * 0.25;
+
+          // Fresnel-style grazing-angle sheen: the sea brightens toward the
+          // horizon and where the view skims the surface, reading as a soft
+          // reflection of the sky — the cue that this is reflective water.
+          float fres = pow(1.0 - max(viewDir.y, 0.0), 3.0);
 
           vec3 col;
           if (uUnderwater < 0.5) {
@@ -338,6 +361,8 @@ export class Scene3D {
             float sun = pow(max(0.0, dot(viewDir, sunDir)), 75.0) * (0.4 + wave * 0.5);
             col = mix(wc, horizonColor, horizonF * 0.55);
             col += sunColor * sun;
+            // Sky-reflection sheen on the surface (Fresnel rim).
+            col += surfaceTint * fres * (0.18 + sea * 0.22);
           } else {
             // UNDERWATER: this plane is the sunlit surface seen from below,
             // a bright rippling "ceiling" so surface vs. deep is obvious.
@@ -399,6 +424,74 @@ export class Scene3D {
     deep.visible = false;
     this.deep = deep;
     this.scene.add(deep);
+  }
+
+  // --- environment linkage: sea state / weather / time-of-day ---
+  //
+  // The mission header carries a sea-state (Beaufort-ish 0-5), a weather index
+  // (0 clear .. 3 storm) and an hour of day. We translate those into the sky
+  // gradient, sun strength, water chop and fog so a night storm in the Barents
+  // reads completely differently from a calm midday in the Bay of Bengal — the
+  // same 3D engine, just a different palette and wave energy.
+  applyEnvironment(env) {
+    if (!env) return;
+    this._lastEnv = env;
+    const hour = typeof env.timeOfDay === 'number' ? env.timeOfDay : (parseInt(env.timeOfDay, 10) || 12);
+    const wx = typeof env.weather === 'number' ? env.weather : (parseInt(env.weather, 10) || 0);
+    const sea = typeof env.seaState === 'number' ? env.seaState : 2;
+    if (this.underwater) return; // SUB VIEW owns its own palette
+
+    // Base palette by time of day.
+    let pal;
+    if (hour < 6 || hour >= 20) {
+      pal = { top: 0x0b1f3a, hor: 0x223a52, bot: 0x05101e, sun: 0xcdd9ff, sunI: 0.20, bg: 0x0b1f3a, fog: 0x223a52 };
+    } else if (hour < 9 || hour >= 17) {
+      pal = { top: 0x8f6fb0, hor: 0xf0b070, bot: 0x352a48, sun: 0xffd9a0, sunI: 0.55, bg: 0xc89a78, fog: 0xe0b088 };
+    } else {
+      pal = { top: 0x5c9fd8, hor: 0xcfe4f0, bot: 0x1c5270, sun: 0xfff3d0, sunI: 0.85, bg: 0x9fc4e8, fog: 0xcfe4f0 };
+    }
+
+    // Weather overrides (denser haze + weaker sun as it worsens).
+    let fogNear = 3800, fogFar = 17000;
+    if (wx === 1) {            // overcast
+      pal.hor = 0xb9c4cc; pal.top = 0x7d93a3; pal.bot = 0x35424a;
+      pal.sun = 0xdfe6ea; pal.sunI = 0.5; pal.bg = 0x9fb0b8; pal.fog = 0xb9c4cc;
+      fogNear = 2600; fogFar = 14000;
+    } else if (wx === 2) {     // rain
+      pal.top = 0x53626c; pal.hor = 0x8a969e; pal.bot = 0x2a333a;
+      pal.sunI = 0.3; pal.bg = 0x6b767e; pal.fog = 0x8a969e;
+      fogNear = 1800; fogFar = 11000;
+    } else if (wx === 3) {     // storm
+      pal.top = 0x3a444c; pal.hor = 0x6b757c; pal.bot = 0x20272c;
+      pal.sunI = 0.15; pal.bg = 0x55605c; pal.fog = 0x6b757c;
+      fogNear = 1200; fogFar = 8000;
+    }
+
+    if (this.sky && this.sky.material.uniforms) {
+      this.sky.material.uniforms.topColor.value.setHex(pal.top);
+      this.sky.material.uniforms.horizonColor.value.setHex(pal.hor);
+      this.sky.material.uniforms.bottomColor.value.setHex(pal.bot);
+    }
+    if (this.sun) {
+      this.sun.material.color.setHex(pal.sun);
+      this.sun.visible = pal.sunI > 0.2;
+    }
+    if (this.sunHalo) {
+      this.sunHalo.material.opacity = 0.22 * Math.min(1, pal.sunI * 1.4);
+      this.sunHalo.visible = this.sun ? this.sun.visible : false;
+    }
+    if (this.water && this.water.material.uniforms) {
+      const u = this.water.material.uniforms;
+      u.uSeaState.value = sea;
+      u.uFogColor.value.setHex(pal.fog);
+      u.uFogNear.value = fogNear;
+      u.uFogFar.value = fogFar;
+      u.horizonColor.value.setHex(pal.fog);
+    }
+    this.scene.background.setHex(pal.bg);
+    this.scene.fog.color.setHex(pal.fog);
+    this.scene.fog.near = fogNear;
+    this.scene.fog.far = fogFar;
   }
 
   // --- procedural ship mesh sized by its radius (immediate fallback) ---
@@ -565,9 +658,21 @@ export class Scene3D {
       if (m.userData.contact) {
         m.userData.contact.visible = this.underwater && s.isSub;
       }
+      this._updateWake(s, m);
     }
     for (const [id, m] of this.shipMeshes) {
-      if (!seenS.has(id)) { this.shipGroup.remove(m); this._disposeGroup(m); this.shipMeshes.delete(id); }
+      if (!seenS.has(id)) {
+        this.shipGroup.remove(m); this._disposeGroup(m); this.shipMeshes.delete(id);
+        const wt = this._wakeTrails.get(id);
+        if (wt) { this.wakeGroup.remove(wt.line); wt.line.geometry.dispose(); wt.line.material.dispose(); this._wakeTrails.delete(id); }
+      }
+    }
+
+    // Death detection -> explosions. Compare the live set against last frame.
+    for (const s of world.ships) {
+      const was = this._prevAlive.get(s.id);
+      if (was && was.alive && !s.alive) this._spawnExplosion(was.x, was.z, s.side, s.isSub);
+      this._prevAlive.set(s.id, { alive: s.alive, x: s.pos.x, z: s.pos.y });
     }
 
     // aircraft
@@ -593,24 +698,86 @@ export class Scene3D {
       if (!seenA.has(id)) { this.acGroup.remove(m); this._disposeGroup(m); this.acMeshes.delete(id); }
     }
 
-    // projectiles (pooled)
+    // projectiles (pooled): glowing core + additive exhaust + fading trail.
     const live = (world.projectiles || []).filter((p) => !p.dead);
     for (let i = 0; i < live.length; i++) {
       const p = live[i];
       let m = this.projPool[i];
       if (!m) {
-        m = new THREE.Mesh(
+        m = new THREE.Group();
+        const core = new THREE.Mesh(
           new THREE.SphereGeometry(4, 8, 8),
           new THREE.MeshBasicMaterial({ color: 0xffffff })
         );
+        m.add(core);
+        m.userData.core = core;
+        // Exhaust glow trailing the projectile (additive, so it reads as a
+        // hot motor plume regardless of what sits behind it).
+        const ex = new THREE.Mesh(
+          new THREE.SphereGeometry(6, 8, 8),
+          new THREE.MeshBasicMaterial({
+            color: 0xffd070, transparent: true, opacity: 0.7,
+            blending: THREE.AdditiveBlending, depthWrite: false, fog: false,
+          })
+        );
+        ex.position.set(0, 0, -7);
+        m.add(ex);
+        m.userData.exhaust = ex;
         this.projGroup.add(m);
         this.projPool[i] = m;
+        // Reusing a parallel pool slot for the trail line.
+        const tgeo = new THREE.BufferGeometry();
+        tgeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(12 * 3), 3));
+        tgeo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(12 * 3), 3));
+        const tmat = new THREE.LineBasicMaterial({
+          vertexColors: true, transparent: true, opacity: 0.9,
+          blending: THREE.AdditiveBlending, depthWrite: false, fog: false,
+        });
+        const tline = new THREE.Line(tgeo, tmat);
+        tline.frustumCulled = false;
+        this.projGroup.add(tline);
+        this.projTrailPool[i] = tline;
       }
+      const sideHex = p.side === 'player' ? 0x6fe0ff : 0xff8a5a;
+      m.userData.core.material.color.setHex(sideHex);
+      const y = p.type === 'torpedo' ? 4 : Math.max(8, p.alt || 30);
       m.visible = true;
-      m.position.set(p.pos.x, 5, p.pos.y);
-      m.material.color.setHex(p.side === 'player' ? 0x6fe0ff : 0xff8a5a);
+      m.position.set(p.pos.x, y, p.pos.y);
+      // Point the exhaust back along travel using the recent trail history.
+      if (p.trail && p.trail.length > 1) {
+        const a = p.trail[p.trail.length - 1];
+        const b = p.trail[p.trail.length - 2];
+        m.rotation.y = -Math.atan2(b.x - a.x, b.y - a.y);
+      }
+      m.userData.exhaust.visible = p.type === 'missile';
+
+      // Trail: fade from the projectile colour (head) to black (tail) under
+      // additive blending, so it dissolves into the scene instead of a hard line.
+      const tline = this.projTrailPool[i];
+      const tr = p.trail || [];
+      const n = Math.min(tr.length, 12);
+      if (n > 1) {
+        const pos = tline.geometry.attributes.position.array;
+        const col = tline.geometry.attributes.color.array;
+        const hc = new THREE.Color(sideHex);
+        for (let k = 0; k < n; k++) {
+          const pt = tr[tr.length - n + k];
+          pos[k * 3] = pt.x; pos[k * 3 + 1] = y; pos[k * 3 + 2] = pt.y;
+          const f = (k + 1) / n;
+          col[k * 3] = hc.r * f; col[k * 3 + 1] = hc.g * f; col[k * 3 + 2] = hc.b * f;
+        }
+        tline.geometry.setDrawRange(0, n);
+        tline.geometry.attributes.position.needsUpdate = true;
+        tline.geometry.attributes.color.needsUpdate = true;
+        tline.visible = true;
+      } else {
+        tline.visible = false;
+      }
     }
-    for (let i = live.length; i < this.projPool.length; i++) this.projPool[i].visible = false;
+    for (let i = live.length; i < this.projPool.length; i++) {
+      this.projPool[i].visible = false;
+      if (this.projTrailPool[i]) this.projTrailPool[i].visible = false;
+    }
   }
 
   _disposeGroup(g) {
@@ -618,6 +785,98 @@ export class Scene3D {
       if (o.geometry) o.geometry.dispose();
       if (o.material) { if (Array.isArray(o.material)) o.material.forEach((m) => m.dispose()); else o.material.dispose(); }
     });
+  }
+
+  // --- ship wake trail ----------------------------------------------------
+  // A short fading line behind the stern of any surface ship that is actually
+  // moving. Foam-white at the bow, dissolving into the water colour at the
+  // tail so it reads as a V-wake rather than a solid stroke.
+  _updateWake(ship, container) {
+    const moving = !ship.isSub && (ship.speed || 0) > 1.5;
+    let wt = this._wakeTrails.get(ship.id);
+    if (!moving) { if (wt) wt.line.visible = false; return; }
+    if (!wt) {
+      const maxPts = 18;
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(maxPts * 3), 3));
+      geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(maxPts * 3), 3));
+      const mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.75, fog: true });
+      const line = new THREE.Line(geo, mat);
+      line.frustumCulled = false;
+      this.wakeGroup.add(line);
+      wt = { line, pts: [], maxPts };
+      this._wakeTrails.set(ship.id, wt);
+    }
+    const r = ship.radius || 30;
+    const bx = ship.pos.x - Math.sin(ship.heading) * r * 1.1;
+    const bz = ship.pos.y - Math.cos(ship.heading) * r * 1.1;
+    wt.pts.push({ x: bx, z: bz });
+    if (wt.pts.length > wt.maxPts) wt.pts.shift();
+
+    const n = wt.pts.length;
+    const pos = wt.line.geometry.attributes.position.array;
+    const col = wt.line.geometry.attributes.color.array;
+    const head = new THREE.Color(0xffffff);
+    const tail = new THREE.Color(0x3d8ca8); // deep-water base, blends into sea
+    for (let i = 0; i < n; i++) {
+      pos[i * 3] = wt.pts[i].x; pos[i * 3 + 1] = 1.2; pos[i * 3 + 2] = wt.pts[i].z;
+      const f = i / (n - 1 || 1); // 0 = oldest tail, 1 = newest (stern)
+      col[i * 3] = tail.r + (head.r - tail.r) * f;
+      col[i * 3 + 1] = tail.g + (head.g - tail.g) * f;
+      col[i * 3 + 2] = tail.b + (head.b - tail.b) * f;
+    }
+    wt.line.geometry.setDrawRange(0, n);
+    wt.line.geometry.attributes.position.needsUpdate = true;
+    wt.line.geometry.attributes.color.needsUpdate = true;
+    wt.line.visible = true;
+  }
+
+  // --- explosions / battle damage FX --------------------------------------
+  _spawnExplosion(x, z, side, isSub) {
+    const sideHex = side === 'neutral' ? NEUTRAL_COLOR : side === 'player' ? PLAYER_COLOR : ENEMY_COLOR;
+    const y = isSub ? -18 : 7;
+    // Initial flash.
+    const flash = new THREE.Mesh(
+      new THREE.SphereGeometry(14, 12, 12),
+      new THREE.MeshBasicMaterial({ color: 0xfff1c0, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })
+    );
+    flash.position.set(x, y, z);
+    this.fxGroup.add(flash);
+    this._effects.push({ mesh: flash, age: 0, life: 0.35, grow: 100, kind: 'flash' });
+    // Fireball (side-tinted) expanding outward.
+    const ball = new THREE.Mesh(
+      new THREE.SphereGeometry(10, 12, 12),
+      new THREE.MeshBasicMaterial({ color: sideHex, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })
+    );
+    ball.position.set(x, y, z);
+    this.fxGroup.add(ball);
+    this._effects.push({ mesh: ball, age: 0, life: 1.1, grow: 80, kind: 'ball' });
+    // Rising smoke column.
+    const smoke = new THREE.Mesh(
+      new THREE.SphereGeometry(10, 10, 10),
+      new THREE.MeshBasicMaterial({ color: 0x4a4a4a, transparent: true, opacity: 0.5, depthWrite: false, fog: false })
+    );
+    smoke.position.set(x, y + 6, z);
+    this.fxGroup.add(smoke);
+    this._effects.push({ mesh: smoke, age: 0, life: 2.0, grow: 45, rise: 60, kind: 'smoke' });
+  }
+
+  _updateEffects(dt) {
+    for (let i = this._effects.length - 1; i >= 0; i--) {
+      const e = this._effects[i];
+      e.age += dt;
+      const t = Math.min(1, e.age / e.life);
+      e.mesh.scale.setScalar(1 + e.grow * t);
+      if (e.rise) e.mesh.position.y += e.rise * dt;
+      const base = e.kind === 'smoke' ? 0.5 : 0.9;
+      e.mesh.material.opacity = Math.max(0, (1 - t) * base);
+      if (e.age >= e.life) {
+        this.fxGroup.remove(e.mesh);
+        e.mesh.geometry.dispose();
+        e.mesh.material.dispose();
+        this._effects.splice(i, 1);
+      }
+    }
   }
 
   // Toggle the selection glow on whatever body is currently active (procedural or
@@ -718,14 +977,18 @@ export class Scene3D {
       w.material.transparent = false;
       w.material.depthWrite = true;
       if (this.sky) this.sky.visible = true;
-      if (this.sun) this.sun.visible = true;
       if (this.sunHalo) this.sunHalo.visible = true;
       if (this.deep) this.deep.visible = false;
-      // Sky-blue fallback + horizon-haze fog (the waterline trick).
-      this.scene.background.setHex(0x9fc4e8);
-      this.scene.fog.color.setHex(0xcfe4f0);
       this._subLight.visible = false;
       this.target.y = 0;
+      // Re-apply the mission environment palette (overrides the hardcoded
+      // surface defaults so a night/storm mission keeps its look after SUB VIEW).
+      if (this._lastEnv) this.applyEnvironment(this._lastEnv);
+      else {
+        this.scene.background.setHex(0x9fc4e8);
+        this.scene.fog.color.setHex(0xcfe4f0);
+        if (this.sun) this.sun.visible = true;
+      }
     }
   }
 
@@ -809,9 +1072,18 @@ export class Scene3D {
   }
 
   render(world) {
+    const env = world && world.environment;
+    if (env) {
+      const key = (env.seaState || 0) + '|' + (env.weather != null ? env.weather : '') + '|' + (env.timeOfDay != null ? env.timeOfDay : '');
+      if (key !== this._envKey) { this._envKey = key; this.applyEnvironment(env); }
+    }
     this.sync(world);
+    const now = performance.now();
+    const dt = this._lastT ? Math.min(0.1, (now - this._lastT) / 1000) : 0.016;
+    this._lastT = now;
+    this._updateEffects(dt);
     if (this.water && this.water.material.uniforms) {
-      this.water.material.uniforms.time.value = performance.now() * 0.0005;
+      this.water.material.uniforms.time.value = now * 0.0005;
     }
     this._updateCamera();
     this.renderer.render(this.scene, this.camera);
