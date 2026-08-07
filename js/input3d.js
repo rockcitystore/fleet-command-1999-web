@@ -102,7 +102,21 @@ export function attachInput3D(canvas, world, handlers, scene) {
     hideContextMenu();
   }
 
-  const onWheel = (e) => { e.preventDefault(); scene.zoom(e.deltaY > 0 ? 1.1 : 0.9); };
+  const onWheel = (e) => {
+    e.preventDefault();
+    // 3D convention: factor > 1 zooms out, < 1 zooms in.
+    const factor = e.deltaY > 0 ? 1.1 : 0.9;
+    scene.zoom(factor);
+    // Mirror into world.camera.zoom. The 2D panels (and the SWAP-mode 3D panel,
+    // whose distance is recomputed from this each frame) use it as the zoom
+    // source of truth — so scrolling over the 3D view zooms in every mode.
+    // In default 3D the loop recomputes this from `distance` anyway, so the
+    // mirror is harmless and stays consistent with the 2D top-down.
+    if (world && world.camera) {
+      const z = world.camera.zoom * (1 / factor);
+      world.camera.zoom = Math.max(0.1, Math.min(8.0, z));
+    }
+  };
   const onCtx = (e) => { e.preventDefault(); };
 
   canvas.addEventListener('pointerdown', onDown);
