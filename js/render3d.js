@@ -252,11 +252,12 @@ export class Scene3D {
         this.shipGroup.add(m);
         this.shipMeshes.set(s.id, m);
       }
-      // Ships are rendered just above the opaque water plane. Submarines use
-      // negative depth in the simulation, which would place them under the sea
-      // and make them invisible. Drawing at a small positive y prevents that
-      // and avoids z-fighting with the water surface.
-      m.position.set(s.pos.x, 0.5, s.pos.y);
+      // Ships are rendered well above the opaque water plane (y=0). Surface
+      // units sit at y=2 so they cannot be coplanar with / clipped by the sea
+      // on any driver. Submarines are shown at a small positive offset when
+      // detected, so they remain visible as surfaced/periscope contacts.
+      const surfaceY = s.isSub ? 0.8 : 2.0;
+      m.position.set(s.pos.x, surfaceY, s.pos.y);
       m.rotation.y = -s.heading;
       m.visible = s.side === 'player' || !!s.detected;
       this._applySelected(m, sel.includes(s.id));
