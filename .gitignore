@@ -13,3 +13,7 @@ node_modules/
 .cache/
 
 # Original game audio is large; kept out of git history (files remain on disk locally).
+
+# Converted native 3D models (~164 MB generated from original .j3d files).
+# Keep the converter scripts; regenerate locally with tools/batch_convert_j3d.py.
+assets/models3d/

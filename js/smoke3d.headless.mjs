@@ -36,6 +36,15 @@ try {
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
   page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 
+  // Track failed model fetches so a bad model key surfaces as a failure.
+  const modelFails = [];
+  page.on('response', (res) => {
+    const u = res.url();
+    if (u.includes('/models3d/') && u.endsWith('.json') && !res.ok()) {
+      modelFails.push(u.split('/').pop() + ' ' + res.status());
+    }
+  });
+
   await page.goto(URL, { waitUntil: 'networkidle2', timeout: 20000 });
 
   const webgl = await page.evaluate(() => {
@@ -110,6 +119,48 @@ try {
     return { ok: true, frac: nonbg / total };
   });
   check(two.ok && two.frac > 0.01, `2D tactical map panel drawing (frac=${two.ok ? two.frac.toFixed(2) : 'n/a'})`);
+
+  // Authentic .j3d models load asynchronously; wait for the swap-in and verify
+  // at least one ship + one aircraft became an original-geometry model, and
+  // that no model fetch 404'd.
+  await new Promise((r) => setTimeout(r, 2800));
+  const modelStats = await page.evaluate(() => {
+    const s = window.__fc.scene3d;
+    let ships = 0, shipModels = 0, acs = 0, acModels = 0;
+    for (const m of s.shipMeshes.values()) { ships++; if (m.userData.isModel) shipModels++; }
+    for (const m of s.acMeshes.values()) { acs++; if (m.userData.isModel) acModels++; }
+    return { ships, shipModels, acs, acModels };
+  });
+  check(modelStats.shipModels > 0,
+    `authentic ship models swapped in (${modelStats.shipModels}/${modelStats.ships})`);
+  check(modelFails.length === 0, `no model fetches failed (${modelFails.length})`);
+  if (modelFails.length) modelFails.slice(0, 10).forEach((e) => console.log('   modelfail: ' + e));
+
+  // The test scenario starts with no airborne aircraft, so launch one CAP
+  // sortie from a carrier to exercise the authentic-aircraft render path
+  // end-to-end (same getInstance + async swap as ships).
+  const launched = await page.evaluate(() => {
+    const w = window.__fc.world;
+    for (const s of w.ships) {
+      if (s.aircraft && s.aircraft.length) {
+        const ac = s.aircraft[0];
+        const id = w.launchAircraft(s.id, ac.id, 'patrol', null);
+        return id != null ? { id, type: ac.type } : null;
+      }
+    }
+    return null;
+  });
+  await new Promise((r) => setTimeout(r, 1600));
+  const acStats = await page.evaluate(() => {
+    const s = window.__fc.scene3d;
+    let acs = 0, acModels = 0;
+    for (const m of s.acMeshes.values()) { acs++; if (m.userData.isModel) acModels++; }
+    return { acs, acModels };
+  });
+  check(launched !== null, `launched a carrier aircraft (${launched ? launched.type : 'none'})`);
+  check(acStats.acs > 0, `aircraft mesh built (${acStats.acs})`);
+  check(acStats.acModels > 0,
+    `authentic aircraft model swapped in (${acStats.acModels}/${acStats.acs})`);
 
   check(errors.length === 0, `no console/page errors (${errors.length})`);
   if (errors.length) errors.slice(0, 10).forEach((e) => console.log('   err: ' + e));

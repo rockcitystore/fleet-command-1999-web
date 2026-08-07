@@ -13,6 +13,8 @@
 
 import * as THREE from './vendor/three.module.js';
 import { getLand } from './terrain.js';
+import { ModelLibrary } from './modellib.js';
+import { shipModelKey, aircraftModelKey } from './modelmap.js';
 
 const PLAYER_COLOR = 0x4f8fce;
 const ENEMY_COLOR = 0xc85a3c;
@@ -59,6 +61,7 @@ export class Scene3D {
     this.acMeshes = new Map();   // id -> Group
     this.projPool = [];          // reused projectile meshes
 
+    this._modelLib = new ModelLibrary(); // authentic .j3d models (lazy)
     this._geoCache = new Map();  // ship-class key -> shared geometries
     this._buildStatic(world);
 
@@ -113,8 +116,8 @@ export class Scene3D {
     }
   }
 
-  // --- procedural ship mesh sized by its radius ---
-  _buildShip(ship) {
+  // --- procedural ship mesh sized by its radius (immediate fallback) ---
+  _proceduralShip(ship) {
     const r = ship.radius || 30;
     const len = r * 2.6, wid = r * 0.9, h = r * 0.7;
     const group = new THREE.Group();
@@ -142,22 +145,10 @@ export class Scene3D {
     const tower = new THREE.Mesh(new THREE.BoxGeometry(wid * 0.32, h * 0.7, len * 0.1), mat);
     tower.position.set(0, h * 1.25, -len * 0.05);
     group.add(tower);
-
-    // selection ring under the hull
-    const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(len * 0.62, r * 0.12, 8, 32),
-      new THREE.MeshBasicMaterial({ color: HILITE, transparent: true, opacity: 0.9 })
-    );
-    ring.rotation.x = Math.PI / 2;
-    ring.position.y = 0.8;
-    ring.visible = false;
-    group.add(ring);
-    group.userData.ring = ring;
-
     return group;
   }
 
-  _buildAircraft(ac) {
+  _proceduralAircraft(ac) {
     const r = 14;
     const group = new THREE.Group();
     const mat = new THREE.MeshLambertMaterial({ color: ac.side === 'player' ? PLAYER_COLOR : ENEMY_COLOR });
@@ -170,16 +161,79 @@ export class Scene3D {
     const tail = new THREE.Mesh(new THREE.BoxGeometry(r * 0.9, r * 0.14, r * 0.4), mat);
     tail.position.z = -r * 0.9;
     group.add(tail);
+    return group;
+  }
+
+  _makeRing(len, r) {
     const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(r * 1.6, 1.2, 6, 24),
+      new THREE.TorusGeometry(len * 0.62, Math.max(1, r * 0.12), 8, 32),
       new THREE.MeshBasicMaterial({ color: HILITE, transparent: true, opacity: 0.9 })
     );
     ring.rotation.x = Math.PI / 2;
-    ring.position.y = -r * 0.6;
+    ring.position.y = 0.8;
     ring.visible = false;
-    group.add(ring);
-    group.userData.ring = ring;
-    return group;
+    return ring;
+  }
+
+  // Build a container that shows a procedural mesh at once, then swaps in the
+  // authentic .j3d model when it finishes loading (async). Keeps the ring and
+  // userData.shipId so the per-frame sync code is unchanged.
+  _buildShip(ship) {
+    const container = new THREE.Group();
+    container.userData.shipId = ship.id;
+
+    const proc = this._proceduralShip(ship);
+    container.add(proc);
+    container.userData.body = proc;
+    container.userData.hullMat = proc.userData.hullMat;
+    container.userData.isModel = false;
+
+    const ring = this._makeRing((ship.radius || 30) * 2.6, ship.radius || 30);
+    container.add(ring);
+    container.userData.ring = ring;
+
+    const key = shipModelKey(ship);
+    if (key) {
+      const len = (ship.radius || 30) * 2.6;
+      this._modelLib.getInstance(key, len, ship.side).then((model) => {
+        if (!model || !container.parent) return; // disposed already
+        container.remove(proc);
+        container.add(model);
+        container.userData.body = model;
+        container.userData.hullMat = null;
+        container.userData.isModel = true;
+      }).catch(() => {});
+    }
+    return container;
+  }
+
+  _buildAircraft(ac) {
+    const container = new THREE.Group();
+    container.userData.shipId = ac.id;
+
+    const proc = this._proceduralAircraft(ac);
+    container.add(proc);
+    container.userData.body = proc;
+    container.userData.hullMat = proc.userData.hullMat;
+    container.userData.isModel = false;
+
+    const ring = this._makeRing(28, 14);
+    ring.position.y = -8.4;
+    container.add(ring);
+    container.userData.ring = ring;
+
+    const key = aircraftModelKey(ac);
+    if (key) {
+      this._modelLib.getInstance(key, 32, ac.side).then((model) => {
+        if (!model || !container.parent) return;
+        container.remove(proc);
+        container.add(model);
+        container.userData.body = model;
+        container.userData.hullMat = null;
+        container.userData.isModel = true;
+      }).catch(() => {});
+    }
+    return container;
   }
 
   // --- per-frame reconciliation of dynamic objects with world state ---
@@ -201,7 +255,7 @@ export class Scene3D {
       m.position.set(s.pos.x, s.isSub ? (s.depth || 0) : 0, s.pos.y);
       m.rotation.y = -s.heading;
       m.visible = s.side === 'player' || !!s.detected;
-      m.userData.hullMat.emissive.setHex(sel.includes(s.id) ? 0x123a2a : 0x000000);
+      this._applySelected(m, sel.includes(s.id));
       if (m.userData.ring) m.userData.ring.visible = sel.includes(s.id);
     }
     for (const [id, m] of this.shipMeshes) {
@@ -224,7 +278,7 @@ export class Scene3D {
       m.position.set(a.pos.x, y, a.pos.y);
       m.rotation.y = -a.heading;
       m.visible = a.side === 'player' || !!a.detected;
-      m.userData.hullMat.emissive.setHex(sel.includes(a.id) ? 0x123a2a : 0x000000);
+      this._applySelected(m, sel.includes(a.id));
       if (m.userData.ring) m.userData.ring.visible = sel.includes(a.id);
     }
     for (const [id, m] of this.acMeshes) {
@@ -255,6 +309,20 @@ export class Scene3D {
     g.traverse((o) => {
       if (o.geometry) o.geometry.dispose();
       if (o.material) { if (Array.isArray(o.material)) o.material.forEach((m) => m.dispose()); else o.material.dispose(); }
+    });
+  }
+
+  // Toggle the selection glow on whatever body is currently active (procedural or
+  // the loaded authentic model).
+  _applySelected(container, on) {
+    const hex = on ? 0x123a2a : 0x000000;
+    const body = container.userData.body;
+    if (!body) return;
+    body.traverse((o) => {
+      if (o.isMesh && o.material) {
+        const mats = Array.isArray(o.material) ? o.material : [o.material];
+        for (const m of mats) if (m.emissive) m.emissive.setHex(hex);
+      }
     });
   }
 
