@@ -30,6 +30,53 @@ function sideColor(u) {
   return u.side === 'player' ? PLAYER_COLOR : ENEMY_COLOR;
 }
 
+// Real-world-ish visual length in world units. The gameplay collision radius is
+// NOT a proxy for hull size — a frigate's selection bubble is ~1 km across,
+// while the actual hull is ~130 m. We scale meshes by approximate real length
+// so the 3D view reads at the correct geographic scale, with a small exaggeration
+// so units stay identifiable without looking like giants.
+function shipVisualLength(ship) {
+  const name = (ship.name || '').toUpperCase();
+  const cls = (ship.shipClass || '').toLowerCase();
+  const hull = (ship.hull || '').toUpperCase();
+  const code = hull || name;
+  // 1 world unit ≈ 92.6 m (METERS_PER_UNIT). Readability exaggeration 1.4x.
+  const toU = (m) => (m / 92.6) * 1.4;
+  if (/CVN|CV\b/.test(code)) return toU(330);
+  if (/LHD|LHA/.test(code)) return toU(260);
+  if (/CGN|CG\b/.test(code)) return toU(185);
+  if (/DDG|DD\b/.test(code)) return toU(160);
+  if (/FFG|FF\b/.test(code)) return toU(135);
+  if (/SSBN/.test(code)) return toU(175);
+  if (/SSGN|SSN|SSK|SUB/.test(code) || cls === 'submarine') return toU(115);
+  if (/MERCHANT|TANKER|TRAWLER|FERRY|CARGO/.test(name)) return toU(200);
+  if (/AIRPORT|BASE|INSTALLATION/.test(name) || cls === 'installation') return toU(120);
+  if (cls === 'carrier') return toU(330);
+  if (cls === 'cruiser') return toU(185);
+  if (cls === 'destroyer') return toU(160);
+  if (cls === 'frigate') return toU(135);
+  if (cls === 'submarine') return toU(115);
+  return toU(150);
+}
+
+function aircraftVisualLength(ac) {
+  const t = (ac.type || ac.name || '').toLowerCase();
+  const cat = (ac.category || '').toLowerCase();
+  // Aircraft are tiny next to ships; exaggerate a bit more so they remain
+  // visible at strategic zoom without turning into giants.
+  const toU = (m) => (m / 92.6) * 2.0;
+  if (cat === 'helo' || /sh-60|hh-60|uh-60|seahawk|lynx|cobra|ah-1|helo|helicopter/.test(t)) return toU(20);
+  if (/f-14|f14|tomcat/.test(t)) return toU(20);
+  if (/f-18|fa-18|f18|hornet/.test(t)) return toU(18);
+  if (/f-16|f16|f-15|f15/.test(t)) return toU(16);
+  if (/e-2|e2|hawkeye/.test(t)) return toU(18);
+  if (/e-3|e3|sentry/.test(t)) return toU(30);
+  if (/p-3|p3|orion/.test(t)) return toU(36);
+  if (/s-3|s3|viking/.test(t)) return toU(17);
+  if (/mig|su-|tu-|bear/.test(t)) return toU(22);
+  return toU(18);
+}
+
 // ---------------------------------------------------------------------------
 export class Scene3D {
   constructor(canvas, world) {
@@ -494,10 +541,11 @@ export class Scene3D {
     this.scene.fog.far = fogFar;
   }
 
-  // --- procedural ship mesh sized by its radius (immediate fallback) ---
+  // --- procedural ship mesh sized by real visual length (fallback) ---
   _proceduralShip(ship) {
-    const r = ship.radius || 30;
-    const len = r * 2.6, wid = r * 0.9, h = r * 0.7;
+    const targetLen = shipVisualLength(ship);
+    const r = targetLen / 2.6; // reuse old proportions, anchored to real length
+    const len = targetLen, wid = r * 0.9, h = r * 0.7;
     const group = new THREE.Group();
     const color = ship.isSub ? SUB_COLOR : sideColor(ship);
     const mat = new THREE.MeshLambertMaterial({ color });
@@ -527,7 +575,8 @@ export class Scene3D {
   }
 
   _proceduralAircraft(ac) {
-    const r = 14;
+    const targetLen = aircraftVisualLength(ac);
+    const r = targetLen / 2.2; // body length = r*2.2 = targetLen
     const group = new THREE.Group();
     const mat = new THREE.MeshLambertMaterial({ color: sideColor(ac) });
     group.userData.hullMat = mat;
@@ -560,13 +609,14 @@ export class Scene3D {
     const container = new THREE.Group();
     container.userData.shipId = ship.id;
 
+    const visualLen = shipVisualLength(ship);
     const proc = this._proceduralShip(ship);
     container.add(proc);
     container.userData.body = proc;
     container.userData.hullMat = proc.userData.hullMat;
     container.userData.isModel = false;
 
-    const ring = this._makeRing((ship.radius || 30) * 2.6, ship.radius || 30);
+    const ring = this._makeRing(visualLen, visualLen / 2.6);
     container.add(ring);
     container.userData.ring = ring;
 
@@ -575,7 +625,7 @@ export class Scene3D {
     // back-lit by surface light or rendered by software WebGL.
     const contactColor = sideColor(ship);
     const contact = new THREE.Mesh(
-      new THREE.SphereGeometry((ship.radius || 30) * 1.4, 16, 12),
+      new THREE.SphereGeometry(visualLen * 0.7, 16, 12),
       new THREE.MeshBasicMaterial({ color: contactColor, transparent: true, opacity: 0.75 })
     );
     contact.visible = false;
@@ -584,7 +634,7 @@ export class Scene3D {
 
     const key = shipModelKey(ship);
     if (key) {
-      const len = (ship.radius || 30) * 2.6;
+      const len = visualLen;
       this._modelLib.getInstance(key, len, ship.side).then((model) => {
         if (!model || !container.parent) return; // disposed already
         container.remove(proc);
@@ -601,20 +651,21 @@ export class Scene3D {
     const container = new THREE.Group();
     container.userData.shipId = ac.id;
 
+    const visualLen = aircraftVisualLength(ac);
     const proc = this._proceduralAircraft(ac);
     container.add(proc);
     container.userData.body = proc;
     container.userData.hullMat = proc.userData.hullMat;
     container.userData.isModel = false;
 
-    const ring = this._makeRing(28, 14);
-    ring.position.y = -8.4;
+    const ring = this._makeRing(visualLen, visualLen / 2.2);
+    ring.position.y = -visualLen * 0.3;
     container.add(ring);
     container.userData.ring = ring;
 
     const key = aircraftModelKey(ac);
     if (key) {
-      this._modelLib.getInstance(key, 32, ac.side).then((model) => {
+      this._modelLib.getInstance(key, visualLen, ac.side).then((model) => {
         if (!model || !container.parent) return;
         container.remove(proc);
         container.add(model);
@@ -671,7 +722,10 @@ export class Scene3D {
     // Death detection -> explosions. Compare the live set against last frame.
     for (const s of world.ships) {
       const was = this._prevAlive.get(s.id);
-      if (was && was.alive && !s.alive) this._spawnExplosion(was.x, was.z, s.side, s.isSub);
+      if (was && was.alive && !s.alive) {
+        const scale = shipVisualLength(s) * 0.35;
+        this._spawnExplosion(was.x, was.z, s.side, s.isSub, scale);
+      }
       this._prevAlive.set(s.id, { alive: s.alive, x: s.pos.x, z: s.pos.y });
     }
 
@@ -807,7 +861,7 @@ export class Scene3D {
       wt = { line, pts: [], maxPts };
       this._wakeTrails.set(ship.id, wt);
     }
-    const r = ship.radius || 30;
+    const r = shipVisualLength(ship) * 0.5;
     const bx = ship.pos.x - Math.sin(ship.heading) * r * 1.1;
     const bz = ship.pos.y - Math.cos(ship.heading) * r * 1.1;
     wt.pts.push({ x: bx, z: bz });
@@ -832,12 +886,17 @@ export class Scene3D {
   }
 
   // --- explosions / battle damage FX --------------------------------------
-  _spawnExplosion(x, z, side, isSub) {
+  _spawnExplosion(x, z, side, isSub, scale = 1) {
     const sideHex = side === 'neutral' ? NEUTRAL_COLOR : side === 'player' ? PLAYER_COLOR : ENEMY_COLOR;
     const y = isSub ? -18 : 7;
+    // Base sizes are tuned for the new real-scale hulls (a few world units long).
+    // The optional scale lets big units produce slightly bigger blasts.
+    const flashR = 2.5 * scale;
+    const ballR = 1.8 * scale;
+    const smokeR = 1.8 * scale;
     // Initial flash.
     const flash = new THREE.Mesh(
-      new THREE.SphereGeometry(14, 12, 12),
+      new THREE.SphereGeometry(flashR, 12, 12),
       new THREE.MeshBasicMaterial({ color: 0xfff1c0, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })
     );
     flash.position.set(x, y, z);
@@ -845,7 +904,7 @@ export class Scene3D {
     this._effects.push({ mesh: flash, age: 0, life: 0.35, grow: 100, kind: 'flash' });
     // Fireball (side-tinted) expanding outward.
     const ball = new THREE.Mesh(
-      new THREE.SphereGeometry(10, 12, 12),
+      new THREE.SphereGeometry(ballR, 12, 12),
       new THREE.MeshBasicMaterial({ color: sideHex, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false })
     );
     ball.position.set(x, y, z);
@@ -853,10 +912,10 @@ export class Scene3D {
     this._effects.push({ mesh: ball, age: 0, life: 1.1, grow: 80, kind: 'ball' });
     // Rising smoke column.
     const smoke = new THREE.Mesh(
-      new THREE.SphereGeometry(10, 10, 10),
+      new THREE.SphereGeometry(smokeR, 10, 10),
       new THREE.MeshBasicMaterial({ color: 0x4a4a4a, transparent: true, opacity: 0.5, depthWrite: false, fog: false })
     );
-    smoke.position.set(x, y + 6, z);
+    smoke.position.set(x, y + 6 * scale, z);
     this.fxGroup.add(smoke);
     this._effects.push({ mesh: smoke, age: 0, life: 2.0, grow: 45, rise: 60, kind: 'smoke' });
   }

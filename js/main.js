@@ -496,12 +496,17 @@ function loop() {
     if (game.swapped) {
       // SWAP: the big 2D tactical map (now main) is authoritative — its own
       // input drives world.camera, and the small 3D view in the bottom-centre
-      // panel mirrors it.
+      // panel mirrors it. The panel is physically short, so pin the preview to a
+      // sensible theater distance (don't let a tiny panel pull the camera to the
+      // surface) and use a more top-down default angle so the wide strip stays
+      // useful.
       const threeH = dom.map3d.clientHeight || msize.height;
       const fov = (game.scene3d.camera.fov * Math.PI) / 180;
       game.scene3d.target.x = world.camera.center.x;
       game.scene3d.target.z = world.camera.center.y;
-      game.scene3d.distance = Math.max(80, (threeH / 2) / (world.camera.zoom || 1) / Math.tan(fov / 2));
+      const rawDist = (threeH / 2) / (world.camera.zoom || 1) / Math.tan(fov / 2);
+      game.scene3d.distance = Math.max(600, rawDist);
+      game.scene3d.elevation = Math.max(game.scene3d.elevation, 0.85);
       game.scene3d.render(world);
     } else {
       // Default: 3D (main) drives the bottom 2D top-down + minimap camera.
