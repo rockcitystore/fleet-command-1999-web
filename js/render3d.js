@@ -101,7 +101,7 @@ export class Scene3D {
     water.position.y = 0;
     water.renderOrder = 1;
     this.water = water;
-    this.surfaceWaterColor = 0x1c5270;
+    this.surfaceWaterColor = 0x3d8ca8;
     this.scene.add(water);
 
     const grid = new THREE.GridHelper(8000, 32, 0x1d4a66, 0x0e2f44);
@@ -230,10 +230,10 @@ export class Scene3D {
       transparent: false,
       depthWrite: true,
       uniforms: {
-        baseColor: { value: new THREE.Color(0x1c5270) },
+        baseColor: { value: new THREE.Color(0x3d8ca8) },
         surfaceTint: { value: new THREE.Color(0x9fd8ea) },
         horizonColor: { value: new THREE.Color(0xcfe4f0) },
-        sunColor: { value: new THREE.Color(0xfff0c0) },
+        sunColor: { value: new THREE.Color(0xfff3d0) },
         sunDir: { value: sunDir },
         time: { value: 0 },
         opacity: { value: 1.0 },
@@ -268,25 +268,71 @@ export class Scene3D {
         varying vec3 vWorldPos;
         varying float vFogDepth;
 
+        // Simple value noise + FBM. We use this to warp the wave coordinates so
+        // sine-wave fronts meander, avoiding the straight-line / tablecloth look.
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+        }
+        float fbm(vec2 p) {
+          float v = 0.0;
+          float a = 0.5;
+          for (int i = 0; i < 4; i++) {
+            v += a * noise(p);
+            p *= 2.0;
+            a *= 0.5;
+          }
+          return v;
+        }
+
         void main() {
           vec3 viewDir = normalize(cameraPosition - vWorldPos);
-          // two-octave procedural ripple
-          float w1 = sin(vWorldPos.x * 0.014 + time) * sin(vWorldPos.z * 0.012 + time * 0.8);
-          float w2 = sin(vWorldPos.x * 0.043 - time * 1.3) * cos(vWorldPos.z * 0.037 + time * 0.9);
-          float wave = (w1 + w2 * 0.5) * 0.5 + 0.5; // 0..1
+          vec2 p = vWorldPos.xz;
+
+          // Domain warp: curve the coordinate space so travelling wave fronts
+          // meander instead of forming straight, tablecloth-like lines.
+          float warp = fbm(p * 0.0025 + vec2(time * 0.015, time * 0.012));
+          vec2 wp = p + vec2(sin(warp * 6.28318), cos(warp * 6.28318)) * 22.0;
+
+          // Non-orthogonal travelling waves at a couple of scales.
+          float w1 = sin(wp.x * 0.008 + wp.y * 0.003 + time * 0.40);
+          float w2 = sin(wp.x * 0.005 - wp.y * 0.007 + time * 0.30);
+          float w3 = sin(wp.x * 0.013 + wp.y * 0.010 - time * 0.65);
+          float w4 = sin(wp.x * 0.022 - wp.y * 0.016 + time * 1.10);
+          float sineWave = (w1 * 0.40 + w2 * 0.30 + w3 * 0.20 + w4 * 0.10) * 0.5 + 0.5;
+
+          // Small sparkle noise — bright glints on wave crests, not bands.
+          float spark = fbm(wp * 0.035 + vec2(time * 0.35, time * 0.28));
+          spark = pow(spark, 5.0);
+
+          // Mix: sine waves give the swell, noise gives irregular sparkle.
+          float wave = sineWave * 0.75 + spark * 0.25;
 
           vec3 col;
           if (uUnderwater < 0.5) {
-            // SURFACE: deep teal sea with a brighter hazy horizon + sun glitter
-            vec3 wc = mix(baseColor, horizonColor * 1.15, wave * 0.30);
-            float horizonF = pow(1.0 - abs(viewDir.y), 3.0);
-            float sun = pow(max(0.0, dot(viewDir, sunDir)), 110.0) * 2.2;
-            col = mix(wc, horizonColor, horizonF * 0.6);
+            // SURFACE: brighter teal sea with stronger crest/trough contrast
+            // plus sun sparkles, so it reads as water from any angle.
+            vec3 crest = baseColor * 1.45;
+            vec3 trough = baseColor * 0.62;
+            vec3 wc = mix(trough, crest, wave);
+            wc += vec3(0.92, 0.96, 1.0) * spark * 0.55;
+            float horizonF = pow(1.0 - abs(viewDir.y), 2.8);
+            float sun = pow(max(0.0, dot(viewDir, sunDir)), 75.0) * (0.4 + wave * 0.5);
+            col = mix(wc, horizonColor, horizonF * 0.55);
             col += sunColor * sun;
           } else {
             // UNDERWATER: this plane is the sunlit surface seen from below,
             // a bright rippling "ceiling" so surface vs. deep is obvious.
-            col = mix(surfaceTint * 0.5, surfaceTint, wave);
+            col = mix(surfaceTint * 0.50, surfaceTint, wave);
           }
 
           float fogF = smoothstep(uFogNear, uFogFar, vFogDepth);
@@ -495,11 +541,11 @@ export class Scene3D {
       }
       // Surface units sit at y=2.0 (clearly above the opaque water plane).
       // In SUB VIEW, submarines drop to their real simulation depth (negative
-      // y) so you look *down* at them through the now-translucent sea; in the
-      // normal surface view a detected sub is shown just under the surface as
-      // a periscope/snorkel contact.
+      // y). In the normal surface view a detected sub is drawn mostly below
+      // the waterline so only the sail/conning tower sticks out — a clear
+      // periscope-depth contact rather than a surface ship.
       const y = s.isSub
-        ? (this.underwater ? (s.depth || 0) : 0.8)
+        ? (this.underwater ? (s.depth || 0) : - (s.radius || 30) * 0.55)
         : 2.0;
       m.position.set(s.pos.x, y, s.pos.y);
       m.rotation.y = -s.heading;
