@@ -7,7 +7,7 @@ import { drawBattle, drawMinimap, RENDER_OPTIONS } from './render.js';
 import { attachInput, attachInput2DPanel } from './input.js';
 import { Scene3D } from './render3d.js';
 import { attachInput3D } from './input3d.js';
-import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlockCampaign, registerMissionEndHandler, refreshMissionList } from './ui.js';
+import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlockCampaign, registerMissionEndHandler, refreshMissionList, refreshCampaignTree } from './ui.js';
 import { AICommander } from './aiCommander.js';
 import { loadMissions } from './missions.js';
 
@@ -524,12 +524,13 @@ function loop() {
   updateHUD(world);
 }
 
-// On a decisive result, unlock the next campaign mission (victory only).
+// On a decisive result, record it into the campaign branch tree (victory
+// advances the trunk + opens branch leaves) and refresh the tree if it is
+// currently on screen.
 function handleMissionEnd(world) {
-  if (world.phase === 'playerWon') {
-    const ni = (world.__scenarioIndex || 0) + 1;
-    unlockCampaign(ni);
-  }
+  const victory = world.phase === 'playerWon';
+  if (world.missionId) unlockCampaign(world.missionId, victory);
+  refreshCampaignTree();
 }
 
 // --- Boot ---

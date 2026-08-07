@@ -915,3 +915,78 @@ html, body {
 .scenario-card.locked { opacity: 0.5; cursor: not-allowed; }
 .scenario-card.locked:hover,
 .scenario-card.locked:focus { border-color: var(--panel-border); outline: none; }
+
+/* ============ Campaign branch tree ============ */
+.campaign-tree {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  padding: 8px 4px 4px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.campaign-tree svg { display: block; }
+.ct-node { cursor: pointer; }
+.ct-node.locked { cursor: not-allowed; }
+.ct-node-rect {
+  fill: rgba(10, 22, 34, 0.92);
+  stroke: rgba(57, 208, 255, 0.55);
+  stroke-width: 1.5;
+  transition: fill 0.15s ease, stroke 0.15s ease;
+}
+.ct-node.available .ct-node-rect {
+  stroke: var(--cyan);
+  filter: drop-shadow(0 0 6px rgba(57, 208, 255, 0.55));
+}
+.ct-node.victory .ct-node-rect {
+  fill: rgba(20, 60, 40, 0.92);
+  stroke: #51e08a;
+}
+.ct-node.defeat .ct-node-rect {
+  fill: rgba(60, 24, 28, 0.92);
+  stroke: #ff7a6e;
+}
+.ct-node.locked .ct-node-rect {
+  fill: rgba(8, 12, 18, 0.85);
+  stroke: rgba(120, 130, 145, 0.35);
+}
+.ct-node:hover:not(.locked) .ct-node-rect { fill: rgba(20, 40, 58, 0.95); }
+.ct-label {
+  fill: #d6f3ff;
+  font: 600 13px "Rajdhani", "Segoe UI", system-ui, sans-serif;
+  pointer-events: none;
+}
+.ct-node.locked .ct-label { fill: rgba(150, 160, 175, 0.6); }
+.ct-sub {
+  fill: rgba(57, 208, 255, 0.6);
+  font: 500 10px "Rajdhani", "Segoe UI", system-ui, sans-serif;
+  pointer-events: none;
+}
+.ct-edge { stroke: rgba(57, 208, 255, 0.28); stroke-width: 1.5; fill: none; }
+.ct-edge.lit { stroke: rgba(57, 208, 255, 0.7); }
+.ct-region-tag {
+  fill: var(--cyan);
+  font: 700 11px "Rajdhani", "Segoe UI", system-ui, sans-serif;
+  letter-spacing: 2px;
+  pointer-events: none;
+}
+.campaign-hint {
+  margin: 6px 4px 2px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(57, 208, 255, 0.65);
+}
+.campaign-hint em { color: var(--cyan); font-style: normal; }
+.btn-ghost {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid rgba(57, 208, 255, 0.4);
+  color: rgba(57, 208, 255, 0.85);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font: 600 11px "Rajdhani", system-ui, sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.btn-ghost:hover { background: rgba(57, 208, 255, 0.12); }
+

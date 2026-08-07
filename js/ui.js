@@ -3,6 +3,10 @@
 
 import { SCENARIOS, SHIP_STATS, upsToKts } from './engine.js';
 import { RENDER_OPTIONS } from './render.js';
+import {
+  buildCampaignTree, loadProgress, recordResult, statusOf,
+  nextAfter, unlockedCount, resetProgress,
+} from './campaign.js';
 
 const SPEED_BUTTONS = {
   1: 'btn-1x',
@@ -17,18 +21,155 @@ function el(id) {
   return document.getElementById(id);
 }
 
-// ---- Campaign progress (localStorage) ----
+// Set by buildMenu so the campaign tree can launch missions.
+let onStartRef = null;
+
+// ---- Campaign progress (localStorage, branch-tree aware) ----
+// `getUnlocked` keeps a linear count for the flat SINGLE MISSIONS list; it is
+// derived from the real branch tree so the two views never disagree.
 function getUnlocked() {
   try {
-    const v = parseInt(localStorage.getItem('fc99_campaign_unlocked') || '0', 10);
-    return Number.isNaN(v) ? 0 : v;
+    return unlockedCount(buildCampaignTree(), loadProgress());
   } catch { return 0; }
 }
-export function unlockCampaign(idx) {
+// Record a finished mission into the campaign tree. Victory advances the
+// trunk + opens branch leaves; defeat is remembered but unlocks nothing.
+export function unlockCampaign(missionId, victory) {
   try {
-    const cur = getUnlocked();
-    if (idx > cur) localStorage.setItem('fc99_campaign_unlocked', String(idx));
+    recordResult(missionId, victory);
   } catch {}
+}
+
+// --- Campaign branch tree (SVG render) -----------------------------------
+
+const SVGNS = 'http://www.w3.org/2000/svg';
+
+function shortTitle(t, n) {
+  t = (t || '').trim();
+  return t.length > n ? t.slice(0, n - 1) + '…' : t;
+}
+
+function drawCampaignNode(svg, opts) {
+  const { x, y, w, h, title, sub, status, onClick, id } = opts;
+  const g = document.createElementNS(SVGNS, 'g');
+  g.setAttribute('class', `ct-node ${status}` + (status === 'locked' ? ' locked' : ''));
+  g.setAttribute('transform', `translate(${x - w / 2}, ${y - h / 2})`);
+  const rect = document.createElementNS(SVGNS, 'rect');
+  rect.setAttribute('class', 'ct-node-rect');
+  rect.setAttribute('width', w);
+  rect.setAttribute('height', h);
+  rect.setAttribute('rx', 8);
+  g.appendChild(rect);
+  const label = document.createElementNS(SVGNS, 'text');
+  label.setAttribute('class', 'ct-label');
+  label.setAttribute('x', w / 2);
+  label.setAttribute('y', sub ? h / 2 - 3 : h / 2 + 1);
+  label.setAttribute('text-anchor', 'middle');
+  label.setAttribute('dominant-baseline', 'middle');
+  label.textContent = title;
+  g.appendChild(label);
+  if (sub) {
+    const s = document.createElementNS(SVGNS, 'text');
+    s.setAttribute('class', 'ct-sub');
+    s.setAttribute('x', w / 2);
+    s.setAttribute('y', h / 2 + 15);
+    s.setAttribute('text-anchor', 'middle');
+    s.textContent = sub;
+    g.appendChild(s);
+  }
+  if (status !== 'locked' && onClick) g.addEventListener('click', () => onClick(id));
+  svg.appendChild(g);
+}
+
+function startMissionById(tree, id) {
+  let idx = -1;
+  const reg = tree.regions.find((r) => r.id === id);
+  if (reg) idx = reg.index;
+  else {
+    const s = tree.singles.find((x) => x.id === id);
+    if (s) idx = s.index;
+  }
+  if (idx >= 0 && onStartRef) onStartRef(idx);
+}
+
+export function renderCampaignTree() {
+  const host = el('campaign-tree');
+  if (!host) return;
+  const tree = buildCampaignTree();
+  const progress = loadProgress();
+  host.innerHTML = '';
+  if (!tree.regions.length) {
+    host.textContent = 'Campaign library is still loading — open CAMPAIGN again in a moment.';
+    return;
+  }
+  const N = tree.regions.length;
+  const DX = 250, RW = 180, RH = 58, SW = 158, SH = 40;
+  const topY = 48, branchStartY = topY + 108, branchGap = 56;
+  let maxBranch = 0;
+  tree.regions.forEach((r) => { maxBranch = Math.max(maxBranch, (tree.branches[r.id] || []).length); });
+  const width = N * DX + 40;
+  const height = maxBranch > 0 ? branchStartY + maxBranch * branchGap + 30 : topY + RH + 40;
+  const rx = tree.regions.map((r, i) => 20 + i * DX + RW / 2);
+
+  const svg = document.createElementNS(SVGNS, 'svg');
+  svg.setAttribute('width', width);
+  svg.setAttribute('height', height);
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+  // Trunk edges between consecutive regions.
+  for (let i = 0; i < N - 1; i++) {
+    const a = rx[i], b = rx[i + 1];
+    const lit = progress.completed[tree.regions[i].id] === 'victory' && progress.completed[tree.regions[i + 1].id];
+    const p = document.createElementNS(SVGNS, 'path');
+    p.setAttribute('class', 'ct-edge' + (lit ? ' lit' : ''));
+    p.setAttribute('d', `M ${a + RW / 2} ${topY + RH} C ${a + RW / 2 + DX / 2} ${topY + RH + 60}, ${b - RW / 2 - DX / 2} ${topY + RH + 60}, ${b - RW / 2} ${topY + RH}`);
+    svg.appendChild(p);
+  }
+
+  tree.regions.forEach((r, i) => {
+    const px = rx[i], py = topY + RH;
+    const st = statusOf(tree, r.id, progress);
+    const bids = tree.branches[r.id] || [];
+    bids.forEach((bid, k) => {
+      const by = branchStartY + k * branchGap;
+      const bst = statusOf(tree, bid, progress);
+      const edge = document.createElementNS(SVGNS, 'path');
+      edge.setAttribute('class', 'ct-edge' + (bst === 'victory' ? ' lit' : ''));
+      edge.setAttribute('d', `M ${px} ${py} L ${px} ${by - SH / 2}`);
+      svg.appendChild(edge);
+      const s = tree.singles.find((x) => x.id === bid);
+      drawCampaignNode(svg, {
+        x: px, y: by, w: SW, h: SH,
+        title: shortTitle(s ? s.title : bid, 16),
+        status: bst,
+        onClick: (id) => startMissionById(tree, id),
+        id: bid,
+      });
+    });
+    const tag = document.createElementNS(SVGNS, 'text');
+    tag.setAttribute('class', 'ct-region-tag');
+    tag.setAttribute('x', px);
+    tag.setAttribute('y', topY - 18);
+    tag.setAttribute('text-anchor', 'middle');
+    tag.textContent = `REGION ${i + 1}`;
+    svg.appendChild(tag);
+    drawCampaignNode(svg, {
+      x: px, y: topY + RH / 2, w: RW, h: RH,
+      title: shortTitle(r.title, 18),
+      sub: st === 'victory' ? '✓ WON' : st === 'defeat' ? '✗ LOST' : st === 'available' ? 'READY' : 'LOCKED',
+      status: st,
+      onClick: (id) => startMissionById(tree, id),
+      id: r.id,
+    });
+  });
+  host.appendChild(svg);
+}
+
+// Re-render the tree only if the campaign view is currently on screen (cheap
+// call from the mission-end handler so a win lights up the next node).
+export function refreshCampaignTree() {
+  const c = el('sub-campaign');
+  if (c && !c.classList.contains('hidden')) renderCampaignTree();
 }
 
 // One-shot handler fired when a battle reaches a win/lose state.
@@ -92,6 +233,7 @@ const PLACEHOLDERS = {
 export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutorial, onMusic }) {
   const list = el('scenario-list');
   list.innerHTML = '';
+  onStartRef = onStart;
 
   let currentMode = 'single';
 
@@ -194,6 +336,14 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   // Exposed so main.js can redraw the list once missions.json resolves.
   missionListRefresher = renderMissionCards;
 
+  // Campaign reset button clears localStorage progress and redraws the tree.
+  const resetBtn = el('btn-reset-campaign');
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    resetProgress();
+    renderCampaignTree();
+    if (currentMode === 'campaign') renderMissionCards();
+  });
+
   // Briefing overlay controls (wired once; persist across opens).
   const bStart = el('btn-brief-start');
   if (bStart) bStart.addEventListener('click', () => {
@@ -208,6 +358,7 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   // --- Navigation between menu sections ---
   const subWelcome = el('sub-welcome');
   const subSingle = el('sub-single');
+  const subCampaign = el('sub-campaign');
   const subPlaceholder = el('sub-placeholder');
   const subTutorials = el('sub-tutorials');
   const subEditor = el('sub-editor');
@@ -217,7 +368,7 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   const menuButtons = Array.from(document.querySelectorAll('#main-menu .menu-btn'));
 
   function showOnly(active) {
-    [subWelcome, subSingle, subPlaceholder, subTutorials, subEditor, subOptions].forEach((p) => p.classList.add('hidden'));
+    [subWelcome, subSingle, subCampaign, subPlaceholder, subTutorials, subEditor, subOptions].forEach((p) => p.classList.add('hidden'));
     if (active) active.classList.remove('hidden');
   }
 
@@ -229,10 +380,12 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
     btn.addEventListener('click', () => {
       const act = btn.dataset.act;
       setActiveMenu(act);
-      if (act === 'single' || act === 'campaign') {
-        // CAMPAIGN reuses the single-mission order of battle as a track,
-        // gating later missions behind completed ones.
-        currentMode = act;
+      if (act === 'campaign') {
+        currentMode = 'campaign';
+        renderCampaignTree();
+        showOnly(subCampaign);
+      } else if (act === 'single') {
+        currentMode = 'single';
         renderMissionCards();
         showOnly(subSingle);
       } else if (act === 'reference') {
@@ -615,10 +768,17 @@ export function updateHUD(world) {
     const retryBtn = el('btn-retry');
     if (nextBtn && retryBtn) {
       if (victory) {
-        const ni = (world.__scenarioIndex || 0) + 1;
-        const total = SCENARIOS.length;
-        if (ni < total) {
-          nextBtn.textContent = (ni === total - 1) ? 'FINAL MISSION ▸' : 'NEXT MISSION ▸';
+        // Advance along the campaign branch tree when this was a library
+        // mission; otherwise fall back to the next scenario in the list.
+        let ni = -1;
+        if (world.missionId) {
+          const tree = buildCampaignTree();
+          ni = nextAfter(tree, world.missionId, loadProgress());
+        } else {
+          ni = (world.__scenarioIndex || 0) + 1;
+        }
+        if (ni >= 0 && ni < SCENARIOS.length) {
+          nextBtn.textContent = 'NEXT MISSION ▸';
           nextBtn.dataset.next = String(ni);
           nextBtn.classList.remove('hidden');
         } else {
