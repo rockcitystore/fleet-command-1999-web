@@ -723,8 +723,8 @@ export class Scene3D {
     for (const s of world.ships) {
       const was = this._prevAlive.get(s.id);
       if (was && was.alive && !s.alive) {
-        const scale = shipVisualLength(s) * 0.35;
-        this._spawnExplosion(was.x, was.z, s.side, s.isSub, scale);
+        const len = shipVisualLength(s);
+        this._spawnExplosion(was.x, was.z, s.side, s.isSub, len);
       }
       this._prevAlive.set(s.id, { alive: s.alive, x: s.pos.x, z: s.pos.y });
     }
@@ -892,14 +892,17 @@ export class Scene3D {
   }
 
   // --- explosions / battle damage FX --------------------------------------
-  _spawnExplosion(x, z, side, isSub, scale = 1) {
+  // `len` is the (real-scale) visual hull length in world units. All blast
+  // radii are derived from it so the fireball stays believably sized next to
+  // the now-realistic ships: an initial flash ~1× the hull length across,
+  // expanding only a few× (a real fireball, not a 100× nuke bloom).
+  _spawnExplosion(x, z, side, isSub, len = 2) {
+    const L = len && len > 0 ? len : 2;
     const sideHex = side === 'neutral' ? NEUTRAL_COLOR : side === 'player' ? PLAYER_COLOR : ENEMY_COLOR;
     const y = isSub ? -18 : 7;
-    // Base sizes are tuned for the new real-scale hulls (a few world units long).
-    // The optional scale lets big units produce slightly bigger blasts.
-    const flashR = 2.5 * scale;
-    const ballR = 1.8 * scale;
-    const smokeR = 1.8 * scale;
+    const flashR = L * 0.5;   // initial flash radius = half the hull length
+    const ballR = L * 0.4;
+    const smokeR = L * 0.45;
     // Initial flash.
     const flash = new THREE.Mesh(
       new THREE.SphereGeometry(flashR, 12, 12),
@@ -907,7 +910,7 @@ export class Scene3D {
     );
     flash.position.set(x, y, z);
     this.fxGroup.add(flash);
-    this._effects.push({ mesh: flash, age: 0, life: 0.35, grow: 100, kind: 'flash' });
+    this._effects.push({ mesh: flash, age: 0, life: 0.35, grow: 3.5, kind: 'flash' });
     // Fireball (side-tinted) expanding outward.
     const ball = new THREE.Mesh(
       new THREE.SphereGeometry(ballR, 12, 12),
@@ -915,15 +918,15 @@ export class Scene3D {
     );
     ball.position.set(x, y, z);
     this.fxGroup.add(ball);
-    this._effects.push({ mesh: ball, age: 0, life: 1.1, grow: 80, kind: 'ball' });
+    this._effects.push({ mesh: ball, age: 0, life: 1.1, grow: 2.5, kind: 'ball' });
     // Rising smoke column.
     const smoke = new THREE.Mesh(
       new THREE.SphereGeometry(smokeR, 10, 10),
       new THREE.MeshBasicMaterial({ color: 0x4a4a4a, transparent: true, opacity: 0.5, depthWrite: false, fog: false })
     );
-    smoke.position.set(x, y + 6 * scale, z);
+    smoke.position.set(x, y + L * 0.4, z);
     this.fxGroup.add(smoke);
-    this._effects.push({ mesh: smoke, age: 0, life: 2.0, grow: 45, rise: 60, kind: 'smoke' });
+    this._effects.push({ mesh: smoke, age: 0, life: 2.0, grow: 2.0, rise: L * 0.6, kind: 'smoke' });
   }
 
   _updateEffects(dt) {
