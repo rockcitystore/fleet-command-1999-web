@@ -459,7 +459,7 @@ export function drawBattle(ctx, world, size) {
   const selected = world.__selected || [];
   for (const ship of world.ships) {
     if (!ship.alive) continue;
-    if (ship.side === 'enemy' && !ship.detected) continue;
+    if (ship.side !== 'player' && !ship.detected) continue;
 
     const sp = worldToScreen(ship.pos, size, world.camera);
     const stats = SHIP_STATS[ship.shipClass] || { radius: 14 };
@@ -482,12 +482,12 @@ export function drawBattle(ctx, world, size) {
   const selectedAc = world.__selectedAircraft || [];
   for (const ac of world.aircraft) {
     if (!ac.alive) continue;
-    if (ac.side === 'enemy' && !ac.detected) continue;
+    if (ac.side !== 'player' && !ac.detected) continue;
     drawAircraftRoute(ctx, ac, size, world.camera, selectedAc.includes(ac.id));
   }
   for (const ac of world.aircraft) {
     if (!ac.alive || !ac.trail || !ac.trail.length) continue;
-    if (ac.side === 'enemy' && !ac.detected) continue;
+    if (ac.side !== 'player' && !ac.detected) continue;
     const col = ac.side === 'player' ? 'rgba(57,208,255,0.5)' : 'rgba(255,91,91,0.4)';
     ctx.save();
     ctx.beginPath();
@@ -505,7 +505,7 @@ export function drawBattle(ctx, world, size) {
   }
   for (const ac of world.aircraft) {
     if (!ac.alive) continue;
-    if (ac.side === 'enemy' && !ac.detected) continue;
+    if (ac.side !== 'player' && !ac.detected) continue;
     const sp = worldToScreen(ac.pos, size, world.camera);
     drawAircraftSymbol(ctx, ac, sp, 7, selectedAc.includes(ac.id), scale);
   }
@@ -741,7 +741,7 @@ export function drawMinimap(ctx, world, size, mapSize) {
 
   for (const ship of world.ships) {
     if (!ship.alive) continue;
-    if (ship.side === 'enemy' && !ship.detected) continue;
+    if (ship.side !== 'player' && !ship.detected) continue;
     const mx = mapX(ship.pos.x);
     const my = mapY(ship.pos.y);
     ctx.fillStyle = ship.side === 'player' ? COLOR_PLAYER : COLOR_ENEMY;
@@ -750,7 +750,7 @@ export function drawMinimap(ctx, world, size, mapSize) {
 
   for (const ac of world.aircraft) {
     if (!ac.alive) continue;
-    if (ac.side === 'enemy' && !ac.detected) continue;
+    if (ac.side !== 'player' && !ac.detected) continue;
     const mx = mapX(ac.pos.x);
     const my = mapY(ac.pos.y);
     ctx.fillStyle = ac.side === 'player' ? COLOR_PLAYER : COLOR_ENEMY;

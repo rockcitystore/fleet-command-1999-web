@@ -40,6 +40,9 @@ const CLASS_FALLBACK = {
   submarine: '688i',
   installation: 'airport',
   battleship: 'iowa',
+  // Merchants / tankers / trawlers / ferries. No dedicated hull model, so the
+  // frigate silhouette stands in; the khaki NEUTRAL tint keeps them readable.
+  merchant: 'perry',
 };
 
 // Nationality hints parsed from the unit name.

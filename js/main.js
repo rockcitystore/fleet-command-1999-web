@@ -1,14 +1,15 @@
 // main.js — integration glue + real-time render loop.
 // Wires engine <-> render <-> input <-> ui. Runs in the browser as an ES module.
 
-import { makeWorld, makeCustomWorld, fitCameraToWorld, makeAircraftOrder } from './engine.js';
+import { makeWorld, makeCustomWorld, fitCameraToWorld, makeAircraftOrder, SCENARIOS } from './engine.js';
 import { buildLandPolygons } from './geo.js';
 import { drawBattle, drawMinimap, RENDER_OPTIONS } from './render.js';
 import { attachInput, attachInput2DPanel } from './input.js';
 import { Scene3D } from './render3d.js';
 import { attachInput3D } from './input3d.js';
-import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlockCampaign, registerMissionEndHandler } from './ui.js';
+import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlockCampaign, registerMissionEndHandler, refreshMissionList } from './ui.js';
 import { AICommander } from './aiCommander.js';
+import { loadMissions } from './missions.js';
 
 // Local-LLM (Ollama / qwen3.5:4b) RED fleet commander. Created once and reused
 // across battles; reset to BUILTIN at each battle start.
@@ -540,6 +541,20 @@ buildMenu(null, {
   onMusic: (on) => setMusic(on),
 });
 registerMissionEndHandler((world) => handleMissionEnd(world));
+
+// Swap the three hand-written scenarios for the full 39-mission library decoded
+// from the original .scc/.scs files, then re-render the mission list. The menu
+// is already usable before this resolves, so a slow/failed fetch just leaves
+// the fallback scenarios in place.
+loadMissions()
+  .then((data) => {
+    console.log(`[missions] loaded ${data.missions.length} original Fleet Command scenarios`);
+    refreshMissionList();
+  })
+  .catch((err) => {
+    console.warn('[missions] falling back to built-in scenarios:', err && err.message);
+  });
+
 window.addEventListener('resize', resizeCanvases);
 const viewBtn = document.getElementById('btn-viewmode');
 if (viewBtn) viewBtn.addEventListener('click', () => toggleViewMode());
@@ -574,3 +589,4 @@ window.__fc.setAIMode = setAIMode;
 window.__fc.aiCommander = aiCommander;
 window.__fc.startCustom = startCustom;
 window.__fc.buildLandPolygons = buildLandPolygons;
+window.__fc.SCENARIOS = SCENARIOS;

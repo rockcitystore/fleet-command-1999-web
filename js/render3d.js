@@ -18,8 +18,17 @@ import { shipModelKey, aircraftModelKey } from './modelmap.js';
 
 const PLAYER_COLOR = 0x4f8fce;
 const ENEMY_COLOR = 0xc85a3c;
+const NEUTRAL_COLOR = 0xb9b26a; // merchants / civil traffic: khaki, never a target
 const SUB_COLOR = 0x35617f;
 const HILITE = 0x39d0ff;
+
+// BLUE / RED / NEUTRAL hull tint. The original scenarios are full of neutral
+// shipping (alliance 8) that must be visually distinct so the player doesn't
+// shoot it.
+function sideColor(u) {
+  if (u.side === 'neutral') return NEUTRAL_COLOR;
+  return u.side === 'player' ? PLAYER_COLOR : ENEMY_COLOR;
+}
 
 // ---------------------------------------------------------------------------
 export class Scene3D {
@@ -397,7 +406,7 @@ export class Scene3D {
     const r = ship.radius || 30;
     const len = r * 2.6, wid = r * 0.9, h = r * 0.7;
     const group = new THREE.Group();
-    const color = ship.isSub ? SUB_COLOR : (ship.side === 'player' ? PLAYER_COLOR : ENEMY_COLOR);
+    const color = ship.isSub ? SUB_COLOR : sideColor(ship);
     const mat = new THREE.MeshLambertMaterial({ color });
     group.userData.hullMat = mat;
 
@@ -427,7 +436,7 @@ export class Scene3D {
   _proceduralAircraft(ac) {
     const r = 14;
     const group = new THREE.Group();
-    const mat = new THREE.MeshLambertMaterial({ color: ac.side === 'player' ? PLAYER_COLOR : ENEMY_COLOR });
+    const mat = new THREE.MeshLambertMaterial({ color: sideColor(ac) });
     group.userData.hullMat = mat;
 
     const body = new THREE.Mesh(new THREE.BoxGeometry(r * 0.4, r * 0.4, r * 2.2), mat);
@@ -471,7 +480,7 @@ export class Scene3D {
     // SUB VIEW: a bright, self-illuminated sonar-contact sphere that guarantees
     // submerged submarines remain visible even when the detailed 3D model is
     // back-lit by surface light or rendered by software WebGL.
-    const contactColor = ship.side === 'player' ? PLAYER_COLOR : ENEMY_COLOR;
+    const contactColor = sideColor(ship);
     const contact = new THREE.Mesh(
       new THREE.SphereGeometry((ship.radius || 30) * 1.4, 16, 12),
       new THREE.MeshBasicMaterial({ color: contactColor, transparent: true, opacity: 0.75 })

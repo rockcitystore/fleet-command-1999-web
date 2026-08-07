@@ -6,6 +6,7 @@ import { REAL_PLACEMENTS } from './realdata.js';
 import { REAL_SHIP_STATS } from './realstats.js';
 import { isPointOnLand, snapToSea, snapToLand, setLand } from './terrain.js';
 import { buildLandPolygons } from './geo.js';
+import { bindGoals, evaluateGoals, hudObjectives, goalVerdict, goalDebrief } from './goals.js';
 
 export const WORLD_SIZE = 4000;
 export const METERS_PER_UNIT = 92.6; // ~200 nmi across the battlespace
@@ -50,6 +51,27 @@ export function distance(a, b) {
 // preserving relative class performance. See realstats.js for source data and
 // the spatial-scale caveat.
 export const SHIP_STATS = REAL_SHIP_STATS;
+
+// Non-combatant hull. The original scenarios are full of merchants, tankers,
+// trawlers, ferries and AGIs (487 of the 494 merchant entities carry
+// `alliance 8` = NEUTRAL). They are unarmed, slow, soft, and exist purely as
+// traffic the player must identify before shooting — exactly the rules-of-
+// engagement pressure FC99 is famous for. [INFERRED] stats: merchant hulls are
+// not in objects.odb's combatant table.
+if (!SHIP_STATS.merchant) {
+  SHIP_STATS.merchant = {
+    label: 'MV',
+    maxHp: 30,
+    maxSpeedKts: 16,
+    radius: 12,
+    sensorRange: 120,
+    isSub: false,
+    defaultDepth: 0,
+    sensors: [{ kind: 'surfaceRadar', range: 120 }],
+    weapons: [],
+    civilian: true,
+  };
+}
 
 // ---------------------------------------------------------------------------
 // Ammunition magazines.
@@ -248,6 +270,76 @@ export class World {
     };
     platform.aircraft = platform.aircraft || [];
     platform.aircraft.push(ac);
+    return ac;
+  }
+
+  // Spawn an aircraft that is ALREADY AIRBORNE at scenario start. The original
+  // .scs files place AIRENTITY records with a position, altitude, course and
+  // speed — bombers inbound, patrol aircraft on station, airliners crossing the
+  // box. Those units have no parent platform, so they can't go through
+  // launchAircraft(); this builds the same airborne record directly.
+  addAirborne(side, type, pos, opts = {}) {
+    const st = AIRCRAFT_STATS[type] || AIRCRAFT_STATS.__default;
+    const civilian = opts.civilian || side === 'neutral';
+    const alt = opts.alt != null ? Math.min(opts.alt, st.maxAlt) : st.maxAlt * 0.6;
+    const ac = {
+      id: this.nextId++,
+      kind: 'aircraft',
+      side,
+      type,
+      // Keep the ORIGINAL airframe name even when it falls back to __default
+      // stats (the scenarios name 80+ types; we model 10 performance classes).
+      display: opts.display || (AIRCRAFT_STATS[type] ? st.display : type),
+      category: st.category,
+      homeId: opts.homeId != null ? opts.homeId : null,
+      state: 'airborne',
+      pos: { x: pos.x, y: pos.y },
+      alt,
+      maxAlt: st.maxAlt,
+      targetAlt: alt,
+      speed: opts.speed != null ? Math.min(ktsToUps(opts.speed), st.maxSpeed) : st.maxSpeed * 0.6,
+      maxSpeed: st.maxSpeed,
+      fuel: st.maxFuel,
+      maxFuel: st.maxFuel,
+      sensorRange: st.sensorRange,
+      sensors:
+        st.category === 'helo'
+          ? [
+              { kind: 'airRadar', range: Math.round(st.sensorRange * 0.7) },
+              { kind: 'activeSonar', range: 160 },
+              { kind: 'esm', range: Math.round(st.sensorRange * 0.5) },
+            ]
+          : [
+              { kind: 'airRadar', range: st.sensorRange },
+              { kind: 'esm', range: Math.round(st.sensorRange * 0.6) },
+            ],
+      // Civil traffic carries no ordnance at all.
+      weapon: civilian ? null : st.weapon ? { ...st.weapon } : null,
+      ordnance: civilian ? 0 : st.ordnance || 0,
+      ordnanceMax: civilian ? 0 : st.ordnance || 0,
+      civilian,
+      _acCd: 0,
+      _rtbReason: null,
+      mission: opts.mission || null,
+      order: null,
+      heading: opts.course != null ? (opts.course * Math.PI) / 180 : 0,
+      detected: false,
+      alive: true,
+      trail: [],
+    };
+    if (opts.waypoints && opts.waypoints.length) {
+      ac.order = {
+        kind: 'flyTo',
+        waypoints: opts.waypoints.map((w) => ({
+          x: w.x, y: w.y,
+          alt: w.alt != null ? Math.min(w.alt, st.maxAlt) : ac.targetAlt,
+          speed: w.speed != null ? Math.min(ktsToUps(w.speed), st.maxSpeed) : ac.maxSpeed,
+        })),
+        wpIndex: 0,
+        loop: true,
+      };
+    }
+    this.aircraft.push(ac);
     return ac;
   }
 
@@ -607,7 +699,7 @@ export function aircraftAtScreen(point, size, cam, world) {
   if (!world.aircraft) return undefined;
   for (const a of world.aircraft) {
     if (!a.alive) continue;
-    if (a.side === 'enemy' && !a.detected) continue;
+    if (a.side !== 'player' && !a.detected) continue;
     const sp = worldToScreen(a.pos, size, cam);
     const d = Math.hypot(sp.x - point.x, sp.y - point.y);
     const tol = Math.max(10 * scale, 14);
@@ -650,11 +742,24 @@ export function waypointAtScreen(point, size, cam, world) {
 // ---------------------------------------------------------------------------
 // Simulation
 // ---------------------------------------------------------------------------
+// Identification-friend-or-foe. FC99 fields three alliances: BLUE (player),
+// RED (enemy) and NEUTRAL — the merchant traffic, civil airliners and third-
+// party warships that fill the original order of battle. Neutrals are tracked
+// and displayed like any other contact but are never valid targets for either
+// combatant, so every "is this shootable?" test must go through here rather
+// than a bare `side !== side` comparison.
+export function isHostile(a, b) {
+  if (!a || !b) return false;
+  if (a.side === b.side) return false;
+  if (a.side === 'neutral' || b.side === 'neutral') return false;
+  return true;
+}
+
 export function nearestEnemy(ship, world) {
   let best = undefined;
   let bd = Infinity;
   for (const o of world.ships) {
-    if (!o.alive || o.side === ship.side) continue;
+    if (!o.alive || !isHostile(ship, o)) continue;
     const d = distance(ship.pos, o.pos);
     if (d < bd) {
       bd = d;
@@ -696,7 +801,7 @@ export function nearestEnemyShipInRange(src, world, range) {
   let best = null;
   let bd = Infinity;
   for (const s of world.ships) {
-    if (!s.alive || s.side === src.side) continue;
+    if (!s.alive || !isHostile(src, s)) continue;
     const d = distance(src.pos, s.pos);
     if (d <= range && d < bd) {
       best = s;
@@ -979,7 +1084,7 @@ function chooseWeaponTarget(s, w, world) {
   // Enemy ships/subs of a domain this weapon can hit — only ones OUR side has
   // actually detected (no firing at ghosts).
   for (const e of world.ships) {
-    if (!e.alive || e.side === s.side) continue;
+    if (!e.alive || !isHostile(s, e)) continue;
     if (!sees(e)) continue;
     if (domains.includes(contactDomain(e)) && distance(s.pos, e.pos) <= w.range) {
       candidates.push(e);
@@ -988,7 +1093,7 @@ function chooseWeaponTarget(s, w, world) {
   // Enemy aircraft (guns/SAMs).
   if (domains.includes('air')) {
     for (const a of world.aircraft) {
-      if (a.alive && a.side !== s.side && sees(a) && distance(s.pos, a.pos) <= w.range) {
+      if (a.alive && isHostile(s, a) && sees(a) && distance(s.pos, a.pos) <= w.range) {
         candidates.push(a);
       }
     }
@@ -1260,10 +1365,10 @@ export function runBuiltinDoctrine(world) {
   for (const s of world.ships) {
     if (!s.alive || s.side !== 'enemy') continue;
 
-    const foes = world.ships.filter((e) => e.alive && e.side !== s.side);
+    const foes = world.ships.filter((e) => e.alive && isHostile(s, e));
     const enemySubs = foes.filter((e) => contactDomain(e) === 'sub');
     const enemySurf = foes.filter((e) => contactDomain(e) === 'surface');
-    const enemyAir = world.aircraft.filter((a) => a.alive && a.side !== s.side);
+    const enemyAir = world.aircraft.filter((a) => a.alive && isHostile(s, a));
 
     // ---- SUBMARINE doctrine -------------------------------------------------
     if (s.isSub) {
@@ -1361,6 +1466,35 @@ export function checkEnd(world) {
   const playerAlive = world.aliveShips('player').length;
   const enemyAlive = world.aliveShips('enemy').length;
 
+  // Missions imported from the original .scc/.scs files carry the authentic
+  // GOAL tree instead of the hand-written objective list. Fold that tree.
+  if (world.goals && world.goals.length) {
+    evaluateGoals(world);
+    world.objectives = hudObjectives(world);
+    if (playerAlive === 0) {
+      world.phase = 'enemyWon';
+      world.debrief = { ...world.debrief, lose: goalDebrief(world, false) || world.debrief.lose };
+      return;
+    }
+    const verdict = goalVerdict(world);
+    if (verdict === 'playerWon' || verdict === 'enemyWon') {
+      world.phase = verdict;
+      const won = verdict === 'playerWon';
+      const text = goalDebrief(world, won);
+      if (text) world.debrief = { ...world.debrief, [won ? 'win' : 'lose']: text };
+      return;
+    }
+    if (verdict === null) {
+      // No usable goals resolved (every target rolled off the spawn table) —
+      // fall back to the classic annihilation rule so the mission can still end.
+      if (enemyAlive === 0) world.phase = 'playerWon';
+      else world.phase = 'playing';
+      return;
+    }
+    world.phase = 'playing';
+    return;
+  }
+
   // Custom / editor worlds carry no objective set → classic annihilation rule.
   if (!world.objectives || world.objectives.length === 0) {
     if (playerAlive === 0) world.phase = 'enemyWon';
@@ -1447,30 +1581,250 @@ export const SCENARIOS = [
 ];
 
 export const SCENARIO_COUNT = SCENARIOS.length;
+export function scenarioCount() { return SCENARIOS.length; }
+
+// ---------------------------------------------------------------------------
+// Original mission library (assets/data/missions.json)
+// ---------------------------------------------------------------------------
+// tools/parse_scenarios.py decodes all 39 shipped Fleet Command '99 scenario
+// files (Region1-4.scc + Single01-35.scs) into a single JSON payload: authentic
+// briefings, the complete order of battle, in-flight aircraft, spawn
+// probabilities, waypoint routes and the 653-node GOAL tree. registerMissions()
+// swaps that library in as the campaign track, replacing the three hand-written
+// scenarios above. Until it is called (e.g. in the Node unit tests, which never
+// fetch), SCENARIOS keeps its legacy contents so nothing else has to change.
+export let MISSION_LIBRARY = null;
+
+// Region files are the four campaign theatres; Single files are stand-alone
+// missions. Present them in that order so the campaign track reads correctly.
+function missionSortKey(m) {
+  const kindRank = m.kind === 'region' ? 0 : 1;
+  return kindRank * 1000 + (m.index || 0);
+}
+
+export function registerMissions(payload) {
+  if (!payload || !payload.missions || !payload.missions.length) return SCENARIOS;
+  MISSION_LIBRARY = payload;
+  const list = payload.missions.slice().sort((a, b) => missionSortKey(a) - missionSortKey(b));
+
+  const entries = list.map((m) => ({
+    name: m.title || m.id,
+    brief: (m.description || '').split(/(?<=\.)\s/)[0] || m.task || m.id,
+    briefing: {
+      title: (m.title || m.id).toUpperCase(),
+      theater: theaterLabel(m),
+      description: m.description || '',
+      intel: m.intel || '',
+      task: m.task || '',
+    },
+    // The playable objective list is derived from the GOAL tree at world build
+    // time; this preview list is only what the briefing screen shows.
+    objectives: previewObjectives(m),
+    debrief: {
+      win: 'All mission objectives complete.',
+      lose: 'Mission objectives were not met.',
+    },
+    mission: m,
+  }));
+
+  SCENARIOS.length = 0;
+  SCENARIOS.push(...entries);
+  return SCENARIOS;
+}
+
+function theaterLabel(m) {
+  const bits = [];
+  if (m.lat != null && m.lon != null) {
+    const ns = m.lat >= 0 ? 'N' : 'S';
+    const ew = m.lon >= 0 ? 'E' : 'W';
+    bits.push(`${Math.abs(m.lat).toFixed(1)}°${ns} ${Math.abs(m.lon).toFixed(1)}°${ew}`);
+  }
+  if (m.spanNm) bits.push(`${Math.round(m.spanNm)} NM box`);
+  if (m.difficulty != null) bits.push(`difficulty ${m.difficulty}`);
+  return bits.join('  ·  ');
+}
+
+// Top-level goal names, for the briefing screen (before the world exists and
+// the tree can be bound to real units).
+function previewObjectives(m) {
+  const goals = m.goals || [];
+  const roots = goals.filter((g) => g.parent === -1 && g.name);
+  const src = roots.length ? roots : goals.filter((g) => g.name);
+  const seen = new Set();
+  const out = [];
+  for (const g of src) {
+    if (seen.has(g.name)) continue;
+    seen.add(g.name);
+    out.push({ kind: 'goal', text: g.name });
+    if (out.length >= 6) break;
+  }
+  if (!out.length) out.push({ kind: 'goal', text: 'Destroy all hostile forces' });
+  return out;
+}
+
+// --- Build a live World from one parsed mission ----------------------------
+function buildMissionWorld(m, seed) {
+  const w = new World(seed || 1);
+  w.scenarioName = m.title || m.id;
+  w.missionId = m.id;
+  w.metersPerUnit = m.metersPerUnit || METERS_PER_UNIT;
+  // Sea state / weather / time-of-day come straight from the mission header and
+  // drive the 3D renderer's atmosphere.
+  w.environment = {
+    seaState: m.seaState != null ? m.seaState : 2,
+    weather: m.weather != null ? m.weather : 0,
+    timeOfDay: m.timeOfDay != null ? m.timeOfDay : 12,
+    cloudHeight: m.cloudHeight != null ? m.cloudHeight : 3000,
+    month: m.month != null ? m.month : 6,
+  };
+
+  // Real geography from the mission's own lat/lon header, projected at that
+  // mission's scale so the coastline lines up with the parsed unit positions.
+  const land = buildLandPolygons(
+    { lat: m.lat, lon: m.lon, label: (m.title || m.id).toUpperCase() },
+    w.metersPerUnit
+  );
+  w.geo = { lat: land.centerLat, lon: land.centerLon, label: land.label, nineDash: land.nineDash };
+  w.land = land.polygons;
+  setLand(land.polygons);
+
+  // ---- Ships / submarines / shore installations ---------------------------
+  const uidToShip = new Map();
+  for (const u of m.units || []) {
+    // NOTE: the original ships a per-entity spawn PROBABILITY ("prob"), but its
+    // semantics are unverified (histogram shows anomalous 150/500 values) and
+    // gating on it deletes most of the order of battle. We therefore spawn the
+    // full parsed OOB every time for an authentic, deterministic force mix.
+    const cls = SHIP_STATS[u.shipClass] ? u.shipClass : 'frigate';
+    const ship = w.addShip(u.side, cls, { x: u.x, y: u.y }, u.depth);
+    ship.uid = u.uid;
+    ship.name = u.name || u.uid;
+    ship.cls = u.cls || '';
+    ship.hull = u.hull || '';
+    ship.country = u.country || '';
+    ship.group = u.group != null ? u.group : null;
+    ship.civilian = cls === 'merchant' || u.side === 'neutral';
+    ship.heading = ((u.course || 0) * Math.PI) / 180;
+    if (u.speed) ship.speed = Math.min(ktsToUps(u.speed), ship.maxSpeed);
+    uidToShip.set(u.uid, ship);
+
+    // Parked air wing.
+    if (u.aircraft && u.aircraft.length) {
+      ship.aircraft = [];
+      for (const a of u.aircraft) {
+        const cnt = Math.min(a.count || 1, 24);
+        for (let j = 0; j < cnt; j++) {
+          const ac = w.addParkedAircraft(ship, a.type);
+          // Keep the authentic airframe name even when it maps to generic stats.
+          if (!AIRCRAFT_STATS[a.type]) ac.display = a.type;
+        }
+      }
+    }
+
+    // Pre-plotted route from the scenario file.
+    if (u.waypoints && u.waypoints.length && !ship.immobile) {
+      ship.order = {
+        kind: 'moveTo',
+        waypoints: u.waypoints.map((p) => ({
+          x: p.x, y: p.y,
+          speed: p.speed ? Math.min(ktsToUps(p.speed), ship.maxSpeed) : ship.maxSpeed * 0.6,
+        })),
+        wpIndex: 0,
+        loop: u.side === 'neutral', // merchant traffic keeps plying its route
+      };
+    }
+  }
+
+  // ---- Aircraft already airborne at mission start -------------------------
+  for (const a of m.air || []) {
+    // Full parsed airborne set spawns (see prob note above for rationale).
+    const ac = w.addAirborne(a.side, a.type, { x: a.x, y: a.y }, {
+      alt: a.alt,
+      speed: a.speed,
+      course: a.course,
+      display: a.display,
+      civilian: a.role === 'CIVILIAN AIRCRAFT' || a.side === 'neutral',
+      mission: airMissionFor(a.role),
+      waypoints: a.waypoints,
+    });
+    ac.uid = a.uid;
+    ac.country = a.country || '';
+    ac.group = a.group != null ? a.group : null;
+    ac.role = a.role || '';
+  }
+
+  ensureSpawnPositions(w);
+
+  // ---- Goals --------------------------------------------------------------
+  w.goals = bindGoals(w, m.goals || []);
+  evaluateGoals(w);
+  w.objectives = hudObjectives(w);
+  w.debrief = {
+    win: 'All mission objectives complete.',
+    lose: 'Mission objectives were not met.',
+  };
+  return w;
+}
+
+function airMissionFor(role) {
+  switch (role) {
+    case 'Fighter/Attack': return 'CAP';
+    case 'Maritime Patrol': return 'patrol';
+    case 'ASW': return 'ASW';
+    case 'Airborne Early Warning': return 'Recon';
+    case 'Electronic Warfare':
+    case 'Electronic Reconnaissance': return 'Recon';
+    case 'Helicopter': return 'ASW';
+    default: return 'patrol';
+  }
+}
 
 // Ensure every unit spawns on the correct terrain: ships at sea, immobile
 // installations (airfields/bases) on land.
 function ensureSpawnPositions(world) {
   const seaRef = { x: WORLD_SIZE / 2, y: WORLD_SIZE / 2 };
+  const M = 40; // keep everything inside the playable box
+  const clamp = (v) => Math.max(M, Math.min(WORLD_SIZE - M, v));
   for (const s of world.ships) {
     if (s.immobile) {
       if (!isPointOnLand(s.pos.x, s.pos.y)) {
         const safe = snapToLand(s.pos);
-        s.pos.x = safe.x;
-        s.pos.y = safe.y;
+        // The clipped coastline extends well beyond the playable box, so the
+        // "nearest land" for an offshore base can be off-map. Only accept the
+        // snap when the coast is actually nearby; otherwise leave the base put.
+        const d = Math.hypot(safe.x - s.pos.x, safe.y - s.pos.y);
+        if (d <= 600) {
+          s.pos.x = safe.x;
+          s.pos.y = safe.y;
+        }
       }
     } else if (isPointOnLand(s.pos.x, s.pos.y)) {
       const safe = snapToSea(s.pos, seaRef);
       s.pos.x = safe.x;
       s.pos.y = safe.y;
     }
+    s.pos.x = clamp(s.pos.x);
+    s.pos.y = clamp(s.pos.y);
+  }
+  for (const a of world.aircraft) {
+    a.pos.x = clamp(a.pos.x);
+    a.pos.y = clamp(a.pos.y);
   }
 }
 
-export function makeWorld(index) {
+export function makeWorld(index, opts = {}) {
   let i = index;
   if (i < 0) i = 0;
-  if (i > 2) i = 2;
+  if (i > SCENARIOS.length - 1) i = SCENARIOS.length - 1;
+
+  // Missions imported from the original scenario files build themselves from
+  // their own parsed data (order of battle, routes, goal tree, geography).
+  if (SCENARIOS[i] && SCENARIOS[i].mission) {
+    const w = buildMissionWorld(SCENARIOS[i].mission, opts.seed);
+    w.__scenarioIndex = i;
+    return w;
+  }
+
   const name = SCENARIOS[i].name;
   const w = new World();
   w.scenarioName = name;

@@ -54,12 +54,13 @@ export function geoForScenario(name) {
 }
 
 // --- Projection (inverse of render.js worldToLatLon) --------------------
-function makeProjector(centerLat, centerLon) {
+function makeProjector(centerLat, centerLon, metersPerUnit) {
   const mLat = 111000;
   const mLon = 111000 * Math.cos((centerLat * Math.PI) / 180);
+  const mpu = metersPerUnit || METERS_PER_UNIT;
   return (lon, lat) => ({
-    x: WORLD_SIZE / 2 + ((lon - centerLon) * mLon) / METERS_PER_UNIT,
-    y: WORLD_SIZE / 2 - ((lat - centerLat) * mLat) / METERS_PER_UNIT,
+    x: WORLD_SIZE / 2 + ((lon - centerLon) * mLon) / mpu,
+    y: WORLD_SIZE / 2 - ((lat - centerLat) * mLat) / mpu,
   });
 }
 
@@ -124,16 +125,24 @@ function boxesOverlap(a, b) {
 
 // --- Build the land polygons for one scenario's AO ----------------------
 // Returns { polygons: [[{x,y}...]], nineDash: [{x,y}...]|null, label }.
-export function buildLandPolygons(name) {
-  const geo = geoForScenario(name);
-  const { lat: cLat, lon: cLon, label } = geo;
-  const project = makeProjector(cLat, cLon);
+// `nameOrGeo` is either a scenario name (looked up in SCENARIO_GEO) or an
+// explicit { lat, lon, label, metersPerUnit } descriptor. The parsed original
+// missions carry their own LATITUDE/LONGITUDE header plus a per-theatre scale,
+// so they pass the explicit form.
+export function buildLandPolygons(nameOrGeo, metersPerUnit) {
+  const geo =
+    nameOrGeo && typeof nameOrGeo === 'object' ? nameOrGeo : geoForScenario(nameOrGeo);
+  const cLat = geo.lat;
+  const cLon = geo.lon;
+  const label = geo.label || '';
+  const mpu = metersPerUnit || geo.metersPerUnit || METERS_PER_UNIT;
+  const project = makeProjector(cLat, cLon, mpu);
 
   // AO half-span in meters. Must stay large enough that every theater retains
   // its real coastline (Norwegian Sea / Spratly dropped to ~0 vertices below
   // ~3x). 3.2x keeps all theaters framed while sitting a touch tighter than the
   // original 3.5x.
-  const halfM = (WORLD_SIZE / 2) * METERS_PER_UNIT * 3.2;
+  const halfM = (WORLD_SIZE / 2) * mpu * 3.2;
   const dLat = halfM / 111000;
   const dLon = halfM / (111000 * Math.cos((cLat * Math.PI) / 180));
   const ao = {

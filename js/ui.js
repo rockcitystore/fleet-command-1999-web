@@ -1,7 +1,7 @@
 // ui.js — menu / scenario select / HUD DOM (imports engine.js)
 // CONTRACT section 4. No game state mutation except via world methods + handlers.
 
-import { SCENARIOS, SCENARIO_COUNT, SHIP_STATS, upsToKts } from './engine.js';
+import { SCENARIOS, SHIP_STATS, upsToKts } from './engine.js';
 import { RENDER_OPTIONS } from './render.js';
 
 const SPEED_BUTTONS = {
@@ -34,6 +34,13 @@ export function unlockCampaign(idx) {
 // One-shot handler fired when a battle reaches a win/lose state.
 let missionEndHandler = null;
 export function registerMissionEndHandler(fn) { missionEndHandler = fn; }
+
+// buildMenu installs the real implementation; main.js calls this once the
+// original 39-mission library has finished loading.
+let missionListRefresher = null;
+export function refreshMissionList() {
+  if (missionListRefresher) missionListRefresher();
+}
 
 // Briefing overlay state (persists across opens so listeners wire only once).
 let briefingIndex = -1;
@@ -87,45 +94,105 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   list.innerHTML = '';
 
   let currentMode = 'single';
+
+  // Build one mission card. `locked` cards are inert and explain themselves.
+  function missionCard(scenario, index, locked) {
+    const m = scenario.mission;
+    const card = document.createElement('div');
+    card.className = 'scenario-card' + (locked ? ' locked' : '');
+    if (m) card.classList.add(m.kind === 'region' ? 'sc-region' : 'sc-single');
+    if (!locked) {
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+    }
+
+    const name = document.createElement('div');
+    name.className = 'sc-name';
+    name.textContent = scenario.name + (locked ? '  🔒' : '');
+    card.appendChild(name);
+
+    const brief = document.createElement('div');
+    brief.className = 'sc-brief';
+    brief.textContent = locked
+      ? 'Locked — clear the previous mission to unlock.'
+      : scenario.brief;
+    card.appendChild(brief);
+
+    // Order-of-battle summary straight from the original scenario file.
+    if (m && !locked) {
+      const meta = document.createElement('div');
+      meta.className = 'sc-meta';
+      const c = m.counts || {};
+      const bits = [
+        `<span class="sc-blue">BLUE ${c.player || 0}</span>`,
+        `<span class="sc-red">RED ${c.enemy || 0}</span>`,
+      ];
+      if (c.neutral) bits.push(`<span class="sc-neu">NEU ${c.neutral}</span>`);
+      const air = (c.airPlayer || 0) + (c.airEnemy || 0);
+      if (air) bits.push(`<span class="sc-air">AIR ${air}</span>`);
+      if (m.difficulty != null) bits.push(`<span class="sc-diff">DIFF ${m.difficulty}</span>`);
+      if (m.spanNm) bits.push(`<span class="sc-span">${Math.round(m.spanNm)} NM</span>`);
+      meta.innerHTML = bits.join('');
+      card.appendChild(meta);
+    }
+
+    if (!locked) {
+      const activate = () => openBriefing(index, onStart);
+      card.addEventListener('click', activate);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
+      });
+    }
+    return card;
+  }
+
+  function sectionHeader(text, sub) {
+    const h = document.createElement('div');
+    h.className = 'sc-section';
+    h.innerHTML = `<span class="sc-section-t">${text}</span>` +
+      (sub ? `<span class="sc-section-s">${sub}</span>` : '');
+    return h;
+  }
+
   function renderMissionCards() {
     const unlocked = getUnlocked();
     list.innerHTML = '';
-    SCENARIOS.forEach((scenario, index) => {
-      const locked = currentMode === 'campaign' && index > unlocked;
-      const card = document.createElement('div');
-      card.className = 'scenario-card' + (locked ? ' locked' : '');
-      if (!locked) {
-        card.tabIndex = 0;
-        card.setAttribute('role', 'button');
-      }
 
-      const name = document.createElement('div');
-      name.className = 'sc-name';
-      name.textContent = scenario.name + (locked ? '  🔒' : '');
+    // With the original library loaded the list splits into the four campaign
+    // theatres (Region1-4.scc) and the 35 stand-alone missions (SingleNN.scs).
+    const hasLibrary = SCENARIOS.some((s) => s.mission);
+    if (!hasLibrary) {
+      SCENARIOS.forEach((scenario, index) => {
+        list.appendChild(missionCard(scenario, index, currentMode === 'campaign' && index > unlocked));
+      });
+      return;
+    }
 
-      const brief = document.createElement('div');
-      brief.className = 'sc-brief';
-      brief.textContent = locked
-        ? 'Locked — clear previous missions to unlock.'
-        : scenario.brief;
-
-      card.appendChild(name);
-      card.appendChild(brief);
-
-      if (!locked) {
-        const activate = () => openBriefing(index, onStart);
-        card.addEventListener('click', activate);
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            activate();
-          }
-        });
-      }
-
-      list.appendChild(card);
+    const regions = [];
+    const singles = [];
+    SCENARIOS.forEach((s, i) => {
+      (s.mission && s.mission.kind === 'region' ? regions : singles).push([s, i]);
     });
+
+    if (regions.length) {
+      list.appendChild(sectionHeader('CAMPAIGN THEATRES', `${regions.length} regional operations`));
+      for (const [s, i] of regions) {
+        list.appendChild(missionCard(s, i, currentMode === 'campaign' && i > unlocked));
+      }
+    }
+    if (singles.length) {
+      list.appendChild(sectionHeader('SINGLE MISSIONS', `${singles.length} scenarios`));
+      for (const [s, i] of singles) {
+        list.appendChild(missionCard(s, i, currentMode === 'campaign' && i > unlocked));
+      }
+    }
   }
+
+  // Exposed so main.js can redraw the list once missions.json resolves.
+  missionListRefresher = renderMissionCards;
 
   // Briefing overlay controls (wired once; persist across opens).
   const bStart = el('btn-brief-start');
@@ -549,8 +616,9 @@ export function updateHUD(world) {
     if (nextBtn && retryBtn) {
       if (victory) {
         const ni = (world.__scenarioIndex || 0) + 1;
-        if (ni < SCENARIO_COUNT) {
-          nextBtn.textContent = (ni === SCENARIO_COUNT - 1) ? 'FINAL MISSION ▸' : 'NEXT MISSION ▸';
+        const total = SCENARIOS.length;
+        if (ni < total) {
+          nextBtn.textContent = (ni === total - 1) ? 'FINAL MISSION ▸' : 'NEXT MISSION ▸';
           nextBtn.dataset.next = String(ni);
           nextBtn.classList.remove('hidden');
         } else {
