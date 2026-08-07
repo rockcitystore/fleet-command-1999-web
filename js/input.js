@@ -12,6 +12,7 @@ import {
   AIRCRAFT_STATS,
 } from './engine.js';
 import { isPointOnLand, snapToSea } from './terrain.js';
+import { buildContextMenuItems, showContextMenu, hideContextMenu } from './contextmenu.js';
 
 const DRAG_THRESHOLD = 8; // px before a press is considered a drag, not a tap.
 
@@ -30,50 +31,6 @@ export function attachInput(canvas, world, handlers) {
   const activePointers = new Map(); // pointerId -> {x,y} (live positions).
 
   const size = () => ({ width: canvas.clientWidth, height: canvas.clientHeight });
-
-  // ---- context menu ----
-  let ctxMenu = null;
-  function hideContextMenu() {
-    if (ctxMenu) {
-      ctxMenu.remove();
-      ctxMenu = null;
-    }
-  }
-  function showContextMenu(x, y, items) {
-    hideContextMenu();
-    const menu = document.createElement('div');
-    menu.id = 'map-context-menu';
-    for (const item of items) {
-      if (item.divider) {
-        const d = document.createElement('div');
-        d.className = 'ctx-divider';
-        menu.appendChild(d);
-      } else {
-        const row = document.createElement('div');
-        row.className = 'ctx-item' + (item.disabled ? ' disabled' : '');
-        row.textContent = item.label;
-        if (!item.disabled) {
-          row.addEventListener('pointerdown', (e) => { e.stopPropagation(); });
-          row.addEventListener('click', (e) => {
-            e.stopPropagation();
-            item.action();
-            hideContextMenu();
-          });
-        }
-        menu.appendChild(row);
-      }
-    }
-    document.body.appendChild(menu);
-    // Keep inside viewport.
-    const rect = menu.getBoundingClientRect();
-    let left = x;
-    let top = y;
-    if (left + rect.width > window.innerWidth) left = window.innerWidth - rect.width - 8;
-    if (top + rect.height > window.innerHeight) top = window.innerHeight - rect.height - 8;
-    menu.style.left = `${left}px`;
-    menu.style.top = `${top}px`;
-    ctxMenu = menu;
-  }
 
   function selectedMobileIds() {
     return selected.filter((id) => {
@@ -96,146 +53,23 @@ export function attachInput(canvas, world, handlers) {
     handlers.onSelectionChange(selected);
   }
 
+  // Build the context-menu items via the shared builder, adapting this input's
+  // local selection state into the `sel` controller it expects.
   function buildMenuItems(e) {
-    const up = { x: e.offsetX, y: e.offsetY };
-    const s = size();
-    const projectile = projectileAtScreen(up, s, world.camera, world);
-    const ship = shipAtScreen(up, s, world.camera, world);
-    const mobileSel = selectedMobileIds();
-    const items = [];
-
-    if (projectile) {
-      items.push({
-        label: 'IDENTIFY WEAPON',
-        action: () => {
-          world.__selectedProjectile = projectile.id;
-          selected = [];
-          handlers.onSelectionChange([]);
-        },
-      });
-      items.push({ divider: true });
-      items.push({ label: 'CLEAR SELECTION', action: clearSelection });
-      return items;
-    }
-
-    if (ship && ship.side === 'player') {
-      items.push({
-        label: `SELECT TRACK ${String(ship.id).padStart(4, '0')}`,
-        action: () => {
-          world.__selectedProjectile = null;
-          selected = [ship.id];
-          handlers.onSelectionChange(selected);
-        },
-      });
-      if (ship.immobile) {
-        items.push({ label: 'BASE — CANNOT MOVE', disabled: true });
-      }
-      // Launch menu: group parked airframes by type.
-      if (ship.aircraft && ship.aircraft.length) {
-        const byType = new Map();
-        for (const a of ship.aircraft) {
-          if (!byType.has(a.type)) byType.set(a.type, { type: a.type, display: a.display, category: a.category, ids: [], count: 0 });
-          const g = byType.get(a.type);
-          g.count++;
-          g.ids.push(a.id);
-        }
-        for (const g of byType.values()) {
-          items.push({
-            label: `LAUNCH ${g.display.toUpperCase()} ×${g.count}`,
-            action: () => handlers.onLaunchAircraft(ship.id, g.ids[0], g.category === 'helo' ? 'ASW' : 'CAP', null),
-          });
-        }
-      }
-      if (!ship.immobile && selected.length > 1) {
-        items.push({
-          label: 'CANCEL ORDERS',
-          action: cancelOrders,
-        });
-      }
-    }
-
-    // Airborne aircraft (player or detected enemy).
-    const aircraft = aircraftAtScreen(up, s, world.camera, world);
-    if (aircraft) {
-      if (aircraft.side === 'player') {
-        items.push({
-          label: `SELECT TRACK ${String(aircraft.id).padStart(4, '0')}`,
-          action: () => {
-            world.__selectedAircraft = [aircraft.id];
-            world.__selectedProjectile = null;
-            selected = [];
-            handlers.onSelectionChange([]);
-          },
-        });
-        items.push({ label: `RECOVER AIRCRAFT`, action: () => handlers.onRecoverAircraft(aircraft.id) });
-        items.push({ label: `DRAW ROUTE`, action: () => handlers.onSetRouteDraw(aircraft.id, true) });
-        const st = AIRCRAFT_STATS[aircraft.type] || AIRCRAFT_STATS.__default;
-        for (const m of st.missions) {
-          items.push({ label: `SET MISSION ${m}`, action: () => handlers.onSetMission(aircraft.id, m) });
-        }
-        return items;
-      } else if (aircraft.side === 'enemy' && aircraft.detected) {
-        if (mobileSel.length > 0) {
-          items.push({
-            label: `ATTACK TRACK ${String(aircraft.id).padStart(4, '0')}`,
-            action: () => handlers.onAttackOrder(aircraft, mobileSel),
-          });
-        } else {
-          items.push({ label: 'SELECT ENEMY', action: () => { world.__selectedProjectile = null; selected = []; handlers.onSelectionChange([]); } });
-        }
-        return items;
-      }
-    }
-
-    if (ship && ship.side === 'enemy' && ship.detected) {
-      if (mobileSel.length > 0) {
-        items.push({
-          label: `ATTACK TRACK ${String(ship.id).padStart(4, '0')}`,
-          action: () => handlers.onAttackOrder(ship, mobileSel),
-        });
-      } else {
-        items.push({ label: 'SELECT ENEMY', action: () => { world.__selectedProjectile = null; selected = []; handlers.onSelectionChange([]); } });
-      }
-    }
-
-    // Waypoint handle (right-click): insert a new leg or delete the grabbed one.
-    const wpHit = waypointAtScreen(up, s, world.camera, world);
-    if (wpHit) {
-      const ac = world.aircraft.find((a) => a.id === wpHit.acId && a.alive);
-      if (ac && ac.side === 'player' && ac.order && ac.order.waypoints.length > 0) {
-        const wpItems = [];
-        wpItems.push({
-          label: `SELECT TRACK ${String(ac.id).padStart(4, '0')}`,
-          action: () => { world.__selectedAircraft = [ac.id]; world.__selectedProjectile = null; selected = []; handlers.onSelectionChange([]); },
-        });
-        if (ac.order.waypoints.length > 2) {
-          wpItems.push({ label: 'DELETE WAYPOINT', action: () => handlers.onDeleteWaypoint(ac.id, wpHit.index) });
-        }
-        wpItems.push({ label: 'INSERT WAYPOINT', action: () => handlers.onInsertWaypoint(ac.id, wpHit.index) });
-        return wpItems;
-      }
-    }
-
-    if (!ship && !aircraft && mobileSel.length > 0) {
-      const wp = screenToWorld(up, s, world.camera);
-      const onLand = isPointOnLand(wp.x, wp.y);
-      const target = onLand ? snapToSea(wp, world.camera.center) : wp;
-      items.push({
-        label: onLand ? 'MOVE TO NEAREST SEA' : 'MOVE TO GRID',
-        action: () => handlers.onMoveOrder(target, mobileSel),
-      });
-    }
-
-    if (selected.length > 0) {
-      if (items.length > 0) items.push({ divider: true });
-      items.push({ label: 'CANCEL ORDERS', action: cancelOrders });
-      items.push({ label: 'CLEAR SELECTION', action: clearSelection });
-    }
-
-    if (items.length === 0) {
-      items.push({ label: 'NO ACTIONS AVAILABLE', disabled: true });
-    }
-    return items;
+    const sel = {
+      get: () => selected,
+      set: (ids) => { selected = ids; handlers.onSelectionChange(selected); },
+      clear: () => clearSelection(),
+      mobileIds: () => selectedMobileIds(),
+      cancel: () => cancelOrders(),
+    };
+    return buildContextMenuItems({
+      world,
+      handlers,
+      screen: { x: e.offsetX, y: e.offsetY },
+      size: size(),
+      sel,
+    });
   }
 
   function onContextMenu(e) {

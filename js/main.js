@@ -240,6 +240,22 @@ function makeInputHandlers(world) {
         updateHUD(world);
       }
     },
+    // Scramble every parked airframe of a given type from a platform at once.
+    onLaunchAircraftAll: (platformId, type, mission) => {
+      const platform = world.ship(platformId);
+      if (!platform || !platform.aircraft) return;
+      const ids = platform.aircraft.filter((a) => a.type === type).map((a) => a.id);
+      const launched = [];
+      for (const id of ids) {
+        const ac = world.launchAircraft(platformId, id, mission, null);
+        if (ac) launched.push(ac.id);
+      }
+      if (launched.length) {
+        world.__selectedAircraft = launched;
+        world.__selected = [];
+        updateHUD(world);
+      }
+    },
     onRecoverAircraft: (aircraftId) => {
       world.recoverAircraft(aircraftId);
       if (world.__selectedAircraft && world.__selectedAircraft[0] === aircraftId) world.__selectedAircraft = [];
