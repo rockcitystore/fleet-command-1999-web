@@ -319,6 +319,7 @@ function mountBattle(world) {
   }
 
   if (game.renderMode === '3d' && game.scene3d) {
+    game.scene3d.frameShips(world);
     game.miniCtx = dom.minimap.getContext('2d');
     game.map2dCtx = dom.map2d.getContext('2d');
     game.detachInput3d = attachInput3D(dom.map3d, world, handlers, game.scene3d);
@@ -427,6 +428,7 @@ function toggleViewMode() {
   }
 
   if (game.renderMode === '3d' && game.scene3d) {
+    game.scene3d.frameShips(world);
     game.miniCtx = dom.minimap.getContext('2d');
     game.map2dCtx = dom.map2d.getContext('2d');
     game.detachInput3d = attachInput3D(dom.map3d, world, handlers, game.scene3d);

@@ -252,7 +252,11 @@ export class Scene3D {
         this.shipGroup.add(m);
         this.shipMeshes.set(s.id, m);
       }
-      m.position.set(s.pos.x, s.isSub ? (s.depth || 0) : 0, s.pos.y);
+      // Submarines are rendered at the surface (y=0) so they are visible above
+      // the opaque water plane — otherwise a submerged sub (negative depth) is
+      // hidden by the sea and looks "missing" in 3D. Depth is still tracked in
+      // the simulation; this is purely a 3D draw-position fix.
+      m.position.set(s.pos.x, 0, s.pos.y);
       m.rotation.y = -s.heading;
       m.visible = s.side === 'player' || !!s.detected;
       this._applySelected(m, sel.includes(s.id));
@@ -360,6 +364,28 @@ export class Scene3D {
   reset() {
     this.target.set(2000, 0, 2000);
     this.azimuth = 0; this.elevation = 0.62; this.distance = 1300;
+  }
+
+  // Frame the camera on the current live ships so they are centred and fit in
+  // view at battle start (the default target/distance can leave them off-screen
+  // or tiny). Called once when a 3D view is created; does not fight user pan.
+  // Immobile land installations (airfields) are excluded from the fit so a far
+  // inland base does not zoom the whole fleet out to nothing.
+  frameShips(world) {
+    let cx = 0, cy = 0, n = 0, maxR = 0;
+    const movers = world.ships.filter((s) => s.alive && !s.immobile);
+    const list = movers.length ? movers : world.ships.filter((s) => s.alive);
+    for (const s of list) { cx += s.pos.x; cy += s.pos.y; n++; }
+    if (!n) return;
+    cx /= n; cy /= n;
+    for (const s of list) {
+      maxR = Math.max(maxR, Math.hypot(s.pos.x - cx, s.pos.y - cy));
+    }
+    this.target.set(cx, 0, cy);
+    this.azimuth = 0;
+    this.elevation = 0.72;
+    // Tight fit: zoom in enough that even small units (subs) are clearly seen.
+    this.distance = Math.max(260, Math.min(2200, maxR * 1.7 + 320));
   }
 
   // --- picking / unprojection ---
