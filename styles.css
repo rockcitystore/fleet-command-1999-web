@@ -676,6 +676,41 @@ html, body {
   overflow: auto;
 }
 
+/* BLUE CIC (player LLM advisor) panel — shown below RED CIC so they don't overlap. */
+#blue-cic-panel {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 14px;
+  min-width: 320px;
+  max-width: min(800px, 80vw);
+  background: rgba(6, 18, 31, 0.92);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(150, 230, 255, 0.18),
+    0 8px 24px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  cursor: pointer;
+}
+#blue-cic-panel.hidden { display: none; }
+#blue-cic-panel.thinking { border-color: var(--cyan); }
+#blue-cic-panel.streaming { border-color: var(--cyan-dim); }
+#blue-cic-panel.done { border-color: var(--highlight); }
+#blue-cic-panel.error { border-color: var(--enemy); }
+.aicic-label-blue { color: var(--cyan); }
+.aicic-text-blue { color: var(--cyan-dim); }
+
+#blue-ai-status { color: var(--cyan-dim); }
+#blue-ai-status.ai-blue { color: var(--cyan); }
+#blue-ai-status.ai-error { color: var(--enemy); }
+
 .btn {
   padding: 6px 12px;
   background: var(--btn-bg);

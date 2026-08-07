@@ -99,6 +99,9 @@ try {
     };
   });
 
+  // --- Enable debug visibility so the RED CIC HUD can be verified ---------
+  await page.evaluate(() => { window.__fc.debugAI = true; });
+
   // --- Enable LLM mode (uses the mock transport) --------------------------
   await page.evaluate(() => window.__fc.setAIMode('llm'));
   await page.waitForFunction(

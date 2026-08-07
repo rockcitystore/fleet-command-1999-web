@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#06121f" />
   <title>FLEET COMMAND '99</title>
   <link rel="icon" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <!-- ============ MENU SCREEN ============ -->
@@ -209,12 +209,14 @@
       <button id="btn-swap" class="btn" type="button">SWAP</button>
       <button id="btn-subview" class="btn" type="button">SUB VIEW</button>
       <button id="btn-ai" class="btn" type="button">AI: BUILTIN</button>
+      <button id="btn-blue-ai" class="btn" type="button">BLUE: OFF</button>
       <button id="btn-music" class="btn" type="button">MUSIC</button>
       <span class="hud-cell hud-scenario-cell"><span id="hud-scenario">&mdash;</span></span>
       <span class="hud-cell"><span class="hud-label">ALLY</span> <span id="hud-player">0</span></span>
       <span class="hud-cell"><span class="hud-label">HOSTILE</span> <span id="hud-enemy">0</span></span>
       <span class="hud-cell"><span class="hud-label">AI</span> <span id="ai-status">BUILTIN</span></span>
-      <span class="hud-cell hud-cell-aicic"><span class="hud-label">RED CIC</span> <span id="ai-live" class="ai-live">&mdash;</span></span>
+      <span class="hud-cell hud-cell-aicic"><span class="hud-label">RED CIC</span> <span id="ai-live" class="ai-live hidden">&mdash;</span></span>
+      <span class="hud-cell"><span class="hud-label">BLUE</span> <span id="blue-ai-status">OFF</span></span>
       <span class="hud-cell"><span class="hud-label">T</span> <span id="hud-time">T+00:00</span></span>
       <span class="hud-cell"><span class="hud-label">STATUS</span> <span id="hud-status">1x</span></span>
     </div>
@@ -222,6 +224,11 @@
     <div id="ai-cic-panel" class="hidden" title="Click to expand/collapse">
       <div class="aicic-label">RED CIC</div>
       <div id="ai-cic-text" class="aicic-text">&mdash;</div>
+    </div>
+
+    <div id="blue-cic-panel" class="hidden" title="Click to expand/collapse">
+      <div class="aicic-label aicic-label-blue">BLUE CIC</div>
+      <div id="blue-cic-text" class="aicic-text aicic-text-blue">&mdash;</div>
     </div>
 
     <div id="objectives" class="objectives hidden"></div>
@@ -281,6 +288,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=4"></script>
+  <script type="module" src="js/main.js?v=5"></script>
 </body>
 </html>

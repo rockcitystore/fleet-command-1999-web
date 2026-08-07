@@ -11,9 +11,24 @@ import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlock
 import { AICommander } from './aiCommander.js';
 import { loadMissions } from './missions.js';
 
-// Local-LLM (Ollama / qwen3.5:4b) RED fleet commander. Created once and reused
-// across battles; reset to BUILTIN at each battle start.
-const aiCommander = new AICommander();
+// Local-LLM (Ollama / qwen3.5:4b) commanders. Created once and reused across
+// battles. RED is the enemy commander; BLUE is the player advisor. Both are
+// OFF by default. RED live stream is hidden from the player unless debugAI is
+// enabled (URL ?debugAI=1 or window.__fc.debugAI = true).
+const aiCommander = new AICommander({ side: 'enemy' });
+const blueCommander = new AICommander({ side: 'player', intervalMs: 10000 });
+
+// Debug visibility for enemy LLM stream: hidden from the player by default so
+// the RED commander's reasoning remains secret. Enable with URL ?debugAI=1 or
+// by setting window.__fc.debugAI = true in the console.
+function detectDebugAI() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('debugAI') === '1' || params.get('debugAI') === 'true';
+  } catch { return false; }
+}
+aiCommander.debug = detectDebugAI();
+blueCommander.debug = aiCommander.debug; // player side is always visible to player
 
 
 const MINIMAP_PX = 140;
@@ -361,10 +376,13 @@ function mountBattle(world) {
   resizeCanvases();
   game.world = world;
 
-  // Enemy command source starts as the built-in deterministic doctrine.
+  // Command sources start as built-in deterministic doctrine / off.
   world.aiMode = 'builtin';
   aiCommander.setEnabled(false);
   aiCommander.lastError = null;
+  world.blueMode = 'off';
+  blueCommander.setEnabled(false);
+  blueCommander.lastError = null;
   syncAIModeUI();
 
   if (!game.rafId) loop();
@@ -386,14 +404,34 @@ function setAIMode(mode) {
   syncAIModeUI();
 }
 
-// Reflect the current AI mode in the control-bar button + status readout.
+// Toggle the BLUE (player) LLM advisor. It suggests orders but does NOT
+// auto-execute them, so it never overrides the player's direct commands.
+function setBlueAIMode(mode) {
+  const world = game.world;
+  if (!world) return;
+  if (mode === 'llm') {
+    world.blueMode = 'llm';
+    blueCommander.setEnabled(true);
+    blueCommander.tick(world, { force: true }).catch(() => {});
+  } else {
+    world.blueMode = 'off';
+    blueCommander.setEnabled(false);
+  }
+  syncAIModeUI();
+}
+
+// Reflect the current RED AI mode in the control-bar button + status readout.
 function syncAIModeUI() {
+  const world = game.world;
+  const llm = world && world.aiMode === 'llm';
+  const blueLlm = world && world.blueMode === 'llm';
+
+  // --- RED (enemy) commander UI ---
   const btn = document.getElementById('btn-ai');
   const status = document.getElementById('ai-status');
   const live = document.getElementById('ai-live');
   const panel = document.getElementById('ai-cic-panel');
   const panelText = document.getElementById('ai-cic-text');
-  const llm = game.world && game.world.aiMode === 'llm';
   if (btn) {
     btn.textContent = llm ? 'AI: LLM' : 'AI: BUILTIN';
     btn.classList.toggle('active', !!llm);
@@ -404,20 +442,56 @@ function syncAIModeUI() {
     status.classList.toggle('ai-error', !!aiCommander.lastError);
     status.title = aiCommander.lastBrief || '';
   }
+  // RED live stream is hidden unless debugAI is enabled — the enemy commander's
+  // reasoning should not be visible to the player in normal play.
+  const redDebug = aiCommander.debug;
   if (live) {
     const streaming = aiCommander.phase === 'thinking' || aiCommander.phase === 'streaming';
-    live.textContent = aiCommander.livePreview();
-    live.classList.toggle('live', !!streaming);
-    live.title = streaming ? aiCommander.liveText : (aiCommander.lastBrief || '');
+    live.textContent = redDebug ? aiCommander.livePreview() : '';
+    live.classList.toggle('live', redDebug && !!streaming);
+    live.classList.toggle('hidden', !redDebug);
+    live.title = redDebug ? (streaming ? aiCommander.liveText : (aiCommander.lastBrief || '')) : '';
   }
   if (panel && panelText) {
-    const show = !!llm || !!aiCommander.lastError || (aiCommander.liveText && aiCommander.liveText !== '');
+    const show = redDebug && (!!llm || !!aiCommander.lastError || (aiCommander.liveText && aiCommander.liveText !== ''));
     panel.classList.toggle('hidden', !show);
     panelText.textContent = aiCommander.livePreview();
     panel.classList.toggle('thinking', aiCommander.phase === 'thinking');
     panel.classList.toggle('streaming', aiCommander.phase === 'streaming');
     panel.classList.toggle('done', aiCommander.phase === 'done');
     panel.classList.toggle('error', !!aiCommander.lastError);
+  }
+
+  // --- BLUE (player advisor) UI ---
+  const blueBtn = document.getElementById('btn-blue-ai');
+  const blueStatus = document.getElementById('blue-ai-status');
+  const blueLive = document.getElementById('blue-ai-live');
+  const bluePanel = document.getElementById('blue-cic-panel');
+  const bluePanelText = document.getElementById('blue-cic-text');
+  if (blueBtn) {
+    blueBtn.textContent = blueLlm ? 'BLUE: LLM' : 'BLUE: OFF';
+    blueBtn.classList.toggle('active', !!blueLlm);
+  }
+  if (blueStatus) {
+    blueStatus.textContent = blueCommander.statusText();
+    blueStatus.classList.toggle('ai-blue', !!blueLlm && !blueCommander.lastError);
+    blueStatus.classList.toggle('ai-error', !!blueCommander.lastError);
+    blueStatus.title = blueCommander.lastBrief || '';
+  }
+  if (blueLive) {
+    const streaming = blueCommander.phase === 'thinking' || blueCommander.phase === 'streaming';
+    blueLive.textContent = blueCommander.livePreview();
+    blueLive.classList.toggle('live', !!streaming);
+    blueLive.title = streaming ? blueCommander.liveText : (blueCommander.lastBrief || '');
+  }
+  if (bluePanel && bluePanelText) {
+    const show = !!blueLlm || !!blueCommander.lastError || (blueCommander.liveText && blueCommander.liveText !== '');
+    bluePanel.classList.toggle('hidden', !show);
+    bluePanelText.textContent = blueCommander.livePreview();
+    bluePanel.classList.toggle('thinking', blueCommander.phase === 'thinking');
+    bluePanel.classList.toggle('streaming', blueCommander.phase === 'streaming');
+    bluePanel.classList.toggle('done', blueCommander.phase === 'done');
+    bluePanel.classList.toggle('error', !!blueCommander.lastError);
   }
 }
 
@@ -484,10 +558,10 @@ function loop() {
   resizeCanvases();
   world.advanceRealtime();
 
-  // Local-LLM RED fleet commander: throttled + async, fire-and-forget. It is a
-  // no-op unless the player has switched AI mode to LLM. Keeps the enemy acting
-  // without ever blocking the render loop.
+  // Local-LLM commanders: throttled + async, fire-and-forget. RED runs the
+  // enemy; BLUE advises the player. They never block the render loop.
   if (world.aiMode === 'llm') aiCommander.tick(world).catch(() => {});
+  if (world.blueMode === 'llm') blueCommander.tick(world).catch(() => {});
   syncAIModeUI();
 
   const msize = { width: dom.map.clientWidth || window.innerWidth, height: dom.map.clientHeight || window.innerHeight };
@@ -570,8 +644,14 @@ const aiBtn = document.getElementById('btn-ai');
 if (aiBtn) aiBtn.addEventListener('click', () => {
   setAIMode(game.world && game.world.aiMode === 'llm' ? 'builtin' : 'llm');
 });
+const blueAiBtn = document.getElementById('btn-blue-ai');
+if (blueAiBtn) blueAiBtn.addEventListener('click', () => {
+  setBlueAIMode(game.world && game.world.blueMode === 'llm' ? 'off' : 'llm');
+});
 const aiPanel = document.getElementById('ai-cic-panel');
 if (aiPanel) aiPanel.addEventListener('click', () => aiPanel.classList.toggle('expanded'));
+const blueAiPanel = document.getElementById('blue-cic-panel');
+if (blueAiPanel) blueAiPanel.addEventListener('click', () => blueAiPanel.classList.toggle('expanded'));
 // SUB VIEW: dive the 3D camera below the surface so submarines (drawn at real
 // depth through the now-translucent sea) become visible.
 const subBtn = document.getElementById('btn-subview');
@@ -592,7 +672,19 @@ window.__fc.makeAircraftOrder = makeAircraftOrder;
 window.__fc.RENDER_OPTIONS = RENDER_OPTIONS;
 window.__fc.startGame = startGame;
 window.__fc.setAIMode = setAIMode;
+window.__fc.setBlueAIMode = setBlueAIMode;
 window.__fc.aiCommander = aiCommander;
+window.__fc.blueCommander = blueCommander;
 window.__fc.startCustom = startCustom;
 window.__fc.buildLandPolygons = buildLandPolygons;
 window.__fc.SCENARIOS = SCENARIOS;
+// Toggle enemy LLM stream visibility. Use ?debugAI=1 URL param, or run in console:
+// window.__fc.debugAI = true
+Object.defineProperty(window.__fc, 'debugAI', {
+  get: () => aiCommander.debug,
+  set: (v) => {
+    aiCommander.debug = !!v;
+    blueCommander.debug = !!v;
+    syncAIModeUI();
+  },
+});

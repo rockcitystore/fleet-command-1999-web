@@ -24,7 +24,7 @@
 import { ollamaChat, ollamaChatStream, OLLAMA_DEFAULT_BASE, OLLAMA_DEFAULT_MODEL } from './ollama.js';
 import { runBuiltinDoctrine } from './engine.js';
 
-const SYSTEM_PROMPT = `You are the RED fleet commander in a real-time naval war game. You command the RED (enemy) ships listed under "enemies". The player's BLUE contacts are under "contacts".
+const RED_SYSTEM_PROMPT = `You are the RED fleet commander in a real-time naval war game. You command the RED (enemy) ships listed under "enemies". The player's BLUE contacts are under "contacts".
 
 Output ONLY a JSON array of orders, one per RED ship you want to control. No prose, no markdown, no code fences — just the array.
 
@@ -43,9 +43,32 @@ Rules:
 Example (war started, two RED ships):
 [{"ship":7,"act":"attack","target":3},{"ship":8,"act":"move","pos":{"x":950,"y":1350},"depth":-60}]`;
 
-function buildSnapshot(world) {
+const BLUE_SYSTEM_PROMPT = `You are the BLUE fleet tactical advisor in a real-time naval war game. The player commands the BLUE ships listed under "friendlies". Hostile RED contacts are under "hostiles".
+
+Output ONLY a JSON array of SUGGESTED orders, one per BLUE ship you want to advise. The player sees these suggestions and may accept or ignore them. No prose, no markdown, no code fences — just the array.
+
+Each order uses these EXACT fields:
+  "ship":   <integer> REQUIRED — the BLUE ship id from the friendlies list (the ship you are advising)
+  "act":    "attack" | "move" | "hold"
+  "target": <integer> a RED hostile id from the hostiles list (REQUIRED only for "attack")
+  "pos":    {"x":int,"y":int}  (REQUIRED only for "move")
+  "depth":  <integer, negative metres>  optional, submarines only (e.g. -15 to fire, -150 to lurk); surface ships ignore it
+
+Rules:
+- "ship" and "target" MUST be integers copied exactly from the snapshot. They are never objects.
+- If "combatStarted" is false, the war has NOT started. DO NOT use "attack" — suggest "move"/"hold" only.
+- If "combatStarted" is true, engage: missile ships stand off and attack surface hostiles; ASW ships close on submarines; subs fire at surface ships from periscope depth.
+
+Example (war started, two BLUE ships):
+[{"ship":3,"act":"attack","target":7},{"ship":4,"act":"move","pos":{"x":950,"y":1350},"depth":-60}]`;
+
+function buildSnapshot(world, side = 'enemy') {
   const round = (n) => Math.round(n);
-  const enemies = world.aliveShips('enemy').map((s) => ({
+  const ownSide = side === 'enemy' ? 'enemy' : 'player';
+  const oppSide = side === 'enemy' ? 'player' : 'enemy';
+  const ownLabel = side === 'enemy' ? 'enemies' : 'friendlies';
+  const oppLabel = side === 'enemy' ? 'contacts' : 'hostiles';
+  const own = world.aliveShips(ownSide).map((s) => ({
     id: s.id,
     type: s.shipClass || s.name || 'ship',
     x: round(s.pos.x),
@@ -56,7 +79,7 @@ function buildSnapshot(world) {
     weapons: (s.weapons || []).map((w) => w.type),
     order: s.order ? s.order.kind : 'none',
   }));
-  const contacts = world.aliveShips('player').map((s) => ({
+  const contacts = world.aliveShips(oppSide).map((s) => ({
     id: s.id,
     type: s.shipClass || s.name || 'ship',
     x: round(s.pos.x),
@@ -67,8 +90,8 @@ function buildSnapshot(world) {
   return {
     time: round(world.time),
     combatStarted: !!world.combatStarted,
-    enemies,
-    contacts,
+    [ownLabel]: own,
+    [oppLabel]: contacts,
   };
 }
 
@@ -97,6 +120,8 @@ export class AICommander {
     this.base = opts.base || OLLAMA_DEFAULT_BASE;
     this.model = opts.model || OLLAMA_DEFAULT_MODEL;
     this.intervalMs = opts.intervalMs || 6000; // decision cadence
+    this.side = opts.side || 'enemy';          // 'enemy' (RED) or 'player' (BLUE)
+    this.debug = opts.debug || false;          // when true, HUD shows live stream
     this.enabled = false;
     this.inFlight = false;
     this.lastCallTs = 0;
@@ -123,12 +148,16 @@ export class AICommander {
 
   // Short status string for the HUD.
   statusText() {
-    if (!this.enabled) return 'BUILTIN';
+    if (!this.enabled) return this.side === 'enemy' ? 'BUILTIN' : 'OFF';
     if (this.phase === 'thinking') return 'LLM ▸ think';
     if (this.phase === 'streaming') return 'LLM ▸ …';
     if (this.inFlight) return 'LLM ▸ …';
     if (this.lastError) return 'LLM! fb';
     return 'LLM';
+  }
+
+  cicLabel() {
+    return this.side === 'enemy' ? 'RED CIC' : 'BLUE CIC';
   }
 
   // Live, human-facing text: the building JSON while streaming, the last brief
@@ -155,19 +184,27 @@ export class AICommander {
     this.liveText = '';
     this.phase = 'thinking';
     this._streamChunks = [];
+    const logPrefix = `[${this.cicLabel()}]`;
     try {
-      const snapshot = buildSnapshot(world);
+      const snapshot = buildSnapshot(world, this.side);
+      const systemPrompt = this.side === 'enemy' ? RED_SYSTEM_PROMPT : BLUE_SYSTEM_PROMPT;
       const messages = [
-        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'system', content: systemPrompt },
         { role: 'user', content: 'Current battle snapshot:\n' + JSON.stringify(snapshot, null, 0) },
       ];
       this._lastMessages = messages;
       this.callCount++;
+      if (this.debug) {
+        console.log(`${logPrefix} snapshot:`, snapshot);
+        console.log(`${logPrefix} messages:`, messages);
+      } else {
+        console.debug(`${logPrefix} snapshot:`, snapshot);
+      }
 
       let content;
       if (this.streaming && this.streamTransport) {
         // Stream the reply; onToken updates liveText/phase in real time so the
-        // HUD can show the RED commander "thinking -> ordering" as it happens.
+        // HUD can show the commander "thinking -> ordering" as it happens.
         content = await this.streamTransport(messages, {
           base: this.base,
           model: this.model,
@@ -177,6 +214,8 @@ export class AICommander {
             this._streamChunks.push(delta);
             this.liveText = full;
             this.phase = 'streaming';
+            if (this.debug) console.log(`${logPrefix} token:`, delta);
+            else console.debug(`${logPrefix} token:`, delta);
           },
         });
       } else {
@@ -194,21 +233,31 @@ export class AICommander {
       this.lastOrders = orders;
       this.phase = 'done';
       if (!orders.length) {
-        // Model returned nothing usable. Keep the RED force active with the
-        // built-in doctrine rather than letting it freeze with no orders.
-        try { runBuiltinDoctrine(world); } catch { /* ignore */ }
-        this.lastBrief = '(built-in: LLM returned no orders)';
+        // Model returned nothing usable. For the RED commander, keep the force
+        // active with the built-in doctrine rather than freezing.
+        if (this.side === 'enemy') {
+          try { runBuiltinDoctrine(world); } catch { /* ignore */ }
+          this.lastBrief = '(built-in: LLM returned no orders)';
+        } else {
+          this.lastBrief = 'no suggestions';
+        }
       } else {
-        this.applyOrders(world, orders);
+        if (this.side === 'enemy') {
+          this.applyOrders(world, orders);
+        }
         this.lastBrief = this.summarize(orders, world);
       }
+      if (this.debug) console.log(`${logPrefix} orders:`, orders);
+      else console.debug(`${logPrefix} orders:`, orders);
     } catch (err) {
       this.lastError = err && err.message ? err.message : String(err);
       this.phase = 'error';
-      // Fall back to built-in doctrine so the enemy keeps acting.
-      try { runBuiltinDoctrine(world); } catch { /* nothing else we can do */ }
-      this.lastBrief = `(built-in fallback: ${this.lastError})`;
-      console.warn('[AICommander] LLM failed, using built-in AI:', this.lastError);
+      // RED commander falls back to built-in doctrine so the enemy keeps acting.
+      if (this.side === 'enemy') {
+        try { runBuiltinDoctrine(world); } catch { /* nothing else we can do */ }
+      }
+      this.lastBrief = `(fallback: ${this.lastError})`;
+      console.warn(`${logPrefix} LLM failed:`, this.lastError);
     } finally {
       this.inFlight = false;
     }
