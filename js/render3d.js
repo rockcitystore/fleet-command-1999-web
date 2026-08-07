@@ -35,8 +35,12 @@ export class Scene3D {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x06121f);
-    this.scene.fog = new THREE.Fog(0x06121f, 3200, 14000);
+    // Sky-coloured fallback; in the surface view a gradient sky dome covers it,
+    // in SUB VIEW setUnderwater() swaps it for the dark deep-blue background.
+    this.scene.background = new THREE.Color(0x9fc4e8);
+    // Fog colour matches the sky-dome horizon haze so distant ships and the sea
+    // surface dissolve into the horizon — that seam is what reads as "waterline".
+    this.scene.fog = new THREE.Fog(0xcfe4f0, 3800, 17000);
 
     this.camera = new THREE.PerspectiveCamera(55, 1, 1, 60000);
 
@@ -75,6 +79,7 @@ export class Scene3D {
     this._modelLib = new ModelLibrary(); // authentic .j3d models (lazy)
     this._geoCache = new Map();  // ship-class key -> shared geometries
     this._buildStatic(world);
+    this._buildSky();
 
     this.raycaster = new THREE.Raycaster();
     this._ndc = new THREE.Vector2();
@@ -89,11 +94,12 @@ export class Scene3D {
   _buildStatic(world) {
     const water = new THREE.Mesh(
       new THREE.PlaneGeometry(60000, 60000),
-      new THREE.MeshBasicMaterial({ color: 0x0b2336, side: THREE.DoubleSide })
+      new THREE.MeshBasicMaterial({ color: 0x1c5270, side: THREE.DoubleSide })
     );
     water.rotation.x = -Math.PI / 2;
     water.position.y = 0;
     this.water = water;
+    this.surfaceWaterColor = 0x1c5270;
     this.scene.add(water);
 
     const grid = new THREE.GridHelper(8000, 32, 0x1d4a66, 0x0e2f44);
@@ -126,6 +132,85 @@ export class Scene3D {
       const lgeo = new THREE.BufferGeometry().setFromPoints(ringPts);
       this.scene.add(new THREE.Line(lgeo, coastMat));
     }
+  }
+
+  // --- sky dome + sun: the "sky" half of the sky/water distinction ---
+  //
+  // A large inverted sphere follows the camera (set in _updateCamera) and is
+  // shaded with a vertical gradient: deep blue overhead -> pale haze at the
+  // horizon. Its bottom hemisphere sits below the sea plane and is hidden by
+  // the water, so the visible seam between the pale horizon sky and the fogged
+  // sea surface becomes the waterline — exactly the look the original FC99 3D
+  // view had. A distant sun disc + halo gives an unmistakable "sky" focal cue.
+  // (No fog on the dome/sun, so the gradient stays crisp; scene.fog is tuned to
+  // the same horizon haze so everything else blends into that line.)
+  _buildSky() {
+    const geo = new THREE.SphereGeometry(30000, 32, 16);
+    const mat = new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      depthWrite: false,
+      fog: false,
+      uniforms: {
+        topColor: { value: new THREE.Color(0x5c9fd8) },
+        horizonColor: { value: new THREE.Color(0xcfe4f0) },
+        bottomColor: { value: new THREE.Color(0x1c5270) },
+        topPow: { value: 0.75 },
+        botPow: { value: 0.55 },
+      },
+      vertexShader: `
+        varying vec3 vLocal;
+        void main() {
+          vLocal = position;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 topColor;
+        uniform vec3 horizonColor;
+        uniform vec3 bottomColor;
+        uniform float topPow;
+        uniform float botPow;
+        varying vec3 vLocal;
+        void main() {
+          float h = normalize(vLocal).y; // -1 (down) .. 1 (up)
+          vec3 col;
+          if (h > 0.0) {
+            col = mix(horizonColor, topColor, pow(clamp(h, 0.0, 1.0), topPow));
+          } else {
+            col = mix(horizonColor, bottomColor, pow(clamp(-h, 0.0, 1.0), botPow));
+          }
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `,
+    });
+    const sky = new THREE.Mesh(geo, mat);
+    sky.frustumCulled = false;
+    this.sky = sky;
+    this.scene.add(sky);
+
+    // Distant sun, fixed in world space, in the same direction as the key light.
+    const sunDir = new THREE.Vector3(1200, 2400, 800).normalize();
+    const sunPos = sunDir.clone().multiplyScalar(26000);
+    const sunCore = new THREE.Mesh(
+      new THREE.SphereGeometry(700, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xfff3d0, fog: false })
+    );
+    sunCore.position.copy(sunPos);
+    sunCore.frustumCulled = false;
+    this.sun = sunCore;
+    this.scene.add(sunCore);
+
+    const halo = new THREE.Mesh(
+      new THREE.SphereGeometry(1700, 16, 16),
+      new THREE.MeshBasicMaterial({
+        color: 0xffe9b0, transparent: true, opacity: 0.22,
+        fog: false, blending: THREE.AdditiveBlending, depthWrite: false,
+      })
+    );
+    halo.position.copy(sunPos);
+    halo.frustumCulled = false;
+    this.sunHalo = halo;
+    this.scene.add(halo);
   }
 
   // --- procedural ship mesh sized by its radius (immediate fallback) ---
@@ -381,6 +466,7 @@ export class Scene3D {
       this.camera.position.y = Math.min(this.camera.position.y, -3);
       // Keep the fill light with the camera so subs are lit from the viewer.
       this._subLight.position.copy(this.camera.position);
+      if (this.sky) this.sky.position.copy(this.camera.position);
       this.camera.lookAt(this.target);
       return;
     }
@@ -394,6 +480,7 @@ export class Scene3D {
     // Keep the camera above the waterline so aggressive zoom/orbit cannot
     // duck beneath the ocean plane and reveal the underside of land meshes.
     this.camera.position.y = Math.max(this.target.y + 3, this.camera.position.y);
+    if (this.sky) this.sky.position.copy(this.camera.position);
     this.camera.lookAt(this.target);
   }
 
@@ -408,6 +495,10 @@ export class Scene3D {
       w.material.transparent = true;
       w.material.opacity = 0.32;
       w.material.color.setHex(0x0a3a52);
+      // Sky dome + sun belong to the surface world; hide them underwater.
+      if (this.sky) this.sky.visible = false;
+      if (this.sun) this.sun.visible = false;
+      if (this.sunHalo) this.sunHalo.visible = false;
       // Lighter blue fog/background so submerged objects don't disappear
       // into pitch-black; the fill light handles close-up submarine shading.
       this.scene.background.setHex(0x0c2b3d);
@@ -421,9 +512,13 @@ export class Scene3D {
     } else {
       w.material.transparent = false;
       w.material.opacity = 1.0;
-      w.material.color.setHex(0x0b2336);
-      this.scene.background.setHex(0x06121f);
-      this.scene.fog.color.setHex(0x06121f);
+      w.material.color.setHex(this.surfaceWaterColor);
+      if (this.sky) this.sky.visible = true;
+      if (this.sun) this.sun.visible = true;
+      if (this.sunHalo) this.sunHalo.visible = true;
+      // Sky-blue fallback + horizon-haze fog (the waterline trick).
+      this.scene.background.setHex(0x9fc4e8);
+      this.scene.fog.color.setHex(0xcfe4f0);
       this._subLight.visible = false;
       this.target.y = 0;
     }
