@@ -33,6 +33,16 @@ const COLOR_LAND_COAST = 'rgba(72, 156, 98, 0.90)';
 
 const FONT_TRACK = '11px SFMono-Regular, Consolas, monospace';
 
+// Aircraft are genuinely tiny vs ships & geography (a fighter is ~1/7 the
+// length of a frigate, and a speck over a strait). Draw the tactical symbol
+// from a *game-radius* that scales with the map (so it shrinks when you zoom
+// out to survey the strait) and sits well below a ship's symbol size, instead
+// of the old fixed 7px which made every aircraft read as ~ship-sized.
+// ~1/4.3 of a ship's gameplay bubble radius (13) mirrors the 3D view's
+// frigate:aircraft ratio.
+const AC_SYMBOL_GAME_R = 3.0;
+const AC_SYMBOL_MIN_R = 3;
+
 function makePoint(x, y) { return { x, y }; }
 
 function drawOcean(ctx, size) {
@@ -507,7 +517,8 @@ export function drawBattle(ctx, world, size) {
     if (!ac.alive) continue;
     if (ac.side !== 'player' && !ac.detected) continue;
     const sp = worldToScreen(ac.pos, size, world.camera);
-    drawAircraftSymbol(ctx, ac, sp, 7, selectedAc.includes(ac.id), scale);
+    const acR = Math.max(AC_SYMBOL_GAME_R * scale, AC_SYMBOL_MIN_R);
+    drawAircraftSymbol(ctx, ac, sp, acR, selectedAc.includes(ac.id), scale);
   }
 
   // Projectiles / missile & torpedo trails (drawn above ships).
