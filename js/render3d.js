@@ -80,6 +80,7 @@ export class Scene3D {
     this._geoCache = new Map();  // ship-class key -> shared geometries
     this._buildStatic(world);
     this._buildSky();
+    this._buildDeep();
 
     this.raycaster = new THREE.Raycaster();
     this._ndc = new THREE.Vector2();
@@ -94,10 +95,11 @@ export class Scene3D {
   _buildStatic(world) {
     const water = new THREE.Mesh(
       new THREE.PlaneGeometry(60000, 60000),
-      new THREE.MeshBasicMaterial({ color: 0x1c5270, side: THREE.DoubleSide })
+      this._makeWaterMaterial()
     );
     water.rotation.x = -Math.PI / 2;
     water.position.y = 0;
+    water.renderOrder = 1;
     this.water = water;
     this.surfaceWaterColor = 0x1c5270;
     this.scene.add(water);
@@ -211,6 +213,136 @@ export class Scene3D {
     halo.frustumCulled = false;
     this.sunHalo = halo;
     this.scene.add(halo);
+  }
+
+  // --- sea-surface material (shared by surface + SUB VIEW) ---
+  //
+  // Animated ripple + a brighter hazy horizon + a sharp sun glitter in the
+  // surface view so the water clearly reads as "sea" (not flat colour). In SUB
+  // VIEW (uUnderwater=1) the very same plane becomes the bright, rippling
+  // underside of the sea surface seen from below — the visual cue that you are
+  // looking UP through the water. Fog is done manually (uFog*) so the look is
+  // identical under SwiftShader and a real GPU.
+  _makeWaterMaterial() {
+    const sunDir = new THREE.Vector3(1200, 2400, 800).normalize();
+    return new THREE.ShaderMaterial({
+      side: THREE.DoubleSide,
+      transparent: false,
+      depthWrite: true,
+      uniforms: {
+        baseColor: { value: new THREE.Color(0x1c5270) },
+        surfaceTint: { value: new THREE.Color(0x9fd8ea) },
+        horizonColor: { value: new THREE.Color(0xcfe4f0) },
+        sunColor: { value: new THREE.Color(0xfff0c0) },
+        sunDir: { value: sunDir },
+        time: { value: 0 },
+        opacity: { value: 1.0 },
+        uUnderwater: { value: 0.0 },
+        uFogColor: { value: new THREE.Color(0xcfe4f0) },
+        uFogNear: { value: 3800 },
+        uFogFar: { value: 17000 },
+      },
+      vertexShader: `
+        varying vec3 vWorldPos;
+        varying float vFogDepth;
+        void main() {
+          vec4 wp = modelMatrix * vec4(position, 1.0);
+          vWorldPos = wp.xyz;
+          vec4 mv = viewMatrix * wp;
+          vFogDepth = -mv.z;
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 baseColor;
+        uniform vec3 surfaceTint;
+        uniform vec3 horizonColor;
+        uniform vec3 sunColor;
+        uniform vec3 sunDir;
+        uniform float time;
+        uniform float opacity;
+        uniform float uUnderwater;
+        uniform vec3 uFogColor;
+        uniform float uFogNear;
+        uniform float uFogFar;
+        varying vec3 vWorldPos;
+        varying float vFogDepth;
+
+        void main() {
+          vec3 viewDir = normalize(cameraPosition - vWorldPos);
+          // two-octave procedural ripple
+          float w1 = sin(vWorldPos.x * 0.014 + time) * sin(vWorldPos.z * 0.012 + time * 0.8);
+          float w2 = sin(vWorldPos.x * 0.043 - time * 1.3) * cos(vWorldPos.z * 0.037 + time * 0.9);
+          float wave = (w1 + w2 * 0.5) * 0.5 + 0.5; // 0..1
+
+          vec3 col;
+          if (uUnderwater < 0.5) {
+            // SURFACE: deep teal sea with a brighter hazy horizon + sun glitter
+            vec3 wc = mix(baseColor, horizonColor * 1.15, wave * 0.30);
+            float horizonF = pow(1.0 - abs(viewDir.y), 3.0);
+            float sun = pow(max(0.0, dot(viewDir, sunDir)), 110.0) * 2.2;
+            col = mix(wc, horizonColor, horizonF * 0.6);
+            col += sunColor * sun;
+          } else {
+            // UNDERWATER: this plane is the sunlit surface seen from below,
+            // a bright rippling "ceiling" so surface vs. deep is obvious.
+            col = mix(surfaceTint * 0.5, surfaceTint, wave);
+          }
+
+          float fogF = smoothstep(uFogNear, uFogFar, vFogDepth);
+          col = mix(col, uFogColor, fogF);
+          gl_FragColor = vec4(col, opacity);
+        }
+      `,
+    });
+  }
+
+  // --- deep-water dome: the "volume" of the sea in SUB VIEW ---
+  //
+  // A camera-following sphere whose colour is a *world-anchored* vertical
+  // gradient: bright at the sea surface (world y=0) fading to near-black in the
+  // deep. This is what makes SUB VIEW read as "under water" — above you is the
+  // bright surface, everything below dissolves into darkness with depth. Hidden
+  // in the surface view (the sky dome + water plane cover it there).
+  _buildDeep() {
+    const geo = new THREE.SphereGeometry(30000, 32, 16);
+    const mat = new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      depthWrite: false,
+      fog: false,
+      uniforms: {
+        topColor: { value: new THREE.Color(0x4f9fc4) },
+        bottomColor: { value: new THREE.Color(0x021018) },
+      },
+      vertexShader: `
+        varying vec3 vWorldPos;
+        void main() {
+          vec4 wp = modelMatrix * vec4(position, 1.0);
+          vWorldPos = wp.xyz;
+          gl_Position = projectionMatrix * viewMatrix * wp;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 topColor;
+        uniform vec3 bottomColor;
+        varying vec3 vWorldPos;
+        void main() {
+          // World-anchored depth gradient: at the sea surface (y>=0) -> lit,
+          // deeper (more negative y) -> dark. The dome follows the camera so
+          // vWorldPos.y stays a true world height.
+          float yw = min(vWorldPos.y, 0.0);
+          float depthF = clamp(-yw / 1400.0, 0.0, 1.0);
+          vec3 col = mix(topColor, bottomColor, depthF);
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `,
+    });
+    const deep = new THREE.Mesh(geo, mat);
+    deep.frustumCulled = false;
+    deep.renderOrder = -1;
+    deep.visible = false;
+    this.deep = deep;
+    this.scene.add(deep);
   }
 
   // --- procedural ship mesh sized by its radius (immediate fallback) ---
@@ -467,6 +599,7 @@ export class Scene3D {
       // Keep the fill light with the camera so subs are lit from the viewer.
       this._subLight.position.copy(this.camera.position);
       if (this.sky) this.sky.position.copy(this.camera.position);
+      if (this.deep) this.deep.position.copy(this.camera.position);
       this.camera.lookAt(this.target);
       return;
     }
@@ -481,6 +614,7 @@ export class Scene3D {
     // duck beneath the ocean plane and reveal the underside of land meshes.
     this.camera.position.y = Math.max(this.target.y + 3, this.camera.position.y);
     if (this.sky) this.sky.position.copy(this.camera.position);
+    if (this.deep) this.deep.position.copy(this.camera.position);
     this.camera.lookAt(this.target);
   }
 
@@ -491,16 +625,25 @@ export class Scene3D {
   setUnderwater(on) {
     this.underwater = !!on;
     const w = this.water;
+    const u = w.material.uniforms;
     if (this.underwater) {
+      // The sea becomes a translucent, rippling sunlit "ceiling" and a deep
+      // gradient dome appears behind everything — you can now tell you are
+      // looking UP through the surface into a darkening water column.
+      u.uUnderwater.value = 1.0;
+      u.opacity.value = 0.72;
+      u.uFogColor.value.setHex(0x0c2b3d);
+      u.uFogNear.value = 3000;
+      u.uFogFar.value = 16000;
       w.material.transparent = true;
-      w.material.opacity = 0.32;
-      w.material.color.setHex(0x0a3a52);
+      w.material.depthWrite = false;
       // Sky dome + sun belong to the surface world; hide them underwater.
       if (this.sky) this.sky.visible = false;
       if (this.sun) this.sun.visible = false;
       if (this.sunHalo) this.sunHalo.visible = false;
-      // Lighter blue fog/background so submerged objects don't disappear
-      // into pitch-black; the fill light handles close-up submarine shading.
+      if (this.deep) this.deep.visible = true;
+      // Dark background so the depth gradient reads; the fill light handles
+      // close-up submarine shading from the viewer's side.
       this.scene.background.setHex(0x0c2b3d);
       this.scene.fog.color.setHex(0x0c2b3d);
       this._subLight.visible = true;
@@ -510,12 +653,18 @@ export class Scene3D {
       this.elevation = 0.28;
       this.distance = Math.max(260, Math.min(900, this.distance));
     } else {
+      u.uUnderwater.value = 0.0;
+      u.opacity.value = 1.0;
+      u.baseColor.value.setHex(this.surfaceWaterColor);
+      u.uFogColor.value.setHex(0xcfe4f0);
+      u.uFogNear.value = 3800;
+      u.uFogFar.value = 17000;
       w.material.transparent = false;
-      w.material.opacity = 1.0;
-      w.material.color.setHex(this.surfaceWaterColor);
+      w.material.depthWrite = true;
       if (this.sky) this.sky.visible = true;
       if (this.sun) this.sun.visible = true;
       if (this.sunHalo) this.sunHalo.visible = true;
+      if (this.deep) this.deep.visible = false;
       // Sky-blue fallback + horizon-haze fog (the waterline trick).
       this.scene.background.setHex(0x9fc4e8);
       this.scene.fog.color.setHex(0xcfe4f0);
@@ -605,6 +754,9 @@ export class Scene3D {
 
   render(world) {
     this.sync(world);
+    if (this.water && this.water.material.uniforms) {
+      this.water.material.uniforms.time.value = performance.now() * 0.0005;
+    }
     this._updateCamera();
     this.renderer.render(this.scene, this.camera);
   }
