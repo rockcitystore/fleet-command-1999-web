@@ -210,6 +210,7 @@ export function buildRealShipStats(WORLD_SIZE = 4000) {
       _salvoLeft: 0,
       _salvoNext: 0,
       _reloadLeft: 0,
+      _reactionLeft: 0, // OODA/command delay on first contact
       minDepth: isUnderwater ? Math.max(-800, raw.depth_i) : 0,
       maxDepth: isUnderwater ? 0 : 0,
       realName: name,

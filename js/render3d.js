@@ -752,7 +752,9 @@ export class Scene3D {
       if (!seenA.has(id)) { this.acGroup.remove(m); this._disposeGroup(m); this.acMeshes.delete(id); }
     }
 
-    // projectiles (pooled): glowing core + additive exhaust + fading trail.
+      // projectiles (pooled): small glowing core + additive exhaust + fading trail.
+      // Sizes are now in real-world scale (a few decimetres to metres), so at the
+      // strategic camera they read as streaks/dots rather than kilometre-wide blobs.
     const live = (world.projectiles || []).filter((p) => !p.dead);
     for (let i = 0; i < live.length; i++) {
       const p = live[i];
@@ -760,7 +762,7 @@ export class Scene3D {
       if (!m) {
         m = new THREE.Group();
         const core = new THREE.Mesh(
-          new THREE.SphereGeometry(4, 8, 8),
+          new THREE.SphereGeometry(0.15, 8, 8),
           new THREE.MeshBasicMaterial({ color: 0xffffff })
         );
         m.add(core);
@@ -768,13 +770,13 @@ export class Scene3D {
         // Exhaust glow trailing the projectile (additive, so it reads as a
         // hot motor plume regardless of what sits behind it).
         const ex = new THREE.Mesh(
-          new THREE.SphereGeometry(6, 8, 8),
+          new THREE.SphereGeometry(0.28, 8, 8),
           new THREE.MeshBasicMaterial({
-            color: 0xffd070, transparent: true, opacity: 0.7,
+            color: 0xffd070, transparent: true, opacity: 0.45,
             blending: THREE.AdditiveBlending, depthWrite: false, fog: false,
           })
         );
-        ex.position.set(0, 0, -7);
+        ex.position.set(0, 0, -0.55);
         m.add(ex);
         m.userData.exhaust = ex;
         this.projGroup.add(m);
@@ -784,7 +786,7 @@ export class Scene3D {
         tgeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(12 * 3), 3));
         tgeo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(12 * 3), 3));
         const tmat = new THREE.LineBasicMaterial({
-          vertexColors: true, transparent: true, opacity: 0.9,
+          vertexColors: true, transparent: true, opacity: 0.55,
           blending: THREE.AdditiveBlending, depthWrite: false, fog: false,
         });
         const tline = new THREE.Line(tgeo, tmat);
@@ -794,7 +796,11 @@ export class Scene3D {
       }
       const sideHex = p.side === 'player' ? 0x6fe0ff : 0xff8a5a;
       m.userData.core.material.color.setHex(sideHex);
-      const y = p.type === 'torpedo' ? 4 : Math.max(8, p.alt || 30);
+      // Use p.alt set by spawnProjectile; keep a small floor so torpedoes stay
+      // just at/under the surface and missiles/guns remain visible.
+      let y = p.alt ?? 2.0;
+      if (p.type === 'torpedo') y = Math.max(0.2, Math.min(2.0, y));
+      else y = Math.max(0.8, Math.min(30, y));
       m.visible = true;
       m.position.set(p.pos.x, y, p.pos.y);
       // Point the exhaust back along travel using the recent trail history.

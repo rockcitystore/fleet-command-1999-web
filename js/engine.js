@@ -1043,6 +1043,28 @@ function spawnProjectile(world, source, target, weapon) {
   const speed = projectileSpeed(weapon.type);
   const maxLifetime = Math.max(3, weapon.range / speed * 1.5);
   const originDist = distance(source.pos, target.pos);
+  // Visual altitude in world units (1 unit ≈ 92.6 m). Values are chosen to be
+  // readable at the strategic camera while still reading as the correct domain:
+  // missiles skim the sea, torpedoes run shallow, guns/shells arc above.
+  const altByType = {
+    missile: 2.0,
+    torpedo: 0.3,
+    gun: 5.0,
+    asroc: 1.2,
+    depthCharge: 0.4,
+  };
+  // Realistic max turn rate (rad/s). Guns/shells are ballistic and do not
+  // manoeuvre; missiles track but cannot snap-turn like a UFO; torpedoes turn
+  // slowly. This keeps engagements believable without making them miss often.
+  const turnByType = {
+    missile: 0.35,
+    torpedo: 0.08,
+    gun: 0,
+    asroc: 0.15,
+    depthCharge: 0,
+  };
+  const dx = target.pos.x - source.pos.x;
+  const dy = target.pos.y - source.pos.y;
   world.projectiles.push({
     id: world.nextId++,
     type: weapon.type,
@@ -1050,6 +1072,8 @@ function spawnProjectile(world, source, target, weapon) {
     sourceId: source.id,
     targetId: target.id,
     pos: { x: source.pos.x, y: source.pos.y },
+    heading: Math.atan2(dy, dx),
+    maxTurn: turnByType[weapon.type] ?? 0.2,
     speed,
     damage: weapon.damage,
     range: weapon.range,
@@ -1058,6 +1082,7 @@ function spawnProjectile(world, source, target, weapon) {
     maxLifetime,
     lifetime: 0,
     color: projectileColor(weapon.type),
+    alt: altByType[weapon.type] ?? 2.0,
     trail: [{ x: source.pos.x, y: source.pos.y }],
   });
 }
@@ -1126,6 +1151,22 @@ export function updateWeapons(world, dt) {
   // Cold war until the player commits: no firing (either side) before the first
   // player attack order. Keeps positioning safe and playable.
   if (!world.combatStarted) return;
+
+  // First frame of actual combat: stagger the fleet's opening shots so the
+  // whole OOB doesn't fire on the same tick. Player crews react a bit faster
+  // than the AI; both have random jitter so salvoes read as a ragged volley.
+  if (!world._weaponsCombatStarted) {
+    world._weaponsCombatStarted = true;
+    for (const s of world.ships) {
+      if (!s.alive) continue;
+      for (const w of s.weapons) {
+        const base = s.side === 'player' ? 0.25 : 0.6;
+        const jitter = s.side === 'player' ? 0.9 : 2.2;
+        w._reactionLeft = base + world.rand() * jitter;
+      }
+    }
+  }
+
   for (const s of world.ships) {
     if (!s.alive) continue;
     for (const w of s.weapons) {
@@ -1136,10 +1177,13 @@ export function updateWeapons(world, dt) {
       // multi-round launcher waits the long RELOAD before the next volley.
       const nextGap = salvo > 1 ? reload : ripple;
 
-      // 1) Launcher reloading after a salvo?
+      // 1) OODA / command-and-control delay (only matters at combat onset).
+      if (w._reactionLeft > 0) { w._reactionLeft -= dt; continue; }
+
+      // 2) Launcher reloading after a salvo?
       if (w._reloadLeft > 0) { w._reloadLeft -= dt; continue; }
 
-      // 2) Mid-salvo: fire the next round when its ripple timer elapses.
+      // 3) Mid-salvo: fire the next round when its ripple timer elapses.
       if (w._salvoLeft > 0) {
         if (w._salvoNext > 0) { w._salvoNext -= dt; continue; }
         const tgt = chooseWeaponTarget(s, w, world);
@@ -1156,7 +1200,7 @@ export function updateWeapons(world, dt) {
         continue;
       }
 
-      // 3) Idle: if a valid target is in range and we have ammo, launch a salvo.
+      // 4) Idle: if a valid target is in range and we have ammo, launch a salvo.
       const tgt = chooseWeaponTarget(s, w, world);
       if (tgt && w.count > 0) {
         const n = Math.min(salvo, w.count);
@@ -1212,7 +1256,17 @@ export function updateProjectiles(world, dt) {
       continue;
     }
 
-    if (d > 0) {
+    // Move. Ballistic rounds (guns/depth charges) fly straight; guided
+    // munitions track the target but are limited by their turn rate.
+    if (p.maxTurn > 0 && d > 0) {
+      const desired = Math.atan2(dy, dx);
+      let heading = p.heading ?? desired;
+      const delta = Math.atan2(Math.sin(desired - heading), Math.cos(desired - heading));
+      heading += Math.max(-p.maxTurn * dt, Math.min(p.maxTurn * dt, delta));
+      p.heading = heading;
+      p.pos.x += Math.cos(heading) * step;
+      p.pos.y += Math.sin(heading) * step;
+    } else if (d > 0) {
       p.pos.x += (dx / d) * step;
       p.pos.y += (dy / d) * step;
     }
