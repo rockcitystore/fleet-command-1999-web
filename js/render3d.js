@@ -357,8 +357,8 @@ export class Scene3D {
       depthWrite: false,
       fog: false,
       uniforms: {
-        topColor: { value: new THREE.Color(0x4f9fc4) },
-        bottomColor: { value: new THREE.Color(0x021018) },
+        topColor: { value: new THREE.Color(0x7ecce8) },
+        bottomColor: { value: new THREE.Color(0x0b1f33) },
       },
       vertexShader: `
         varying vec3 vWorldPos;
@@ -373,11 +373,12 @@ export class Scene3D {
         uniform vec3 bottomColor;
         varying vec3 vWorldPos;
         void main() {
-          // World-anchored depth gradient: at the sea surface (y>=0) -> lit,
-          // deeper (more negative y) -> dark. The dome follows the camera so
-          // vWorldPos.y stays a true world height.
-          float yw = min(vWorldPos.y, 0.0);
-          float depthF = clamp(-yw / 1400.0, 0.0, 1.0);
+          // World-anchored depth gradient. Real light attenuation in water is
+          // roughly exponential: bright just under the surface, then smoothly
+          // darkening with depth. We never reach pure black, just a very deep
+          // blue, so the water column has visible volume instead of a hard cut.
+          float depth = max(-vWorldPos.y, 0.0);
+          float depthF = 1.0 - exp(-depth / 2200.0);
           vec3 col = mix(topColor, bottomColor, depthF);
           gl_FragColor = vec4(col, 1.0);
         }
