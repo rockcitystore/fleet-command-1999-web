@@ -1324,12 +1324,56 @@ export function runBuiltinDoctrine(world) {
   }
 }
 
+// Evaluate each world objective and stamp its live status onto the descriptor
+// so the HUD / end screen can render per-objective results.
+// Objective kinds:
+//   destroy-all-enemy — no hostile ships remain
+//   destroy-class     — no hostile ship of `cls` remains
+//   survive           — at least one friendly ship alive after `seconds`
+//   protect           — at least `minAlive` friendly (optionally `tag`) ships alive
+function evaluateObjectives(world) {
+  const playerAlive = world.aliveShips('player');
+  const enemyAlive = world.aliveShips('enemy');
+  for (const o of world.objectives || []) {
+    let ok = false;
+    let failed = false;
+    if (o.kind === 'destroy-all-enemy') {
+      ok = enemyAlive.length === 0;
+    } else if (o.kind === 'destroy-class') {
+      ok = !enemyAlive.some((s) => s.shipClass === o.cls);
+    } else if (o.kind === 'survive') {
+      ok = world.time >= o.seconds && playerAlive.length > 0;
+    } else if (o.kind === 'protect') {
+      const relevant = o.tag
+        ? playerAlive.filter((s) => s.shipClass === o.tag).length
+        : playerAlive.length;
+      const need = o.minAlive != null ? o.minAlive : 1;
+      ok = relevant >= need;
+      if (relevant < need) failed = true;
+    }
+    o.status = ok ? 'ok' : failed ? 'failed' : 'pending';
+  }
+  return world.objectives || [];
+}
+
 export function checkEnd(world) {
-  const p = world.aliveShips('player').length;
-  const e = world.aliveShips('enemy').length;
-  if (p === 0) world.phase = 'enemyWon';
-  else if (e === 0) world.phase = 'playerWon';
-  else world.phase = 'playing';
+  if (world.phase && world.phase !== 'playing') return;
+  const playerAlive = world.aliveShips('player').length;
+  const enemyAlive = world.aliveShips('enemy').length;
+
+  // Custom / editor worlds carry no objective set → classic annihilation rule.
+  if (!world.objectives || world.objectives.length === 0) {
+    if (playerAlive === 0) world.phase = 'enemyWon';
+    else if (enemyAlive === 0) world.phase = 'playerWon';
+    else world.phase = 'playing';
+    return;
+  }
+
+  const objs = evaluateObjectives(world);
+  if (playerAlive === 0) { world.phase = 'enemyWon'; return; }
+  if (objs.some((o) => o.status === 'failed')) { world.phase = 'enemyWon'; return; }
+  if (objs.length && objs.every((o) => o.status === 'ok')) { world.phase = 'playerWon'; return; }
+  world.phase = 'playing';
 }
 
 // ---------------------------------------------------------------------------
@@ -1338,11 +1382,71 @@ export function checkEnd(world) {
 // Real mission titles/briefs from the original 1999 Fleet Command .scs files
 // (Single07 / Single01 / Single08). The in-game fleets are a balanced
 // recreation, not a 1:1 port of the original unit placements.
+// Campaign track. Each entry carries the AUTHENTIC title / intel / orders text
+// lifted verbatim from the original 1999 Fleet Command .scs mission files
+// (Single07 / Single01 / Single08), plus objectives the engine evaluates.
 export const SCENARIOS = [
-  { name: 'Wyoming Deploys', brief: 'Help an SSBN start her ballistic missile deterrence patrol.' },
-  { name: 'CVBG Norwegian Sea', brief: 'Protect your Carrier from cruise missile attack.' },
-  { name: 'Hair Trigger', brief: 'Defend against long-range cruise missile attacks and diesel submarine torpedoes. CVBG deployed in the Eastern Mediterranean.' },
+  {
+    name: 'Wyoming Deploys',
+    brief: 'Help an SSBN start her ballistic missile deterrence patrol.',
+    briefing: {
+      title: 'WYOMING DEPLOYS',
+      theater: 'Western Atlantic — off Kings Bay, Georgia',
+      description: 'Help an SSBN start her ballistic missile deterrence patrol.',
+      intel: 'The Russian submarines detected off the U.S. east coast in recent weeks are an Akula Class SSN and a Victor III Class SSN. Both boats are capable of carrying the 65 cm torpedo. Although the weapon has a reported range in excess of 25 nautical miles, operational firing ranges are expected to be limited by sensor performance and should be within 10 nautical miles.',
+      task: 'The USS Wyoming (SSBN-742) has departed the submarine base at Kings Bay, Georgia and is headed for deep water. Once the Wyoming reaches the 300 fathom curve she will run silent and deep and commence her ballistic missile deterrence patrol. Russian submarines have been detected off the east coast and may be waiting to oppose the transit. Engage any detected Russian submarines and destroy them before they can attack the Wyoming.',
+    },
+    objectives: [
+      { kind: 'destroy-class', cls: 'submarine', text: 'Destroy the hostile submarine before it can strike' },
+      { kind: 'protect', minAlive: 2, text: 'Keep at least two escorts operational' },
+    ],
+    debrief: {
+      win: 'Wyoming reaches deep water unopposed. Deterrence patrol commenced — mission accomplished.',
+      lose: 'The Russian submarine broke through the screen. The patrol was compromised.',
+    },
+  },
+  {
+    name: 'CVBG Norwegian Sea',
+    brief: 'Protect your Carrier from cruise missile attack.',
+    briefing: {
+      title: 'CVBG NORWEGIAN SEA',
+      theater: 'Norwegian Sea — high north',
+      description: 'Protect your Carrier from cruise missile attack.',
+      intel: 'Expect attack by TU-22M Backfire bombers equipped with long range AS-4 Kitchen air-to-surface missiles. Kill all hostile aircraft. Targeting information may be provided by TU-142 Bear J AEW aircraft.',
+      task: 'Protect the carrier from attack by bombers equipped with long range air-to-surface missiles. Kill all hostile aircraft.',
+    },
+    objectives: [
+      { kind: 'protect', minAlive: 1, tag: 'carrier', text: 'Protect your aircraft carrier' },
+      { kind: 'survive', seconds: 1200, text: 'Hold the battle group for 20 minutes' },
+    ],
+    debrief: {
+      win: 'The carrier survives the bomber assault. The battle group remains operational.',
+      lose: 'The carrier was struck and sunk. The battle group is broken.',
+    },
+  },
+  {
+    name: 'Hair Trigger',
+    brief: 'Defend against cruise missile attacks and diesel submarine torpedoes in the Eastern Mediterranean.',
+    briefing: {
+      title: 'HAIR TRIGGER',
+      theater: 'Eastern Mediterranean Sea',
+      description: 'Defend yourself against long range cruise missile attacks and diesel submarine torpedoes. Your CVBG is deployed in the Eastern Mediterranean Sea.',
+      intel: 'Various sources indicate that your carrier battle group is being targeted for elimination. Be alert for attacks.',
+      task: "You have taken command of a United States carrier battle group. Your orders are to keep the force out of danger. Russian forces are determined to sink a United States aircraft carrier in the Mediterranean using long range bombers and a diesel submarine. Protect the CVBG for the next thirty minutes.",
+    },
+    objectives: [
+      { kind: 'protect', minAlive: 1, tag: 'carrier', text: 'Protect the carrier battle group' },
+      { kind: 'survive', seconds: 1800, text: 'Hold the CVBG for 30 minutes' },
+      { kind: 'destroy-class', cls: 'submarine', text: 'Sink the diesel submarine' },
+    ],
+    debrief: {
+      win: 'The CVBG holds through the thirty-minute watch. The threat is driven off — well done, Captain.',
+      lose: 'The carrier battle group was overwhelmed. The Mediterranean watch is lost.',
+    },
+  },
 ];
+
+export const SCENARIO_COUNT = SCENARIOS.length;
 
 // Ensure every unit spawns on the correct terrain: ships at sea, immobile
 // installations (airfields/bases) on land.
@@ -1370,6 +1474,9 @@ export function makeWorld(index) {
   const name = SCENARIOS[i].name;
   const w = new World();
   w.scenarioName = name;
+  w.briefing = SCENARIOS[i].briefing;
+  w.debrief = SCENARIOS[i].debrief || {};
+  w.objectives = (SCENARIOS[i].objectives || []).map((o) => ({ ...o, status: 'pending' }));
 
   // Real geography: each scenario resolves to a real lat/lon area of operations;
   // the bundled Natural Earth coastline is clipped to that AO and projected.
@@ -1411,8 +1518,9 @@ export function makeWorld(index) {
     w.addShip('enemy', 'cruiser', { x: 3300, y: 2300 });
     w.addShip('enemy', 'submarine', { x: 3400, y: 2900 }, -150);
   } else {
-    // Convoy: battleship escorted by destroyers vs two submerged submarines.
-    w.addShip('player', 'battleship', { x: 800, y: 2000 });
+    // CVBG on station in the Eastern Med: carrier escorted by destroyers vs
+    // two submerged diesel submarines.
+    w.addShip('player', 'carrier', { x: 800, y: 2000 });
     w.addShip('player', 'destroyer', { x: 1000, y: 1500 });
     w.addShip('player', 'destroyer', { x: 1000, y: 2500 });
     w.addShip('enemy', 'submarine', { x: 3200, y: 1400 }, -150);

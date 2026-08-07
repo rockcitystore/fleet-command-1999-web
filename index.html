@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#06121f" />
   <title>FLEET COMMAND '99</title>
   <link rel="icon" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
   <!-- ============ MENU SCREEN ============ -->
@@ -213,6 +213,8 @@
       <div id="ai-cic-text" class="aicic-text">&mdash;</div>
     </div>
 
+    <div id="objectives" class="objectives hidden"></div>
+
     <div id="coach" class="coach hidden">
       <div class="coach-step" id="coach-step">1 / 4</div>
       <div class="coach-text" id="coach-text"></div>
@@ -226,11 +228,48 @@
       <div class="endscreen-inner">
         <div id="end-result" class="end-result">VICTORY</div>
         <div id="end-detail" class="end-detail"></div>
-        <button id="btn-menu" class="btn btn-menu" type="button">MENU</button>
+        <div id="end-objectives" class="end-objectives hidden"></div>
+        <div class="end-actions">
+          <button id="btn-next-mission" class="btn btn-go hidden" type="button">NEXT MISSION &rsaquo;</button>
+          <button id="btn-retry" class="btn hidden" type="button">RETRY</button>
+          <button id="btn-menu" class="btn btn-menu" type="button">MENU</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=3"></script>
+  <!-- ============ MISSION BRIEFING OVERLAY ============ -->
+  <div id="briefing" class="overlay hidden">
+    <div class="briefing-inner glass">
+      <div class="brief-head">
+        <span class="brief-theater" id="brief-theater"></span>
+        <h2 class="brief-title" id="brief-title"></h2>
+      </div>
+      <div class="brief-body">
+        <div class="brief-section">
+          <span class="brief-label">SITUATION</span>
+          <p id="brief-desc"></p>
+        </div>
+        <div class="brief-section">
+          <span class="brief-label">INTELLIGENCE</span>
+          <p id="brief-intel"></p>
+        </div>
+        <div class="brief-section">
+          <span class="brief-label">ORDERS</span>
+          <p id="brief-task"></p>
+        </div>
+        <div class="brief-section">
+          <span class="brief-label">OBJECTIVES</span>
+          <div id="brief-objectives" class="brief-objectives"></div>
+        </div>
+      </div>
+      <div class="brief-actions">
+        <button id="btn-brief-back" class="btn" type="button">&lsaquo; BACK</button>
+        <button id="btn-brief-start" class="btn btn-go" type="button">START MISSION &rsaquo;</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js?v=4"></script>
 </body>
 </html>

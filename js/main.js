@@ -7,7 +7,7 @@ import { drawBattle, drawMinimap, RENDER_OPTIONS } from './render.js';
 import { attachInput, attachInput2DPanel } from './input.js';
 import { Scene3D } from './render3d.js';
 import { attachInput3D } from './input3d.js';
-import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach } from './ui.js';
+import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlockCampaign, registerMissionEndHandler } from './ui.js';
 import { AICommander } from './aiCommander.js';
 
 // Local-LLM (Ollama / qwen3.5:4b) RED fleet commander. Created once and reused
@@ -291,6 +291,8 @@ function makeInputHandlers(world) {
 function startGame(index) {
   const world = makeWorld(index);
   world.__selected = [];
+  world.__scenarioIndex = index;
+  world.__endHandled = false;
   mountBattle(world);
 }
 
@@ -317,6 +319,7 @@ function mountBattle(world) {
     onControlChange: () => updateHUD(world),
     onMenu: () => showMenu(),
     onMusic: (on) => setMusic(on),
+    onStartMission: (i) => startGame(i),
   });
 
   const handlers = makeInputHandlers(world);
@@ -520,6 +523,14 @@ function loop() {
   updateHUD(world);
 }
 
+// On a decisive result, unlock the next campaign mission (victory only).
+function handleMissionEnd(world) {
+  if (world.phase === 'playerWon') {
+    const ni = (world.__scenarioIndex || 0) + 1;
+    unlockCampaign(ni);
+  }
+}
+
 // --- Boot ---
 buildMenu(null, {
   onStart: (i) => startGame(i),
@@ -528,6 +539,7 @@ buildMenu(null, {
   onTutorial: () => startTutorial(),
   onMusic: (on) => setMusic(on),
 });
+registerMissionEndHandler((world) => handleMissionEnd(world));
 window.addEventListener('resize', resizeCanvases);
 const viewBtn = document.getElementById('btn-viewmode');
 if (viewBtn) viewBtn.addEventListener('click', () => toggleViewMode());

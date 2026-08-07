@@ -1,7 +1,7 @@
 // ui.js — menu / scenario select / HUD DOM (imports engine.js)
 // CONTRACT section 4. No game state mutation except via world methods + handlers.
 
-import { SCENARIOS, SHIP_STATS, upsToKts } from './engine.js';
+import { SCENARIOS, SCENARIO_COUNT, SHIP_STATS, upsToKts } from './engine.js';
 import { RENDER_OPTIONS } from './render.js';
 
 const SPEED_BUTTONS = {
@@ -15,6 +15,44 @@ const SPEED_BUTTONS = {
 
 function el(id) {
   return document.getElementById(id);
+}
+
+// ---- Campaign progress (localStorage) ----
+function getUnlocked() {
+  try {
+    const v = parseInt(localStorage.getItem('fc99_campaign_unlocked') || '0', 10);
+    return Number.isNaN(v) ? 0 : v;
+  } catch { return 0; }
+}
+export function unlockCampaign(idx) {
+  try {
+    const cur = getUnlocked();
+    if (idx > cur) localStorage.setItem('fc99_campaign_unlocked', String(idx));
+  } catch {}
+}
+
+// One-shot handler fired when a battle reaches a win/lose state.
+let missionEndHandler = null;
+export function registerMissionEndHandler(fn) { missionEndHandler = fn; }
+
+// Briefing overlay state (persists across opens so listeners wire only once).
+let briefingIndex = -1;
+let briefingOnStart = null;
+function openBriefing(index, onStart) {
+  const sc = SCENARIOS[index];
+  if (!sc) return;
+  briefingIndex = index;
+  briefingOnStart = onStart;
+  const b = sc.briefing || { title: sc.name, description: sc.brief };
+  el('brief-title').textContent = b.title || sc.name;
+  el('brief-theater').textContent = b.theater || '';
+  el('brief-desc').textContent = b.description || '';
+  el('brief-intel').textContent = b.intel || '';
+  el('brief-task').textContent = b.task || '';
+  const ob = el('brief-objectives');
+  if (ob) ob.innerHTML = (sc.objectives || []).map((o) => `<div class="brief-obj">▸ ${o.text}</div>`).join('');
+  const overlay = el('briefing');
+  if (overlay) overlay.classList.remove('hidden');
 }
 
 /* ---------- Menu ---------- */
@@ -48,33 +86,56 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   const list = el('scenario-list');
   list.innerHTML = '';
 
-  SCENARIOS.forEach((scenario, index) => {
-    const card = document.createElement('div');
-    card.className = 'scenario-card';
-    card.tabIndex = 0;
-    card.setAttribute('role', 'button');
-
-    const name = document.createElement('div');
-    name.className = 'sc-name';
-    name.textContent = scenario.name;
-
-    const brief = document.createElement('div');
-    brief.className = 'sc-brief';
-    brief.textContent = scenario.brief;
-
-    card.appendChild(name);
-    card.appendChild(brief);
-
-    const activate = () => onStart(index);
-    card.addEventListener('click', activate);
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        activate();
+  let currentMode = 'single';
+  function renderMissionCards() {
+    const unlocked = getUnlocked();
+    list.innerHTML = '';
+    SCENARIOS.forEach((scenario, index) => {
+      const locked = currentMode === 'campaign' && index > unlocked;
+      const card = document.createElement('div');
+      card.className = 'scenario-card' + (locked ? ' locked' : '');
+      if (!locked) {
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
       }
-    });
 
-    list.appendChild(card);
+      const name = document.createElement('div');
+      name.className = 'sc-name';
+      name.textContent = scenario.name + (locked ? '  🔒' : '');
+
+      const brief = document.createElement('div');
+      brief.className = 'sc-brief';
+      brief.textContent = locked
+        ? 'Locked — clear previous missions to unlock.'
+        : scenario.brief;
+
+      card.appendChild(name);
+      card.appendChild(brief);
+
+      if (!locked) {
+        const activate = () => openBriefing(index, onStart);
+        card.addEventListener('click', activate);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            activate();
+          }
+        });
+      }
+
+      list.appendChild(card);
+    });
+  }
+
+  // Briefing overlay controls (wired once; persist across opens).
+  const bStart = el('btn-brief-start');
+  if (bStart) bStart.addEventListener('click', () => {
+    el('briefing').classList.add('hidden');
+    if (briefingOnStart) briefingOnStart(briefingIndex);
+  });
+  const bBack = el('btn-brief-back');
+  if (bBack) bBack.addEventListener('click', () => {
+    el('briefing').classList.add('hidden');
   });
 
   // --- Navigation between menu sections ---
@@ -102,7 +163,10 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
       const act = btn.dataset.act;
       setActiveMenu(act);
       if (act === 'single' || act === 'campaign') {
-        // CAMPAIGN reuses the single-mission order of battle as a track.
+        // CAMPAIGN reuses the single-mission order of battle as a track,
+        // gating later missions behind completed ones.
+        currentMode = act;
+        renderMissionCards();
         showOnly(subSingle);
       } else if (act === 'reference') {
         showOnly(subWelcome);
@@ -260,6 +324,22 @@ export function buildBattleHUD(rootEl, world, handlers) {
     });
   }
 
+  // End screen NEXT MISSION / RETRY buttons
+  const nextBtn = el('btn-next-mission');
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const i = parseInt(nextBtn.dataset.next, 10);
+      if (!isNaN(i) && handlers.onStartMission) handlers.onStartMission(i);
+    });
+  }
+  const retryBtn = el('btn-retry');
+  if (retryBtn) {
+    retryBtn.addEventListener('click', () => {
+      const i = parseInt(retryBtn.dataset.index, 10);
+      if (!isNaN(i) && handlers.onStartMission) handlers.onStartMission(i);
+    });
+  }
+
   // Control-bar MENU (exit to main menu at any time)
   const menuExit = el('btn-menu-exit');
   if (menuExit) {
@@ -411,6 +491,21 @@ export function updateHUD(world) {
   el('hud-status').textContent = world.paused ? 'PAUSED' : `${world.speed}x`;
   el('hud-scenario').textContent = world.scenarioName || '—';
 
+  // Live objective tracker
+  const objLive = el('objectives');
+  if (objLive) {
+    if (world.objectives && world.objectives.length) {
+      objLive.classList.remove('hidden');
+      objLive.innerHTML = '<div class="obj-title">OBJECTIVES</div>' + world.objectives.map((o) => {
+        const cls = o.status === 'ok' ? 'ok' : o.status === 'failed' ? 'fail' : 'pend';
+        const m = o.status === 'ok' ? '✓' : o.status === 'failed' ? '✗' : '•';
+        return `<div class="obj-row ${cls}"><span class="obj-mark">${m}</span><span class="obj-text">${o.text}</span></div>`;
+      }).join('');
+    } else {
+      objLive.classList.add('hidden');
+    }
+  }
+
   // Pause label
   el('btn-pause').textContent = world.paused ? 'RESUME' : 'PAUSE';
 
@@ -430,9 +525,51 @@ export function updateHUD(world) {
     const victory = world.phase === 'playerWon';
     resultEl.textContent = victory ? 'VICTORY' : 'DEFEAT';
     resultEl.className = 'end-result ' + (victory ? 'victory' : 'defeat');
-    el('end-detail').textContent = victory
-      ? 'ALL HOSTILE FORCES NEUTRALIZED'
-      : 'ALLIED TASK FORCE ELIMINATED';
+    const detailEl = el('end-detail');
+    if (detailEl) detailEl.textContent = victory
+      ? (world.debrief && world.debrief.win ? world.debrief.win : 'ALL OBJECTIVES COMPLETE')
+      : (world.debrief && world.debrief.lose ? world.debrief.lose : 'OBJECTIVE FAILED');
+
+    const objBox = el('end-objectives');
+    if (objBox) {
+      if (world.objectives && world.objectives.length) {
+        objBox.innerHTML = '<div class="eo-title">MISSION OBJECTIVES</div>' + world.objectives.map((o) => {
+          const cls = o.status === 'ok' ? 'ok' : o.status === 'failed' ? 'fail' : 'pend';
+          const m = o.status === 'ok' ? '✓' : o.status === 'failed' ? '✗' : '•';
+          return `<div class="eo-row ${cls}"><span class="eo-mark">${m}</span><span class="eo-text">${o.text}</span></div>`;
+        }).join('');
+        objBox.classList.remove('hidden');
+      } else {
+        objBox.classList.add('hidden');
+      }
+    }
+
+    const nextBtn = el('btn-next-mission');
+    const retryBtn = el('btn-retry');
+    if (nextBtn && retryBtn) {
+      if (victory) {
+        const ni = (world.__scenarioIndex || 0) + 1;
+        if (ni < SCENARIO_COUNT) {
+          nextBtn.textContent = (ni === SCENARIO_COUNT - 1) ? 'FINAL MISSION ▸' : 'NEXT MISSION ▸';
+          nextBtn.dataset.next = String(ni);
+          nextBtn.classList.remove('hidden');
+        } else {
+          nextBtn.textContent = 'CAMPAIGN COMPLETE';
+          nextBtn.dataset.next = '';
+          nextBtn.classList.remove('hidden');
+        }
+        retryBtn.classList.add('hidden');
+      } else {
+        retryBtn.dataset.index = String(world.__scenarioIndex || 0);
+        retryBtn.classList.remove('hidden');
+        nextBtn.classList.add('hidden');
+      }
+    }
+
+    if (!world.__endHandled) {
+      world.__endHandled = true;
+      if (missionEndHandler) missionEndHandler(world);
+    }
     end.classList.remove('hidden');
   } else {
     end.classList.add('hidden');

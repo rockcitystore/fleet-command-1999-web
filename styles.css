@@ -834,3 +834,84 @@ html, body {
   background: var(--panel-border);
   margin: 4px 8px;
 }
+
+/* ============ Mission briefing overlay ============ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 18, 31, 0.86);
+  padding: 24px;
+}
+
+.briefing-inner {
+  width: min(720px, 94vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  padding: 28px 32px 24px;
+  border: 1px solid var(--panel-border);
+  box-shadow: inset 0 1px 0 rgba(150, 230, 255, 0.18), 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.brief-head { margin-bottom: 18px; border-bottom: 1px solid var(--panel-border); padding-bottom: 14px; }
+.brief-theater { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: rgba(57, 208, 255, 0.7); text-transform: uppercase; margin-bottom: 6px; }
+.brief-title { font-size: clamp(24px, 5vw, 34px); letter-spacing: 4px; color: var(--highlight); margin: 0; text-shadow: 0 0 16px rgba(57, 208, 255, 0.25); }
+
+.brief-section { margin-bottom: 16px; }
+.brief-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: var(--cyan); opacity: 0.85; margin-bottom: 6px; }
+.brief-section p { margin: 0; font-size: 13px; line-height: 1.6; color: rgba(214, 240, 255, 0.92); }
+
+.brief-objectives { display: flex; flex-direction: column; gap: 6px; }
+.brief-obj { font-size: 13px; line-height: 1.5; color: #ffd66b; letter-spacing: 0.3px; }
+
+.brief-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; }
+
+/* ============ Live objective tracker (in-battle) ============ */
+.objectives {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 30;
+  min-width: 260px;
+  max-width: 340px;
+  background: rgba(8, 22, 38, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  box-shadow: inset 0 1px 0 rgba(150, 230, 255, 0.16), 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.obj-title { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: var(--cyan); opacity: 0.8; margin-bottom: 8px; }
+.obj-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; line-height: 1.4; margin-bottom: 6px; color: rgba(214, 240, 255, 0.9); }
+.obj-mark { font-weight: 700; width: 14px; text-align: center; flex: 0 0 auto; }
+.obj-row.ok .obj-mark { color: #5dff9b; }
+.obj-row.ok .obj-text { color: rgba(160, 255, 196, 0.92); }
+.obj-row.fail .obj-mark { color: #ff6b6b; }
+.obj-row.fail .obj-text { color: rgba(255, 150, 150, 0.92); }
+.obj-row.pend .obj-mark { color: #ffd66b; }
+
+/* ============ End-screen objective results ============ */
+.end-objectives { margin-bottom: 18px; }
+.eo-title { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: rgba(57, 208, 255, 0.7); margin-bottom: 8px; }
+.eo-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; line-height: 1.4; margin-bottom: 5px; color: rgba(214, 240, 255, 0.9); }
+.eo-mark { font-weight: 700; width: 14px; text-align: center; flex: 0 0 auto; }
+.eo-row.ok .eo-mark { color: #5dff9b; }
+.eo-row.ok .eo-text { color: rgba(160, 255, 196, 0.92); }
+.eo-row.fail .eo-mark { color: #ff6b6b; }
+.eo-row.fail .eo-text { color: rgba(255, 150, 150, 0.92); }
+.eo-row.pend .eo-mark { color: #ffd66b; }
+
+.end-actions { display: flex; gap: 12px; justify-content: center; margin-top: 4px; }
+.btn-go { background: var(--highlight); color: var(--bg); border-color: var(--highlight); }
+.btn-go:hover { filter: brightness(1.1); }
+.btn-go:active { transform: scale(0.98); }
+
+/* ============ Locked campaign card ============ */
+.scenario-card.locked { opacity: 0.5; cursor: not-allowed; }
+.scenario-card.locked:hover,
+.scenario-card.locked:focus { border-color: var(--panel-border); outline: none; }
