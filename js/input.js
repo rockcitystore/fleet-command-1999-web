@@ -474,3 +474,66 @@ export function attachInput(canvas, world, handlers) {
 
   return detach;
 }
+
+// Lightweight pan/zoom input for the small bottom 2D tactical panel.
+// When `scene3d` is supplied (normal 3D main view) the gestures drive the 3D
+// camera so the panel stays synchronised with the main view. When `scene3d` is
+// null the gestures operate directly on `world.camera`.
+export function attachInput2DPanel(canvas, world, scene3d) {
+  canvas.style.touchAction = 'none';
+  let dragging = false, moved = false, lastX = 0, lastY = 0;
+
+  const size = () => ({ width: canvas.clientWidth, height: canvas.clientHeight });
+
+  const onWheel = (ev) => {
+    ev.preventDefault();
+    const zoomIn = ev.deltaY < 0;
+    if (scene3d) {
+      scene3d.zoom(zoomIn ? 0.9 : 1.1);
+    } else {
+      zoomCamera(world.camera, zoomIn ? 1.1 : 1 / 1.1, { x: ev.offsetX, y: ev.offsetY }, size());
+    }
+  };
+
+  const onPointerDown = (e) => {
+    if (e.button !== 0) return;
+    dragging = true; moved = false;
+    lastX = e.offsetX; lastY = e.offsetY;
+    try { canvas.setPointerCapture(e.pointerId); } catch { /* ignore */ }
+  };
+
+  const onPointerMove = (e) => {
+    if (!dragging) return;
+    const dx = e.offsetX - lastX;
+    const dy = e.offsetY - lastY;
+    if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+    if (moved && (dx !== 0 || dy !== 0)) {
+      if (scene3d) scene3d.pan(dx, dy);
+      else panCamera(world.camera, { x: dx, y: dy }, size());
+    }
+    lastX = e.offsetX; lastY = e.offsetY;
+  };
+
+  const onPointerUp = (e) => {
+    dragging = false; moved = false;
+    try { canvas.releasePointerCapture(e.pointerId); } catch { /* ignore */ }
+  };
+
+  const onContextMenu = (e) => e.preventDefault();
+
+  canvas.addEventListener('wheel', onWheel, { passive: false });
+  canvas.addEventListener('pointerdown', onPointerDown);
+  canvas.addEventListener('pointermove', onPointerMove);
+  canvas.addEventListener('pointerup', onPointerUp);
+  canvas.addEventListener('pointercancel', onPointerUp);
+  canvas.addEventListener('contextmenu', onContextMenu);
+
+  return () => {
+    canvas.removeEventListener('wheel', onWheel, { passive: false });
+    canvas.removeEventListener('pointerdown', onPointerDown);
+    canvas.removeEventListener('pointermove', onPointerMove);
+    canvas.removeEventListener('pointerup', onPointerUp);
+    canvas.removeEventListener('pointercancel', onPointerUp);
+    canvas.removeEventListener('contextmenu', onContextMenu);
+  };
+}

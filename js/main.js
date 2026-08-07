@@ -4,7 +4,7 @@
 import { makeWorld, makeCustomWorld, fitCameraToWorld, makeAircraftOrder } from './engine.js';
 import { buildLandPolygons } from './geo.js';
 import { drawBattle, drawMinimap, RENDER_OPTIONS } from './render.js';
-import { attachInput } from './input.js';
+import { attachInput, attachInput2DPanel } from './input.js';
 import { Scene3D } from './render3d.js';
 import { attachInput3D } from './input3d.js';
 import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach } from './ui.js';
@@ -48,6 +48,7 @@ const game = {
                     // bottom-centre panel shows the primary (3D/2D) view.
   subView: false,   // when true, the 3D camera is dived below the surface.
   detachInput2dTac: null, // input for the big tactical map when swapped
+  detachInput2dPanel: null, // input for the small bottom 2D tactical panel
   mapCtx: null,
   miniCtx: null,
   map2dCtx: null,
@@ -151,9 +152,16 @@ function applySwapLayout() {
 // 2D input (with its right-click context menu) to that canvas.
 function refreshViewInput() {
   if (game.detachInput2dTac) { game.detachInput2dTac(); game.detachInput2dTac = null; }
+  if (game.detachInput2dPanel) { game.detachInput2dPanel(); game.detachInput2dPanel = null; }
   const wantTacInput = game.swapped && game.renderMode === '3d' && game.world && game.map2dCtx;
   if (wantTacInput) {
     game.detachInput2dTac = attachInput(dom.map2d, game.world, game.world.__handlers);
+  }
+  // Attach lightweight pan/zoom input to the small bottom 2D tactical panel
+  // whenever it is visible but not swapped into the main view.
+  const wantPanelInput = !game.swapped && game.renderMode === '3d' && game.world && game.map2dCtx && game.scene3d;
+  if (wantPanelInput) {
+    game.detachInput2dPanel = attachInput2DPanel(dom.map2d, game.world, game.scene3d);
   }
 }
 
@@ -163,6 +171,9 @@ function setSwapped(on) {
   applySwapLayout();
   applyRenderModeVisibility();
   refreshViewInput();
+  if (!game.swapped && game.map2dCtx && game.scene3d) {
+    game.detachInput2dPanel = attachInput2DPanel(dom.map2d, world, game.scene3d);
+  }
   resizeCanvases();
 }
 
@@ -172,6 +183,8 @@ function showMenu() {
   game.rafId = 0;
   if (game.detachInput) { game.detachInput(); game.detachInput = null; }
   if (game.detachInput3d) { game.detachInput3d(); game.detachInput3d = null; }
+  if (game.detachInput2dTac) { game.detachInput2dTac(); game.detachInput2dTac = null; }
+  if (game.detachInput2dPanel) { game.detachInput2dPanel(); game.detachInput2dPanel = null; }
   if (game.scene3d) { game.scene3d.dispose(); game.scene3d = null; }
   stopMusic();
   game.world = null;
@@ -295,6 +308,8 @@ function mountBattle(world) {
   // Tear down any previous view first.
   if (game.detachInput) { game.detachInput(); game.detachInput = null; }
   if (game.detachInput3d) { game.detachInput3d(); game.detachInput3d = null; }
+  if (game.detachInput2dTac) { game.detachInput2dTac(); game.detachInput2dTac = null; }
+  if (game.detachInput2dPanel) { game.detachInput2dPanel(); game.detachInput2dPanel = null; }
   if (game.scene3d) { game.scene3d.dispose(); game.scene3d = null; }
   game.mapCtx = null;
 
@@ -336,6 +351,9 @@ function mountBattle(world) {
   applySwapLayout();
   applyRenderModeVisibility();
   refreshViewInput();
+  if (!game.swapped && game.map2dCtx && game.scene3d) {
+    game.detachInput2dPanel = attachInput2DPanel(dom.map2d, world, game.scene3d);
+  }
   resizeCanvases();
   game.world = world;
 
@@ -413,6 +431,8 @@ function toggleViewMode() {
   game.renderMode = game.renderMode === '3d' ? '2d' : '3d';
   if (game.detachInput) { game.detachInput(); game.detachInput = null; }
   if (game.detachInput3d) { game.detachInput3d(); game.detachInput3d = null; }
+  if (game.detachInput2dTac) { game.detachInput2dTac(); game.detachInput2dTac = null; }
+  if (game.detachInput2dPanel) { game.detachInput2dPanel(); game.detachInput2dPanel = null; }
   if (game.scene3d) { game.scene3d.dispose(); game.scene3d = null; }
   game.mapCtx = null;
 
@@ -445,6 +465,9 @@ function toggleViewMode() {
   applySwapLayout();
   applyRenderModeVisibility();
   refreshViewInput();
+  if (!game.swapped && game.map2dCtx && game.scene3d) {
+    game.detachInput2dPanel = attachInput2DPanel(dom.map2d, world, game.scene3d);
+  }
   resizeCanvases();
 }
 
