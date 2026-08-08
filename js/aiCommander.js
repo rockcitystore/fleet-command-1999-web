@@ -1,28 +1,30 @@
 // ---------------------------------------------------------------------------
 // AICommander — a local-LLM (Ollama / qwen3.5:4b) replacement for the built-in
-// RED fleet doctrine.
+// fleet doctrine, usable for EITHER side. A RED commander (side='enemy')
+// directly controls the enemy fleet; a BLUE commander (side='player') directly
+// controls the player fleet. Both are off by default.
 //
 // Design notes
 // ------------
-// * The LLM is the RED fleet commander. Every ~6 s it receives a compact
-//   snapshot of its own ships and the player's (BLUE) contacts, and returns a
-//   strict JSON array of orders: attack / move / hold (plus optional depth for
-//   submarines).
-// * The commander NEVER opens fire before the player commits the war. The
-//   engine keeps `world.combatStarted === false` until the player issues an
-//   attack order; the prompt instructs the model not to attack while cold, and
-//   `applyOrders` enforces it in code (an attack order pre-combat is silently
-//   downgraded to a hold).
+// * Each commander, every ~6 s (BLUE 10 s), receives a compact snapshot of its
+//   own ships and the opposing contacts, and returns a strict JSON array of
+//   orders: attack / move / hold (plus optional depth for submarines). It then
+//   applies those orders directly to its own ships — it is NOT an advisor.
+// * The ENEMY commander NEVER opens fire before the player commits the war: an
+//   attack order while `world.combatStarted === false` is silently downgraded
+//   to a hold. The PLAYER commander MAY open the war (its attack order while
+//   cold sets world.combatStarted), since it stands in for the human player.
 // * Throttled + in-flight guarded so the async chat call never stacks up.
 // * On any error (Ollama down, timeout, malformed JSON) it falls back to the
-//   built-in doctrine (`runBuiltinDoctrine`) for that tick so the enemy never
-//   freezes — and keeps the LLM enabled so it retries next cycle.
+//   built-in doctrine (`runBuiltinDoctrine` for RED, `runBuiltinPlayerDoctrine`
+//   for BLUE) for that tick so neither fleet ever freezes — and keeps the LLM
+//   enabled so it retries next cycle.
 // * `transport` is injectable so headless tests can drive deterministic canned
 //   JSON without a real Ollama server.
 // ---------------------------------------------------------------------------
 
 import { ollamaChat, ollamaChatStream, OLLAMA_DEFAULT_BASE, OLLAMA_DEFAULT_MODEL } from './ollama.js';
-import { runBuiltinDoctrine } from './engine.js';
+import { runBuiltinDoctrine, runBuiltinPlayerDoctrine } from './engine.js';
 
 const RED_SYSTEM_PROMPT = `You are the RED fleet commander in a real-time naval war game. You command the RED (enemy) ships listed under "enemies". The player's BLUE contacts are under "contacts".
 
@@ -43,12 +45,12 @@ Rules:
 Example (war started, two RED ships):
 [{"ship":7,"act":"attack","target":3},{"ship":8,"act":"move","pos":{"x":950,"y":1350},"depth":-60}]`;
 
-const BLUE_SYSTEM_PROMPT = `You are the BLUE fleet tactical advisor in a real-time naval war game. The player commands the BLUE ships listed under "friendlies". Hostile RED contacts are under "hostiles".
+const BLUE_SYSTEM_PROMPT = `You are the BLUE fleet commander in a real-time naval war game. You DIRECTLY command the BLUE (player) ships listed under "friendlies". Hostile RED contacts are under "hostiles". Your orders are carried out immediately by the fleet — you are not an advisor.
 
-Output ONLY a JSON array of SUGGESTED orders, one per BLUE ship you want to advise. The player sees these suggestions and may accept or ignore them. No prose, no markdown, no code fences — just the array.
+Output ONLY a JSON array of orders, one per BLUE ship you want to control. No prose, no markdown, no code fences — just the array.
 
 Each order uses these EXACT fields:
-  "ship":   <integer> REQUIRED — the BLUE ship id from the friendlies list (the ship you are advising)
+  "ship":   <integer> REQUIRED — the BLUE ship id from the friendlies list (the ship you are ordering)
   "act":    "attack" | "move" | "hold"
   "target": <integer> a RED hostile id from the hostiles list (REQUIRED only for "attack")
   "pos":    {"x":int,"y":int}  (REQUIRED only for "move")
@@ -56,7 +58,7 @@ Each order uses these EXACT fields:
 
 Rules:
 - "ship" and "target" MUST be integers copied exactly from the snapshot. They are never objects.
-- If "combatStarted" is false, the war has NOT started. DO NOT use "attack" — suggest "move"/"hold" only.
+- If "combatStarted" is false, the war has NOT started. DO NOT use "attack" — issue "move"/"hold" only, but you MAY open the war by attacking once you judge the moment is right (doing so starts the engagement).
 - If "combatStarted" is true, engage: missile ships stand off and attack surface hostiles; ASW ships close on submarines; subs fire at surface ships from periscope depth.
 
 Example (war started, two BLUE ships):
@@ -233,18 +235,12 @@ export class AICommander {
       this.lastOrders = orders;
       this.phase = 'done';
       if (!orders.length) {
-        // Model returned nothing usable. For the RED commander, keep the force
-        // active with the built-in doctrine rather than freezing.
-        if (this.side === 'enemy') {
-          try { runBuiltinDoctrine(world); } catch { /* ignore */ }
-          this.lastBrief = '(built-in: LLM returned no orders)';
-        } else {
-          this.lastBrief = 'no suggestions';
-        }
+        // Model returned nothing usable. Keep the force active with the
+        // built-in doctrine for this commander's side rather than freezing.
+        this._fallbackDoctrine(world);
+        this.lastBrief = '(built-in: LLM returned no orders)';
       } else {
-        if (this.side === 'enemy') {
-          this.applyOrders(world, orders);
-        }
+        this.applyOrders(world, orders);
         this.lastBrief = this.summarize(orders, world);
       }
       if (this.debug) console.log(`${logPrefix} orders:`, orders);
@@ -252,10 +248,8 @@ export class AICommander {
     } catch (err) {
       this.lastError = err && err.message ? err.message : String(err);
       this.phase = 'error';
-      // RED commander falls back to built-in doctrine so the enemy keeps acting.
-      if (this.side === 'enemy') {
-        try { runBuiltinDoctrine(world); } catch { /* nothing else we can do */ }
-      }
+      // Keep the force acting with the built-in doctrine for this side.
+      this._fallbackDoctrine(world);
       this.lastBrief = `(fallback: ${this.lastError})`;
       console.warn(`${logPrefix} LLM failed:`, this.lastError);
     } finally {
@@ -263,10 +257,24 @@ export class AICommander {
     }
   }
 
-  // Apply parsed orders to enemy ships. Attack orders are suppressed while the
-  // war is cold (combatStarted === false) — the LLM must not start the fight.
+  // Built-in deterministic doctrine for THIS commander's side (used when the LLM
+  // returns nothing or errors), so neither fleet ever freezes.
+  _fallbackDoctrine(world) {
+    try {
+      if (this.side === 'enemy') runBuiltinDoctrine(world);
+      else runBuiltinPlayerDoctrine(world);
+    } catch { /* nothing else we can do */ }
+  }
+
+  // Apply parsed orders to THIS commander's own ships. The ENEMY commander may
+  // not open the war (an attack order while combatStarted === false is silently
+  // downgraded to a hold). The PLAYER commander MAY open the war — a BLUE attack
+  // order while cold sets world.combatStarted (mirroring a manual player attack
+  // via world.issueOrder), so the LLM can genuinely direct the player fleet.
   applyOrders(world, orders) {
     if (!Array.isArray(orders)) return;
+    const ownSide = this.side;
+    const oppSide = this.side === 'enemy' ? 'player' : 'enemy';
     for (const o of orders) {
       if (!o) continue;
       // Accept either `ship` (preferred, disambiguated in the prompt) or the
@@ -275,16 +283,20 @@ export class AICommander {
       const sidRaw = o.ship != null ? o.ship : o.id;
       const sid = Number(sidRaw);
       if (!Number.isFinite(sid)) continue;
-      const s = world.ships.find((x) => x.id === sid && x.alive && x.side === 'enemy');
+      const s = world.ships.find((x) => x.id === sid && x.alive && x.side === ownSide);
       if (!s) continue;
       const act = o.act;
 
       if (act === 'attack') {
-        if (!world.combatStarted) { s.order = null; s.targetId = null; continue; }
+        if (!world.combatStarted) {
+          if (ownSide === 'enemy') { s.order = null; s.targetId = null; continue; }
+          // Player commander opens the war.
+          world.combatStarted = true;
+        }
         const tRaw = o.target;
         const tid = Number(tRaw && typeof tRaw === 'object' ? tRaw.id : tRaw);
         if (!Number.isFinite(tid)) continue;
-        const t = world.ships.find((x) => x.id === tid && x.alive && x.side !== 'enemy');
+        const t = world.ships.find((x) => x.id === tid && x.alive && x.side === oppSide);
         if (!t) continue;
         s.order = { kind: 'attack', targetId: t.id };
         s.targetId = t.id;

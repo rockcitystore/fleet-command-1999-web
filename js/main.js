@@ -12,7 +12,8 @@ import { AICommander } from './aiCommander.js';
 import { loadMissions } from './missions.js';
 
 // Local-LLM (Ollama / qwen3.5:4b) commanders. Created once and reused across
-// battles. RED is the enemy commander; BLUE is the player advisor. Both are
+// battles. RED is the enemy commander; BLUE is the player-side commander (it
+// directly controls the BLUE fleet, not just advises). Both are
 // OFF by default. RED live stream is hidden from the player unless debugAI is
 // enabled (URL ?debugAI=1 or window.__fc.debugAI = true).
 const aiCommander = new AICommander({ side: 'enemy' });
@@ -420,8 +421,9 @@ function setAIMode(mode) {
   syncAIModeUI();
 }
 
-// Toggle the BLUE (player) LLM advisor. It suggests orders but does NOT
-// auto-execute them, so it never overrides the player's direct commands.
+// Toggle the BLUE (player) LLM commander. When 'llm' it DIRECTLY controls the
+// player fleet (issues attack/move/hold orders each cycle); when 'off' the human
+// player commands BLUE as normal. A BLUE attack order may open the war.
 function setBlueAIMode(mode) {
   const world = game.world;
   if (!world) return;
@@ -485,7 +487,7 @@ function syncAIModeUI() {
   const bluePanel = document.getElementById('blue-cic-panel');
   const bluePanelText = document.getElementById('blue-cic-text');
   if (blueBtn) {
-    blueBtn.textContent = blueLlm ? 'BLUE: LLM' : 'BLUE: OFF';
+    blueBtn.textContent = blueLlm ? 'BLUE: LLM' : 'BLUE: HUMAN';
     blueBtn.classList.toggle('active', !!blueLlm);
   }
   if (blueStatus) {
@@ -575,7 +577,7 @@ function loop() {
   world.advanceRealtime();
 
   // Local-LLM commanders: throttled + async, fire-and-forget. RED runs the
-  // enemy; BLUE advises the player. They never block the render loop.
+  // enemy; BLUE commands the player fleet. They never block the render loop.
   if (world.aiMode === 'llm') aiCommander.tick(world).catch(() => {});
   if (world.blueMode === 'llm') blueCommander.tick(world).catch(() => {});
   syncAIModeUI();

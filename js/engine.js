@@ -1441,12 +1441,15 @@ export function updateAI(world, dt) {
   runBuiltinDoctrine(world);
 }
 
-// Deterministic RED fleet doctrine (the classic Fleet Command AI). Extracted
-// from updateAI so the LLM commander can fall back to it on error without
-// re-entering the air-wing launch block.
-export function runBuiltinDoctrine(world) {
+// Deterministic fleet doctrine (the classic Fleet Command AI), parameterized by
+// the side it commands. Extracted from updateAI so the LLM commanders can fall
+// back to it on error without re-entering the air-wing launch block. The RED
+// commander uses ownSide='enemy'; the BLUE commander uses ownSide='player'.
+export function runBuiltinDoctrine(world) { return _runBuiltinDoctrine(world, 'enemy'); }
+export function runBuiltinPlayerDoctrine(world) { return _runBuiltinDoctrine(world, 'player'); }
+function _runBuiltinDoctrine(world, ownSide) {
   for (const s of world.ships) {
-    if (!s.alive || s.side !== 'enemy') continue;
+    if (!s.alive || s.side !== ownSide) continue;
 
     const foes = world.ships.filter((e) => e.alive && isHostile(s, e));
     const enemySubs = foes.filter((e) => contactDomain(e) === 'sub');
