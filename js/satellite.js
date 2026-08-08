@@ -14,6 +14,13 @@
 //
 //   If you run this yourself, pass your token in the URL, OR set a URL
 //   restriction on the token in the Mapbox account to avoid abuse.
+//
+// OFFLINE PRE-CACHED TILES (preferred):
+//   Run `tools/fetch_tiles.mjs` (with MAPBOX_TOKEN in the env) to download a
+//   theater's satellite image + terrain-rgb tiles into assets/tiles/<key>/.
+//   At runtime getTheaterData() loads those local files FIRST — no token and
+//   no network needed, so the game launches instantly and works fully offline.
+//   The ?mapbox= online path is only a live fallback when no local tiles exist.
 // ---------------------------------------------------------------------------
 
 const SAT_STYLE = 'mapbox/satellite-v9';
@@ -38,6 +45,12 @@ export function readTokenFromURL() {
 
 export function hasToken() {
   return !!_token;
+}
+
+// Stable directory key for a theater's pre-cached tiles under assets/tiles/.
+// Format: "<lat 3dp>_<lon 3dp>" (e.g. "50.900_160.730").
+export function tileKey(geo) {
+  return `${geo.lat.toFixed(3)}_${geo.lon.toFixed(3)}`;
 }
 
 // --- projection helpers ----------------------------------------------------
@@ -68,6 +81,8 @@ function chooseZoom(lat) {
   const z = Math.floor(Math.log2((156543.03392 * Math.cos((lat * Math.PI) / 180)) / 578));
   return Math.max(4, Math.min(8, z));
 }
+// Exported so the pre-fetch script picks the same zoom as the runtime.
+export { chooseZoom };
 
 // --- image loading ---------------------------------------------------------
 
@@ -168,10 +183,11 @@ function decodeElevationTile(img) {
   return out;
 }
 
-async function fetchElevation(geo) {
-  if (!_token) return null;
+// World-rect (world 0..4000) -> terrain-rgb tile range at the chosen zoom.
+// Exported so the pre-fetch script downloads exactly the same tiles the
+// runtime expects.
+export function elevationTileRange(geo) {
   const z = chooseZoom(geo.lat);
-  // Visible world rect corners -> Mercator pixels -> tile range.
   const corners = [
     worldToLatLon(0, 0, geo), worldToLatLon(WORLD_SIZE, 0, geo),
     worldToLatLon(0, WORLD_SIZE, geo), worldToLatLon(WORLD_SIZE, WORLD_SIZE, geo),
@@ -184,15 +200,21 @@ async function fetchElevation(geo) {
   }
   const tx0 = Math.floor(minx / 256), tx1 = Math.floor(maxx / 256);
   const ty0 = Math.floor(miny / 256), ty1 = Math.floor(maxy / 256);
+  return { z, tx0, tx1, ty0, ty1 };
+}
+
+// Assemble a bilinear elevation sampler from decoded terrain-rgb tiles.
+// `tileUrlFor(tx, ty)` returns the URL/path of each tile (Mapbox or local).
+// Returns null if no tiles could be loaded.
+async function assembleElevation(geo, z, tx0, tx1, ty0, ty1, tileUrlFor) {
   const cols = tx1 - tx0 + 1, rows = ty1 - ty0 + 1;
-  if (cols * rows > 64) return null; // too many tiles — skip elevation
   const W = cols * 256, H = rows * 256;
   const grid = new Float32Array(W * H).fill(NaN);
+  let loaded = 0;
   for (let ty = ty0; ty <= ty1; ty++) {
     for (let tx = tx0; tx <= tx1; tx++) {
-      const url = `https://api.mapbox.com/v4/mapbox.terrain-rgb/${z}/${tx}/${ty}.pngraw?access_token=${_token}`;
       try {
-        const img = await fetchImage(url);
+        const img = await fetchImage(tileUrlFor(tx, ty));
         const elev = decodeElevationTile(img);
         const gx0 = (tx - tx0) * 256, gy0 = (ty - ty0) * 256;
         for (let y = 0; y < 256; y++) {
@@ -200,9 +222,11 @@ async function fetchElevation(geo) {
             grid[(gy0 + y) * W + (gx0 + x)] = elev[y * 256 + x];
           }
         }
+        loaded++;
       } catch { /* skip missing tile */ }
     }
   }
+  if (!loaded) return null;
   const bilinear = (gx, gy) => {
     const x0 = Math.floor(gx), y0 = Math.floor(gy);
     const x1 = Math.min(W - 1, x0 + 1), y1 = Math.min(H - 1, y0 + 1);
@@ -225,19 +249,65 @@ async function fetchElevation(geo) {
   };
 }
 
+// Online elevation fetch from Mapbox (requires a token).
+async function fetchElevation(geo) {
+  if (!_token) return null;
+  const { z, tx0, tx1, ty0, ty1 } = elevationTileRange(geo);
+  if ((tx1 - tx0 + 1) * (ty1 - ty0 + 1) > 64) return null; // too many tiles
+  return assembleElevation(geo, z, tx0, tx1, ty0, ty1,
+    (tx, ty) => `https://api.mapbox.com/v4/mapbox.terrain-rgb/${z}/${tx}/${ty}.pngraw?access_token=${_token}`);
+}
+
 // --- public API -------------------------------------------------------------
 
 let _cache = { key: null, promise: null };
 
-// Returns { satellite: canvas|null, elevation: field|null } or null if no token.
+// Load a theater from pre-cached local tiles under assets/tiles/<key>/.
+// Returns { satellite, elevation } or null if no manifest/tiles are present.
+// This is the OFFLINE path: no Mapbox token is required at runtime.
+async function tryLoadLocal(geo) {
+  const key = tileKey(geo);
+  const base = `assets/tiles/${key}`;
+  let manifest;
+  try {
+    const r = await fetch(`${base}/manifest.json`, { cache: 'no-store' });
+    if (!r.ok) return null;
+    manifest = await r.json();
+  } catch { return null; }
+
+  let satImg = null;
+  if (manifest.hasSatellite) {
+    try { satImg = await fetchImage(`${base}/satellite.png`); } catch { /* no satellite */ }
+  }
+  let elevation = null;
+  if (manifest.elev) {
+    const { z, tx0, tx1, ty0, ty1 } = manifest.elev;
+    try {
+      elevation = await assembleElevation(geo, z, tx0, tx1, ty0, ty1,
+        (tx, ty) => `${base}/elev/${z}/${tx}/${ty}.png`);
+    } catch { /* no elevation */ }
+  }
+  if (!satImg && !elevation) return null;
+  const satellite = satImg ? reproject(satImg, geo) : null;
+  return { satellite, elevation };
+}
+
+// Returns { satellite: canvas|null, elevation: field|null }.
+// Priority: (1) pre-cached local tiles (offline, no token), (2) Mapbox online
+// if a token is present, (3) null -> procedural terrain fallback.
 export async function getTheaterData(geo) {
-  if (!_token || !geo) return null;
+  if (!geo) return null;
   const key = `${geo.lat.toFixed(3)},${geo.lon.toFixed(3)}`;
   if (_cache.key === key && _cache.promise) return _cache.promise;
   const promise = (async () => {
-    const [satImg, elevation] = await Promise.all([fetchSatellite(geo), fetchElevation(geo)]);
-    const satellite = satImg ? reproject(satImg, geo) : null;
-    return { satellite, elevation };
+    const local = await tryLoadLocal(geo);
+    if (local) return local;
+    if (_token) {
+      const [satImg, elevation] = await Promise.all([fetchSatellite(geo), fetchElevation(geo)]);
+      const satellite = satImg ? reproject(satImg, geo) : null;
+      return { satellite, elevation };
+    }
+    return null;
   })();
   _cache = { key, promise };
   return promise;

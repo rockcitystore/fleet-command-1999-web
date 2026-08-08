@@ -16,11 +16,14 @@
   滚轮缩放贴近舰船模型；WebGL 不可用时自动降级为 2D 战术图。
 - **程序化地形与等高线**：海岸线以外的地形由数字高程模型（DEM）离线生成，
   2D 战术图叠加绿色等高线，3D 视图呈现真实起伏山脉，全程沿用军事绿 CIC 配色。
-- **真实卫星地图 + 真实高程（可选）**：在 URL 中附带 `?mapbox=PK...`（Mapbox
-  公开令牌），即可把当前战区替换为 **Mapbox 真实卫星影像** 与 **真实地形高程**
-  （terrain-rgb，等比例、无垂直夸张）。影像经重投影与海战矢量海岸线精确对齐，
-  3D 山脉与 2D 底图同步更新。**不填令牌时自动回退到离线的程序化 DEM 地形**，
-  令牌仅存于地址栏、绝不写入代码仓库（避免公开泄露）。
+- **真实卫星地图 + 真实高程（可选，支持离线）**：战区可显示 **Mapbox 真实卫星影像** 与
+  **真实地形高程**（terrain-rgb，等比例、无垂直夸张），影像经重投影与海战矢量海岸线精确对齐，
+  3D 山脉与 2D 底图同步更新。两种方式：
+  1. **离线预缓存（推荐）**：运行 `tools/fetch_tiles.mjs`（令牌仅存于环境变量，绝不入库）
+     把某战区的卫星图 + 高程瓦片下载进 `assets/tiles/<战区>/`，游戏**启动时直接读本地文件，
+     无需令牌、无需联网、秒开**。已为默认战区（北太平洋 / Wyoming Deploys）预缓存。
+  2. **运行时在线**：在 URL 附带 `?mapbox=PK...`（你的 Mapbox 公开令牌）临时拉取，不填则回退离线程序化 DEM。
+  令牌仅存于地址栏 / 环境变量，**绝不写入代码仓库**。
 - **双 AI 指挥官**：
   - **RED（敌方）**：由本地大模型直接指挥，其思考过程对玩家隐藏（debug 可见）。
   - **BLUE（我方）**：默认由你手动指挥，可一键切换为由本地大模型指挥；
@@ -117,18 +120,40 @@ npx serve .          # 或： python3 -m http.server 8137
 
 | 参数 | 作用 |
 | --- | --- |
-| `?mapbox=PK...` | 接入 **Mapbox 真实卫星影像 + 真实高程**（terrain-rgb，等比例无夸张）。令牌从地址栏读取，**不写入仓库**。无令牌或加载失败时自动回退离线程序化地形。 |
+| `?mapbox=PK...` | 接入 **Mapbox 真实卫星影像 + 真实高程**（terrain-rgb，等比例无夸张）的**运行时在线**模式。令牌从地址栏读取，**不写入仓库**。若本地 `assets/tiles/<战区>/` 已存在预缓存瓦片，则**优先用本地**，无需此参数。无本地瓦片且无令牌时回退离线程序化地形。 |
 | `?llmdebug=1` | 在游戏内显示红 / 蓝双方大模型的实时思考流（左右分列、可点击标题折叠）。仅用于调试，关闭则控制台也保持干净。旧参数 `?debugAI=1` 仍兼容。 |
 
 示例：
 
 ```
-# 带真实卫星地图（把 PK... 换成你自己的 Mapbox 公开令牌）
+# 离线模式（已预缓存战区）—— 直接打开即可，无需任何令牌
+http://localhost:8137/
+
+# 运行时在线拉取（把 PK... 换成你自己的 Mapbox 公开令牌）
 http://localhost:8137/?mapbox=PK.your_token_here
 
 # 同时打开大模型调试面板
 http://localhost:8137/?mapbox=PK.your_token_here&llmdebug=1
 ```
+
+### 预缓存战区瓦片（离线运行）
+
+不想每次启动都联网拉取、也不想把令牌暴露在 URL 里？用脚本把瓦片提前下好：
+
+```bash
+# 默认预缓存「北太平洋 / Wyoming Deploys」战区（我们的任务战区）
+MAPBOX_TOKEN=pk.xxxx node tools/fetch_tiles.mjs
+
+# 预缓存全部 17 个剧本战区
+MAPBOX_TOKEN=pk.xxxx node tools/fetch_tiles.mjs --all
+
+# 预缓存任意经纬度
+MAPBOX_TOKEN=pk.xxxx node tools/fetch_tiles.mjs 50.9,160.73
+```
+
+脚本只读取环境变量 `MAPBOX_TOKEN`（**绝不写入磁盘 / 不入库**），把卫星图与
+terrain-rgb 高程瓦片写入 `assets/tiles/<lat>_<lon>/` 并生成 `manifest.json`。
+这些瓦片已随仓库提交，其他人克隆后**无需令牌即可离线**看到真实地图。
 
 > 安全提示：Mapbox 令牌建议在其账户后台设置 **URL 限制**，以防被他人盗用。
 
@@ -172,10 +197,13 @@ controllable via a natural-language HQ command chat).
 
 - **Run:** `python3 serve.py` then open `http://localhost:8137/` (any static server works).
 - **Optional LLM:** `ollama pull qwen3.5:4b` to enable the AI commanders.
-- **Optional real satellite + elevation:** append `?mapbox=PK...` (your own Mapbox
-  public token, read from the URL only — never committed) to swap the procedural DEM
-  for real Mapbox satellite imagery and true-scale terrain-rgb elevation. Offline
-  (no token) falls back to the procedural terrain automatically.
+- **Optional real satellite + elevation:** the default theater ships with
+  **pre-cached Mapbox satellite imagery + true-scale terrain-rgb elevation** under
+  `assets/tiles/` — the game loads them offline, no token or network needed. To
+  cache more theaters, run `MAPBOX_TOKEN=pk.xxxx node tools/fetch_tiles.mjs`
+  (`--all` for every scenario). You can also append `?mapbox=PK...` (your own
+  Mapbox public token, read from the URL only — never committed) for a live online
+  fallback. Offline (no tiles, no token) falls back to procedural terrain.
 - **Debug URL params:** `?llmdebug=1` shows the live RED/BLUE LLM reasoning panels
   in-game (collapsible, side-by-side); `?debugAI=1` is a legacy alias.
 - **License:** non-commercial use only; you must attribute the source
