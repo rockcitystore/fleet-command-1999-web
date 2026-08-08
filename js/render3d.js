@@ -20,12 +20,13 @@ const PLAYER_COLOR = 0x4f8fce;
 // Terrain relief: world units -> metres, plus a vertical exaggeration so the
 // synthesized land reads as relief without dwarfing the ships.
 const MPU = 92.6;
-const TERRAIN_EXAG = 2.0;
-const RELIEF_CELL = 24;
+const TERRAIN_EXAG = 6.0;
+const RELIEF_CELL = 20;
 // Land colour ramp (matched to the 2D military-green palette): low (dark) to
-// high (lighter) elevation.
-const LAND_LOW = new THREE.Color(0x1f5a32);
-const LAND_HIGH = new THREE.Color(0x6fae7a);
+// high (lighter) elevation. Deliberately brighter than the old flat fill so
+// slope shading from the sun is readable.
+const LAND_LOW = new THREE.Color(0x2f7a42);
+const LAND_HIGH = new THREE.Color(0xb8e6c0);
 const ENEMY_COLOR = 0xc85a3c;
 const NEUTRAL_COLOR = 0xb9b26a; // merchants / civil traffic: khaki, never a target
 const SUB_COLOR = 0x35617f;
@@ -240,7 +241,8 @@ export class Scene3D {
         const x = wx(c), y = wy(r);
         const yy = yOf(x, y);
         positions.push(x, yy, y); // scene (X, height, Z=world-y)
-        const t = Math.max(0, Math.min(1, elevationAt(x, y) / 850));
+        const elev = elevationAt(x, y);
+        const t = Math.max(0, Math.min(1, elev / 850));
         const col = LAND_LOW.clone().lerp(LAND_HIGH, t);
         colors.push(col.r, col.g, col.b);
       }
@@ -257,6 +259,23 @@ export class Scene3D {
     geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     geo.setIndex(indices);
     geo.computeVertexNormals();
+    // Bake a fixed oblique hillshade into the vertex colours so relief reads
+    // even when the dynamic sun is near noon and would otherwise wash out slopes.
+    const lightDir = new THREE.Vector3(0.55, 0.75, 0.35).normalize();
+    const posAttr = geo.attributes.position;
+    const normAttr = geo.attributes.normal;
+    const colAttr = geo.attributes.color;
+    const tmp = new THREE.Vector3();
+    for (let i = 0; i < posAttr.count; i++) {
+      tmp.fromBufferAttribute(normAttr, i);
+      const shade = 0.55 + 0.45 * Math.max(0, tmp.dot(lightDir));
+      colAttr.setXYZ(i,
+        colAttr.getX(i) * shade,
+        colAttr.getY(i) * shade,
+        colAttr.getZ(i) * shade
+      );
+    }
+    colAttr.needsUpdate = true;
     const mat = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide });
     return new THREE.Mesh(geo, mat);
   }
