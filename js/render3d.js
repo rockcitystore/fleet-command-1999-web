@@ -513,7 +513,7 @@ export class Scene3D {
     let hor = lerpHex(0x223a52, 0xcfe4f0, day);
     const bot = lerpHex(0x05101e, 0x1c5270, day);
     let sunC = lerpHex(0xcdd9ff, 0xfff3d0, day);
-    const bg = lerpHex(0x0b1f3a, 0x9fc4e8, day);
+    let bg = lerpHex(0x0b1f3a, 0x9fc4e8, day);
     let fog = lerpHex(0x223a52, 0xcfe4f0, day);
     const hemiSky = lerpHex(0x223a52, 0x9fc4e8, day);
     const hemiGround = lerpHex(0x0a1420, 0x16242e, day);
