@@ -549,7 +549,7 @@ export class Scene3D {
     if (this.water && this.water.material.uniforms) {
       const u = this.water.material.uniforms;
       u.uSeaState.value = sea;
-      u.uSunDir.value.copy(dir);
+      if (u.sunDir && u.sunDir.value) u.sunDir.value.copy(dir);
       u.uFogColor.value.setHex(fog);
       u.uFogNear.value = fogNear;
       u.uFogFar.value = fogFar;
