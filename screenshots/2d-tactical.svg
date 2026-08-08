@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="'SFMono-Regular',Consolas,monospace">
+  <defs>
+    <linearGradient id="panel2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c2336" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#06121f" stop-opacity="0.92"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ocean -->
+  <rect x="0" y="0" width="800" height="480" fill="#06121f"/>
+  <!-- grid every 500 world-units (≈50px) -->
+  <g stroke="#10314a" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="446"/><line x1="200" y1="0" x2="200" y2="446"/>
+    <line x1="300" y1="0" x2="300" y2="446"/><line x1="400" y1="0" x2="400" y2="446"/>
+    <line x1="500" y1="0" x2="500" y2="446"/><line x1="600" y1="0" x2="600" y2="446"/>
+    <line x1="0" y1="60" x2="800" y2="60"/><line x1="0" y1="120" x2="800" y2="120"/>
+    <line x1="0" y1="180" x2="800" y2="180"/><line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="360" x2="800" y2="360"/>
+  </g>
+  <!-- world border -->
+  <rect x="0" y="0" width="800" height="446" fill="none" stroke="#1d4a66" stroke-width="1"/>
+
+  <!-- land mass with contour lines -->
+  <g>
+    <polygon points="430,150 520,120 600,150 660,120 720,170 700,250 620,300 540,280 470,240 430,200"
+             fill="#2f7a42" stroke="#9fd8ad" stroke-width="2"/>
+    <!-- index contour (500m, bold) -->
+    <polygon points="470,180 540,155 600,180 650,160 690,200 670,250 600,280 540,265 480,230"
+             fill="none" stroke="#b8e6c0" stroke-width="2" stroke-opacity="0.85"/>
+    <!-- minor contours (100m) -->
+    <g fill="none" stroke="#9fd8ad" stroke-width="1" stroke-opacity="0.7">
+      <polygon points="488,200 545,178 595,200 635,184 665,212 648,248 595,268 545,256 498,228"/>
+      <polygon points="508,216 552,200 590,216 618,204 640,224 626,248 590,262 552,252 516,232"/>
+      <polygon points="528,230 558,220 584,232 602,224 614,238 604,252 580,260 552,252 534,240"/>
+    </g>
+  </g>
+
+  <!-- player ships (cyan chevrons) -->
+  <g fill="#39d0ff" stroke="#bff0ff" stroke-width="1">
+    <polygon points="250,300 236,322 264,322"/>
+    <polygon points="330,350 314,374 346,374"/>
+    <polygon points="190,360 176,382 204,382"/>
+    <polygon points="300,260 286,282 314,282"/>
+  </g>
+  <circle cx="250" cy="311" r="16" fill="none" stroke="#ffd84d" stroke-width="2"/>
+  <!-- detected enemy (red) -->
+  <g fill="#ff5b5b" stroke="#ffd0d0" stroke-width="1">
+    <polygon points="610,210 596,232 624,232"/>
+    <polygon points="660,250 646,272 674,272"/>
+  </g>
+  <!-- health bars -->
+  <g>
+    <rect x="240" y="288" width="20" height="3" fill="#0c2b1a"/><rect x="240" y="288" width="14" height="3" fill="#39d0ff"/>
+    <rect x="320" y="338" width="20" height="3" fill="#0c2b1a"/><rect x="320" y="338" width="10" height="3" fill="#39d0ff"/>
+    <rect x="600" y="198" width="20" height="3" fill="#2b0c0c"/><rect x="600" y="198" width="8" height="3" fill="#ff5b5b"/>
+    <rect x="650" y="238" width="20" height="3" fill="#2b0c0c"/><rect x="650" y="238" width="14" height="3" fill="#ff5b5b"/>
+  </g>
+
+  <!-- minimap -->
+  <rect x="660" y="10" width="130" height="130" fill="#04121f" stroke="#1d4a66"/>
+  <rect x="700" y="60" width="40" height="36" fill="#2f7a42" stroke="#9fd8ad" stroke-width="1"/>
+  <g fill="#39d0ff"><circle cx="690" cy="110" r="3"/><circle cx="710" cy="120" r="3"/><circle cx="675" cy="125" r="3"/></g>
+  <g fill="#ff5b5b"><circle cx="720" cy="80" r="3"/><circle cx="735" cy="95" r="3"/></g>
+  <text x="666" y="22" fill="#9fd8ad" font-size="9">MINIMAP</text>
+
+  <!-- TOP BAR -->
+  <rect x="0" y="0" width="800" height="34" fill="url(#panel2)" stroke="#1d4a66"/>
+  <g fill="#cfe9f5" font-size="13">
+    <text x="14" y="22">BLUE 4</text>
+    <text x="92" y="22" fill="#ff8a8a">RED 3</text>
+    <text x="170" y="22" fill="#9fd8ad">Taiwan Strait</text>
+    <text x="320" y="22">T+ 12:30</text>
+    <text x="430" y="22" fill="#ffd84d">25x</text>
+  </g>
+
+  <!-- CONTROL BAR -->
+  <rect x="0" y="446" width="800" height="34" fill="url(#panel2)" stroke="#1d4a66"/>
+  <g font-size="11">
+    <rect x="8" y="452" width="46" height="22" rx="3" fill="#1d4a66"/><text x="14" y="467" fill="#cfe9f5">PAUSE</text>
+    <rect x="60" y="452" width="36" height="22" rx="3" fill="#39d0ff"/><text x="66" y="467" fill="#06121f">25x</text>
+    <rect x="102" y="452" width="52" height="22" rx="3" fill="#163a52"/><text x="108" y="467" fill="#cfe9f5">ZOOM</text>
+    <rect x="160" y="452" width="74" height="22" rx="3" fill="#163a52"/><text x="166" y="467" fill="#cfe9f5">RESET</text>
+    <rect x="240" y="452" width="40" height="22" rx="3" fill="#39d0ff"/><text x="246" y="467" fill="#06121f">2D</text>
+    <rect x="286" y="452" width="52" height="22" rx="3" fill="#163a52"/><text x="292" y="467" fill="#cfe9f5">SWAP</text>
+    <rect x="344" y="452" width="74" height="22" rx="3" fill="#163a52"/><text x="350" y="467" fill="#cfe9f5">SUB VIEW</text>
+    <rect x="424" y="452" width="64" height="22" rx="3" fill="#39d0ff"/><text x="430" y="467" fill="#06121f">AI: LLM</text>
+    <rect x="494" y="452" width="80" height="22" rx="3" fill="#39d0ff"/><text x="500" y="467" fill="#06121f">BLUE: LLM</text>
+    <rect x="540" y="452" width="56" height="22" rx="3" fill="#ffd84d"/><text x="546" y="467" fill="#06121f">CMD</text>
+  </g>
+
+  <text x="14" y="468" fill="#5f87a0" font-size="10" font-family="sans-serif">Fleet Command '99 — Web Port · Powered by hy3</text>
+</svg>

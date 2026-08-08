@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="'SFMono-Regular',Consolas,monospace">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5c9fd8"/>
+      <stop offset="1" stop-color="#cfe4f0"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d8ca8"/>
+      <stop offset="1" stop-color="#123a52"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c2336" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#06121f" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="landlit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8e6c0"/>
+      <stop offset="1" stop-color="#2f7a42"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sky + sea -->
+  <rect x="0" y="0" width="800" height="170" fill="url(#sky)"/>
+  <rect x="0" y="170" width="800" height="310" fill="url(#sea)"/>
+  <!-- subtle sea glitter -->
+  <g stroke="#bfe0ee" stroke-opacity="0.18" stroke-width="1">
+    <line x1="40" y1="230" x2="220" y2="230"/>
+    <line x1="120" y1="280" x2="360" y2="280"/>
+    <line x1="60" y1="330" x2="300" y2="330"/>
+    <line x1="200" y1="390" x2="520" y2="390"/>
+  </g>
+
+  <!-- mountainous island (procedural relief, CIC green) -->
+  <g>
+    <polygon points="430,170 500,110 560,135 620,75 700,140 770,120 800,170"
+             fill="url(#landlit)" stroke="#9fd8ad" stroke-width="1"/>
+    <!-- shaded relief (hillshade baked on NW light) -->
+    <polygon points="620,75 700,140 770,120 800,170 660,170 610,120" fill="#1f5a32" fill-opacity="0.55"/>
+    <polygon points="500,110 560,135 620,75 610,120 540,150" fill="#0f3b22" fill-opacity="0.5"/>
+    <!-- ridge contour hints -->
+    <g stroke="#e7f6ea" stroke-opacity="0.4" stroke-width="1" fill="none">
+      <path d="M470,160 Q560,120 640,135"/>
+      <path d="M500,140 Q580,108 660,118"/>
+    </g>
+    <!-- coastline -->
+    <polyline points="430,170 500,110 560,135 620,75 700,140 770,120 800,170"
+              fill="none" stroke="#9fd8ad" stroke-width="2"/>
+  </g>
+
+  <!-- player ships (cyan) -->
+  <g fill="#39d0ff" stroke="#bff0ff" stroke-width="1">
+    <polygon points="250,300 238,318 262,318"/>
+    <polygon points="330,350 316,372 344,372"/>
+    <polygon points="200,360 188,380 212,380"/>
+  </g>
+  <!-- selected ring -->
+  <circle cx="250" cy="309" r="16" fill="none" stroke="#ffd84d" stroke-width="2"/>
+  <!-- detected enemy (red) -->
+  <g fill="#ff5b5b" stroke="#ffd0d0" stroke-width="1">
+    <polygon points="560,300 548,318 572,318"/>
+    <polygon points="640,340 626,362 654,362"/>
+  </g>
+  <!-- health bars -->
+  <g>
+    <rect x="240" y="288" width="20" height="3" fill="#0c2b1a"/><rect x="240" y="288" width="14" height="3" fill="#39d0ff"/>
+    <rect x="550" y="288" width="20" height="3" fill="#2b0c0c"/><rect x="550" y="288" width="8" height="3" fill="#ff5b5b"/>
+  </g>
+
+  <!-- TOP BAR -->
+  <rect x="0" y="0" width="800" height="34" fill="url(#panel)" stroke="#1d4a66"/>
+  <g fill="#cfe9f5" font-size="13">
+    <text x="14" y="22">BLUE 4</text>
+    <text x="92" y="22" fill="#ff8a8a">RED 3</text>
+    <text x="170" y="22" fill="#9fd8ad">Taiwan Strait</text>
+    <text x="320" y="22">T+ 12:30</text>
+    <text x="430" y="22" fill="#ffd84d">25x</text>
+    <text x="700" y="22" fill="#7fd0ff">FC99 · WEB</text>
+  </g>
+
+  <!-- CONTROL BAR -->
+  <rect x="0" y="446" width="610" height="34" fill="url(#panel)" stroke="#1d4a66"/>
+  <g font-size="11">
+    <g fill="#06121f">
+      <rect x="8" y="452" width="46" height="22" rx="3" fill="#1d4a66"/><text x="14" y="467" fill="#cfe9f5">PAUSE</text>
+      <rect x="60" y="452" width="36" height="22" rx="3" fill="#39d0ff"/><text x="66" y="467" fill="#06121f">25x</text>
+      <rect x="102" y="452" width="52" height="22" rx="3" fill="#163a52"/><text x="108" y="467" fill="#cfe9f5">ZOOM</text>
+      <rect x="160" y="452" width="74" height="22" rx="3" fill="#163a52"/><text x="166" y="467" fill="#cfe9f5">RESET</text>
+      <rect x="240" y="452" width="40" height="22" rx="3" fill="#163a52"/><text x="246" y="467" fill="#cfe9f5">3D</text>
+      <rect x="286" y="452" width="52" height="22" rx="3" fill="#163a52"/><text x="292" y="467" fill="#cfe9f5">SWAP</text>
+      <rect x="344" y="452" width="74" height="22" rx="3" fill="#163a52"/><text x="350" y="467" fill="#cfe9f5">SUB VIEW</text>
+    </g>
+    <rect x="424" y="452" width="64" height="22" rx="3" fill="#39d0ff"/><text x="430" y="467" fill="#06121f">AI: LLM</text>
+    <rect x="494" y="452" width="80" height="22" rx="3" fill="#39d0ff"/><text x="500" y="467" fill="#06121f">BLUE: LLM</text>
+    <rect x="540" y="452" width="56" height="22" rx="3" fill="#ffd84d"/><text x="546" y="467" fill="#06121f">CMD</text>
+  </g>
+
+  <!-- HQ COMMAND panel (right) -->
+  <rect x="614" y="34" width="186" height="412" fill="url(#panel)" stroke="#1d4a66"/>
+  <rect x="614" y="34" width="186" height="26" fill="#0c2336"/>
+  <text x="624" y="52" fill="#ffd84d" font-size="12">HQ COMMAND ▸</text>
+  <text x="624" y="78" fill="#9fd8ad" font-size="10">HQ ▸ 集中火力攻击敌方航母</text>
+  <g font-size="11">
+    <rect x="624" y="92" width="160" height="34" rx="4" fill="#102b3c" stroke="#1d4a66"/>
+    <text x="632" y="108" fill="#bff0ff">你：集火敌方航母</text>
+    <text x="632" y="122" fill="#bff0ff">与主力编队</text>
+    <rect x="624" y="134" width="160" height="46" rx="4" fill="#13351f" stroke="#2f7a42"/>
+    <text x="632" y="150" fill="#cfeecf">BLUE CIC：旗舰率驱逐舰</text>
+    <text x="632" y="164" fill="#cfeecf">前出接敌，集火敌航母；</text>
+    <text x="632" y="178" fill="#cfeecf">护航兵力展开防空圈。</text>
+  </g>
+  <rect x="624" y="404" width="160" height="22" rx="3" fill="#0a1c2b" stroke="#1d4a66"/>
+  <text x="632" y="419" fill="#7fa9c0" font-size="10">输入指令… (Enter 发送)</text>
+
+  <text x="14" y="468" fill="#5f87a0" font-size="10" font-family="sans-serif">Fleet Command '99 — Web Port · Powered by hy3</text>
+</svg>

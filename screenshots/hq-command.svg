@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="'SFMono-Regular',Consolas,monospace">
+  <defs>
+    <linearGradient id="panelh" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c2336" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#06121f" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="seah" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d8ca8"/><stop offset="1" stop-color="#123a52"/>
+    </linearGradient>
+  </defs>
+
+  <!-- left: slim 3D battle strip -->
+  <rect x="0" y="0" width="470" height="480" fill="#06121f"/>
+  <rect x="0" y="60" width="470" height="386" fill="url(#seah)" opacity="0.5"/>
+  <text x="16" y="40" fill="#9fd8ad" font-size="13">3D 海战视图（大模型接管我方）</text>
+  <g fill="#39d0ff"><polygon points="120,300 108,318 132,318"/><polygon points="200,340 186,362 214,362"/><polygon points="90,360 78,380 102,380"/></g>
+  <g fill="#ff5b5b"><polygon points="360,260 348,278 372,278"/><polygon points="400,300 388,318 412,318"/></g>
+  <circle cx="120" cy="309" r="15" fill="none" stroke="#ffd84d" stroke-width="2"/>
+  <!-- faint mountain -->
+  <polygon points="300,360 350,300 410,340 470,310 470,420 300,420" fill="#2f7a42" opacity="0.7" stroke="#9fd8ad"/>
+
+  <!-- right: HQ COMMAND panel -->
+  <rect x="476" y="0" width="324" height="480" fill="url(#panelh)" stroke="#1d4a66"/>
+  <rect x="476" y="0" width="324" height="30" fill="#0c2336"/>
+  <text x="490" y="20" fill="#ffd84d" font-size="13">HQ COMMAND ▸ 自然语言指挥</text>
+
+  <g font-size="11.5">
+    <!-- quick chips -->
+    <g>
+      <rect x="490" y="40" width="70" height="22" rx="4" fill="#163a52" stroke="#2f7a42"/><text x="498" y="55" fill="#cfeecf">全军进攻</text>
+      <rect x="566" y="40" width="70" height="22" rx="4" fill="#163a52" stroke="#2f7a42"/><text x="574" y="55" fill="#cfeecf">全军撤退</text>
+      <rect x="642" y="40" width="70" height="22" rx="4" fill="#163a52" stroke="#2f7a42"/><text x="650" y="55" fill="#cfeecf">集中防空</text>
+      <rect x="718" y="40" width="58" height="22" rx="4" fill="#163a52" stroke="#2f7a42"/><text x="726" y="55" fill="#cfeecf">保持阵型</text>
+    </g>
+
+    <!-- directive readout -->
+    <text x="490" y="84" fill="#9fd8ad" font-size="10">HQ ▸ 集中火力攻击敌方航母</text>
+
+    <!-- user message -->
+    <rect x="560" y="96" width="246" height="40" rx="5" fill="#102b3c" stroke="#1d4a66"/>
+    <text x="572" y="114" fill="#bff0ff">你：集中火力攻击敌方航母</text>
+    <text x="572" y="128" fill="#bff0ff">与主力编队</text>
+
+    <!-- BLUE CIC reply (formal military) -->
+    <rect x="490" y="146" width="246" height="86" rx="5" fill="#13351f" stroke="#2f7a42"/>
+    <text x="502" y="164" fill="#cfeecf">BLUE CIC：旗舰率驱逐舰前出</text>
+    <text x="502" y="178" fill="#cfeecf">接敌，集火敌航母；反潜编队</text>
+    <text x="502" y="192" fill="#cfeecf">前出至中部海域建立反潜屏障，</text>
+    <text x="502" y="206" fill="#cfeecf">护航兵力展开防空圈掩护主力。</text>
+
+    <!-- second exchange -->
+    <rect x="560" y="240" width="246" height="24" rx="5" fill="#102b3c" stroke="#1d4a66"/>
+    <text x="572" y="256" fill="#bff0ff">你：保持当前阵型</text>
+    <rect x="490" y="272" width="246" height="44" rx="5" fill="#13351f" stroke="#2f7a42"/>
+    <text x="502" y="290" fill="#cfeecf">BLUE CIC：遵照。各舰就位，</text>
+    <text x="502" y="304" fill="#cfeecf">按条令自主交战，听令机动。</text>
+  </g>
+
+  <!-- input -->
+  <rect x="490" y="430" width="280" height="30" rx="5" fill="#0a1c2b" stroke="#1d4a66"/>
+  <text x="500" y="450" fill="#7fa9c0" font-size="10">输入指令… (Enter 发送)   [CLR]</text>
+
+  <text x="16" y="466" fill="#5f87a0" font-size="10" font-family="sans-serif">Fleet Command '99 — Web Port · Powered by hy3</text>
+</svg>
