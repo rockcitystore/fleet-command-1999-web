@@ -699,12 +699,15 @@ export function updateHUD(world) {
   const ss = String(totalSec % 60).padStart(2, '0');
   el('hud-time').textContent = `T+${mm}:${ss}`;
 
-  // Info-panel clock starts at 12:00 local scenario time.
+  // Info-panel clock starts at 12:00 local scenario time. Show seconds so
+  // the player can immediately see time compression at work (25x ticks a
+  // game-second every ~40ms, so seconds fly by; at 1x they crawl).
   const clockSec = (43200 + totalSec) % 86400;
   const ch = String(Math.floor(clockSec / 3600)).padStart(2, '0');
   const cmin = String(Math.floor((clockSec % 3600) / 60)).padStart(2, '0');
+  const csec = String(clockSec % 60).padStart(2, '0');
   const infoTime = el('info-time');
-  if (infoTime) infoTime.textContent = `${ch}:${cmin}`;
+  if (infoTime) infoTime.textContent = `${ch}:${cmin}:${csec}`;
   const infoScale = el('info-scale');
   if (infoScale) infoScale.textContent = '50 NMI';
 

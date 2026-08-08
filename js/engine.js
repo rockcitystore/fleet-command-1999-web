@@ -571,13 +571,17 @@ export class World {
     let raw = this.lastTick ? (now - this.lastTick) / 1000 : 1 / 60;
     this.lastTick = now;
     if (raw < 0) raw = 0;
-    if (raw > 0.05) raw = 0.05;
+    // Cap the wall-clock delta so a lag spike doesn't teleport units, but keep
+    // the cap generous enough that the selected time multiplier is preserved
+    // down to ~4 FPS (250ms/frame). Sub-stepping below still keeps physics/AI
+    // stable at 50ms steps.
+    if (raw > 0.25) raw = 0.25;
     let remaining = raw * this.speed; // real-time × speed
-    // Sub-step so a high multiplier (e.g. ×20) integrates as many small steps
+    // Sub-step so a high multiplier (e.g. ×200) integrates as many small steps
     // rather than one huge Euler jump — keeps movement/AI/firing stable.
     const MAX_STEP = 0.05;
     let guard = 0;
-    while (remaining > 1e-6 && guard < 512) {
+    while (remaining > 1e-6 && guard < 2048) {
       const step = Math.min(remaining, MAX_STEP);
       this.time += step;
       updateMovement(this, step);
