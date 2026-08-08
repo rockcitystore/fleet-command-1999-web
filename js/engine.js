@@ -222,9 +222,10 @@ export class World {
     this._randState = seed >>> 0 === 0 ? 1n : BigInt(seed >>> 0);
     this.camera = makeCamera();
     this.paused = false;
-    // Default time compression. Ship/aircraft speeds are now REAL knots, so
-    // ×1 would crawl; 25x keeps the opening battle watchable out of the box.
-    this.speed = 25;
+    // Default time compression. The game opens at real-time ×1 so the player
+    // sees honest pacing; they can crank the multiplier up via the HUD control
+    // if they want the opening battle to play out faster.
+    this.speed = 1;
     this.lastTick = undefined;
     // Combat stays "cold" until the player commits: no side may fire until the
     // player issues an explicit attack order. This prevents the AI from sinking

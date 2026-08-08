@@ -407,17 +407,18 @@ function mountBattle(world) {
   resizeCanvases();
   game.world = world;
 
-  // Optional real Mapbox satellite basemap + real elevation (requires ?mapbox=
-  // token). Fetched async so it never blocks the battle start; when it arrives
-  // it is pushed into the 3D scene (if in 3D) and exposed for the 2D renderer.
-  if (MAPBOX_TOKEN) {
-    getTheaterData(world.geo).then((data) => {
-      if (!data) return;
-      _theaterData = data;
-      window.__fc.satelliteCanvas = data.satellite;
-      if (game.scene3d) applyTheaterToScene(game.scene3d);
-    }).catch(() => {});
-  }
+  // Real satellite basemap + real elevation. satellite.js is LOCAL-FIRST: it
+  // loads pre-cached tiles from assets/tiles/<key>/ with no network needed, and
+  // only falls back to the live Mapbox API (requires ?mapbox= token) when no
+  // cached data exists. Fetched async so it never blocks the battle start; when
+  // it arrives it is pushed into the 3D scene (if in 3D) and exposed for the
+  // 2D renderer.
+  getTheaterData(world.geo).then((data) => {
+    if (!data) return;
+    _theaterData = data;
+    window.__fc.satelliteCanvas = data.satellite;
+    if (game.scene3d) applyTheaterToScene(game.scene3d);
+  }).catch(() => {});
 
   // Command sources start as built-in deterministic doctrine / off.
   world.aiMode = 'builtin';
