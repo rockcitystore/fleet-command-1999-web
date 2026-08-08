@@ -11,14 +11,31 @@ import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlock
 import { AICommander } from './aiCommander.js';
 import { loadMissions } from './missions.js';
 import { readTokenFromURL, getTheaterData } from './satellite.js';
+import { OLLAMA_DEFAULT_BASE, OLLAMA_DEFAULT_MODEL } from './ollama.js';
 
-// Local-LLM (Ollama / qwen3.5:4b) commanders. Created once and reused across
-// battles. RED is the enemy commander; BLUE is the player-side commander (it
-// directly controls the BLUE fleet, not just advises). Both are
-// OFF by default. LLM internal streams are never dumped to the browser console;
-// they are only shown in-game when ?llmdebug=1 (or legacy ?debugAI=1) is set.
-const aiCommander = new AICommander({ side: 'enemy' });
-const blueCommander = new AICommander({ side: 'player', intervalMs: 10000 });
+// System settings are persisted across sessions. The Ollama endpoint and model
+// are global; RED/BLUE LLM toggles default to off so a fresh launch never
+// surprises the player with autonomous units.
+function readSetting(key, fallback) {
+  try { const v = window.localStorage.getItem(`fc99.${key}`); return v != null ? v : fallback; }
+  catch { return fallback; }
+}
+function writeSetting(key, value) {
+  try { window.localStorage.setItem(`fc99.${key}`, value); } catch { /* ignore */ }
+}
+
+let ollamaBase = readSetting('ollamaBase', OLLAMA_DEFAULT_BASE);
+let selectedModel = readSetting('ollamaModel', OLLAMA_DEFAULT_MODEL);
+let desiredRedMode = readSetting('redAIMode', 'builtin');
+let desiredBlueMode = readSetting('blueAIMode', 'off');
+
+// Local-LLM (Ollama) commanders. Created once and reused across battles. RED is
+// the enemy commander; BLUE is the player-side commander (it directly controls
+// the BLUE fleet). Both are OFF by default. LLM internal streams are never
+// dumped to the browser console; they are only shown in-game when ?llmdebug=1
+// (or legacy ?debugAI=1) is set.
+const aiCommander = new AICommander({ side: 'enemy', base: ollamaBase, model: selectedModel });
+const blueCommander = new AICommander({ side: 'player', intervalMs: 10000, base: ollamaBase, model: selectedModel });
 
 // LLM debug visibility: hidden by default so RED/BLUE reasoning stays off-screen
 // and the console stays clean. Enable with ?llmdebug=1 or legacy ?debugAI=1,
@@ -33,6 +50,107 @@ function detectLLMDebug() {
 let LLM_DEBUG = detectLLMDebug();
 aiCommander.debug = LLM_DEBUG;
 blueCommander.debug = LLM_DEBUG;
+
+// ---------------------------------------------------------------------------
+// System settings — Ollama auto-detection + model selection
+// ---------------------------------------------------------------------------
+
+// Probe an Ollama base URL and return the sorted model-name list, or null.
+async function probeOllama(base) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 3500);
+  try {
+    const res = await fetch(`${base}/api/tags`, {
+      method: 'GET',
+      signal: ctrl.signal,
+      cache: 'no-store',
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const models = (data.models || []).map((m) => m.name).sort();
+    return models.length ? models : null;
+  } catch (err) {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+let lastDetectedModels = [];
+
+function populateOllamaModelSelect(models) {
+  lastDetectedModels = models || [];
+  const select = document.getElementById('sys-ollama-model');
+  if (!select) return;
+  select.innerHTML = '';
+  const placeholder = document.createElement('option');
+  placeholder.textContent = '— select model —';
+  placeholder.value = '';
+  select.appendChild(placeholder);
+  for (const name of lastDetectedModels) {
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    select.appendChild(opt);
+  }
+  // Restore the persisted/selected model if it is available; otherwise keep
+  // the placeholder selected so the user must make an explicit choice.
+  if (selectedModel && lastDetectedModels.includes(selectedModel)) {
+    select.value = selectedModel;
+  } else {
+    select.value = '';
+  }
+  select.disabled = !lastDetectedModels.length;
+}
+
+function setOllamaStatus(text, ok, err) {
+  const el = document.getElementById('sys-ollama-status');
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove('ok', 'err');
+  if (ok) el.classList.add('ok');
+  if (err) el.classList.add('err');
+}
+
+async function detectOllama() {
+  setOllamaStatus('Detecting local Ollama…');
+  const models = await probeOllama(ollamaBase);
+  if (models) {
+    populateOllamaModelSelect(models);
+    setOllamaStatus(`Connected — ${models.length} model${models.length === 1 ? '' : 's'}`, true, false);
+    // If no model is selected yet, pick the default/first available one.
+    if (!selectedModel || !models.includes(selectedModel)) {
+      const preferred = models.includes(OLLAMA_DEFAULT_MODEL) ? OLLAMA_DEFAULT_MODEL : models[0];
+      selectOllamaModel(preferred);
+    }
+    return;
+  }
+  populateOllamaModelSelect([]);
+  setOllamaStatus(`Not reachable at ${ollamaBase}`, false, true);
+}
+
+function selectOllamaModel(name) {
+  if (!name) return;
+  selectedModel = name;
+  writeSetting('ollamaModel', name);
+  aiCommander.model = name;
+  blueCommander.model = name;
+  const select = document.getElementById('sys-ollama-model');
+  if (select && select.value !== name) select.value = name;
+}
+
+function applyOllamaBase(base) {
+  base = (base || '').trim();
+  if (!base) return;
+  // Allow "localhost:11434" shorthand.
+  if (!/^https?:\/\//i.test(base)) base = `http://${base}`;
+  ollamaBase = base;
+  writeSetting('ollamaBase', base);
+  aiCommander.base = base;
+  blueCommander.base = base;
+  const input = document.getElementById('sys-ollama-url');
+  if (input && input.value !== base) input.value = base;
+}
 
 // Optional Mapbox satellite basemap + real elevation. The token is read from
 // ?mapbox=PK... in the URL (never hard-coded, so it never leaks into the public
@@ -420,13 +538,18 @@ function mountBattle(world) {
     if (game.scene3d) applyTheaterToScene(game.scene3d);
   }).catch(() => {});
 
-  // Command sources start as built-in deterministic doctrine / off.
-  world.aiMode = 'builtin';
-  aiCommander.setEnabled(false);
+  // Apply the AI modes chosen in System Settings. Defaults keep RED on
+  // built-in doctrine and BLUE under human control so a fresh launch never
+  // surprises the player.
+  world.aiMode = desiredRedMode === 'llm' ? 'llm' : 'builtin';
+  aiCommander.setEnabled(world.aiMode === 'llm');
   aiCommander.lastError = null;
-  world.blueMode = 'off';
-  blueCommander.setEnabled(false);
+  world.blueMode = desiredBlueMode === 'llm' ? 'llm' : 'off';
+  blueCommander.setEnabled(world.blueMode === 'llm');
   blueCommander.lastError = null;
+  // Kick off an immediate first decision when either commander is LLM-enabled.
+  if (world.aiMode === 'llm') aiCommander.tick(world, { force: true }).catch(() => {});
+  if (world.blueMode === 'llm') blueCommander.tick(world, { force: true }).catch(() => {});
   // Reset any HQ directive + chat from a previous battle.
   blueCommander.humanDirective = null;
   if (hqChat) {
@@ -453,16 +576,18 @@ function mountBattle(world) {
 
 // Toggle the RED fleet between the built-in doctrine and the local LLM.
 function setAIMode(mode) {
+  desiredRedMode = mode === 'llm' ? 'llm' : 'builtin';
+  writeSetting('redAIMode', desiredRedMode);
   const world = game.world;
-  if (!world) return;
-  if (mode === 'llm') {
-    world.aiMode = 'llm';
-    aiCommander.setEnabled(true);
-    // Kick off an immediate first decision (don't wait a full throttle window).
-    aiCommander.tick(world, { force: true }).catch(() => {});
-  } else {
-    world.aiMode = 'builtin';
-    aiCommander.setEnabled(false);
+  if (world) {
+    if (desiredRedMode === 'llm') {
+      world.aiMode = 'llm';
+      aiCommander.setEnabled(true);
+      aiCommander.tick(world, { force: true }).catch(() => {});
+    } else {
+      world.aiMode = 'builtin';
+      aiCommander.setEnabled(false);
+    }
   }
   syncAIModeUI();
 }
@@ -471,32 +596,37 @@ function setAIMode(mode) {
 // player fleet (issues attack/move/hold orders each cycle); when 'off' the human
 // player commands BLUE as normal. A BLUE attack order may open the war.
 function setBlueAIMode(mode) {
+  desiredBlueMode = mode === 'llm' ? 'llm' : 'off';
+  writeSetting('blueAIMode', desiredBlueMode);
   const world = game.world;
-  if (!world) return;
-  if (mode === 'llm') {
-    world.blueMode = 'llm';
-    blueCommander.setEnabled(true);
-    blueCommander.tick(world, { force: true }).catch(() => {});
-  } else {
-    world.blueMode = 'off';
-    blueCommander.setEnabled(false);
+  if (world) {
+    if (desiredBlueMode === 'llm') {
+      world.blueMode = 'llm';
+      blueCommander.setEnabled(true);
+      blueCommander.tick(world, { force: true }).catch(() => {});
+    } else {
+      world.blueMode = 'off';
+      blueCommander.setEnabled(false);
+    }
   }
   syncAIModeUI();
 }
 
-// Reflect the current RED/BLUE AI mode in the control-bar button + status readout.
+// Reflect the current RED/BLUE AI mode in the control-bar status readout and in
+// the System Settings panel.
 function syncAIModeUI() {
   const world = game.world;
-  const llm = world && world.aiMode === 'llm';
-  const blueLlm = world && world.blueMode === 'llm';
+  const llm = world ? world.aiMode === 'llm' : desiredRedMode === 'llm';
+  const blueLlm = world ? world.blueMode === 'llm' : desiredBlueMode === 'llm';
 
   // --- RED (enemy) commander UI ---
-  const btn = document.getElementById('btn-ai');
+  const sysRedBtn = document.getElementById('sys-red-ai');
   const status = document.getElementById('ai-status');
   const live = document.getElementById('ai-live');
-  if (btn) {
-    btn.textContent = llm ? 'AI: LLM' : 'AI: BUILTIN';
-    btn.classList.toggle('active', !!llm);
+  if (sysRedBtn) {
+    sysRedBtn.textContent = llm ? 'LLM' : 'BUILTIN';
+    sysRedBtn.dataset.mode = llm ? 'llm' : 'builtin';
+    sysRedBtn.classList.toggle('active', !!llm);
   }
   if (status) {
     status.textContent = aiCommander.statusText();
@@ -509,13 +639,14 @@ function syncAIModeUI() {
     live.textContent = '';
   }
 
-  // --- BLUE (player advisor) UI ---
-  const blueBtn = document.getElementById('btn-blue-ai');
+  // --- BLUE (player commander) UI ---
+  const sysBlueBtn = document.getElementById('sys-blue-ai');
   const blueStatus = document.getElementById('blue-ai-status');
   const blueLive = document.getElementById('blue-ai-live');
-  if (blueBtn) {
-    blueBtn.textContent = blueLlm ? 'BLUE: LLM' : 'BLUE: HUMAN';
-    blueBtn.classList.toggle('active', !!blueLlm);
+  if (sysBlueBtn) {
+    sysBlueBtn.textContent = blueLlm ? 'LLM' : 'HUMAN';
+    sysBlueBtn.dataset.mode = blueLlm ? 'llm' : 'off';
+    sysBlueBtn.classList.toggle('active', !!blueLlm);
   }
   if (blueStatus) {
     blueStatus.textContent = blueCommander.statusText();
@@ -689,6 +820,7 @@ buildMenu(null, {
   onStartCustom: (opts) => startCustom(opts),
   onTutorial: () => startTutorial(),
   onMusic: (on) => setMusic(on),
+  onSystem: () => { detectOllama(); syncAIModeUI(); },
 });
 registerMissionEndHandler((world) => handleMissionEnd(world));
 
@@ -710,14 +842,32 @@ const viewBtn = document.getElementById('btn-viewmode');
 if (viewBtn) viewBtn.addEventListener('click', () => toggleViewMode());
 const swapBtn = document.getElementById('btn-swap');
 if (swapBtn) swapBtn.addEventListener('click', () => setSwapped(!game.swapped));
-const aiBtn = document.getElementById('btn-ai');
-if (aiBtn) aiBtn.addEventListener('click', () => {
-  setAIMode(game.world && game.world.aiMode === 'llm' ? 'builtin' : 'llm');
-});
-const blueAiBtn = document.getElementById('btn-blue-ai');
-if (blueAiBtn) blueAiBtn.addEventListener('click', () => {
-  setBlueAIMode(game.world && game.world.blueMode === 'llm' ? 'off' : 'llm');
-});
+
+// --- SYSTEM SETTINGS (Ollama + AI toggles) ---------------------------------
+const sysUrl = document.getElementById('sys-ollama-url');
+const sysDetect = document.getElementById('sys-ollama-detect');
+const sysModel = document.getElementById('sys-ollama-model');
+const sysRed = document.getElementById('sys-red-ai');
+const sysBlue = document.getElementById('sys-blue-ai');
+if (sysUrl) {
+  sysUrl.value = ollamaBase;
+  sysUrl.addEventListener('change', () => { applyOllamaBase(sysUrl.value); detectOllama(); });
+}
+if (sysDetect) sysDetect.addEventListener('click', () => { applyOllamaBase(sysUrl ? sysUrl.value : ollamaBase); detectOllama(); });
+if (sysModel) {
+  sysModel.addEventListener('change', () => { if (sysModel.value) selectOllamaModel(sysModel.value); });
+}
+if (sysRed) {
+  sysRed.addEventListener('click', () => {
+    setAIMode(sysRed.dataset.mode === 'llm' ? 'builtin' : 'llm');
+  });
+}
+if (sysBlue) {
+  sysBlue.addEventListener('click', () => {
+    setBlueAIMode(sysBlue.dataset.mode === 'llm' ? 'off' : 'llm');
+  });
+}
+
 // --- LLM DEBUG PANEL --------------------------------------------------------
 const llmDebugPanel = document.getElementById('llm-debug-panel');
 const llmDebugHead = document.getElementById('llm-debug-head');
@@ -919,3 +1069,8 @@ Object.defineProperty(window.__fc, 'debugAI', {
   get: () => window.__fc.llmDebug,
   set: (v) => { window.__fc.llmDebug = v; },
 });
+
+// Auto-detect the local Ollama daemon on startup and reflect persisted AI
+// toggle states in the System Settings panel.
+detectOllama();
+syncAIModeUI();

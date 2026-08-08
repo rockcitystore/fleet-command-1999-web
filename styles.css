@@ -221,6 +221,30 @@ html, body {
 .opt-toggle[data-on="simple"] { opacity: 0.85; }
 .opt-note { color: rgba(57, 208, 255, 0.45); font-size: 11px; letter-spacing: 1px; margin: 4px 0 0; }
 
+/* System settings (Ollama + AI toggles) */
+.system-card { border-radius: 8px; padding: 18px 22px; display: flex; flex-direction: column; gap: 12px; max-width: 520px; }
+.sys-row { display: flex; align-items: center; justify-content: space-between; color: var(--cyan-dim); font-size: 13px; letter-spacing: 1.5px; gap: 16px; }
+.sys-row-input { align-items: stretch; }
+.sys-input-wrap { display: flex; gap: 8px; flex: 1 1 auto; justify-content: flex-end; }
+.sys-input-wrap input[type=text] {
+  min-width: 180px; max-width: 280px; flex: 1 1 auto;
+  background: var(--btn-bg); color: var(--cyan); border: 1px solid var(--btn-border);
+  border-radius: 4px; padding: 6px 10px; font-family: var(--mono); font-size: 12px;
+}
+.sys-input-wrap input[type=text]:focus { outline: none; border-color: var(--cyan); }
+.sys-select {
+  min-width: 180px; background: var(--btn-bg); color: var(--cyan);
+  border: 1px solid var(--btn-border); border-radius: 4px; padding: 6px 10px;
+  font-family: var(--mono); font-size: 12px;
+}
+.sys-select:disabled { opacity: 0.5; }
+.sys-toggle { min-width: 100px; }
+.sys-toggle.active { border-color: var(--highlight); color: var(--highlight); background: rgba(40, 34, 8, 0.55); }
+.sys-status-row { justify-content: flex-start; font-size: 12px; letter-spacing: 1px; color: rgba(57, 208, 255, 0.7); min-height: 18px; }
+.sys-status-row.ok { color: var(--ok); }
+.sys-status-row.err { color: var(--enemy); }
+.sys-note { color: rgba(57, 208, 255, 0.45); font-size: 11px; letter-spacing: 1px; margin: 4px 0 0; line-height: 1.45; }
+
 /* Coach overlay (battle screen) */
 .coach {
   position: fixed;

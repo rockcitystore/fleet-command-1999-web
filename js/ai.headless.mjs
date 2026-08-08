@@ -1,8 +1,8 @@
 // Headless test for the local-LLM (Ollama) RED fleet commander.
 //
 // Verifies:
-//   1. The #btn-ai toggle + #ai-status readout exist.
-//   2. Enabling AI: LLM calls the commander's transport (the /api/chat
+//   1. The #sys-red-ai toggle + #ai-status readout exist.
+//   2. Enabling RED: LLM calls the commander's transport (the /api/chat
 //      equivalent) and the RED fleet receives orders.
 //   3. While the war is cold (combatStarted === false) the commander does NOT
 //      open fire — attack orders are downgraded to a hold.
@@ -55,18 +55,18 @@ try {
 
   // --- UI present ----------------------------------------------------------
   const ui = await page.evaluate(() => ({
-    btn: !!document.getElementById('btn-ai'),
+    btn: !!document.getElementById('sys-red-ai'),
     status: !!document.getElementById('ai-status'),
-    btnLabel: document.getElementById('btn-ai') && document.getElementById('btn-ai').textContent,
+    btnLabel: document.getElementById('sys-red-ai') && document.getElementById('sys-red-ai').textContent,
     enemyCount: window.__fc.world ? window.__fc.world.aliveShips('enemy').length : -1,
     playerCount: window.__fc.world ? window.__fc.world.aliveShips('player').length : -1,
     combatStarted: window.__fc.world ? window.__fc.world.combatStarted : null,
   }));
-  check(ui.btn, 'AI toggle button (#btn-ai) exists');
+  check(ui.btn, 'AI toggle button (#sys-red-ai) exists');
   check(ui.status, 'AI status readout (#ai-status) exists');
   check(await page.evaluate(() => !!document.getElementById('ai-live')),
     'RED CIC live readout (#ai-live) exists');
-  check(ui.btnLabel === 'AI: BUILTIN', 'AI button defaults to BUILTIN');
+  check(ui.btnLabel === 'BUILTIN', 'RED AI button defaults to BUILTIN');
   check(ui.enemyCount > 0, `scenario has RED ships (${ui.enemyCount})`);
   check(ui.playerCount > 0, `scenario has BLUE ships (${ui.playerCount})`);
   check(ui.combatStarted === false, 'war starts cold (combatStarted === false)');
@@ -115,7 +115,7 @@ try {
     calls: window.__fc.aiCommander.callCount,
     mockCalls: window.__mock.calls,
     brief: window.__fc.aiCommander.lastBrief,
-    btnLabel: document.getElementById('btn-ai').textContent,
+    btnLabel: document.getElementById('sys-red-ai').textContent,
     // Cold war: attack must NOT be applied yet.
     enemyOrder: (() => {
       const e = window.__fc.world.aliveShips('enemy')[0];
@@ -146,7 +146,7 @@ try {
     'liveText accumulated the full streamed reply');
   check(stream.domLive.length > 0 && stream.domLive !== '—', 'RED CIC HUD shows the live readout');
 
-  check(llmOn.btnLabel === 'AI: LLM', 'AI button reflects LLM mode');
+  check(llmOn.btnLabel === 'LLM', 'RED AI button reflects LLM mode');
   check(llmOn.enemyOrder === null || llmOn.enemyOrder !== 'attack',
     'cold war: RED does NOT open fire (attack downgraded to hold)');
 
@@ -173,11 +173,11 @@ try {
   const back = await page.evaluate(() => ({
     mode: window.__fc.world.aiMode,
     enabled: window.__fc.aiCommander.enabled,
-    btnLabel: document.getElementById('btn-ai').textContent,
+    btnLabel: document.getElementById('sys-red-ai').textContent,
   }));
   check(back.mode === 'builtin', 'AI mode switches back to builtin');
   check(back.enabled === false, 'commander disabled in builtin mode');
-  check(back.btnLabel === 'AI: BUILTIN', 'AI button reflects BUILTIN mode');
+  check(back.btnLabel === 'BUILTIN', 'RED AI button reflects BUILTIN mode');
 
   check(errors.length === 0, 'no console/page errors (' + errors.length + ')');
   if (errors.length) errors.slice(0, 10).forEach((e) => console.log('  ERR: ' + e));

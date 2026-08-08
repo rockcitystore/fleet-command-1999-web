@@ -25,6 +25,7 @@
           <button class="menu-btn" data-act="editor" type="button">MISSION EDITOR</button>
           <button class="menu-btn" data-act="reference" type="button">REFERENCE</button>
           <button class="menu-btn" data-act="options" type="button">OPTIONS</button>
+          <button class="menu-btn" data-act="system" type="button">SYSTEM</button>
         </nav>
 
         <div class="menu-content">
@@ -133,6 +134,40 @@
               <p class="opt-note">Grid &amp; symbol changes apply to the next battle. Music toggles live.</p>
             </div>
           </div>
+
+          <div id="sub-system" class="subpanel hidden">
+            <div class="subpanel-head">
+              <span class="subpanel-title">SYSTEM SETTINGS</span>
+            </div>
+            <div class="system-card glass">
+              <div class="sys-row sys-row-input">
+                <span>OLLAMA ENDPOINT</span>
+                <div class="sys-input-wrap">
+                  <input id="sys-ollama-url" type="text" value="http://localhost:11434" autocomplete="off" />
+                  <button id="sys-ollama-detect" class="btn btn-sm" type="button">DETECT</button>
+                </div>
+              </div>
+              <div class="sys-row">
+                <span>MODEL</span>
+                <select id="sys-ollama-model" class="sys-select"></select>
+              </div>
+              <div class="sys-row sys-status-row">
+                <span id="sys-ollama-status">Detecting local Ollama…</span>
+              </div>
+              <div class="sys-row">
+                <span>RED COMMANDER</span>
+                <button id="sys-red-ai" class="btn sys-toggle" type="button" data-mode="builtin">BUILTIN</button>
+              </div>
+              <div class="sys-row">
+                <span>BLUE COMMANDER</span>
+                <button id="sys-blue-ai" class="btn sys-toggle" type="button" data-mode="off">HUMAN</button>
+              </div>
+              <p class="sys-note">
+                Ollama is auto-detected on startup. Choose a model, then enable RED / BLUE LLM commanders.
+                These settings apply to the current and next battle.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -208,8 +243,6 @@
       <button id="btn-viewmode" class="btn" type="button">3D</button>
       <button id="btn-swap" class="btn" type="button">SWAP</button>
       <button id="btn-subview" class="btn" type="button">SUB VIEW</button>
-      <button id="btn-ai" class="btn" type="button">AI: BUILTIN</button>
-      <button id="btn-blue-ai" class="btn" type="button">BLUE: OFF</button>
       <button id="btn-cmd" class="btn" type="button">CMD</button>
       <button id="btn-music" class="btn" type="button">MUSIC</button>
       <span class="hud-cell hud-scenario-cell"><span id="hud-scenario">&mdash;</span></span>
@@ -325,6 +358,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=20"></script>
+  <script type="module" src="js/main.js?v=21"></script>
 </body>
 </html>

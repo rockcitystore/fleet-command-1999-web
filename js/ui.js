@@ -230,7 +230,7 @@ const PLACEHOLDERS = {
   },
 };
 
-export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutorial, onMusic }) {
+export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutorial, onMusic, onSystem }) {
   const list = el('scenario-list');
   list.innerHTML = '';
   onStartRef = onStart;
@@ -363,12 +363,13 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
   const subTutorials = el('sub-tutorials');
   const subEditor = el('sub-editor');
   const subOptions = el('sub-options');
+  const subSystem = el('sub-system');
   const placeholderTitle = el('placeholder-title');
   const placeholderBody = el('placeholder-body');
   const menuButtons = Array.from(document.querySelectorAll('#main-menu .menu-btn'));
 
   function showOnly(active) {
-    [subWelcome, subSingle, subCampaign, subPlaceholder, subTutorials, subEditor, subOptions].forEach((p) => p.classList.add('hidden'));
+    [subWelcome, subSingle, subCampaign, subPlaceholder, subTutorials, subEditor, subOptions, subSystem].forEach((p) => p.classList.add('hidden'));
     if (active) active.classList.remove('hidden');
   }
 
@@ -398,6 +399,9 @@ export function buildMenu(rootEl, { onStart, onReference, onStartCustom, onTutor
       } else if (act === 'options') {
         showOnly(subOptions);
         syncOptionsUI();
+      } else if (act === 'system') {
+        showOnly(subSystem);
+        if (onSystem) onSystem();
       } else if (PLACEHOLDERS[act]) {
         placeholderTitle.textContent = PLACEHOLDERS[act].title;
         placeholderBody.textContent = PLACEHOLDERS[act].body;
