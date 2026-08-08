@@ -12,11 +12,20 @@
 // throws and main.js falls back to the 2D renderer, so nothing else regresses.
 
 import * as THREE from './vendor/three.module.js';
-import { getLand } from './terrain.js';
+import { getLand, elevationAt, isPointOnLand } from './terrain.js';
 import { ModelLibrary } from './modellib.js';
 import { shipModelKey, aircraftModelKey } from './modelmap.js';
 
 const PLAYER_COLOR = 0x4f8fce;
+// Terrain relief: world units -> metres, plus a vertical exaggeration so the
+// synthesized land reads as relief without dwarfing the ships.
+const MPU = 92.6;
+const TERRAIN_EXAG = 2.0;
+const RELIEF_CELL = 24;
+// Land colour ramp (matched to the 2D military-green palette): low (dark) to
+// high (lighter) elevation.
+const LAND_LOW = new THREE.Color(0x1f5a32);
+const LAND_HIGH = new THREE.Color(0x6fae7a);
 const ENEMY_COLOR = 0xc85a3c;
 const NEUTRAL_COLOR = 0xb9b26a; // merchants / civil traffic: khaki, never a target
 const SUB_COLOR = 0x35617f;
@@ -182,27 +191,74 @@ export class Scene3D {
     // Land polygons (world.land is an array of point-arrays [[{x,y}...]]).
     let polys = [];
     try { polys = getLand() || []; } catch (_) { polys = (world && world.land) || []; }
-    const landMat = new THREE.MeshLambertMaterial({ color: 0x1f5a32, side: THREE.DoubleSide });
     const coastMat = new THREE.LineBasicMaterial({ color: 0x49a06a, transparent: true, opacity: 0.9 });
     for (const poly of polys) {
       const pts = Array.isArray(poly) ? poly : (poly && poly.pts) || [];
       if (!pts || pts.length < 3) continue;
-      const shape = new THREE.Shape();
-      shape.moveTo(pts[0].x, -pts[0].y);
-      for (let i = 1; i < pts.length; i++) shape.lineTo(pts[i].x, -pts[i].y);
-      shape.closePath();
-      const geo = new THREE.ShapeGeometry(shape);
-      geo.rotateX(-Math.PI / 2); // lay flat: shape (x, -y) -> scene (x, 0, y)
-      const land = new THREE.Mesh(geo, landMat);
-      land.position.y = 0.2;
-      this.scene.add(land);
+      // Procedural relief: a heightfield sampled from the DEM, clipped to the
+      // coastline. Off-land vertices dip just below the waterline so the coast
+      // slopes into the sea naturally instead of leaving a hole.
+      const relief = this._buildLandRelief(pts);
+      if (relief) this.scene.add(relief);
 
       // coastline outline
-      const ringPts = pts.map((p) => new THREE.Vector3(p.x, 0.6, p.y));
+      const ringPts = pts.map((p) => new THREE.Vector3(p.x, 0.7, p.y));
       ringPts.push(ringPts[0].clone());
       const lgeo = new THREE.BufferGeometry().setFromPoints(ringPts);
       this.scene.add(new THREE.Line(lgeo, coastMat));
     }
+  }
+
+  // Build a triangulated heightfield for one land polygon, displaced by the
+  // procedural DEM. Vertices on land rise by elevation (scaled to world Y with
+  // TERRAIN_EXAG); vertices just off the coast dip below the waterline so the
+  // shoreline slopes into the sea. Coloured per-vertex along the green ramp.
+  _buildLandRelief(pts) {
+    let xMin = Infinity, xMax = -Infinity, yMin = Infinity, yMax = -Infinity;
+    for (const p of pts) {
+      if (p.x < xMin) xMin = p.x;
+      if (p.x > xMax) xMax = p.x;
+      if (p.y < yMin) yMin = p.y;
+      if (p.y > yMax) yMax = p.y;
+    }
+    if (!isFinite(xMin)) return null;
+    const cell = RELIEF_CELL;
+    const gx = Math.max(1, Math.ceil((xMax - xMin) / cell));
+    const gy = Math.max(1, Math.ceil((yMax - yMin) / cell));
+    const wx = (c) => xMin + c * cell;
+    const wy = (r) => yMin + r * cell;
+    const yOf = (x, y) => {
+      if (!isPointOnLand(x, y)) return -1.0;            // submerged shoal
+      const m = Math.max(0, elevationAt(x, y));
+      return Math.max(0.3, (m / MPU) * TERRAIN_EXAG);   // world-Y height
+    };
+    const positions = [];
+    const colors = [];
+    const indices = [];
+    for (let r = 0; r <= gy; r++) {
+      for (let c = 0; c <= gx; c++) {
+        const x = wx(c), y = wy(r);
+        const yy = yOf(x, y);
+        positions.push(x, yy, y); // scene (X, height, Z=world-y)
+        const t = Math.max(0, Math.min(1, elevationAt(x, y) / 850));
+        const col = LAND_LOW.clone().lerp(LAND_HIGH, t);
+        colors.push(col.r, col.g, col.b);
+      }
+    }
+    const idx = (r, c) => r * (gx + 1) + c;
+    for (let r = 0; r < gy; r++) {
+      for (let c = 0; c < gx; c++) {
+        const a = idx(r, c), b = idx(r, c + 1), d = idx(r + 1, c), e = idx(r + 1, c + 1);
+        indices.push(a, b, e, a, e, d);
+      }
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    geo.setIndex(indices);
+    geo.computeVertexNormals();
+    const mat = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide });
+    return new THREE.Mesh(geo, mat);
   }
 
   // --- sky dome + sun: the "sky" half of the sky/water distinction ---

@@ -3,6 +3,7 @@
 // our added planner re-routes blocked moves around a coastline.
 import {
   setLand, isPointOnLand, distToLand, nearestSea, planSeaRoute,
+  elevationAt, getContourSegments,
 } from './terrain.js';
 
 let passed = 0, failed = 0;
@@ -84,6 +85,24 @@ setLand(ISLAND);
   const route = planSeaRoute({ x: 100, y: 100 }, { x: 900, y: 900 }, { margin: 20 });
   ok(route.length === 1, `empty world should be a single waypoint, got ${route.length}`);
   ok(approx(route[0].x, 900) && approx(route[0].y, 900), 'empty-world waypoint == goal');
+}
+
+// --- 6) procedural DEM + contour lines ------------------------------------
+{
+  setLand(ISLAND); // rebuild the elevation field on a known island
+  const coastElev = elevationAt(1820, 2000); // ~20 units inside the 1800..2200 coast
+  const midElev = elevationAt(2000, 2000);   // island centre
+  ok(midElev > coastElev, `elevation should rise inland (centre ${midElev.toFixed(0)} > coast ${coastElev.toFixed(0)})`);
+  ok(coastElev >= 0, 'coastal elevation must be non-negative');
+  const segs = getContourSegments(100);
+  ok(Array.isArray(segs) && segs.length > 0, `contour segments should be produced (got ${segs ? segs.length : 'null'})`);
+  let inside = true;
+  for (const s of segs) {
+    if (s.x1 < 1800 || s.x1 > 2200 || s.y1 < 1800 || s.y1 > 2200) inside = false;
+    if (s.x2 < 1800 || s.x2 > 2200 || s.y2 < 1800 || s.y2 > 2200) inside = false;
+  }
+  ok(inside, 'contour segment endpoints stay within the island bbox');
+  ok(getContourSegments(100) === segs, 'getContourSegments should cache by interval');
 }
 
 console.log(`\nChecks passed: ${passed}` + (failed ? `  (${failed} FAILED)` : ''));

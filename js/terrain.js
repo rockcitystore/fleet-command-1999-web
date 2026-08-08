@@ -25,10 +25,169 @@ export function setLand(polygons) {
     }
     return { pts, bbox: { xMin, xMax, yMin, yMax } };
   });
+  // Rebuild the elevation / contour field whenever the coastline changes.
+  _buildDEM();
 }
 
 export function getLand() {
   return LAND_POLYGONS;
+}
+
+// ---------------------------------------------------------------------------
+// Procedural elevation field (DEM) + contour lines.
+//
+// The original Fleet Command '99 had no terrain elevation — only a flat
+// coastline. We synthesise a believable land relief offline (no network, no
+// external tiles) so both the 2D tactical map and the 3D view can show
+// terrain and contour lines in the game's own military-green palette:
+//
+//   elevation(x,y)  ~  distanceToCoast * SLOPE  +  fractal noise
+//
+// i.e. land rises inland from the shoreline and is roughened by value-noise
+// fbm, the way a coastal range would. Sea cells carry a small negative value
+// (shoal) so the 3D mesh can dip naturally below the waterline at the coast.
+// This keeps the look consistent with the existing flat-green land fill and
+// avoids pulling in OpenStreetMap raster tiles (which would need a live tile
+// server and would override the CIC colour scheme with street-map imagery).
+// ---------------------------------------------------------------------------
+
+const TERRAIN_CELL = 24;          // world units per DEM cell (≈2.2 km)
+const SLOPE_M_PER_UNIT = 1.0;     // metres of rise per world-unit inland
+const NOISE_AMP_M = 75;           // fbm roughness amplitude (metres)
+const MAX_ELEV_M = 850;           // cap on synthesised peak elevation
+const TERRAIN_SEED = 1337;
+
+let _dem = null;
+
+// Deterministic hashed value-noise (no Math.random -> stable per scenario).
+function _hash2(ix, iy, seed) {
+  let h = (Math.imul(ix, 374761393) + Math.imul(iy, 668265263) + Math.imul(seed, 1442695040)) >>> 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0;
+  h = (h ^ (h >>> 16)) >>> 0;
+  return h / 4294967296; // 0..1
+}
+function _valueNoise(x, y, seed) {
+  const x0 = Math.floor(x), y0 = Math.floor(y);
+  const fx = x - x0, fy = y - y0;
+  const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy);
+  const n00 = _hash2(x0, y0, seed), n10 = _hash2(x0 + 1, y0, seed);
+  const n01 = _hash2(x0, y0 + 1, seed), n11 = _hash2(x0 + 1, y0 + 1, seed);
+  const nx0 = n00 + (n10 - n00) * sx, nx1 = n01 + (n11 - n01) * sx;
+  return nx0 + (nx1 - nx0) * sy; // 0..1
+}
+function _fbm(x, y, seed) {
+  let f = 0, amp = 0.5, freq = 1;
+  for (let o = 0; o < 4; o++) {
+    f += amp * (_valueNoise(x * freq, y * freq, seed + o * 17) - 0.5);
+    freq *= 2; amp *= 0.5;
+  }
+  return f; // ~ -1..1
+}
+
+function _buildDEM() {
+  const cell = TERRAIN_CELL;
+  const cols = Math.ceil(WORLD_SIZE / cell) + 1;
+  const rows = Math.ceil(WORLD_SIZE / cell) + 1;
+  const onLand = new Uint8Array(cols * rows);
+  const dist = new Float32Array(cols * rows); // world-unit distance to sea
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = c * cell, y = r * cell;
+      if (isPointOnLand(x, y)) { onLand[r * cols + c] = 1; dist[r * cols + c] = Infinity; }
+      else dist[r * cols + c] = 0; // sea is the distance seed (0)
+    }
+  }
+  // Two-pass 8-connected chamfer distance transform (cheap, good enough).
+  const D1 = 1, D2 = Math.SQRT2;
+  for (let pass = 0; pass < 2; pass++) {
+    const r0 = pass === 0 ? 0 : rows - 1, r1 = pass === 0 ? rows : -1, dr = pass === 0 ? 1 : -1;
+    for (let r = r0; r !== r1; r += dr) {
+      for (let c = 0; c < cols; c++) {
+        const i = r * cols + c;
+        if (dist[i] === 0) continue;
+        let m = dist[i];
+        if (r > 0) {
+          if (c > 0) m = Math.min(m, dist[(r - 1) * cols + c - 1] + D2);
+          m = Math.min(m, dist[(r - 1) * cols + c] + D1);
+          if (c < cols - 1) m = Math.min(m, dist[(r - 1) * cols + c + 1] + D2);
+        }
+        if (c > 0) m = Math.min(m, dist[r * cols + c - 1] + D1);
+        if (c < cols - 1) m = Math.min(m, dist[r * cols + c + 1] + D1);
+        if (r < rows - 1) {
+          if (c > 0) m = Math.min(m, dist[(r + 1) * cols + c - 1] + D2);
+          m = Math.min(m, dist[(r + 1) * cols + c] + D1);
+          if (c < cols - 1) m = Math.min(m, dist[(r + 1) * cols + c + 1] + D2);
+        }
+        dist[i] = m;
+      }
+    }
+  }
+  const h = new Float32Array(cols * rows);
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const i = r * cols + c;
+      if (!onLand[i]) { h[i] = -3; continue; } // shoal below waterline
+      const x = c * cell, y = r * cell;
+      let e = dist[i] * cell * SLOPE_M_PER_UNIT + _fbm(x / 240, y / 240, TERRAIN_SEED) * NOISE_AMP_M;
+      if (e < 0) e = 0;
+      if (e > MAX_ELEV_M) e = MAX_ELEV_M;
+      h[i] = e;
+    }
+  }
+  _dem = { cell, cols, rows, h, onLand, maxH: MAX_ELEV_M };
+}
+
+// Bilinear sample of the elevation field, in metres (negative = sea/shoal).
+export function elevationAt(x, y) {
+  if (!_dem) _buildDEM();
+  const { cell, cols, rows, h } = _dem;
+  const fx = x / cell, fy = y / cell;
+  let c0 = Math.floor(fx), r0 = Math.floor(fy);
+  c0 = Math.max(0, Math.min(cols - 1, c0));
+  r0 = Math.max(0, Math.min(rows - 1, r0));
+  const c1 = Math.min(cols - 1, c0 + 1), r1 = Math.min(rows - 1, r0 + 1);
+  const tx = fx - c0, ty = fy - r0;
+  const h00 = h[r0 * cols + c0], h10 = h[r0 * cols + c1];
+  const h01 = h[r1 * cols + c0], h11 = h[r1 * cols + c1];
+  const a = h00 + (h10 - h00) * tx, b = h01 + (h11 - h01) * tx;
+  return a + (b - a) * ty;
+}
+
+// Marching-squares contour lines at `interval` metres, returned as world-space
+// segments {x1,y1,x2,y2,level}. Cached per (land version, interval).
+let _contourCache = { key: null, segs: null };
+export function getContourSegments(interval = 100) {
+  if (!_dem) _buildDEM();
+  const key = _landVersion + '|' + interval;
+  if (_contourCache.key === key && _contourCache.segs) return _contourCache.segs;
+  const { cell, cols, rows, h, onLand, maxH } = _dem;
+  const segs = [];
+  const lerp = (ax, ay, av, bx, by, bv, L) => {
+    const t = (L - av) / (bv - av || 1e-6);
+    return { x: ax + (bx - ax) * t, y: ay + (by - ay) * t };
+  };
+  for (let r = 0; r < rows - 1; r++) {
+    for (let c = 0; c < cols - 1; c++) {
+      const i = r * cols + c;
+      if (!onLand[i] && !onLand[i + 1] && !onLand[i + cols] && !onLand[i + cols + 1]) continue;
+      const x0 = c * cell, y0 = r * cell, x1 = x0 + cell, y1 = y0 + cell;
+      const v00 = h[i], v10 = h[i + 1], v01 = h[i + cols], v11 = h[i + cols + 1];
+      for (let L = interval; L <= maxH; L += interval) {
+        const xs = [];
+        if ((v00 > L) !== (v10 > L)) xs.push(lerp(x0, y0, v00, x1, y0, v10, L));
+        if ((v10 > L) !== (v11 > L)) xs.push(lerp(x1, y0, v10, x1, y1, v11, L));
+        if ((v11 > L) !== (v01 > L)) xs.push(lerp(x1, y1, v11, x0, y1, v01, L));
+        if ((v01 > L) !== (v00 > L)) xs.push(lerp(x0, y1, v01, x0, y0, v00, L));
+        if (xs.length === 2) segs.push({ x1: xs[0].x, y1: xs[0].y, x2: xs[1].x, y2: xs[1].y, level: L });
+        else if (xs.length === 4) {
+          segs.push({ x1: xs[0].x, y1: xs[0].y, x2: xs[1].x, y2: xs[1].y, level: L });
+          segs.push({ x1: xs[2].x, y1: xs[2].y, x2: xs[3].x, y2: xs[3].y, level: L });
+        }
+      }
+    }
+  }
+  _contourCache = { key, segs };
+  return segs;
 }
 
 function pointInPolygon(px, py, poly) {

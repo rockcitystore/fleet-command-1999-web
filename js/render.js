@@ -3,7 +3,7 @@
 // Authoritative spec: CONTRACT.md section 2.
 
 import { worldToScreen, screenToWorld, scaleFor, WORLD_SIZE, METERS_PER_UNIT, SHIP_STATS, shipAmmo } from './engine.js';
-import { getLand } from './terrain.js';
+import { getLand, getContourSegments } from './terrain.js';
 
 // Colors: matched to the original Fleet Command '99 CIC screenshot.
 const COLOR_OCEAN = '#04121f';
@@ -30,6 +30,10 @@ export const RENDER_OPTIONS = {
 // thin fringe and would otherwise vanish against the dark CIC ocean.
 const COLOR_LAND = 'rgba(24, 70, 42, 0.80)';
 const COLOR_LAND_COAST = 'rgba(72, 156, 98, 0.90)';
+// Contour (elevation) lines — a slightly lighter green so they read as
+// topo lines over the land fill without clashing with the CIC palette.
+const COLOR_LAND_CONTOUR = 'rgba(122, 190, 148, 0.50)';
+const COLOR_LAND_CONTOUR_MAJOR = 'rgba(150, 214, 170, 0.70)';
 
 const FONT_TRACK = '11px SFMono-Regular, Consolas, monospace';
 
@@ -681,6 +685,33 @@ function drawLand(ctx, world, size) {
     }
     ctx.closePath();
     ctx.fill();
+    ctx.stroke();
+  }
+  // Elevation contour lines (procedural DEM, nautical-chart style). Every 100 m
+  // is a minor line; every 500 m is a bolder "index" contour.
+  const segs = getContourSegments(100);
+  if (segs && segs.length) {
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    for (const s of segs) {
+      const a = worldToScreen({ x: s.x1, y: s.y1 }, size, world.camera);
+      const b = worldToScreen({ x: s.x2, y: s.y2 }, size, world.camera);
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+    }
+    ctx.strokeStyle = COLOR_LAND_CONTOUR;
+    ctx.stroke();
+    // Bolder index contours at 500 m multiples.
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    for (const s of segs) {
+      if (s.level % 500 !== 0) continue;
+      const a = worldToScreen({ x: s.x1, y: s.y1 }, size, world.camera);
+      const b = worldToScreen({ x: s.x2, y: s.y2 }, size, world.camera);
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+    }
+    ctx.strokeStyle = COLOR_LAND_CONTOUR_MAJOR;
     ctx.stroke();
   }
   ctx.restore();
