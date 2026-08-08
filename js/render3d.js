@@ -1110,7 +1110,9 @@ export class Scene3D {
   }
 
   zoom(factor) {
-    this.distance = Math.max(80, Math.min(6000, this.distance * factor));
+    // Min distance lowered from 80 -> 25 (ships were rescaled ~2x, so we can
+    // sit much closer before clipping). Max raised a bit for the same reason.
+    this.distance = Math.max(25, Math.min(8000, this.distance * factor));
   }
 
   reset() {
