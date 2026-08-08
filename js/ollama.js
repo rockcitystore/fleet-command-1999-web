@@ -42,7 +42,10 @@ export async function ollamaModels(base = OLLAMA_DEFAULT_BASE) {
 export async function ollamaChat(messages, opts = {}) {
   const base = opts.base || OLLAMA_DEFAULT_BASE;
   const model = opts.model || OLLAMA_DEFAULT_MODEL;
-  const timeout = opts.timeout || 45000;
+  // Local 4B models can take a while to cold-start and emit a long opening
+  // assessment (situation report + candidate orders). 120s gives CPU-bound
+  // hosts enough headroom without leaving the UI hanging indefinitely.
+  const timeout = opts.timeout || 120000;
 
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeout);
@@ -110,7 +113,8 @@ export async function ollamaAsk(prompt, opts = {}) {
 export async function ollamaChatStream(messages, opts = {}) {
   const base = opts.base || OLLAMA_DEFAULT_BASE;
   const model = opts.model || OLLAMA_DEFAULT_MODEL;
-  const timeout = opts.timeout || 45000;
+  // See ollamaChat() for the 120s default rationale.
+  const timeout = opts.timeout || 120000;
   const onToken = typeof opts.onToken === 'function' ? opts.onToken : () => {};
 
   const ctrl = new AbortController();
