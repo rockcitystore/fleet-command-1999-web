@@ -47,15 +47,23 @@ Example (war started, two RED ships):
 
 const BLUE_SYSTEM_PROMPT = `You are the BLUE fleet commander in a real-time naval war game. You DIRECTLY command the BLUE (player) ships listed under "friendlies". Hostile RED contacts are under "hostiles". Your orders are carried out immediately by the fleet — you are not an advisor.
 
-Output ONLY a JSON array of orders, one per BLUE ship you want to control. No prose, no markdown, no code fences — just the array.
-
-Each order uses these EXACT fields:
-  "ship":   <integer> REQUIRED — the BLUE ship id from the friendlies list (the ship you are ordering)
-  "act":    "attack" | "move" | "hold"
-  "target": <integer> a RED hostile id from the hostiles list (REQUIRED only for "attack")
-  "pos":    {"x":int,"y":int}  (REQUIRED only for "move")
-  "depth":  <integer, negative metres>  optional, submarines only (e.g. -15 to fire, -150 to lurk); surface ships ignore it
-  "note":   <string> OPTIONAL — a one-line reason WHENEVER you override a human order (see chain of command below)
+OUTPUT FORMAT (strict JSON, no markdown, no code fences):
+Return a single JSON object with exactly two keys:
+{
+  "report": "A concise Chinese tactical situation assessment / acknowledgement. Use formal military naval terminology. NO markdown, NO backticks (\`), NO emoji, NO ship ids, NO English command names like moveTo/attack/hold, NO coordinates. Refer to units by type and relative bearing, e.g. 旗舰向西北机动接敌, 反潜编队前出至中部海域建立反潜屏障, 驱逐舰向敌水面舰艇群开火.",
+  "orders": [
+    // one order object per BLUE ship you want to control this cycle (omit ships you leave as-is)
+    {
+      "ship":   <integer> — BLUE ship id (machine-use only; do NOT put this number in report)
+      "act":    "attack" | "move" | "hold"
+      "target": <integer> — RED hostile id (REQUIRED only for "attack")
+      "pos":    {"x":int,"y":int}  (REQUIRED only for "move")
+      "depth":  <integer, negative metres>  optional, submarines only (e.g. -15 to fire, -150 to lurk)
+      "note":   <string> OPTIONAL — reason when overriding a human order
+    },
+    ...
+  ]
+}
 
 CHAIN OF COMMAND (supreme rule — overrides all other instructions):
 - The human player is the SUPREME COMMANDER (HQ). You are the SUBORDINATE theater commander. A friendly ship whose "orderSource" is "human" is under a DIRECT ORDER FROM HQ and is HIGHER authority than your own judgement.
@@ -80,7 +88,7 @@ GENERAL RULES:
 - If "combatStarted" is true, engage: missile ships stand off and attack surface hostiles; ASW ships close on submarines; subs fire at surface ships from periscope depth.
 
 Example (war started; #3 is under a human HOLD order you respect by omitting it, and you refine #4 to attack):
-[{"ship":4,"act":"attack","target":7}]`;
+{"report":"旗舰率驱逐舰前出接敌，其余舰艇保持阵位。","orders":[{"ship":4,"act":"attack","target":7}]}`;
 
 function buildSnapshot(world, side = 'enemy', opts = {}) {
   const round = (n) => Math.round(n);
@@ -122,23 +130,38 @@ function buildSnapshot(world, side = 'enemy', opts = {}) {
   return snap;
 }
 
-// Pull a JSON array out of a model reply that may contain ```json fences or a
-// little surrounding prose. Returns [] on failure.
+// Pull a JSON object/array out of a model reply. Supports two forms:
+//   - { "report": "...", "orders": [...] }  (BLUE commander, human-readable
+//     military report alongside machine orders)
+//   - [...]  (RED commander, raw orders only)
+// Returns { orders: [...], report: "" }. Markdown fences are tolerated.
 function extractOrders(text) {
-  if (typeof text !== 'string') return [];
+  const empty = { orders: [], report: '' };
+  if (typeof text !== 'string') return empty;
   let t = text.trim();
   // Strip markdown code fences if present.
   const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fence) t = fence[1].trim();
-  // Find the outermost JSON array.
-  const start = t.indexOf('[');
-  const end = t.lastIndexOf(']');
-  if (start === -1 || end === -1 || end < start) return [];
   try {
-    const parsed = JSON.parse(t.slice(start, end + 1));
-    return Array.isArray(parsed) ? parsed : [];
+    const parsed = JSON.parse(t);
+    if (Array.isArray(parsed)) return { orders: parsed, report: '' };
+    if (parsed && typeof parsed === 'object') {
+      const orders = Array.isArray(parsed.orders) ? parsed.orders : [];
+      const report = typeof parsed.report === 'string' ? parsed.report : '';
+      return { orders, report };
+    }
+    return empty;
   } catch {
-    return [];
+    // Fallback: try to grab an outermost JSON array from inside prose.
+    const start = t.indexOf('[');
+    const end = t.lastIndexOf(']');
+    if (start !== -1 && end !== -1 && end >= start) {
+      try {
+        const arr = JSON.parse(t.slice(start, end + 1));
+        return { orders: Array.isArray(arr) ? arr : [], report: '' };
+      } catch { /* ignore */ }
+    }
+    return empty;
   }
 }
 
@@ -154,6 +177,7 @@ export class AICommander {
     this.lastCallTs = 0;
     this.callCount = 0;       // how many times transport was invoked
     this.lastRaw = '';        // raw assistant content of the last successful call
+    this.lastReport = '';     // human-readable Chinese military report from the reply
     this.lastOrders = [];     // parsed orders of the last successful call
     this.lastBrief = '';      // short human-readable summary for the HUD
     this.lastError = null;    // last failure message (cleared on success)
@@ -263,8 +287,9 @@ export class AICommander {
       }
 
       this.lastRaw = content || '';
-      const orders = extractOrders(content);
+      const { orders, report } = extractOrders(content);
       this.lastOrders = orders;
+      this.lastReport = report;
       this.phase = 'done';
       if (!orders.length) {
         // Model returned nothing usable. Keep the force active with the

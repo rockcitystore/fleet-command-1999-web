@@ -743,10 +743,10 @@ const hqChat = (() => {
       if (blueCommander.lastError) {
         add('assistant', 'BLUE CIC: LLM 暂时离线，已记录指令（内置条令接管，恢复后执行）。');
       } else {
-        // Show the LLM's FULL reply (including any prose around the JSON
-        // orders) so the player can see how BLUE interpreted the directive.
-        const full = blueCommander.lastRaw || blueCommander.lastBrief || '已下达。';
-        add('assistant', 'BLUE CIC:\n' + full);
+        // Display the LLM's Chinese military report; fall back to the brief
+        // summary if the model returned no report field.
+        const full = blueCommander.lastReport || blueCommander.lastBrief || '已下达。';
+        add('assistant', 'BLUE CIC：' + full);
       }
       ensureVisible();
     }).catch(() => {

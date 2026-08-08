@@ -16,9 +16,11 @@ function makeWorld() {
   return { w, p, e };
 }
 
-// A transport that ignores the prompt and returns a fixed JSON array of orders.
-function fixedTransport(orders) {
-  return async (_messages, _opts) => JSON.stringify(orders);
+// A transport that ignores the prompt and returns a fixed reply. The BLUE
+// commander expects { report, orders }; the RED commander accepts a bare
+// array as well. extractOrders handles both.
+function fixedTransport(orders, report = '') {
+  return async (_messages, _opts) => JSON.stringify({ report, orders });
 }
 
 async function testRedCannotOpenWar() {
@@ -105,7 +107,7 @@ async function testOrderSourceTags() {
 
   // 2) The BLUE snapshot the LLM receives exposes orderSource per friendly.
   let captured = null;
-  const capTransport = async (messages) => { captured = messages; return JSON.stringify([]); };
+  const capTransport = async (messages) => { captured = messages; return JSON.stringify({ orders: [], report: '' }); };
   const c = new AICommander({ side: 'player', streaming: false, transport: capTransport });
   c.setEnabled(true);
   await c.tick(w, { force: true });
@@ -163,7 +165,7 @@ async function testBlueReceivesHumanDirective() {
   const redCap = [];
   const redC = new AICommander({
     side: 'enemy', streaming: false,
-    transport: async (messages) => { redCap.push(messages); return JSON.stringify([]); },
+    transport: async (messages) => { redCap.push(messages); return JSON.stringify({ orders: [], report: '' }); },
   });
   redC.humanDirective = '敌军不应看到此指令';
   redC.setEnabled(true);
@@ -171,6 +173,23 @@ async function testBlueReceivesHumanDirective() {
   const redUser = JSON.parse(redCap[0].find((m) => m.role === 'user').content.replace(/^Current battle snapshot:\n/, ''));
   check(!('hqDirective' in redUser), 'RED snapshot never carries the human HQ directive');
 }
+
+async function testBlueReportFormat() {
+  // The BLUE commander must surface the Chinese military report from the reply
+  // while still applying the orders inside it.
+  const { w, p, e } = makeWorld();
+  w.combatStarted = true;
+  const c = new AICommander({ side: 'player', streaming: false, transport: fixedTransport(
+    [{ ship: p.id, act: 'attack', target: e.id }],
+    '旗舰接敌，全舰跟进。'
+  ) });
+  c.setEnabled(true);
+  await c.tick(w, { force: true });
+  check(c.lastReport === '旗舰接敌，全舰跟进。', 'BLUE commander extracts the military report from the LLM reply');
+  check(p.order && p.order.kind === 'attack', 'BLUE orders still applied when report is present');
+}
+
+await testBlueReportFormat();
 
 console.log(`\nChecks passed: ${pass}` + (fail ? `  FAILED: ${fail}` : ''));
 process.exit(fail ? 1 : 0);
