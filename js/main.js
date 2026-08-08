@@ -10,6 +10,7 @@ import { attachInput3D } from './input3d.js';
 import { buildMenu, buildBattleHUD, updateHUD, buildReference, showCoach, unlockCampaign, registerMissionEndHandler, refreshMissionList, refreshCampaignTree } from './ui.js';
 import { AICommander } from './aiCommander.js';
 import { loadMissions } from './missions.js';
+import { readTokenFromURL, getTheaterData } from './satellite.js';
 
 // Local-LLM (Ollama / qwen3.5:4b) commanders. Created once and reused across
 // battles. RED is the enemy commander; BLUE is the player-side commander (it
@@ -32,6 +33,17 @@ function detectLLMDebug() {
 let LLM_DEBUG = detectLLMDebug();
 aiCommander.debug = LLM_DEBUG;
 blueCommander.debug = LLM_DEBUG;
+
+// Optional Mapbox satellite basemap + real elevation. The token is read from
+// ?mapbox=PK... in the URL (never hard-coded, so it never leaks into the public
+// repo). Without a token the game uses the offline procedural terrain + DEM.
+let MAPBOX_TOKEN = readTokenFromURL();
+// Resolved { satellite, elevation } so a view-mode switch can re-apply the
+// imagery to a freshly created 3D scene.
+let _theaterData = null;
+function applyTheaterToScene(scene) {
+  if (_theaterData && scene) scene.setSatellite(_theaterData.satellite, _theaterData.elevation);
+}
 
 
 const MINIMAP_PX = 140;
@@ -395,6 +407,18 @@ function mountBattle(world) {
   resizeCanvases();
   game.world = world;
 
+  // Optional real Mapbox satellite basemap + real elevation (requires ?mapbox=
+  // token). Fetched async so it never blocks the battle start; when it arrives
+  // it is pushed into the 3D scene (if in 3D) and exposed for the 2D renderer.
+  if (MAPBOX_TOKEN) {
+    getTheaterData(world.geo).then((data) => {
+      if (!data) return;
+      _theaterData = data;
+      window.__fc.satelliteCanvas = data.satellite;
+      if (game.scene3d) applyTheaterToScene(game.scene3d);
+    }).catch(() => {});
+  }
+
   // Command sources start as built-in deterministic doctrine / off.
   world.aiMode = 'builtin';
   aiCommander.setEnabled(false);
@@ -576,6 +600,8 @@ function toggleViewMode() {
     game.miniCtx = dom.minimap.getContext('2d');
     game.map2dCtx = dom.map2d.getContext('2d');
     game.detachInput3d = attachInput3D(dom.map3d, world, handlers, game.scene3d);
+    // Re-apply the real satellite texture if it was already fetched.
+    if (_theaterData) applyTheaterToScene(game.scene3d);
   } else {
     game.mapCtx = dom.map.getContext('2d');
     game.miniCtx = dom.minimap.getContext('2d');
@@ -871,6 +897,11 @@ window.__fc.sendHQ = (t) => hqChat && hqChat.send(t);
 window.__fc.startCustom = startCustom;
 window.__fc.buildLandPolygons = buildLandPolygons;
 window.__fc.SCENARIOS = SCENARIOS;
+// Optional real Mapbox satellite basemap token (from ?mapbox=PK...; never
+// hard-coded). Exposed for debugging; window.__fc.satelliteCanvas is set once
+// the imagery loads, and window.__fc.applyTheater() re-applies it to a scene.
+window.__fc.mapboxToken = MAPBOX_TOKEN;
+window.__fc.applyTheater = applyTheaterToScene;
 // Toggle in-game LLM debug panel. Use ?llmdebug=1 URL param (legacy ?debugAI=1
 // still works), or run in console: window.__fc.llmDebug = true
 Object.defineProperty(window.__fc, 'llmDebug', {

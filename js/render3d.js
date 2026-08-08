@@ -20,7 +20,10 @@ const PLAYER_COLOR = 0x4f8fce;
 // Terrain relief: world units -> metres, plus a vertical exaggeration so the
 // synthesized land reads as relief without dwarfing the ships.
 const MPU = 92.6;
-const TERRAIN_EXAG = 6.0;
+const WORLD_SIZE = 4000;
+// True vertical scale: 1 world unit = 92.6 m, so a 1000 m peak is ~10.8 world
+// units high. No exaggeration — the relief matches the real satellite imagery.
+const TERRAIN_EXAG = 1.0;
 const RELIEF_CELL = 20;
 // Land colour ramp (matched to the 2D military-green palette): low (dark) to
 // high (lighter) elevation. Deliberately brighter than the old flat fill so
@@ -190,17 +193,20 @@ export class Scene3D {
     this.scene.add(grid);
 
     // Land polygons (world.land is an array of point-arrays [[{x,y}...]]).
+    this._landMeshes = [];
+    this.satelliteTexture = this.satelliteTexture || null;
+    this.elevationField = this.elevationField || null;
     let polys = [];
     try { polys = getLand() || []; } catch (_) { polys = (world && world.land) || []; }
     const coastMat = new THREE.LineBasicMaterial({ color: 0x49a06a, transparent: true, opacity: 0.9 });
     for (const poly of polys) {
       const pts = Array.isArray(poly) ? poly : (poly && poly.pts) || [];
       if (!pts || pts.length < 3) continue;
-      // Procedural relief: a heightfield sampled from the DEM, clipped to the
-      // coastline. Off-land vertices dip just below the waterline so the coast
-      // slopes into the sea naturally instead of leaving a hole.
+      // Real satellite relief when available, else the offline procedural DEM.
+      // Off-land vertices dip just below the waterline so the coast slopes into
+      // the sea naturally instead of leaving a hole.
       const relief = this._buildLandRelief(pts);
-      if (relief) this.scene.add(relief);
+      if (relief) { this.scene.add(relief); this._landMeshes.push(relief); }
 
       // coastline outline
       const ringPts = pts.map((p) => new THREE.Vector3(p.x, 0.7, p.y));
@@ -230,21 +236,28 @@ export class Scene3D {
     const wy = (r) => yMin + r * cell;
     const yOf = (x, y) => {
       if (!isPointOnLand(x, y)) return -1.0;            // submerged shoal
-      const m = Math.max(0, elevationAt(x, y));
+      // Prefer the REAL Mapbox elevation field when present; otherwise use the
+      // offline procedural DEM (also true-ratio). Either way no exaggeration.
+      let m;
+      if (this.elevationField) m = Math.max(0, this.elevationField.sample(x, y));
+      else m = Math.max(0, elevationAt(x, y));
       return Math.max(0.3, (m / MPU) * TERRAIN_EXAG);   // world-Y height
     };
     const positions = [];
     const colors = [];
+    const uvs = [];
     const indices = [];
+    const useSat = !!this.satelliteTexture;
     for (let r = 0; r <= gy; r++) {
       for (let c = 0; c <= gx; c++) {
         const x = wx(c), y = wy(r);
         const yy = yOf(x, y);
         positions.push(x, yy, y); // scene (X, height, Z=world-y)
-        const elev = elevationAt(x, y);
+        const elev = this.elevationField ? this.elevationField.sample(x, y) : elevationAt(x, y);
         const t = Math.max(0, Math.min(1, elev / 850));
         const col = LAND_LOW.clone().lerp(LAND_HIGH, t);
         colors.push(col.r, col.g, col.b);
+        if (useSat) uvs.push(x / WORLD_SIZE, 1 - y / WORLD_SIZE);
       }
     }
     const idx = (r, c) => r * (gx + 1) + c;
@@ -257,6 +270,7 @@ export class Scene3D {
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    if (useSat && uvs.length) geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
     geo.setIndex(indices);
     geo.computeVertexNormals();
     // Bake a fixed oblique hillshade into the vertex colours so relief reads
@@ -276,8 +290,50 @@ export class Scene3D {
       );
     }
     colAttr.needsUpdate = true;
-    const mat = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide });
+    // With a real satellite texture the map provides true surface colour and
+    // the baked hillshade (vertex colors) multiplies in extra slope relief so
+    // the terrain still reads under a high noon sun. Without it the green ramp
+    // is the whole look.
+    const matOpts = { side: THREE.DoubleSide, vertexColors: true };
+    if (useSat && this.satelliteTexture) matOpts.map = this.satelliteTexture;
+    const mat = new THREE.MeshLambertMaterial(matOpts);
     return new THREE.Mesh(geo, mat);
+  }
+
+  // Inject a real Mapbox satellite texture + real elevation field. Call this
+  // AFTER the world is built; if the terrain was already generated it is
+  // rebuilt so the new imagery shows up.
+  setSatellite(canvas, elevation) {
+    this.elevationField = elevation || null;
+    if (canvas) {
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.flipY = true;
+      tex.anisotropy = 4;
+      this.satelliteTexture = tex;
+    } else {
+      this.satelliteTexture = null;
+    }
+    if (this._landMeshes && this._landMeshes.length) this.rebuildLand();
+  }
+
+  // Rebuild the land relief meshes (e.g. after a satellite texture arrives).
+  rebuildLand() {
+    if (!this._landMeshes) return;
+    for (const m of this._landMeshes) {
+      this.scene.remove(m);
+      if (m.geometry) m.geometry.dispose();
+      if (m.material) m.material.dispose();
+    }
+    this._landMeshes = [];
+    let polys = [];
+    try { polys = getLand() || []; } catch (_) { polys = []; }
+    for (const poly of polys) {
+      const pts = Array.isArray(poly) ? poly : (poly && poly.pts) || [];
+      if (!pts || pts.length < 3) continue;
+      const relief = this._buildLandRelief(pts);
+      if (relief) { this.scene.add(relief); this._landMeshes.push(relief); }
+    }
   }
 
   // --- sky dome + sun: the "sky" half of the sky/water distinction ---

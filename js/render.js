@@ -671,7 +671,14 @@ function drawGeoOverlay(ctx, world, size) {
 function drawLand(ctx, world, size) {
   const land = getLand();
   if (!land.length) return;
+  // Real satellite basemap (Mapbox) shared via window.__fc by main.js. When
+  // present it becomes the sea/land fill; the vector coastline is still drawn
+  // on top so the tactical edge stays crisp. Falls back to the offline green
+  // fill + contour lines when no token / offline.
+  const sat = (typeof window !== 'undefined' && window.__fc && window.__fc.satelliteCanvas) || null;
   ctx.save();
+  // 1. Base land fill — also backs any coastline that projects outside the
+  //    satellite image bounds (the AO margin can extend past world 0..4000).
   ctx.fillStyle = COLOR_LAND;
   ctx.strokeStyle = COLOR_LAND_COAST;
   ctx.lineWidth = 1;
@@ -687,32 +694,53 @@ function drawLand(ctx, world, size) {
     ctx.fill();
     ctx.stroke();
   }
-  // Elevation contour lines (procedural DEM, nautical-chart style). Every 100 m
-  // is a minor line; every 500 m is a bolder "index" contour.
-  const segs = getContourSegments(100);
-  if (segs && segs.length) {
-    ctx.lineWidth = 0.8;
+  // 2. Real satellite imagery over the world rect (world 0..4000).
+  if (sat) {
+    const tl = worldToScreen({ x: 0, y: 0 }, size, world.camera);
+    const br = worldToScreen({ x: WORLD_SIZE, y: WORLD_SIZE }, size, world.camera);
+    ctx.drawImage(sat, tl.x, tl.y, br.x - tl.x, br.y - tl.y);
+  }
+  // 3. Crisp vector coastline on top of the imagery.
+  ctx.strokeStyle = COLOR_LAND_COAST;
+  ctx.lineWidth = 1.2;
+  for (const poly of land) {
+    const pts = poly.pts || poly;
     ctx.beginPath();
-    for (const s of segs) {
-      const a = worldToScreen({ x: s.x1, y: s.y1 }, size, world.camera);
-      const b = worldToScreen({ x: s.x2, y: s.y2 }, size, world.camera);
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(b.x, b.y);
+    for (let i = 0; i < pts.length; i++) {
+      const sp = worldToScreen(pts[i], size, world.camera);
+      if (i === 0) ctx.moveTo(sp.x, sp.y);
+      else ctx.lineTo(sp.x, sp.y);
     }
-    ctx.strokeStyle = COLOR_LAND_CONTOUR;
+    ctx.closePath();
     ctx.stroke();
-    // Bolder index contours at 500 m multiples.
-    ctx.lineWidth = 1.4;
-    ctx.beginPath();
-    for (const s of segs) {
-      if (s.level % 500 !== 0) continue;
-      const a = worldToScreen({ x: s.x1, y: s.y1 }, size, world.camera);
-      const b = worldToScreen({ x: s.x2, y: s.y2 }, size, world.camera);
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(b.x, b.y);
+  }
+  // 4. Elevation contour lines (procedural DEM) — only without satellite,
+  //    since the imagery already shows real relief.
+  if (!sat) {
+    const segs = getContourSegments(100);
+    if (segs && segs.length) {
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      for (const s of segs) {
+        const a = worldToScreen({ x: s.x1, y: s.y1 }, size, world.camera);
+        const b = worldToScreen({ x: s.x2, y: s.y2 }, size, world.camera);
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+      }
+      ctx.strokeStyle = COLOR_LAND_CONTOUR;
+      ctx.stroke();
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      for (const s of segs) {
+        if (s.level % 500 !== 0) continue;
+        const a = worldToScreen({ x: s.x1, y: s.y1 }, size, world.camera);
+        const b = worldToScreen({ x: s.x2, y: s.y2 }, size, world.camera);
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+      }
+      ctx.strokeStyle = COLOR_LAND_CONTOUR_MAJOR;
+      ctx.stroke();
     }
-    ctx.strokeStyle = COLOR_LAND_CONTOUR_MAJOR;
-    ctx.stroke();
   }
   ctx.restore();
 }
