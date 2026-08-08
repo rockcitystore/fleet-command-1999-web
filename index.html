@@ -222,14 +222,24 @@
       <span class="hud-cell"><span class="hud-label">STATUS</span> <span id="hud-status">1x</span></span>
     </div>
 
-    <div id="ai-cic-panel" class="hidden" title="Click to expand/collapse">
-      <div class="aicic-label">RED CIC</div>
-      <div id="ai-cic-text" class="aicic-text">&mdash;</div>
-    </div>
-
-    <div id="blue-cic-panel" class="hidden" title="Click to expand/collapse">
-      <div class="aicic-label aicic-label-blue">BLUE CIC</div>
-      <div id="blue-cic-text" class="aicic-text aicic-text-blue">&mdash;</div>
+    <!-- ============ LLM DEBUG PANEL ============ -->
+    <!-- Hidden by default. Enable with ?llmdebug=1 or ?debugAI=1 URL parameter.
+         Shows RED and BLUE commander streaming output side-by-side. -->
+    <div id="llm-debug-panel" class="llm-debug-panel hidden" title="Click header to collapse/expand">
+      <div id="llm-debug-head" class="llm-debug-head">
+        <span class="llm-debug-label">LLM DEBUG</span>
+        <button id="llm-debug-close" class="llm-debug-close" type="button" title="折叠/展开">&#9652;</button>
+      </div>
+      <div id="llm-debug-body" class="llm-debug-body">
+        <div class="llm-debug-side llm-debug-red">
+          <div class="llm-debug-title">RED CIC</div>
+          <div id="llm-debug-red-text" class="llm-debug-text">&mdash;</div>
+        </div>
+        <div class="llm-debug-side llm-debug-blue">
+          <div class="llm-debug-title">BLUE CIC</div>
+          <div id="llm-debug-blue-text" class="llm-debug-text">&mdash;</div>
+        </div>
+      </div>
     </div>
 
     <!-- ============ HQ COMMAND CHAT ============ -->
@@ -315,6 +325,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=16"></script>
+  <script type="module" src="js/main.js?v=17"></script>
 </body>
 </html>

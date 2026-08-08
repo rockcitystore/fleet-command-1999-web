@@ -271,11 +271,6 @@ export class AICommander {
       ];
       this._lastMessages = messages;
       this.callCount++;
-      if (this.debug) {
-        console.log(`${logPrefix} messages:`, messages);
-      } else {
-        console.debug(`${logPrefix} messages:`, messages);
-      }
       const content = await this.transport(messages, {
         base: this.base,
         model: this.model,
@@ -285,8 +280,6 @@ export class AICommander {
       this.lastRaw = content || '';
       const result = extractOpeningAssessment(content);
       this.phase = 'done';
-      if (this.debug) console.log(`${logPrefix} result:`, result);
-      else console.debug(`${logPrefix} result:`, result);
       return result;
     } catch (err) {
       this.lastError = err && err.message ? err.message : String(err);
@@ -348,13 +341,6 @@ export class AICommander {
       ];
       this._lastMessages = messages;
       this.callCount++;
-      if (this.debug) {
-        console.log(`${logPrefix} snapshot:`, snapshot);
-        console.log(`${logPrefix} messages:`, messages);
-      } else {
-        console.debug(`${logPrefix} snapshot:`, snapshot);
-      }
-
       let content;
       if (this.streaming && this.streamTransport) {
         // Stream the reply; onToken updates liveText/phase in real time so the
@@ -368,8 +354,8 @@ export class AICommander {
             this._streamChunks.push(delta);
             this.liveText = full;
             this.phase = 'streaming';
-            if (this.debug) console.log(`${logPrefix} token:`, delta);
-            else console.debug(`${logPrefix} token:`, delta);
+            // Intentionally no console output: streaming tokens are shown
+            // in the in-game LLM debug panel only when explicitly enabled.
           },
         });
       } else {
@@ -396,8 +382,6 @@ export class AICommander {
         this.applyOrders(world, orders);
         this.lastBrief = this.summarize(orders, world);
       }
-      if (this.debug) console.log(`${logPrefix} orders:`, orders);
-      else console.debug(`${logPrefix} orders:`, orders);
     } catch (err) {
       this.lastError = err && err.message ? err.message : String(err);
       this.phase = 'error';

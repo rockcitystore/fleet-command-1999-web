@@ -14,22 +14,24 @@ import { loadMissions } from './missions.js';
 // Local-LLM (Ollama / qwen3.5:4b) commanders. Created once and reused across
 // battles. RED is the enemy commander; BLUE is the player-side commander (it
 // directly controls the BLUE fleet, not just advises). Both are
-// OFF by default. RED live stream is hidden from the player unless debugAI is
-// enabled (URL ?debugAI=1 or window.__fc.debugAI = true).
+// OFF by default. LLM internal streams are never dumped to the browser console;
+// they are only shown in-game when ?llmdebug=1 (or legacy ?debugAI=1) is set.
 const aiCommander = new AICommander({ side: 'enemy' });
 const blueCommander = new AICommander({ side: 'player', intervalMs: 10000 });
 
-// Debug visibility for enemy LLM stream: hidden from the player by default so
-// the RED commander's reasoning remains secret. Enable with URL ?debugAI=1 or
-// by setting window.__fc.debugAI = true in the console.
-function detectDebugAI() {
+// LLM debug visibility: hidden by default so RED/BLUE reasoning stays off-screen
+// and the console stays clean. Enable with ?llmdebug=1 or legacy ?debugAI=1,
+// or set window.__fc.llmDebug = true in the console.
+function detectLLMDebug() {
   try {
     const params = new URLSearchParams(window.location.search);
-    return params.get('debugAI') === '1' || params.get('debugAI') === 'true';
+    return params.get('llmdebug') === '1' || params.get('llmdebug') === 'true' ||
+           params.get('debugAI') === '1' || params.get('debugAI') === 'true';
   } catch { return false; }
 }
-aiCommander.debug = detectDebugAI();
-blueCommander.debug = aiCommander.debug; // player side is always visible to player
+let LLM_DEBUG = detectLLMDebug();
+aiCommander.debug = LLM_DEBUG;
+blueCommander.debug = LLM_DEBUG;
 
 
 const MINIMAP_PX = 140;
@@ -457,7 +459,7 @@ function setBlueAIMode(mode) {
   syncAIModeUI();
 }
 
-// Reflect the current RED AI mode in the control-bar button + status readout.
+// Reflect the current RED/BLUE AI mode in the control-bar button + status readout.
 function syncAIModeUI() {
   const world = game.world;
   const llm = world && world.aiMode === 'llm';
@@ -467,8 +469,6 @@ function syncAIModeUI() {
   const btn = document.getElementById('btn-ai');
   const status = document.getElementById('ai-status');
   const live = document.getElementById('ai-live');
-  const panel = document.getElementById('ai-cic-panel');
-  const panelText = document.getElementById('ai-cic-text');
   if (btn) {
     btn.textContent = llm ? 'AI: LLM' : 'AI: BUILTIN';
     btn.classList.toggle('active', !!llm);
@@ -479,32 +479,15 @@ function syncAIModeUI() {
     status.classList.toggle('ai-error', !!aiCommander.lastError);
     status.title = aiCommander.lastBrief || '';
   }
-  // RED live stream is hidden unless debugAI is enabled — the enemy commander's
-  // reasoning should not be visible to the player in normal play.
-  const redDebug = aiCommander.debug;
   if (live) {
-    const streaming = aiCommander.phase === 'thinking' || aiCommander.phase === 'streaming';
-    live.textContent = redDebug ? aiCommander.livePreview() : '';
-    live.classList.toggle('live', redDebug && !!streaming);
-    live.classList.toggle('hidden', !redDebug);
-    live.title = redDebug ? (streaming ? aiCommander.liveText : (aiCommander.lastBrief || '')) : '';
-  }
-  if (panel && panelText) {
-    const show = redDebug && (!!llm || !!aiCommander.lastError || (aiCommander.liveText && aiCommander.liveText !== ''));
-    panel.classList.toggle('hidden', !show);
-    panelText.textContent = aiCommander.livePreview();
-    panel.classList.toggle('thinking', aiCommander.phase === 'thinking');
-    panel.classList.toggle('streaming', aiCommander.phase === 'streaming');
-    panel.classList.toggle('done', aiCommander.phase === 'done');
-    panel.classList.toggle('error', !!aiCommander.lastError);
+    live.classList.add('hidden');
+    live.textContent = '';
   }
 
   // --- BLUE (player advisor) UI ---
   const blueBtn = document.getElementById('btn-blue-ai');
   const blueStatus = document.getElementById('blue-ai-status');
   const blueLive = document.getElementById('blue-ai-live');
-  const bluePanel = document.getElementById('blue-cic-panel');
-  const bluePanelText = document.getElementById('blue-cic-text');
   if (blueBtn) {
     blueBtn.textContent = blueLlm ? 'BLUE: LLM' : 'BLUE: HUMAN';
     blueBtn.classList.toggle('active', !!blueLlm);
@@ -516,18 +499,43 @@ function syncAIModeUI() {
     blueStatus.title = blueCommander.lastBrief || '';
   }
   if (blueLive) {
-    const streaming = blueCommander.phase === 'thinking' || blueCommander.phase === 'streaming';
-    blueLive.textContent = blueCommander.livePreview();
-    blueLive.classList.toggle('live', !!streaming);
-    blueLive.title = streaming ? blueCommander.liveText : (blueCommander.lastBrief || '');
+    blueLive.classList.add('hidden');
+    blueLive.textContent = '';
   }
-  // BLUE CIC output is now merged into the HQ command chat on the right, so
-  // the standalone floating panel is hidden. The control-bar status still
-  // reports BLUE LLM state.
-  if (bluePanel && bluePanelText) {
-    bluePanel.classList.add('hidden');
-    bluePanelText.textContent = '';
+
+  // --- Unified LLM debug panel (only when explicitly enabled via URL param) ---
+  updateLLMDebugPanel();
+}
+
+function formatLLMDebugText(cmd) {
+  const phase = cmd.phase || 'idle';
+  let out = `[${phase.toUpperCase()}]`;
+  if (cmd.lastError) out += `  ERR: ${cmd.lastError}`;
+  out += '\n---\n';
+  if (cmd.liveText && cmd.liveText !== '') {
+    out += cmd.liveText;
+  } else if (cmd.lastRaw && cmd.lastRaw !== '') {
+    out += cmd.lastRaw;
+  } else if (cmd.lastBrief && cmd.lastBrief !== '') {
+    out += cmd.lastBrief;
+  } else {
+    out += '(no output)';
   }
+  return out;
+}
+
+function updateLLMDebugPanel() {
+  const panel = document.getElementById('llm-debug-panel');
+  if (!panel) return;
+  if (!LLM_DEBUG) {
+    panel.classList.add('hidden');
+    return;
+  }
+  panel.classList.remove('hidden');
+  const redText = document.getElementById('llm-debug-red-text');
+  const blueText = document.getElementById('llm-debug-blue-text');
+  if (redText) redText.textContent = formatLLMDebugText(aiCommander);
+  if (blueText) blueText.textContent = formatLLMDebugText(blueCommander);
 }
 
 function startTutorial() {
@@ -683,10 +691,13 @@ const blueAiBtn = document.getElementById('btn-blue-ai');
 if (blueAiBtn) blueAiBtn.addEventListener('click', () => {
   setBlueAIMode(game.world && game.world.blueMode === 'llm' ? 'off' : 'llm');
 });
-const aiPanel = document.getElementById('ai-cic-panel');
-if (aiPanel) aiPanel.addEventListener('click', () => aiPanel.classList.toggle('expanded'));
-const blueAiPanel = document.getElementById('blue-cic-panel');
-if (blueAiPanel) blueAiPanel.addEventListener('click', () => blueAiPanel.classList.toggle('expanded'));
+// --- LLM DEBUG PANEL --------------------------------------------------------
+const llmDebugPanel = document.getElementById('llm-debug-panel');
+const llmDebugHead = document.getElementById('llm-debug-head');
+const llmDebugClose = document.getElementById('llm-debug-close');
+function toggleLLMDebugPanel() { if (llmDebugPanel) llmDebugPanel.classList.toggle('collapsed'); }
+if (llmDebugHead) llmDebugHead.addEventListener('click', toggleLLMDebugPanel);
+if (llmDebugClose) llmDebugClose.addEventListener('click', (e) => { e.stopPropagation(); toggleLLMDebugPanel(); });
 
 // --- HQ COMMAND CHAT -------------------------------------------------------
 // The human issues natural-language orders here. Each message becomes the
@@ -860,13 +871,19 @@ window.__fc.sendHQ = (t) => hqChat && hqChat.send(t);
 window.__fc.startCustom = startCustom;
 window.__fc.buildLandPolygons = buildLandPolygons;
 window.__fc.SCENARIOS = SCENARIOS;
-// Toggle enemy LLM stream visibility. Use ?debugAI=1 URL param, or run in console:
-// window.__fc.debugAI = true
-Object.defineProperty(window.__fc, 'debugAI', {
-  get: () => aiCommander.debug,
+// Toggle in-game LLM debug panel. Use ?llmdebug=1 URL param (legacy ?debugAI=1
+// still works), or run in console: window.__fc.llmDebug = true
+Object.defineProperty(window.__fc, 'llmDebug', {
+  get: () => LLM_DEBUG,
   set: (v) => {
-    aiCommander.debug = !!v;
-    blueCommander.debug = !!v;
+    LLM_DEBUG = !!v;
+    aiCommander.debug = LLM_DEBUG;
+    blueCommander.debug = LLM_DEBUG;
     syncAIModeUI();
   },
+});
+// Keep the legacy debugAI alias for existing bookmarks/tests.
+Object.defineProperty(window.__fc, 'debugAI', {
+  get: () => window.__fc.llmDebug,
+  set: (v) => { window.__fc.llmDebug = v; },
 });
