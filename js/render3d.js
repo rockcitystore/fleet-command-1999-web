@@ -98,7 +98,7 @@ export class Scene3D {
     // surface dissolve into the horizon — that seam is what reads as "waterline".
     this.scene.fog = new THREE.Fog(0xcfe4f0, 3800, 17000);
 
-    this.camera = new THREE.PerspectiveCamera(55, 1, 1, 60000);
+    this.camera = new THREE.PerspectiveCamera(55, 1, 0.5, 60000);
 
     const hemi = new THREE.HemisphereLight(0x9fc4e8, 0x16242e, 1.05);
     this.scene.add(hemi);
@@ -1110,9 +1110,11 @@ export class Scene3D {
   }
 
   zoom(factor) {
-    // Min distance lowered from 80 -> 25 (ships were rescaled ~2x, so we can
-    // sit much closer before clipping). Max raised a bit for the same reason.
-    this.distance = Math.max(25, Math.min(8000, this.distance * factor));
+    // Min distance lowered to 4 so the player can sit right alongside a ship
+    // model and inspect its detail (a destroyer is only ~2.3 world units long,
+    // a carrier ~5). The near-plane is 0.5 so nothing clips at that range.
+    // Max raised to 8000 for tactical overview headroom.
+    this.distance = Math.max(4, Math.min(8000, this.distance * factor));
   }
 
   reset() {

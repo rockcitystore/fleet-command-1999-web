@@ -104,8 +104,9 @@ export function attachInput3D(canvas, world, handlers, scene) {
 
   const onWheel = (e) => {
     e.preventDefault();
-    // 3D convention: factor > 1 zooms out, < 1 zooms in.
-    const factor = e.deltaY > 0 ? 1.1 : 0.9;
+    // 3D convention: factor > 1 zooms out, < 1 zooms in. Zoom-in is more
+    // aggressive so the player can reach ship-model range in a few notches.
+    const factor = e.deltaY > 0 ? 1.12 : 0.82;
     scene.zoom(factor);
     // Mirror into world.camera.zoom. The 2D panels (and the SWAP-mode 3D panel,
     // whose distance is recomputed from this each frame) use it as the zoom
