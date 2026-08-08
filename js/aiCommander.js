@@ -55,14 +55,25 @@ Each order uses these EXACT fields:
   "target": <integer> a RED hostile id from the hostiles list (REQUIRED only for "attack")
   "pos":    {"x":int,"y":int}  (REQUIRED only for "move")
   "depth":  <integer, negative metres>  optional, submarines only (e.g. -15 to fire, -150 to lurk); surface ships ignore it
+  "note":   <string> OPTIONAL — a one-line reason WHENEVER you override a human order (see chain of command below)
 
-Rules:
+CHAIN OF COMMAND (supreme rule — overrides all other instructions):
+- The human player is the SUPREME COMMANDER (HQ). You are the SUBORDINATE theater commander. A friendly ship whose "orderSource" is "human" is under a DIRECT ORDER FROM HQ and is HIGHER authority than your own judgement.
+- You MUST obey HQ orders. You MAY OPTIMIZE them — re-route around a fresh threat, pick the best weapon, adjust speed, add an escort — but you must NOT contradict the intent:
+    * never turn a "hold" into a "move";
+    * never redirect an "attack" onto a different target unless HQ's target is already destroyed;
+    * never cancel a human order without cause.
+- To leave a HQ order exactly as given, simply OMIT that ship from your reply — it keeps its current order. Only list a human-ordered ship if you are refining it or invoking field discretion (below).
+- "将在外，君命有所不受" (a field commander may deviate from HQ when necessary): you MAY override a human order ONLY in a clear tactical emergency — the ordered target is already dead; the ship is under immediate lethal threat and must evade; or the order is physically impossible (e.g. move onto land). Deviate as little as possible, keep the ship in your reply, and set "note" to a brief reason.
+- In all normal cases subordinates obey: comply with HQ.
+
+GENERAL RULES:
 - "ship" and "target" MUST be integers copied exactly from the snapshot. They are never objects.
 - If "combatStarted" is false, the war has NOT started. DO NOT use "attack" — issue "move"/"hold" only, but you MAY open the war by attacking once you judge the moment is right (doing so starts the engagement).
 - If "combatStarted" is true, engage: missile ships stand off and attack surface hostiles; ASW ships close on submarines; subs fire at surface ships from periscope depth.
 
-Example (war started, two BLUE ships):
-[{"ship":3,"act":"attack","target":7},{"ship":4,"act":"move","pos":{"x":950,"y":1350},"depth":-60}]`;
+Example (war started; #3 is under a human HOLD order you respect by omitting it, and you refine #4 to attack):
+[{"ship":4,"act":"attack","target":7}]`;
 
 function buildSnapshot(world, side = 'enemy') {
   const round = (n) => Math.round(n);
@@ -80,6 +91,7 @@ function buildSnapshot(world, side = 'enemy') {
     speed: round(s.speed),
     weapons: (s.weapons || []).map((w) => w.type),
     order: s.order ? s.order.kind : 'none',
+    orderSource: s.order ? (s.order.source || 'ai') : 'none',
   }));
   const contacts = world.aliveShips(oppSide).map((s) => ({
     id: s.id,
@@ -314,6 +326,7 @@ export class AICommander {
         s.targetId = null;
         if (s.isSub && typeof o.depth === 'number') s.targetDepth = o.depth;
       }
+      if (s.order) s.order.source = 'llm';
     }
   }
 

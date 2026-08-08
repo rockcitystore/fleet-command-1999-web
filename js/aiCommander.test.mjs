@@ -1,6 +1,6 @@
 // aiCommander.test.mjs — verify each side's LLM commander DIRECTLY controls its
 // own ships, and that only the player (BLUE) commander may open the war.
-import { World } from './engine.js';
+import { World, runBuiltinPlayerDoctrine } from './engine.js';
 import { AICommander } from './aiCommander.js';
 
 let pass = 0, fail = 0;
@@ -94,6 +94,42 @@ await testRedControlsEnemyPostCombat();
 await testBlueDirectlyControlsAndOpensWar();
 await testBlueMoveOrder();
 await testBlueFallbackDoctrine();
+await testOrderSourceTags();
+
+async function testOrderSourceTags() {
+  const { w, p, e } = makeWorld();
+  w.combatStarted = true;
+  // 1) Human order via the command interface carries source 'human'.
+  w.issueOrder({ kind: 'hold' }, [p.id]);
+  check(p.order && p.order.source === 'human', 'human order via issueOrder carries source "human"');
+
+  // 2) The BLUE snapshot the LLM receives exposes orderSource per friendly.
+  let captured = null;
+  const capTransport = async (messages) => { captured = messages; return JSON.stringify([]); };
+  const c = new AICommander({ side: 'player', streaming: false, transport: capTransport });
+  c.setEnabled(true);
+  await c.tick(w, { force: true });
+  const userMsg = captured.find((m) => m.role === 'user').content.replace(/^Current battle snapshot:\n/, '');
+  const snap = JSON.parse(userMsg);
+  const me = snap.friendlies.find((s) => s.id === p.id);
+  check(me && me.orderSource === 'human', 'BLUE snapshot exposes human orderSource for a player ship');
+
+  // 3) Built-in player doctrine (BLUE fallback) marks its orders as 'ai'.
+  const w2 = new World();
+  const p2 = w2.addShip('player', 'destroyer', { x: 800, y: 2000 });
+  const e2 = w2.addShip('enemy', 'destroyer', { x: 3200, y: 2000 });
+  w2.combatStarted = true;
+  runBuiltinPlayerDoctrine(w2);
+  check(p2.order && p2.order.source === 'ai', 'built-in player doctrine marks orders source "ai"');
+
+  // 4) The BLUE commander tags the orders it applies as 'llm'.
+  const c2 = new AICommander({ side: 'player', streaming: false, transport: fixedTransport([
+    { ship: p2.id, act: 'move', pos: { x: 1200, y: 2400 } },
+  ]) });
+  c2.setEnabled(true);
+  await c2.tick(w2, { force: true });
+  check(p2.order && p2.order.source === 'llm', 'BLUE commander tags applied orders source "llm"');
+}
 
 console.log(`\nChecks passed: ${pass}` + (fail ? `  FAILED: ${fail}` : ''));
 process.exit(fail ? 1 : 0);

@@ -481,7 +481,7 @@ export class World {
     return ship;
   }
 
-  issueOrder(order, ids) {
+  issueOrder(order, ids, source = 'human') {
     if (order && order.kind === 'attack') this.combatStarted = true;
     for (const id of ids) {
       const s = this.ships.find((x) => x.id === id);
@@ -520,8 +520,10 @@ export class World {
         }
         if (wps.length) s.order = { kind: 'moveTo', waypoints: wps, wpIndex: 0, loop: !!order.loop };
         else s.order = null;
+        if (s.order) s.order.source = source;
       } else {
         s.order = order;
+        s.order.source = source;
         if (order.kind === 'attack') s.targetId = order.targetId;
         else if (order.kind === 'setDepth') s.targetDepth = order.depth;
       }
@@ -1477,6 +1479,7 @@ function _runBuiltinDoctrine(world, ownSide) {
         s.targetDepth = s.defaultDepth; // stay deep while stalking
         s.order = { kind: 'attack', targetId: t.id };
       }
+      if (s.order) s.order.source = 'ai';
       continue;
     }
 
@@ -1512,6 +1515,7 @@ function _runBuiltinDoctrine(world, ownSide) {
       s.targetId = null;
       s.order = { kind: 'formation' };
     }
+    if (s.order) s.order.source = 'ai';
   }
 }
 
