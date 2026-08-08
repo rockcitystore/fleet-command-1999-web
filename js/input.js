@@ -282,7 +282,8 @@ export function attachInput(canvas, world, handlers) {
   }
 
   function onGlobalPointerDown(e) {
-    if (ctxMenu && !ctxMenu.contains(e.target)) hideContextMenu();
+    // Dismiss the context menu when the player clicks anywhere outside it.
+    if (!e.target.closest || !e.target.closest('#map-context-menu')) hideContextMenu();
   }
 
   canvas.addEventListener('wheel', onWheel, { passive: false });
