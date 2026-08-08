@@ -190,6 +190,41 @@ async function testBlueReportFormat() {
 }
 
 await testBlueReportFormat();
+await testBlueOpeningAssessment();
+
+async function testBlueOpeningAssessment() {
+  const { w, p, e } = makeWorld();
+  w.combatStarted = false;
+
+  // A transport that returns a report + candidate orders, no ship orders.
+  const openingTransport = async (_messages, _opts) => JSON.stringify({
+    report: '我编队位于战区西南，敌水面舰艇群位于东北方向。',
+    options: [
+      { label: '前出侦察', cmd: '驱逐舰前出至中部海域建立雷达哨' },
+      { label: '保持阵型', cmd: '各舰保持当前阵位，按条令自主交战' },
+    ],
+  });
+
+  const c = new AICommander({ side: 'player', streaming: false, transport: openingTransport });
+  // requestOpeningAssessment does NOT require the commander to be enabled.
+  const result = await c.requestOpeningAssessment(w);
+  check(result.report === '我编队位于战区西南，敌水面舰艇群位于东北方向。',
+    'opening assessment extracts the Chinese military report');
+  check(Array.isArray(result.options) && result.options.length === 2,
+    'opening assessment extracts option list');
+  check(result.options[0].label === '前出侦察' && result.options[0].cmd === '驱逐舰前出至中部海域建立雷达哨',
+    'opening assessment option carries label and cmd');
+  // It must NOT apply any orders or open the war.
+  check(!w.combatStarted, 'opening assessment does not start the war');
+  check(!p.order, 'opening assessment does not issue ship orders');
+  check(!e.order, 'opening assessment does not touch enemy ships');
+
+  // Error transport returns empty result without throwing.
+  const bad = new AICommander({ side: 'player', streaming: false, transport: async () => { throw new Error('down'); } });
+  const empty = await bad.requestOpeningAssessment(w);
+  check(empty && empty.report === '' && empty.options.length === 0,
+    'opening assessment returns empty result on transport error');
+}
 
 console.log(`\nChecks passed: ${pass}` + (fail ? `  FAILED: ${fail}` : ''));
 process.exit(fail ? 1 : 0);

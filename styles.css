@@ -805,6 +805,40 @@ html, body {
   color: rgba(57, 208, 255, 0.55);
   font-size: 11px;
 }
+.hq-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px 10px 2px;
+  border-top: 1px solid rgba(57, 208, 255, 0.12);
+}
+.hq-suggestions.hidden { display: none; }
+.hq-suggestions-title {
+  font-size: 10px;
+  color: rgba(57, 208, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.hq-suggestions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.hq-suggestion {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--cyan);
+  background: rgba(57, 208, 255, 0.10);
+  border: 1px solid var(--cyan-dim);
+  border-radius: 12px;
+  padding: 3px 9px;
+  cursor: pointer;
+}
+.hq-suggestion:hover {
+  color: var(--bg);
+  background: var(--cyan);
+  border-color: var(--cyan);
+}
 .hq-chips { display: flex; flex-wrap: wrap; gap: 5px; padding: 8px 10px 4px; }
 .hq-chip {
   font-family: var(--mono);

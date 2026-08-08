@@ -409,6 +409,18 @@ function mountBattle(world) {
   }
   syncAIModeUI();
 
+  // Auto-request an opening situation assessment + candidate orders when no
+  // human directive exists yet. This runs once per battle and does NOT apply
+  // any orders — it only presents clickable suggestions to the player.
+  if (world && hqChat) {
+    blueCommander.requestOpeningAssessment(world).then((result) => {
+      if (result && result.report) {
+        hqChat.add('assistant', 'BLUE CIC：' + result.report);
+        hqChat.setSuggestions(result.options || []);
+      }
+    }).catch(() => {});
+  }
+
   if (!game.rafId) loop();
 }
 
@@ -692,6 +704,7 @@ const hqChat = (() => {
   const toggleBtn = document.getElementById('hq-chat-toggle');
   const directiveOut = document.getElementById('hq-directive-readout');
   const chips = Array.from(document.querySelectorAll('.hq-chip'));
+  const suggestionsEl = document.getElementById('hq-suggestions');
 
   const scroll = () => { if (log) log.scrollTop = log.scrollHeight; };
   function add(role, text) {
@@ -716,12 +729,39 @@ const hqChat = (() => {
       if (cmdBtn) cmdBtn.classList.add('active');
     }
   }
+  function clearSuggestions() {
+    if (!suggestionsEl) return;
+    suggestionsEl.innerHTML = '';
+    suggestionsEl.classList.add('hidden');
+  }
+  function setSuggestions(options) {
+    clearSuggestions();
+    if (!suggestionsEl || !Array.isArray(options) || !options.length) return;
+    const title = document.createElement('div');
+    title.className = 'hq-suggestions-title';
+    title.textContent = '建议指令';
+    suggestionsEl.appendChild(title);
+    const row = document.createElement('div');
+    row.className = 'hq-suggestions-row';
+    options.forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.className = 'hq-suggestion';
+      btn.type = 'button';
+      btn.textContent = opt.label || opt.cmd;
+      btn.title = opt.cmd;
+      btn.addEventListener('click', () => send(opt.cmd));
+      row.appendChild(btn);
+    });
+    suggestionsEl.appendChild(row);
+    suggestionsEl.classList.remove('hidden');
+  }
   function send(raw) {
     const text = (raw != null ? raw : (input ? input.value : '')).trim();
     if (!text) return;
     add('human', text);
     if (input) input.value = '';
     ensureVisible();
+    clearSuggestions();
     const world = game.world;
     if (!world) { add('system', '（尚未进入战斗）'); return; }
     if (HQ_CLEAR_PATTERNS.some((re) => re.test(text))) {
@@ -773,7 +813,8 @@ const hqChat = (() => {
     add,
     send,
     setDirective,
-    clear: () => { if (log) log.innerHTML = ''; },
+    setSuggestions,
+    clear: () => { if (log) log.innerHTML = ''; clearSuggestions(); },
   };
 })();
 

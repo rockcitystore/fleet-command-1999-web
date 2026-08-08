@@ -90,6 +90,30 @@ GENERAL RULES:
 Example (war started; #3 is under a human HOLD order you respect by omitting it, and you refine #4 to attack):
 {"report":"旗舰率驱逐舰前出接敌，其余舰艇保持阵位。","orders":[{"ship":4,"act":"attack","target":7}]}`;
 
+// Special one-shot prompt used at battle start when the human has issued no
+// directive yet. The LLM produces a tactical situation report AND a short list
+// of candidate orders the human can click to issue.
+const BLUE_OPENING_PROMPT = `You are the BLUE fleet commander at the opening of an engagement. You have NOT yet received an HQ directive. Your task is to briefly assess the tactical situation and present a small set of concrete candidate orders for the human supreme commander to choose from.
+
+OUTPUT FORMAT (strict JSON, no markdown, no code fences):
+{
+  "report": "A concise Chinese tactical situation assessment. Use formal military naval terminology. NO markdown, NO backticks, NO emoji, NO ship ids, NO English command names, NO coordinates. Describe force dispositions and the apparent enemy threat in plain professional prose, e.g. 我编队位于战区西南，敌水面舰艇群位于东北方向，防空与反舰态势对等；潜艇威胁尚不明朗。",
+  "options": [
+    // 3 to 4 candidate orders. Each option is a self-contained natural-language order.
+    {"label": "全军进攻", "cmd": "全军向东北发起进攻，优先打击敌方主力舰"},
+    {"label": "保持阵型", "cmd": "各舰保持当前阵位，按条令自主交战，反潜机前出侦察"},
+    {"label": "前出侦察", "cmd": "驱逐舰前出至中部海域建立雷达哨，航母舰载机升空警戒"},
+    {"label": "集中防空", "cmd": "全队转入区域防空阵型，优先保护旗舰与航母"}
+  ]
+}
+
+Rules for options:
+- "label" is a very short Chinese phrase (2-6 characters) shown on a button.
+- "cmd" is the full natural-language order that will be sent to BLUE CIC if the human clicks it. It must be self-contained and unambiguous.
+- Options must represent genuinely different courses of action; do NOT include a "cancel" or "do nothing" option.
+- If the war has not started (combatStarted:false), do NOT issue attack orders — suggest aggressive movement/recon/posture instead. The first attack will open the war.
+- Total JSON must be compact; keep the report under 120 Chinese characters and options under 4.`;
+
 function buildSnapshot(world, side = 'enemy', opts = {}) {
   const round = (n) => Math.round(n);
   const ownSide = side === 'enemy' ? 'enemy' : 'player';
@@ -165,6 +189,31 @@ function extractOrders(text) {
   }
 }
 
+// Parse the opening-assessment reply: { report, options: [{label, cmd}, ...] }.
+function extractOpeningAssessment(text) {
+  const empty = { report: '', options: [] };
+  if (typeof text !== 'string') return empty;
+  let t = text.trim();
+  const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fence) t = fence[1].trim();
+  try {
+    const parsed = JSON.parse(t);
+    if (!parsed || typeof parsed !== 'object') return empty;
+    const report = typeof parsed.report === 'string' ? parsed.report : '';
+    const rawOpts = Array.isArray(parsed.options) ? parsed.options : [];
+    const options = rawOpts
+      .filter((o) => o && typeof o === 'object')
+      .map((o) => ({
+        label: typeof o.label === 'string' ? o.label : '',
+        cmd: typeof o.cmd === 'string' ? o.cmd : '',
+      }))
+      .filter((o) => o.label && o.cmd);
+    return { report, options };
+  } catch {
+    return empty;
+  }
+}
+
 export class AICommander {
   constructor(opts = {}) {
     this.base = opts.base || OLLAMA_DEFAULT_BASE;
@@ -200,6 +249,53 @@ export class AICommander {
   setEnabled(on) {
     this.enabled = !!on;
     if (!this.enabled) { this.inFlight = false; this.phase = 'idle'; this.liveText = ''; }
+  }
+
+  // One-shot opening assessment: describe the situation and suggest candidate
+  // orders. Unlike tick(), this does NOT apply any orders; it only returns
+  // { report, options }. It bypasses the normal throttle and does not mutate
+  // the commander's ongoing decision state (except for in-flight guarding).
+  async requestOpeningAssessment(world, opts = {}) {
+    if (this.inFlight) return { report: '', options: [] };
+    this.inFlight = true;
+    this.lastError = null;
+    this.phase = 'thinking';
+    const logPrefix = `[${this.cicLabel()} opening]`;
+    try {
+      const snapshot = buildSnapshot(world, this.side, {
+        hqDirective: this.side === 'player' ? null : null,
+      });
+      const messages = [
+        { role: 'system', content: BLUE_OPENING_PROMPT },
+        { role: 'user', content: 'Battle opening snapshot:\n' + JSON.stringify(snapshot, null, 0) },
+      ];
+      this._lastMessages = messages;
+      this.callCount++;
+      if (this.debug) {
+        console.log(`${logPrefix} messages:`, messages);
+      } else {
+        console.debug(`${logPrefix} messages:`, messages);
+      }
+      const content = await this.transport(messages, {
+        base: this.base,
+        model: this.model,
+        temperature: 0.2,
+        num_ctx: 4096,
+      });
+      this.lastRaw = content || '';
+      const result = extractOpeningAssessment(content);
+      this.phase = 'done';
+      if (this.debug) console.log(`${logPrefix} result:`, result);
+      else console.debug(`${logPrefix} result:`, result);
+      return result;
+    } catch (err) {
+      this.lastError = err && err.message ? err.message : String(err);
+      this.phase = 'error';
+      console.warn(`${logPrefix} failed:`, this.lastError);
+      return { report: '', options: [] };
+    } finally {
+      this.inFlight = false;
+    }
   }
 
   // Short status string for the HUD.
