@@ -509,14 +509,12 @@ function syncAIModeUI() {
     blueLive.classList.toggle('live', !!streaming);
     blueLive.title = streaming ? blueCommander.liveText : (blueCommander.lastBrief || '');
   }
+  // BLUE CIC output is now merged into the HQ command chat on the right, so
+  // the standalone floating panel is hidden. The control-bar status still
+  // reports BLUE LLM state.
   if (bluePanel && bluePanelText) {
-    const show = !!blueLlm || !!blueCommander.lastError || (blueCommander.liveText && blueCommander.liveText !== '');
-    bluePanel.classList.toggle('hidden', !show);
-    bluePanelText.textContent = blueCommander.livePreview();
-    bluePanel.classList.toggle('thinking', blueCommander.phase === 'thinking');
-    bluePanel.classList.toggle('streaming', blueCommander.phase === 'streaming');
-    bluePanel.classList.toggle('done', blueCommander.phase === 'done');
-    bluePanel.classList.toggle('error', !!blueCommander.lastError);
+    bluePanel.classList.add('hidden');
+    bluePanelText.textContent = '';
   }
 }
 
@@ -697,17 +695,25 @@ const hqChat = (() => {
 
   const scroll = () => { if (log) log.scrollTop = log.scrollHeight; };
   function add(role, text) {
-    if (!log) return;
+    if (!log) return null;
     const el = document.createElement('div');
     el.className = 'hq-msg hq-msg-' + role;
     el.textContent = text;
     log.appendChild(el);
     scroll();
+    return el;
   }
+  function remove(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
   function setDirective(d) {
     blueCommander.humanDirective = d;
     if (directiveOut) {
       directiveOut.textContent = d ? ('HQ ▸ ' + d) : 'HQ ▸ (无指令 / 自由行动)';
+    }
+  }
+  function ensureVisible() {
+    if (root) {
+      root.classList.remove('hidden', 'collapsed');
+      if (cmdBtn) cmdBtn.classList.add('active');
     }
   }
   function send(raw) {
@@ -715,6 +721,7 @@ const hqChat = (() => {
     if (!text) return;
     add('human', text);
     if (input) input.value = '';
+    ensureVisible();
     const world = game.world;
     if (!world) { add('system', '（尚未进入战斗）'); return; }
     if (HQ_CLEAR_PATTERNS.some((re) => re.test(text))) {
@@ -730,15 +737,22 @@ const hqChat = (() => {
       blueCommander.setEnabled(true);
       syncAIModeUI();
     }
-    add('assistant', 'BLUE CIC: 指令已接收，正在规划…');
+    const placeholder = add('assistant', 'BLUE CIC: 收到指令，正在规划…');
     blueCommander.tick(world, { force: true }).then(() => {
+      remove(placeholder);
       if (blueCommander.lastError) {
         add('assistant', 'BLUE CIC: LLM 暂时离线，已记录指令（内置条令接管，恢复后执行）。');
       } else {
-        add('assistant', 'BLUE CIC: ' + (blueCommander.lastBrief || '已下达。'));
+        // Show the LLM's FULL reply (including any prose around the JSON
+        // orders) so the player can see how BLUE interpreted the directive.
+        const full = blueCommander.lastRaw || blueCommander.lastBrief || '已下达。';
+        add('assistant', 'BLUE CIC:\n' + full);
       }
+      ensureVisible();
     }).catch(() => {
+      remove(placeholder);
       add('assistant', 'BLUE CIC: 指令已记录。');
+      ensureVisible();
     });
   }
   if (sendBtn) sendBtn.addEventListener('click', () => send());
