@@ -1,0 +1,13 @@
+{
+  "lat": 26,
+  "lon": 55.5,
+  "zoom": 7,
+  "hasSatellite": true,
+  "elev": {
+    "z": 7,
+    "tx0": 83,
+    "tx1": 84,
+    "ty0": 53,
+    "ty1": 55
+  }
+}

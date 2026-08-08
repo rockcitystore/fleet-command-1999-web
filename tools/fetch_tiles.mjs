@@ -13,7 +13,7 @@
 // players get offline maps for free.
 // ---------------------------------------------------------------------------
 
-import { writeFile, mkdir } from 'node:fs/promises';
+import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { tileKey, chooseZoom, elevationTileRange } from '../js/satellite.js';
 import { SCENARIO_GEO } from '../js/geo.js';
@@ -27,10 +27,34 @@ if (!TOKEN) {
 const ROOT = fileURLToPath(new URL('..', import.meta.url)); // repo root
 const SAT_SIZE = 1280;
 
-function resolveTargets() {
+async function loadMissionTargets() {
+  try {
+    const raw = await readFile(`${ROOT}assets/data/missions.json`, 'utf8');
+    const payload = JSON.parse(raw);
+    const missions = (payload.missions || []).filter((m) => m.lat != null && m.lon != null);
+    const byKey = new Map();
+    for (const m of missions) {
+      const key = tileKey({ lat: m.lat, lon: m.lon });
+      if (!byKey.has(key)) {
+        byKey.set(key, { name: m.title || m.id, lat: m.lat, lon: m.lon });
+      }
+    }
+    return Array.from(byKey.values());
+  } catch (e) {
+    console.warn('Could not read missions.json:', e.message);
+    return [];
+  }
+}
+
+async function resolveTargets() {
   const args = process.argv.slice(2);
   if (args.includes('--all')) {
-    return Object.entries(SCENARIO_GEO).map(([name, g]) => ({ name, lat: g.lat, lon: g.lon }));
+    const missions = await loadMissionTargets();
+    const geo = Object.entries(SCENARIO_GEO).map(([name, g]) => ({ name, lat: g.lat, lon: g.lon }));
+    // Merge, deduplicating by tile key (missions take precedence).
+    const byKey = new Map();
+    for (const t of [...geo, ...missions]) byKey.set(tileKey({ lat: t.lat, lon: t.lon }), t);
+    return Array.from(byKey.values());
   }
   const explicit = args
     .filter((a) => a.includes(','))
@@ -101,7 +125,7 @@ async function fetchTheater(lat, lon, name) {
 }
 
 async function main() {
-  const targets = resolveTargets();
+  const targets = await resolveTargets();
   console.log(`Pre-caching ${targets.length} theater(s)...\n`);
   for (const t of targets) {
     console.log(`[${t.name}]  (${t.lat}, ${t.lon})`);
