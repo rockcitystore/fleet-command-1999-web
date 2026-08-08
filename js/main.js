@@ -400,6 +400,13 @@ function mountBattle(world) {
   world.blueMode = 'off';
   blueCommander.setEnabled(false);
   blueCommander.lastError = null;
+  // Reset any HQ directive + chat from a previous battle.
+  blueCommander.humanDirective = null;
+  if (hqChat) {
+    hqChat.clear();
+    hqChat.setDirective(null);
+    hqChat.add('system', 'BLUE CIC 在线。用自然语言下达指令，或点击上方快捷指令。');
+  }
   syncAIModeUI();
 
   if (!game.rafId) loop();
@@ -670,6 +677,106 @@ const aiPanel = document.getElementById('ai-cic-panel');
 if (aiPanel) aiPanel.addEventListener('click', () => aiPanel.classList.toggle('expanded'));
 const blueAiPanel = document.getElementById('blue-cic-panel');
 if (blueAiPanel) blueAiPanel.addEventListener('click', () => blueAiPanel.classList.toggle('expanded'));
+
+// --- HQ COMMAND CHAT -------------------------------------------------------
+// The human issues natural-language orders here. Each message becomes the
+// supreme HQ directive fed to the BLUE (player) LLM, which translates it into
+// concrete fleet orders. Directing the BLUE LLM auto-enables its LLM mode.
+const HQ_CLEAR_PATTERNS = [
+  /(自由|取消|撤消|撤销|解除|stand[\s_-]?down|standby|free\s*operation|clear\s*directive|自由行动)/i,
+];
+const hqChat = (() => {
+  const root = document.getElementById('hq-chat');
+  const log = document.getElementById('hq-chat-log');
+  const input = document.getElementById('hq-chat-input');
+  const sendBtn = document.getElementById('hq-chat-send');
+  const clearBtn = document.getElementById('hq-chat-clear');
+  const toggleBtn = document.getElementById('hq-chat-toggle');
+  const directiveOut = document.getElementById('hq-directive-readout');
+  const chips = Array.from(document.querySelectorAll('.hq-chip'));
+
+  const scroll = () => { if (log) log.scrollTop = log.scrollHeight; };
+  function add(role, text) {
+    if (!log) return;
+    const el = document.createElement('div');
+    el.className = 'hq-msg hq-msg-' + role;
+    el.textContent = text;
+    log.appendChild(el);
+    scroll();
+  }
+  function setDirective(d) {
+    blueCommander.humanDirective = d;
+    if (directiveOut) {
+      directiveOut.textContent = d ? ('HQ ▸ ' + d) : 'HQ ▸ (无指令 / 自由行动)';
+    }
+  }
+  function send(raw) {
+    const text = (raw != null ? raw : (input ? input.value : '')).trim();
+    if (!text) return;
+    add('human', text);
+    if (input) input.value = '';
+    const world = game.world;
+    if (!world) { add('system', '（尚未进入战斗）'); return; }
+    if (HQ_CLEAR_PATTERNS.some((re) => re.test(text))) {
+      setDirective(null);
+      add('assistant', 'BLUE CIC: 收到，解除指令，恢复自主战术。');
+      return;
+    }
+    setDirective(text);
+    // Directing the BLUE LLM requires its LLM mode on; enable it (without the
+    // built-in first tick — we drive our own directive-aware tick below).
+    if (world.blueMode !== 'llm') {
+      world.blueMode = 'llm';
+      blueCommander.setEnabled(true);
+      syncAIModeUI();
+    }
+    add('assistant', 'BLUE CIC: 指令已接收，正在规划…');
+    blueCommander.tick(world, { force: true }).then(() => {
+      if (blueCommander.lastError) {
+        add('assistant', 'BLUE CIC: LLM 暂时离线，已记录指令（内置条令接管，恢复后执行）。');
+      } else {
+        add('assistant', 'BLUE CIC: ' + (blueCommander.lastBrief || '已下达。'));
+      }
+    }).catch(() => {
+      add('assistant', 'BLUE CIC: 指令已记录。');
+    });
+  }
+  if (sendBtn) sendBtn.addEventListener('click', () => send());
+  if (input) input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+  if (clearBtn) clearBtn.addEventListener('click', () => send('取消指令'));
+  if (toggleBtn && root) toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (root) root.classList.toggle('collapsed');
+  });
+  if (root) root.addEventListener('click', (e) => {
+    // Click on the header (but not its buttons) collapses the panel.
+    if (e.target === root.querySelector('#hq-chat-head')) root.classList.toggle('collapsed');
+  });
+  chips.forEach((c) => c.addEventListener('click', () => send(c.dataset.cmd || c.textContent)));
+  return {
+    add,
+    send,
+    setDirective,
+    clear: () => { if (log) log.innerHTML = ''; },
+  };
+})();
+
+// CMD toggle in the control bar shows/hides the HQ command chat panel.
+const cmdBtn = document.getElementById('btn-cmd');
+function toggleCmdPanel() {
+  const el = document.getElementById('hq-chat');
+  if (el) {
+    el.classList.toggle('hidden');
+    cmdBtn.classList.toggle('active', !el.classList.contains('hidden'));
+  }
+}
+if (cmdBtn) {
+  cmdBtn.addEventListener('click', toggleCmdPanel);
+  const el = document.getElementById('hq-chat');
+  if (el) cmdBtn.classList.toggle('active', !el.classList.contains('hidden'));
+}
 // SUB VIEW: dive the 3D camera below the surface so submarines (drawn at real
 // depth through the now-translucent sea) become visible.
 const subBtn = document.getElementById('btn-subview');
@@ -693,6 +800,8 @@ window.__fc.setAIMode = setAIMode;
 window.__fc.setBlueAIMode = setBlueAIMode;
 window.__fc.aiCommander = aiCommander;
 window.__fc.blueCommander = blueCommander;
+window.__fc.hqChat = hqChat;
+window.__fc.sendHQ = (t) => hqChat && hqChat.send(t);
 window.__fc.startCustom = startCustom;
 window.__fc.buildLandPolygons = buildLandPolygons;
 window.__fc.SCENARIOS = SCENARIOS;

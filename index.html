@@ -210,6 +210,7 @@
       <button id="btn-subview" class="btn" type="button">SUB VIEW</button>
       <button id="btn-ai" class="btn" type="button">AI: BUILTIN</button>
       <button id="btn-blue-ai" class="btn" type="button">BLUE: OFF</button>
+      <button id="btn-cmd" class="btn" type="button">CMD</button>
       <button id="btn-music" class="btn" type="button">MUSIC</button>
       <span class="hud-cell hud-scenario-cell"><span id="hud-scenario">&mdash;</span></span>
       <span class="hud-cell"><span class="hud-label">ALLY</span> <span id="hud-player">0</span></span>
@@ -229,6 +230,31 @@
     <div id="blue-cic-panel" class="hidden" title="Click to expand/collapse">
       <div class="aicic-label aicic-label-blue">BLUE CIC</div>
       <div id="blue-cic-text" class="aicic-text aicic-text-blue">&mdash;</div>
+    </div>
+
+    <!-- ============ HQ COMMAND CHAT ============ -->
+    <!-- Natural-language command window: the human issues free-text orders
+         that the player-side (BLUE) LLM translates into fleet orders. -->
+    <div id="hq-chat">
+      <div id="hq-chat-head" title="Click to collapse/expand">
+        <span class="hq-chat-title">HQ COMMAND</span>
+        <button id="hq-chat-clear" type="button" title="清除当前指令">CLR</button>
+        <button id="hq-chat-toggle" type="button" title="折叠/展开">&#9662;</button>
+      </div>
+      <div id="hq-directive-readout">HQ &#9656; (无指令 / 自由行动)</div>
+      <div class="hq-chat-body">
+        <div id="hq-chat-log"></div>
+        <div class="hq-chips">
+          <button class="hq-chip" type="button" data-cmd="全军进攻 集火敌方主力">全军进攻</button>
+          <button class="hq-chip" type="button" data-cmd="全军向东南方向撤退 拉开距离">全军撤退</button>
+          <button class="hq-chip" type="button" data-cmd="集中防空 拦截来袭敌机 保护航母">集中防空</button>
+          <button class="hq-chip" type="button" data-cmd="保持当前阵型 按条令自主交战">保持阵型</button>
+        </div>
+        <div class="hq-chat-inputrow">
+          <textarea id="hq-chat-input" placeholder="用自然语言下达指令，如：集中火力攻击敌方航母"></textarea>
+          <button id="hq-chat-send" type="button">发送</button>
+        </div>
+      </div>
     </div>
 
     <div id="objectives" class="objectives hidden"></div>
@@ -288,6 +314,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=9"></script>
+  <script type="module" src="js/main.js?v=10"></script>
 </body>
 </html>

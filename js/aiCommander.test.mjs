@@ -131,5 +131,46 @@ async function testOrderSourceTags() {
   check(p2.order && p2.order.source === 'llm', 'BLUE commander tags applied orders source "llm"');
 }
 
+await testRedCannotOpenWar();
+await testRedControlsEnemyPostCombat();
+await testBlueDirectlyControlsAndOpensWar();
+await testBlueMoveOrder();
+await testBlueFallbackDoctrine();
+await testOrderSourceTags();
+await testBlueReceivesHumanDirective();
+
+async function testBlueReceivesHumanDirective() {
+  // A BLUE commander with a human directive must embed it as `hqDirective` in
+  // the snapshot it sends to the model, and the RED commander must never see it.
+  const { w, p, e } = makeWorld();
+  w.combatStarted = true;
+
+  const blueCap = [];
+  const blueC = new AICommander({
+    side: 'player', streaming: false,
+    transport: async (messages) => { blueCap.push(messages); return JSON.stringify([]); },
+  });
+  blueC.humanDirective = '集中火力攻击敌方航母';
+  blueC.setEnabled(true);
+  await blueC.tick(w, { force: true });
+  const blueUser = JSON.parse(blueCap[0].find((m) => m.role === 'user').content.replace(/^Current battle snapshot:\n/, ''));
+  check(blueUser.hqDirective === '集中火力攻击敌方航母',
+    'BLUE snapshot embeds the human HQ directive as hqDirective');
+  check(typeof blueUser.friendlies !== 'undefined' && Array.isArray(blueUser.friendlies),
+    'BLUE snapshot still carries its own friendlies');
+
+  // RED must NOT carry the human directive (it is the enemy).
+  const redCap = [];
+  const redC = new AICommander({
+    side: 'enemy', streaming: false,
+    transport: async (messages) => { redCap.push(messages); return JSON.stringify([]); },
+  });
+  redC.humanDirective = '敌军不应看到此指令';
+  redC.setEnabled(true);
+  await redC.tick(w, { force: true });
+  const redUser = JSON.parse(redCap[0].find((m) => m.role === 'user').content.replace(/^Current battle snapshot:\n/, ''));
+  check(!('hqDirective' in redUser), 'RED snapshot never carries the human HQ directive');
+}
+
 console.log(`\nChecks passed: ${pass}` + (fail ? `  FAILED: ${fail}` : ''));
 process.exit(fail ? 1 : 0);

@@ -67,6 +67,13 @@ CHAIN OF COMMAND (supreme rule — overrides all other instructions):
 - "将在外，君命有所不受" (a field commander may deviate from HQ when necessary): you MAY override a human order ONLY in a clear tactical emergency — the ordered target is already dead; the ship is under immediate lethal threat and must evade; or the order is physically impossible (e.g. move onto land). Deviate as little as possible, keep the ship in your reply, and set "note" to a brief reason.
 - In all normal cases subordinates obey: comply with HQ.
 
+HQ DIRECTIVE (supreme strategic intent, free-text from the human commander):
+- The snapshot may include an "hqDirective" string: a natural-language order from the supreme commander (in Chinese or English), e.g. "集中火力攻击敌方航母", "全军向东南撤退", "所有驱逐舰前出护航".
+- When "hqDirective" is present, TRANSLATE it into concrete ship orders that fulfill its intent. This is your TOP PRIORITY — above your own tactical preferences. You MAY still pick the best weapon, route, escort and speed per ship, but the resulting orders must serve the directive.
+- You still obey the CHAIN OF COMMAND above for any ship with "orderSource":"human". If a specific per-ship HQ order and the directive conflict, honor the specific per-ship order and pursue the directive with the remaining ships.
+- Continue to react tactically to fresh threats while pursuing the directive.
+- When "hqDirective" is null/empty/absent, fall back to your own tactical judgement per the GENERAL RULES below.
+
 GENERAL RULES:
 - "ship" and "target" MUST be integers copied exactly from the snapshot. They are never objects.
 - If "combatStarted" is false, the war has NOT started. DO NOT use "attack" — issue "move"/"hold" only, but you MAY open the war by attacking once you judge the moment is right (doing so starts the engagement).
@@ -75,7 +82,7 @@ GENERAL RULES:
 Example (war started; #3 is under a human HOLD order you respect by omitting it, and you refine #4 to attack):
 [{"ship":4,"act":"attack","target":7}]`;
 
-function buildSnapshot(world, side = 'enemy') {
+function buildSnapshot(world, side = 'enemy', opts = {}) {
   const round = (n) => Math.round(n);
   const ownSide = side === 'enemy' ? 'enemy' : 'player';
   const oppSide = side === 'enemy' ? 'player' : 'enemy';
@@ -101,12 +108,18 @@ function buildSnapshot(world, side = 'enemy') {
     isSub: !!s.isSub,
     speed: round(s.speed),
   }));
-  return {
+  const snap = {
     time: round(world.time),
     combatStarted: !!world.combatStarted,
     [ownLabel]: own,
     [oppLabel]: contacts,
   };
+  // Surface the human HQ directive to the BLUE (player) commander only — it is
+  // what the player LLM translates into orders. RED never sees it.
+  if (ownSide === 'player' && opts && opts.hqDirective != null && opts.hqDirective !== '') {
+    snap.hqDirective = opts.hqDirective;
+  }
+  return snap;
 }
 
 // Pull a JSON array out of a model reply that may contain ```json fences or a
@@ -153,6 +166,11 @@ export class AICommander {
     this.transport = opts.transport || ((messages, o) => ollamaChat(messages, o));
     this.streamTransport = opts.streamTransport || ((messages, o) => ollamaChatStream(messages, o));
     this._streamChunks = [];  // captured streaming deltas (tests/debug)
+    // Natural-language HQ directive from the human player (set via the HQ
+    // command chat). The BLUE commander translates this free-text strategic
+    // intent into concrete ship orders each cycle. Null = no directive
+    // (BLUE acts on its own tactical judgement).
+    this.humanDirective = null;
   }
 
   setEnabled(on) {
@@ -200,7 +218,9 @@ export class AICommander {
     this._streamChunks = [];
     const logPrefix = `[${this.cicLabel()}]`;
     try {
-      const snapshot = buildSnapshot(world, this.side);
+      const snapshot = buildSnapshot(world, this.side, {
+        hqDirective: this.side === 'player' ? this.humanDirective : null,
+      });
       const systemPrompt = this.side === 'enemy' ? RED_SYSTEM_PROMPT : BLUE_SYSTEM_PROMPT;
       const messages = [
         { role: 'system', content: systemPrompt },
